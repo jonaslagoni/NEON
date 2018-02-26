@@ -1,16 +1,12 @@
 package com.ecorp.main;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
 public class Main {
     public static void main(String[] args) {
-        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        //config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
-        config.title = "MyGame";
-        config.resizable = false;
-        //config.fullscreen = true;
-        config.useGL30 = true;
-        new LwjglApplication(new Game(), config);
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+        new Lwjgl3Application(new Game(), config);
     }
 }
