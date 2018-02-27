@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.neon.ui.GameData;
+import com.neon.ui.GameInputProcessor;
+import com.neon.ui.GameKeys;
+import com.neon.ui.UI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +23,20 @@ public class Game implements ApplicationListener {
 
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
+    private final GameData gameData = new GameData();
+    private UI ui;
 
     @Override
     public void create() {
 
+        Gdx.input.setInputProcessor(
+                new GameInputProcessor(gameData)
+        );
+        
         /* Sprite batch is used to render sprites on the gpu */
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-
+        ui = new UI();
     }
 
     @Override
@@ -44,7 +54,10 @@ public class Game implements ApplicationListener {
     private void draw() {
         /* Clear screen*/
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-
+        if(gameData.getKeys().isPressed(GameKeys.SPACE)){
+            ui.toggleUi();
+        }
+        
         /* Draw grid */
         int gap = Gdx.graphics.getHeight() / grid.length;
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -60,6 +73,10 @@ public class Game implements ApplicationListener {
         batch.begin();
         entities.forEach(this::draw);
         batch.end();
+        
+        ui.draw();
+        
+        gameData.getKeys().update();
     }
 
     /**

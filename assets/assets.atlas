@@ -1,0 +1,52 @@
+
+assets.png
+size: 512,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+checked-button
+  rotate: false
+  xy: 2, 2
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+
+assets2.png
+size: 512,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+down-button
+  rotate: false
+  xy: 2, 2
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+
+assets3.png
+size: 512,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+up-button
+  rotate: false
+  xy: 2, 2
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+
+assets4.png
+size: 256,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tower1
+  rotate: false
+  xy: 2, 2
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
