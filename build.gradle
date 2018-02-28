@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = "com.ecorp.main.Main"
+mainClassName = "com.neon.main.Main"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

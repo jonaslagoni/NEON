@@ -1,4 +1,4 @@
-package com.ecorp.main;
+package com.neon.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -8,35 +8,38 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.neon.ui.GameData;
-import com.neon.ui.GameInputProcessor;
-import com.neon.ui.GameKeys;
+import com.badlogic.gdx.math.Vector2;
+import com.neon.main.entities.Drawable;
+import com.neon.main.entities.Position;
+import com.neon.player.PlayerPlugin;
 import com.neon.ui.UI;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.neon.ui.UiInputProcessor;
 
 public class Game implements ApplicationListener {
 
-    private final List<Entity> entities = new ArrayList<>();
-    private final Entity[][] grid = new Entity[16][16];         // 2D array
-
+    private GameData gameData;
+    private UI ui;
+    private World world;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
-    private final GameData gameData = new GameData();
-    private UI ui;
 
     @Override
     public void create() {
 
-        Gdx.input.setInputProcessor(
-                new GameInputProcessor(gameData)
-        );
-        
+
+        gameData = new GameData();
+        ui = new UI();
+        world = new World();
+
         /* Sprite batch is used to render sprites on the gpu */
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        ui = new UI();
+
+        Plugin playerPlugin = new PlayerPlugin();
+        playerPlugin.start(gameData, world);
+
+        gameData.addController(new MoveController());
+        gameData.addInputProcessor(new UiInputProcessor(ui));
     }
 
     @Override
@@ -48,35 +51,35 @@ public class Game implements ApplicationListener {
      */
     @Override
     public void render() {
+        for (Controller controller : gameData.getControllers()) {
+            controller.update(world);
+        }
         draw();
     }
 
     private void draw() {
         /* Clear screen*/
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        if(gameData.getKeys().isPressed(GameKeys.SPACE)){
-            ui.toggleUi();
-        }
-        
+
         /* Draw grid */
-        int gap = Gdx.graphics.getHeight() / grid.length;
+        int gap = Gdx.graphics.getHeight() / world.getGridLength();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.GREEN);
-        for (int i = 1; i < grid.length; i++) {
-            shapeRenderer.line(i * gap, 0, i * gap, grid.length * gap); // Vertical
-            shapeRenderer.line(0, i * gap, grid.length * gap, i * gap); // Horizontal
+        for (int i = 1; i < world.getGridLength(); i++) {
+            shapeRenderer.line(i * gap, 0, i * gap, world.getGridLength() * gap); // Vertical
+            shapeRenderer.line(0, i * gap, world.getGridLength() * gap, i * gap); // Horizontal
 
         }
         shapeRenderer.end();
 
         /* Render all entities to screen*/
         batch.begin();
-        entities.forEach(this::draw);
+        for (Drawable entity : world.getEntities(Drawable.class)) {
+            draw(entity);
+        }
         batch.end();
-        
+
         ui.draw();
-        
-        gameData.getKeys().update();
     }
 
     /**
@@ -84,18 +87,20 @@ public class Game implements ApplicationListener {
      *
      * @param entity Entity to be drawn
      */
-    private void draw(Entity entity) {
+    private void draw(Drawable entity) {
         Texture texture = entity.getTexture();
+        Position position = entity.getPosition();
+        Vector2 vector = position.getVector();
         batch.draw(
                 texture,                               // Texture
-                entity.getX() - texture.getWidth() / 2,     // Position x
-                entity.getY() - texture.getHeight() / 2,    // Position y
+                vector.x - texture.getWidth() / 2,     // Position x
+                vector.y - texture.getHeight() / 2,    // Position y
                 texture.getWidth() / 2,                // Offset by x to ensure centring
                 texture.getHeight() / 2,               // Offset by y to ensure centring
                 texture.getWidth(),                    // Texture Width
                 texture.getHeight(),                   // Texture Height
                 1, 1,                                         // Texture scaling
-                entity.getRotation() * MathUtils.radDeg, // Rotation
+                position.getRotation() * MathUtils.radDeg + 90, // Rotation
                 0, 0,                                         // Position of texture in source texture
                 texture.getWidth(),                    // Source Width
                 texture.getHeight(),                   // Source Height
