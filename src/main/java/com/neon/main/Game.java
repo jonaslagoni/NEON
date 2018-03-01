@@ -1,4 +1,4 @@
-package com.neon.main;
+ package com.neon.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -27,7 +27,7 @@ public class Game implements ApplicationListener {
     public void create() {
 
         gameData = new GameData();
-        ui = new UI();
+        ui = new UI(gameData);
         world = new World();
 
         /* Sprite batch is used to render sprites on the gpu */
