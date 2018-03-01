@@ -1,6 +1,5 @@
 package com.neon.main.entities;
 
-public interface Positionable {
-
+public interface Positionable extends Entity {
     Position getPosition();
 }

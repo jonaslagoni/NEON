@@ -1,41 +1,53 @@
 package com.neon.main;
 
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.neon.main.entities.MoveAbility;
 import com.neon.main.entities.Moveable;
 import com.neon.main.entities.Position;
 
-import static com.badlogic.gdx.Gdx.graphics;
-import static com.badlogic.gdx.math.MathUtils.cos;
-import static com.badlogic.gdx.math.MathUtils.sin;
+import static com.badlogic.gdx.math.MathUtils.*;
 
 public class MoveController implements Controller {
 
-    @Override
-    public void update(World world) {
-        for (Moveable moveable : world.getEntities(Moveable.class)) {
-            move(moveable.getMoveAbility(), moveable.getPosition());
-        }
+    private static float angle(Vector2 a, Vector2 b) {
+        return atan2(a.y - b.y, a.x - b.x);
     }
 
-    private void move(MoveAbility moveAbility, Position position) {
+    private static float deltaX(float angle, float velocity) {
+        return cos(angle) * velocity * Gdx.graphics.getDeltaTime();
+    }
 
+    private static float deltaY(float angle, float velocity) {
+        return sin(angle) * velocity * Gdx.graphics.getDeltaTime();
+    }
+
+    private static float distanceSquare(Vector2 a, Vector2 b) {
+        return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+    }
+
+    private static void move(Moveable moveable) {
+
+        MoveAbility moveAbility = moveable.getMoveAbility();
+        Position position = moveable.getPosition();
         Vector2 targetVector = moveAbility.getTargetVector();
         Vector2 positionVector = position.getVector();
 
-        /* Dont Move if player is on target, dst is the distance */
-        if (positionVector.dst(targetVector) <= 3) return;
+        /* Don't Move if player is on target.
+         * It is not necessary to calculate the actual distance, just the square of it. */
+        if (distanceSquare(positionVector, targetVector) < 2) return;
 
         /* Calculate angle
          * https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors */
-        position.setRotation(MathUtils.atan2(positionVector.y - targetVector.y, positionVector.x - targetVector.x) + MathUtils.PI);
-
+        position.setRotation(angle(positionVector, targetVector) + PI);
 
         /* Move */
-        positionVector.x += cos(position.getRotation()) * moveAbility.getVelocity() * graphics.getDeltaTime();
-        positionVector.y += sin(position.getRotation()) * moveAbility.getVelocity() * graphics.getDeltaTime();
-
+        positionVector.x += deltaX(position.getRotation(), moveAbility.getVelocity());
+        positionVector.y += deltaY(position.getRotation(), moveAbility.getVelocity());
     }
 
+    @Override
+    public void update(World world) {
+        world.getEntities(Moveable.class).forEach(MoveController::move);
+    }
 }

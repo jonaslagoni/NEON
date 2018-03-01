@@ -26,7 +26,6 @@ public class Game implements ApplicationListener {
     @Override
     public void create() {
 
-
         gameData = new GameData();
         ui = new UI();
         world = new World();

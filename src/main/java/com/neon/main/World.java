@@ -22,7 +22,7 @@ public class World {
         entities.add(entity);
     }
 
-    public <E> List<E> getEntities(Class<E> type) {
+    public <E extends Entity> List<E> getEntities(Class<E> type) {
 
         if (cache.containsKey(type)) {
             return (List<E>) cache.get(type);
@@ -39,10 +39,11 @@ public class World {
     }
 
     public void removeEntity(Entity player) {
+        cache.clear();
         entities.remove(player);
     }
 
-    int getGridLength() {
+    public int getGridLength() {
         return grid.length;
     }
 }

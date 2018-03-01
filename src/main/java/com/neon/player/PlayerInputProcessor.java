@@ -29,7 +29,6 @@ public class PlayerInputProcessor implements InputProcessor {
         return false;
     }
 
-
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         /* Touch and mouse is the same */

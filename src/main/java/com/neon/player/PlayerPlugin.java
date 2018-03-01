@@ -32,7 +32,6 @@ public class PlayerPlugin implements Plugin {
 
         gameData.addController(playerController);
         gameData.addInputProcessor(inputProcessor);
-
     }
 
     @Override

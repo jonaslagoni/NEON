@@ -3,13 +3,14 @@ package com.neon.player;
 import com.badlogic.gdx.graphics.Texture;
 import com.neon.main.entities.*;
 
-public class Player extends Entity implements Moveable, Drawable {
+public class Player implements Moveable, Drawable, Entity {
 
+    private Texture texture;
     private Position position;
     private MoveAbility moveAbility;
 
     public Player(Texture texture, Position position, MoveAbility moveAbility) {
-        super(texture);
+        this.texture = texture;
         this.position = position;
         this.moveAbility = moveAbility;
     }
@@ -24,4 +25,8 @@ public class Player extends Entity implements Moveable, Drawable {
         return position;
     }
 
+    @Override
+    public Texture getTexture() {
+        return texture;
+    }
 }
