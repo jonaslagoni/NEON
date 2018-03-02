@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+import com.neon.enemy.EnemyPlugin;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Position;
 import com.neon.player.PlayerPlugin;
@@ -37,6 +39,9 @@ public class Game implements ApplicationListener {
 
         Plugin playerPlugin = new PlayerPlugin();
         playerPlugin.start(gameData, world);
+
+        Plugin enemyPlugin = new EnemyPlugin();
+        enemyPlugin.start(gameData, world);
 
         gameData.addController(new MoveController());
         gameData.addInputProcessor(new UiInputProcessor(ui));

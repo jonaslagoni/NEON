@@ -44,6 +44,7 @@ format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 checked-tower2
+enemy
   rotate: false
   xy: 2, 2
   size: 160, 160
