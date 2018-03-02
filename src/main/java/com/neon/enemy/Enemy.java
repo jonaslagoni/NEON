@@ -14,11 +14,22 @@ public class Enemy implements Moveable, Drawable {
     private Position position;
     private MoveAbility moveAbility;
     private Texture texture;
+    private float width;
+    private float height;
 
-    public Enemy(Texture texture, Position position, MoveAbility moveAbility) {
+    @SuppressWarnings("WeakerAccess")
+    public Enemy(
+            Texture texture,
+            Position position,
+            MoveAbility moveAbility,
+            float width,
+            float height
+    ) {
         this.position = position;
         this.moveAbility = moveAbility;
         this.texture = texture;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
@@ -34,5 +45,15 @@ public class Enemy implements Moveable, Drawable {
     @Override
     public Texture getTexture() {
         return texture;
+    }
+
+    @Override
+    public float getWidth() {
+        return width;
+    }
+
+    @Override
+    public float getHeight() {
+        return height;
     }
 }

@@ -1,4 +1,4 @@
- package com.neon.main;
+package com.neon.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 import com.neon.enemy.EnemyPlugin;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Position;
@@ -105,7 +104,8 @@ public class Game implements ApplicationListener {
                 texture.getHeight() / 2,               // Offset by y to ensure centring
                 texture.getWidth(),                    // Texture Width
                 texture.getHeight(),                   // Texture Height
-                1, 1,                                         // Texture scaling
+                entity.getWidth() / texture.getWidth(),
+                entity.getHeight() / texture.getHeight(),                                         // Texture scaling
                 position.getRotation() * MathUtils.radDeg + 90, // Rotation
                 0, 0,                                         // Position of texture in source texture
                 texture.getWidth(),                    // Source Width

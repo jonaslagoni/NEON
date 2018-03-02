@@ -11,9 +11,6 @@ import com.neon.main.World;
 import com.neon.main.entities.MoveAbility;
 import com.neon.main.entities.Position;
 
-import java.util.Iterator;
-import java.util.List;
-
 public class EnemyPlugin implements Plugin {
 
 
@@ -25,7 +22,9 @@ public class EnemyPlugin implements Plugin {
                 Enemy enemy = new Enemy(
                         new Texture(Gdx.files.internal("images/enemy.png")),
                         new Position(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight()), 0),
-                        new MoveAbility(new Vector2(Gdx.graphics.getWidth() / 2, 0), 20)
+                        new MoveAbility(new Vector2(Gdx.graphics.getWidth() / 2, 0), 20),
+                        16,
+                        16
                 );
                 world.addEntity(enemy);
             }

@@ -22,7 +22,9 @@ public class PlayerPlugin implements Plugin {
         player = new Player(
                 new Texture(Gdx.files.internal("images/tower1.png")),
                 new Position(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), 0),
-                new MoveAbility(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), 150)
+                new MoveAbility(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), 150),
+                128,
+                128
         );
 
         world.addEntity(player);
