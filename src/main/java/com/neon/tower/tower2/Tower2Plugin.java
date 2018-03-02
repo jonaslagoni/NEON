@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.neon.tower.ITowerPlugin;
 import com.neon.tower.Tower;
 import com.neon.ui.ITowerPlacementProcessor;
+import com.neon.ui.IUiController;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,28 +23,42 @@ import java.util.List;
  */
 public class Tower2Plugin implements ITowerPlugin{
     private Tower2Ui towerUi;
-    
+    private IUiController controller;
     private List<Tower> towers = new ArrayList();
     
+    public Tower2Plugin(BitmapFont font, Skin skin, IUiController controller){
+        this.setUiController(controller);
+        this.addTower(font, skin);
+    }
+    
     @Override
-    public void addTower(Stage stage, BitmapFont font, Skin skin, ITowerPlacementProcessor towerPlacement) {
+    public void addTower(BitmapFont font, Skin skin) {
         towerUi = new Tower2Ui(font, skin, "button");
         towerUi.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 Tower tower = new Tower2(font, skin, "tower2");
+                tower.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y){
+                        
+                    }
+                });
                 towers.add(tower);
-                stage.addActor(tower);
-                towerPlacement.setSelectedTower(tower);
+                controller.addTowerToPlacement(tower);
             }
         });
-        stage.addActor(towerUi);
+        controller.addTowerButton(towerUi);
+    }
+    
+    @Override
+    public void setUiController(IUiController controller) {
+        this.controller = controller;
     }
 
     @Override
     public void removeTower(Stage stage) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
 }

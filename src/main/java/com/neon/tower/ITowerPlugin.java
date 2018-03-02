@@ -9,13 +9,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.neon.ui.ITowerPlacementProcessor;
-import com.neon.ui.UiController;
+import com.neon.ui.IUiController;
 
 /**
  *
  * @author Lagoni
  */
 public interface ITowerPlugin {
-    public void addTower(Stage stage, BitmapFont font, Skin skin, ITowerPlacementProcessor towerPlacement);
+    public void setUiController(IUiController controller);
+    public void addTower(BitmapFont font, Skin skin);
     public void removeTower(Stage stage);
 }

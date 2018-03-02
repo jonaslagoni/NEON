@@ -11,12 +11,12 @@ import com.neon.tower.tower2.Tower2;
 public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlacementProcessor {
     
     private Tower tower;
-    private IDeselectTower deselector;
+    private IUiController uiController;
     
     @Override
     public boolean keyDown(int keycode) {
         if(Keys.ESCAPE == keycode){
-            deselector.reset(tower);
+            uiController.deselectTowerPlacement(tower);
             tower = null;
         }
         return false;
@@ -38,11 +38,11 @@ public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlace
         if(Buttons.LEFT == button){
             if(tower != null){
                 TowerController.getInstance().addTower(tower);
-                deselector.reset(tower);
+                uiController.deselectTowerPlacement(tower);
                 tower = null;
             }
         }else if(Buttons.RIGHT == button){
-            deselector.reset(tower);
+            uiController.deselectTowerPlacement(tower);
             tower = null;
         }
         return false;
@@ -76,10 +76,10 @@ public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlace
 
 
     /**
-     * @param deselector the deselector to set
+     * @param uiController the uiController to set
      */
-    public void setDeselector(IDeselectTower deselector) {
-        this.deselector = deselector;
+    public void setUiController(IUiController uiController) {
+        this.uiController = uiController;
     }
 
     @Override

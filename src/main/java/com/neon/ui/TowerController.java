@@ -5,8 +5,11 @@
  */
 package com.neon.ui;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.neon.tower.Tower;
+import com.neon.tower.tower2.Tower2;
 
 /**
  *

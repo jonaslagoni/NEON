@@ -24,5 +24,4 @@ public class Tower extends TextButton{
     public Tower (String text, TextButtonStyle style) {
         super(text, style);
     }
-    
 }

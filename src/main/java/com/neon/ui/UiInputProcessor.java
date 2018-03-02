@@ -7,21 +7,10 @@ import com.badlogic.gdx.InputProcessor;
 public class UiInputProcessor implements InputProcessor {
 
     /* How input works: https://github.com/libgdx/libgdx/wiki/Event-handling */
-
-    private UiController ui;
-
-    public UiInputProcessor(UiController ui) {
-        this.ui = ui;
-    }
-
+    
     @Override
     public boolean keyDown(int keycode) {
-        switch (keycode) {
-            case Keys.SPACE:
-                ui.toggleUi();
-                break;
-        }
-        return true;
+        return false;
     }
 
     @Override

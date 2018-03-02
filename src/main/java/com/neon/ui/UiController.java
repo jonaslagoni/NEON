@@ -8,8 +8,11 @@ package com.neon.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.neon.main.GameData;
 import com.neon.tower.Tower;
 import com.neon.tower.tower2.Tower2Plugin;
@@ -17,9 +20,13 @@ import com.neon.tower.tower2.Tower2Plugin;
 /**
  * @author Lagoni
  */
-public class UiController implements IDeselectTower{
+public class UiController implements IUiController{
 
     private Stage stage;
+    private Table towerButtonTable; //for all the towers buttons for creating towers
+    private Group towerUpgradeGroup; //For the upgrading the group
+    private Group towerPlacementGroup;
+    
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas atlas;
@@ -34,29 +41,74 @@ public class UiController implements IDeselectTower{
         atlas = new TextureAtlas(Gdx.files.internal("./assets/assets.atlas"));
         skin.addRegions(atlas);
         towerInput = new TowerPlacementInputProcessor();
-        towerInput.setDeselector(this);
+        towerInput.setUiController(this);
         gameData.addInputProcessor(towerInput);
-        createUI();
         gameData.addInputProcessor(stage);
+        
+        towerButtonTable = new Table();
+        towerButtonTable.setVisible(true);
+        towerButtonTable.setPosition(Gdx.graphics.getWidth()/2-100, 0);
+        towerButtonTable.setFillParent(true);
+        
+        towerUpgradeGroup = new Group();
+        towerUpgradeGroup.setVisible(false);
+        
+        towerPlacementGroup = new Group();
+        towerPlacementGroup.setVisible(true);
+        
+        stage.addActor(towerButtonTable);
+        stage.addActor(towerUpgradeGroup);
+        stage.addActor(towerPlacementGroup);
+        
+        
+        createTowers();
+        
     }
 
-    private void createUI() {
-        Tower2Plugin plugin1 = new Tower2Plugin();
-        plugin1.addTower(stage, font, skin, towerInput);
+    private void createTowers() {
+        Tower2Plugin plugin = new Tower2Plugin(font, skin, this);
+        Tower2Plugin plugin2 = new Tower2Plugin(font, skin, this);
         
     }
 
     public void draw() {
         stage.draw();
     }
-
-    public void toggleUi() {
-        stage.getRoot().setVisible(!stage.getRoot().isVisible());
+    
+    @Override
+    public void deselectTowerPlacement(Tower tower) {
+        towerPlacementGroup.removeActor(tower);
     }
     
+    @Override
+    public void hideTowerUpgrade() {
+        towerUpgradeGroup.setVisible(false);
+    }
 
     @Override
-    public void reset(Tower tower) {
-        stage.getRoot().removeActor(tower);
+    public void showTowerUpgrade(Tower tower) {
+        towerUpgradeGroup.setVisible(true);
     }
+
+    @Override
+    public void showTowerPlacement() {
+        towerButtonTable.setVisible(true);
+    }
+
+    @Override
+    public void hideTowerPlacement() {
+        towerButtonTable.setVisible(false);
+    }
+    @Override
+    public void addTowerButton(Tower tower) {
+        towerButtonTable.add(tower).width(tower.getWidth()).height(tower.getHeight()).row();
+    }
+
+    @Override
+    public void addTowerToPlacement(Tower tower) {
+        towerPlacementGroup.clearChildren();
+        towerPlacementGroup.addActor(tower);
+        towerInput.setSelectedTower(tower);
+    }
+
 }

@@ -43,7 +43,6 @@ public class Game implements ApplicationListener {
         enemyPlugin.start(gameData, world);
 
         gameData.addController(new MoveController());
-        gameData.addInputProcessor(new UiInputProcessor(ui));
     }
 
     @Override

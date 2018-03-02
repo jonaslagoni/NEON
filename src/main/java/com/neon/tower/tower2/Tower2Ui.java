@@ -17,7 +17,7 @@ import com.neon.tower.Tower;
  */
 public class Tower2Ui extends Tower {
     public Tower2Ui(BitmapFont font, Skin skin, String drawable) {
-        super("Tower2", new TextButton.TextButtonStyle(skin.getDrawable("up-" + drawable), skin.getDrawable("down-" + drawable), skin.getDrawable("checked-" + drawable), font));
+        super("Tower2 - button", new TextButton.TextButtonStyle(skin.getDrawable("up-" + drawable), skin.getDrawable("down-" + drawable), skin.getDrawable("checked-" + drawable), font));
         
         super.setWidth(125);
         super.setHeight(25);
