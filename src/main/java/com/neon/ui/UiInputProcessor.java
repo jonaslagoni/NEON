@@ -8,9 +8,9 @@ public class UiInputProcessor implements InputProcessor {
 
     /* How input works: https://github.com/libgdx/libgdx/wiki/Event-handling */
 
-    private UI ui;
+    private UiController ui;
 
-    public UiInputProcessor(UI ui) {
+    public UiInputProcessor(UiController ui) {
         this.ui = ui;
     }
 
