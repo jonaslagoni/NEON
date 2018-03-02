@@ -3,7 +3,7 @@ package com.neon.player;
 import com.badlogic.gdx.graphics.Texture;
 import com.neon.main.entities.*;
 
-public class Player implements Moveable, Drawable, Entity {
+public class Player implements Moveable, Drawable {
 
     private Texture texture;
     private Position position;

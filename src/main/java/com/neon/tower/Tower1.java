@@ -21,7 +21,6 @@ public class Tower1{
         button.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                System.out.println("Does this");
                 return false;
             }
         });
