@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Position;
 import com.neon.player.PlayerPlugin;
+import com.neon.ui.TowerController;
 import com.neon.ui.UI;
 import com.neon.ui.UiInputProcessor;
 
@@ -71,6 +72,7 @@ public class Game implements ApplicationListener {
         }
         shapeRenderer.end();
 
+        TowerController.getInstance().getStage().draw();
         /* Render all entities to screen*/
         batch.begin();
         for (Drawable entity : world.getEntities(Drawable.class)) {

@@ -8,18 +8,18 @@ package com.neon.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.neon.main.GameData;
 import com.neon.tower.Tower1;
 
 /**
  * @author Lagoni
  */
-public class UI {
+public class UI implements Test{
 
     private Stage stage;
     private BitmapFont font;
@@ -28,6 +28,7 @@ public class UI {
     private GameData gameData;
     private TowerPlacementInputProcessor towerInput;
     private Tower1 currentSelectedTower;
+    
     public UI(GameData gameData) {
         this.gameData = gameData;
         stage = new Stage();
@@ -36,9 +37,10 @@ public class UI {
         atlas = new TextureAtlas(Gdx.files.internal("./assets/assets.atlas"));
         skin.addRegions(atlas);
         towerInput = new TowerPlacementInputProcessor();
+        towerInput.setTest(this);
         gameData.addInputProcessor(towerInput);
         createUI();
-        gameData.addInputProcessor(stage);        
+        gameData.addInputProcessor(stage);
     }
 
     private void createUI() {
@@ -48,17 +50,16 @@ public class UI {
         textButtonStyle.down = skin.getDrawable("down-button");
         textButtonStyle.checked = skin.getDrawable("checked-button");
         TextButton button = new TextButton("Button1", textButtonStyle);
-        button.addListener(new EventListener() {
+        button.addListener(new ClickListener() {
             @Override
-            public boolean handle(Event event) {
+            public void clicked(InputEvent event, float x, float y){
                 Tower1 tower = new Tower1(font, skin, "up-button");
                 if(currentSelectedTower != null){
-                    stage.getRoot().removeActor(currentSelectedTower.getActor());
+                    stage.getRoot().removeActor(currentSelectedTower);
                 }
-                stage.getRoot().addActor(tower.getActor());
+                stage.getRoot().addActor(tower);
                 currentSelectedTower = tower;
                 towerInput.setTower(tower);
-                return true;
             }
         });
         button.setWidth(120);
@@ -77,5 +78,13 @@ public class UI {
     
     public void setTower(){
         
+    }
+
+    @Override
+    public void reset() {
+        if(currentSelectedTower != null){
+            stage.getRoot().removeActor(currentSelectedTower);
+            currentSelectedTower = null;
+        }
     }
 }

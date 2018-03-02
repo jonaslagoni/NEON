@@ -6,34 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.neon.main.entities.*;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
-public class Tower1{
-    private Actor actor;
+public class Tower1 extends Tower{
     
-
     public Tower1(BitmapFont font, Skin skin, String drawable) {
+        super("Tower1", new TextButton.TextButtonStyle(skin.getDrawable(drawable), skin.getDrawable(drawable), skin.getDrawable(drawable), font));
         
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable(drawable);
-        TextButton button = new TextButton("Tower1", textButtonStyle);
-        button.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                return false;
-            }
-        });
-        button.setWidth(75);
-        button.setHeight(75);
-        actor = button;
-    }
-
-    /**
-     * @return the actor
-     */
-    public Actor getActor() {
-        return actor;
+        super.setWidth(75);
+        super.setHeight(75);
     }
 
 }

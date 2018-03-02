@@ -5,15 +5,10 @@
  */
 package com.neon.ui;
 
-import com.badlogic.gdx.scenes.scene2d.Stage;
-
 /**
  *
  * @author Lagoni
  */
-public class GridUI {
-    
-    public GridUI(Stage stage){
-        
-    }
+public interface Test {
+    public void reset();
 }

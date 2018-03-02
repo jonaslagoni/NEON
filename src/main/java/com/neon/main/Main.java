@@ -13,7 +13,7 @@ public class Main {
         TexturePacker.process(settings, "./images", "./assets", "assets");
 
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+        //config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
         new Lwjgl3Application(new Game(), config);
     }
 }

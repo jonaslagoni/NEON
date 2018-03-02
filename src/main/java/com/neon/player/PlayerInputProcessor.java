@@ -39,7 +39,7 @@ public class PlayerInputProcessor implements InputProcessor {
                 target.y = (Gdx.graphics.getHeight() - screenY);
                 break;
         }
-        return true;
+        return false;
     }
 
     @Override
