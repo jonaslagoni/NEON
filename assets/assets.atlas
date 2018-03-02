@@ -39,13 +39,34 @@ up-button
   index: -1
 
 assets4.png
-size: 256,256
+size: 512,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-tower1
+checked-tower2
   rotate: false
   xy: 2, 2
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+down-tower2
+  rotate: false
+  xy: 2, 2
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+up-tower2
+  rotate: false
+  xy: 2, 2
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+tower1
+  rotate: false
+  xy: 164, 34
   size: 128, 128
   orig: 128, 128
   offset: 0, 0

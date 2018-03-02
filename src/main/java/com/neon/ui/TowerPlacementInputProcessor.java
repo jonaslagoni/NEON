@@ -4,19 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.neon.tower.Tower1;
+import com.neon.tower.Tower;
+import com.neon.tower.tower2.Tower2;
 
 
-public class TowerPlacementInputProcessor implements InputProcessor {
+public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlacementProcessor {
     
-    private Tower1 tower;
-    private Test test;
+    private Tower tower;
+    private IDeselectTower deselector;
     
     @Override
     public boolean keyDown(int keycode) {
         if(Keys.ESCAPE == keycode){
+            deselector.reset(tower);
             tower = null;
-            test.reset();
         }
         return false;
     }
@@ -37,12 +38,12 @@ public class TowerPlacementInputProcessor implements InputProcessor {
         if(Buttons.LEFT == button){
             if(tower != null){
                 TowerController.getInstance().addTower(tower);
+                deselector.reset(tower);
                 tower = null;
-                test.reset();
             }
         }else if(Buttons.RIGHT == button){
+            deselector.reset(tower);
             tower = null;
-            test.reset();
         }
         return false;
     }
@@ -56,6 +57,7 @@ public class TowerPlacementInputProcessor implements InputProcessor {
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         return false;
     }
+    
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
         if(tower != null){
@@ -72,18 +74,17 @@ public class TowerPlacementInputProcessor implements InputProcessor {
         return false;
     }
 
-    /**
-     * @param tower the tower to set
-     */
-    public void setTower(Tower1 tower) {
-        this.tower = tower;
-    }
 
     /**
-     * @param test the test to set
+     * @param deselector the deselector to set
      */
-    public void setTest(Test test) {
-        this.test = test;
+    public void setDeselector(IDeselectTower deselector) {
+        this.deselector = deselector;
+    }
+
+    @Override
+    public void setSelectedTower(Tower tower) {
+        this.tower = tower;
     }
 
 }

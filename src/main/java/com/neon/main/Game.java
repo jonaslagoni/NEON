@@ -13,13 +13,13 @@ import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Position;
 import com.neon.player.PlayerPlugin;
 import com.neon.ui.TowerController;
-import com.neon.ui.UI;
+import com.neon.ui.UiController;
 import com.neon.ui.UiInputProcessor;
 
 public class Game implements ApplicationListener {
 
     private GameData gameData;
-    private UI ui;
+    private UiController ui;
     private World world;
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
@@ -28,7 +28,7 @@ public class Game implements ApplicationListener {
     public void create() {
 
         gameData = new GameData();
-        ui = new UI(gameData);
+        ui = new UiController(gameData);
         world = new World();
 
         /* Sprite batch is used to render sprites on the gpu */

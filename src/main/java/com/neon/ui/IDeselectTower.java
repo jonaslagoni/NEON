@@ -5,10 +5,12 @@
  */
 package com.neon.ui;
 
+import com.neon.tower.Tower;
+
 /**
  *
  * @author Lagoni
  */
-public interface Test {
-    public void reset();
+public interface IDeselectTower {
+    public void reset(Tower tower);
 }
