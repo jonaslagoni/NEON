@@ -3,7 +3,6 @@ package com.neon.player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.neon.main.GameData;
 import com.neon.main.Plugin;
 import com.neon.main.World;
@@ -19,19 +18,18 @@ public class PlayerPlugin implements Plugin {
     @Override
     public void start(GameData gameData, World world) {
 
-        player = new Player(
-                new MoveAbility(100),
-                new Sprite(
-                        new Texture(Gdx.files.internal("images/tower1.png")),
-                        new Vector2(World.WIDTH / 2, World.HEIGHT / 2),
-                        World.GRID_CELL_SIZE,
-                        World.GRID_CELL_SIZE
-                )
+        Sprite sprite = new Sprite(
+                new Texture(Gdx.files.internal("images/tower1.png")),
+                World.GRID_CELL_SIZE,
+                World.GRID_CELL_SIZE
         );
+        sprite.setPosition(World.WIDTH / 2, World.HEIGHT / 2);
+
+        player = new Player(new MoveAbility(100), sprite);
 
         world.addEntity(player);
 
-        inputProcessor = new PlayerInputProcessor(player, gameData.getCamera(), gameData.getViewport());
+        inputProcessor = new PlayerInputProcessor(player);
         playerController = new PlayerController();
 
         gameData.addController(playerController);

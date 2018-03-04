@@ -1,7 +1,10 @@
 package com.neon.main;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IdentityMap;
+import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Entity;
 
 public class World {
@@ -14,7 +17,7 @@ public class World {
 
     private final Array<Entity> entities = new Array<>(false, 256);
     @SuppressWarnings("MismatchedReadAndWriteOfArray")
-    private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];         // 2D array
+    private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
     private final IdentityMap<Class<?>, Array<?>> cache = new IdentityMap<>();
 
     public Array<Entity> getEntities() {
@@ -48,8 +51,28 @@ public class World {
         entities.removeValue(player, true);
     }
 
-    public int getGridLength() {
-        return grid.length;
+
+    public void setGridCell(Vector2 position, Drawable entity) {
+        int x = MathUtils.floor(position.x / GRID_CELL_SIZE);
+        int y = MathUtils.floor(position.y / GRID_CELL_SIZE);
+        entities.add(entity);
+        grid[x][y] = entity;
+        entity.getSprite().setPosition(
+                x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2,
+                y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2)
+        ;
     }
+
+    public Entity getGridCell(Vector2 position) {
+        int x = MathUtils.floor(position.x / GRID_CELL_SIZE);
+        int y = MathUtils.floor(position.y / GRID_CELL_SIZE);
+        return grid[x][y];
+    }
+
+    public void removeGridCell(int x, int y) {
+        entities.removeValue(grid[x][y], true);
+        grid[x][y] = null;
+    }
+
 }
 

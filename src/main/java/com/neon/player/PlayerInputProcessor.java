@@ -1,9 +1,8 @@
 package com.neon.player;
 
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.neon.main.Game;
 import com.neon.main.World;
 import com.neon.main.entities.MoveAbility;
 
@@ -12,16 +11,11 @@ import static com.badlogic.gdx.Input.Buttons;
 public class PlayerInputProcessor implements InputProcessor {
 
     private Player player;
-    private OrthographicCamera camera;
-    private Viewport viewport;
+
 
     @SuppressWarnings("WeakerAccess")
-    public PlayerInputProcessor(Player player,
-                                OrthographicCamera camera,
-                                Viewport viewport) {
+    public PlayerInputProcessor(Player player) {
         this.player = player;
-        this.camera = camera;
-        this.viewport = viewport;
     }
 
     private static boolean isOutOfBounds(Vector2 v) {
@@ -48,19 +42,19 @@ public class PlayerInputProcessor implements InputProcessor {
         /* Touch and mouse is the same */
         switch (button) {
             case Buttons.LEFT:
-                Vector2 target = viewport.unproject(new Vector2(screenX, screenY));
+                Vector2 target = Game.viewport.unproject(new Vector2(screenX, screenY));
                 if (isOutOfBounds(target)) break;
                 MoveAbility moveAbility = player.getMoveAbility();
                 moveAbility.setTargetVector(target);
                 moveAbility.setTarget(true);
-                break;
+                return true;
         }
-        System.out.println(camera.viewportHeight);
+/*        System.out.println(camera.viewportHeight);
         System.out.println(camera.viewportWidth);
         System.out.println(screenY);
         System.out.println(screenX);
         System.out.println(viewport.unproject(new Vector2(screenX, screenY)));
-        System.out.println();
+        System.out.println();*/
 
         return false;
     }

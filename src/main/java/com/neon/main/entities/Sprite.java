@@ -7,26 +7,23 @@ public class Sprite {
 
     private float height;
     private float width;
-    private Vector2 position;
+    private Vector2 position = new Vector2();
     private float rotation;
     private Texture texture;
 
     public Sprite(Texture texture,
-                  Vector2 position,
                   float height,
                   float width,
                   float rotation) {
-        this(texture, position, height, width);
+        this(texture, height, width);
         this.rotation = rotation;
     }
 
     public Sprite(Texture texture,
-                  Vector2 position,
                   float height,
                   float width) {
         this.height = height;
         this.width = width;
-        this.position = position;
         this.texture = texture;
     }
 
@@ -52,6 +49,11 @@ public class Sprite {
 
     public void setPosition(Vector2 position) {
         this.position = position;
+    }
+
+    public void setPosition(float x, float y) {
+        position.x = x;
+        position.y = y;
     }
 
     public float getRotation() {

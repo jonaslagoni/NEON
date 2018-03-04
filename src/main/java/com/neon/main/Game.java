@@ -14,20 +14,22 @@ import com.neon.enemy.EnemyPlugin;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Sprite;
 import com.neon.player.PlayerPlugin;
-import com.neon.ui.TowerController;
-import com.neon.ui.UiController;
+import com.neon.player.Tower.TowerPlugin;
+import com.neon.ui.HUD;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 
 public class Game implements ApplicationListener {
 
+    private static final OrthographicCamera camera = new OrthographicCamera();
+    public static final Viewport viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
+
     private static SpriteBatch batch;
     private static ShapeRenderer shapeRenderer;
     private GameData gameData;
-    private UiController ui;
+    private HUD hud;
     private World world;
-    private OrthographicCamera camera;
-    private Viewport viewport;
+    private Texture bg;
 
     private static void drawEntity(Drawable drawable) {
         Sprite sprite = drawable.getSprite();
@@ -64,29 +66,30 @@ public class Game implements ApplicationListener {
     @Override
     public void create() {
 
-        camera = new OrthographicCamera();
-        viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
-        viewport.apply();
+        /* Set camera such that 0,0 is bottom left */
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
 
         gameData = new GameData();
-        gameData.setCamera(camera);
-        gameData.setViewport(viewport);
-
-        ui = new UiController(gameData);
         world = new World();
-
-        /* Sprite batch is used to render sprites on the gpu */
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-
-        Plugin playerPlugin = new PlayerPlugin();
-        playerPlugin.start(gameData, world);
 
         Plugin enemyPlugin = new EnemyPlugin();
         enemyPlugin.start(gameData, world);
 
+        Plugin towerPlugin = new TowerPlugin();
+        towerPlugin.start(gameData, world);
+
         gameData.addController(new MoveController());
+
+        hud = new HUD(gameData, world, batch);
+
+        Plugin playerPlugin = new PlayerPlugin();
+        playerPlugin.start(gameData, world);
+
+        camera.zoom += 0.5;
+
+        bg = new Texture(Gdx.files.internal("images/up-button.png"));
     }
 
     @Override
@@ -108,22 +111,29 @@ public class Game implements ApplicationListener {
 
         camera.update();
         batch.setProjectionMatrix(camera.combined);
+
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         /* Draw grid */
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        drawGrid();
-        shapeRenderer.end();
+        // shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        // drawGrid();
+        // shapeRenderer.end();
 
-        TowerController.getInstance().getStage().draw();
-
-        /* Render all entities to screen*/
+        viewport.apply();
         batch.begin();
+
+        /* Draw background */
+        batch.draw(bg, 0, 0, World.WIDTH, World.HEIGHT);
+
+        /* Draw all entities to screen*/
         world.getEntities(Drawable.class).forEach(Game::drawEntity);
         batch.end();
-        ui.draw();
+
+        /* Draw HUD*/
+        hud.getStage().getViewport().apply();
+        hud.getStage().draw();
     }
 
     @Override
