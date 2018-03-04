@@ -1,19 +1,23 @@
 package com.neon.main;
 
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.IdentityMap;
 import com.neon.main.entities.Entity;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class World {
 
-    private final List<Entity> entities = new ArrayList<>();
-    private final Entity[][] grid = new Entity[16][16];         // 2D array
-    private final Map<Class<?>, List<?>> cache = new HashMap<>();
+    public static final int WIDTH = 2048;
+    public static final int HEIGHT = 2048;
+    public static final int GRID_SPACES = 16;
+    public static final int GRID_CELL_SIZE = HEIGHT / GRID_SPACES;
 
-    public List<Entity> getEntities() {
+
+    private final Array<Entity> entities = new Array<>(false, 256);
+    @SuppressWarnings("MismatchedReadAndWriteOfArray")
+    private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];         // 2D array
+    private final IdentityMap<Class<?>, Array<?>> cache = new IdentityMap<>();
+
+    public Array<Entity> getEntities() {
         return entities;
     }
 
@@ -22,13 +26,14 @@ public class World {
         entities.add(entity);
     }
 
-    public <E extends Entity> List<E> getEntities(Class<E> type) {
+    @SuppressWarnings("unchecked")
+    public <E extends Entity> Iterable<E> getEntities(Class<E> type) {
 
         if (cache.containsKey(type)) {
-            return (List<E>) cache.get(type);
+            return (Array<E>) cache.get(type);
         }
 
-        List<E> result = new ArrayList<>();
+        Array<E> result = new Array<>();
         for (Entity entity : entities) {
             if (type.isInstance(entity)) {
                 result.add((E) entity);
@@ -40,7 +45,7 @@ public class World {
 
     public void removeEntity(Entity player) {
         cache.clear();
-        entities.remove(player);
+        entities.removeValue(player, true);
     }
 
     public int getGridLength() {

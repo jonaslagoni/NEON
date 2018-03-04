@@ -8,12 +8,14 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 public class Main {
     public static void main(String[] args) {
         Settings settings = new Settings();
-        settings.maxWidth = 512;
-        settings.maxHeight = 512;
+        settings.maxWidth = 2048;
+        settings.maxHeight = 2048;
         TexturePacker.process(settings, "./images", "./assets", "assets");
 
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        //config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+        // config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+        config.setWindowedMode(768, 768);
+        config.setResizable(false);
         new Lwjgl3Application(new Game(), config);
     }
 }

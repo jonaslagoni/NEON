@@ -8,9 +8,8 @@ package com.neon.ui;
 import com.neon.tower.Tower;
 
 /**
- *
  * @author Lagoni
  */
 public interface ITowerPlacementProcessor {
-    public void setSelectedTower(Tower tower);
+    void setSelectedTower(Tower tower);
 }

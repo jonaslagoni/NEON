@@ -1,31 +1,19 @@
 package com.neon.player;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.MoveAbility;
 import com.neon.main.entities.Moveable;
-import com.neon.main.entities.Position;
+import com.neon.main.entities.Sprite;
 
 public class Player implements Moveable, Drawable {
 
-    private Texture texture;
-    private Position position;
     private MoveAbility moveAbility;
-    private float width;
-    private float height;
+    private Sprite sprite;
 
-    public Player(
-            Texture texture,
-            Position position,
-            MoveAbility moveAbility,
-            float width,
-            float height
-    ) {
-        this.texture = texture;
-        this.position = position;
+    @SuppressWarnings("WeakerAccess")
+    public Player(MoveAbility moveAbility, Sprite sprite) {
         this.moveAbility = moveAbility;
-        this.width = width;
-        this.height = height;
+        this.sprite = sprite;
     }
 
     @Override
@@ -33,23 +21,10 @@ public class Player implements Moveable, Drawable {
         return moveAbility;
     }
 
-    @Override
-    public Position getPosition() {
-        return position;
-    }
 
     @Override
-    public Texture getTexture() {
-        return texture;
+    public Sprite getSprite() {
+        return sprite;
     }
 
-    @Override
-    public float getWidth() {
-        return width;
-    }
-
-    @Override
-    public float getHeight() {
-        return height;
-    }
 }

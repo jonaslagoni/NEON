@@ -3,32 +3,76 @@ package com.neon.main;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.enemy.EnemyPlugin;
 import com.neon.main.entities.Drawable;
-import com.neon.main.entities.Position;
+import com.neon.main.entities.Sprite;
 import com.neon.player.PlayerPlugin;
 import com.neon.ui.TowerController;
 import com.neon.ui.UiController;
-import com.neon.ui.UiInputProcessor;
+
+import static com.badlogic.gdx.math.MathUtils.radDeg;
 
 public class Game implements ApplicationListener {
 
+    private static SpriteBatch batch;
+    private static ShapeRenderer shapeRenderer;
     private GameData gameData;
     private UiController ui;
     private World world;
-    private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
+    private OrthographicCamera camera;
+    private Viewport viewport;
+
+    private static void drawEntity(Drawable drawable) {
+        Sprite sprite = drawable.getSprite();
+        Texture texture = sprite.getTexture();
+        batch.draw(
+                texture,
+                sprite.getPosition().x - texture.getWidth() / 2,
+                sprite.getPosition().y - texture.getHeight() / 2,
+                texture.getWidth() / 2,
+                texture.getHeight() / 2,
+                texture.getWidth(),
+                texture.getHeight(),
+                sprite.getWidth() / texture.getWidth(),
+                sprite.getHeight() / texture.getHeight(),
+                sprite.getRotation() * radDeg,
+                0, 0,
+                texture.getWidth(),
+                texture.getHeight(),
+                false, false
+        );
+    }
+
+    private static void drawGrid() {
+        int gap = Gdx.graphics.getHeight() / World.GRID_SPACES;
+        shapeRenderer.setColor(Color.GREEN);
+        for (int i = 1; i < World.GRID_SPACES; i++) {
+            /* Vertical */
+            shapeRenderer.line(i * gap, 0, i * gap, World.GRID_SPACES * gap);
+            /* Horizontal */
+            shapeRenderer.line(0, i * gap, World.GRID_SPACES * gap, i * gap);
+        }
+    }
 
     @Override
     public void create() {
 
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
+        viewport.apply();
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+
         gameData = new GameData();
+        gameData.setCamera(camera);
+        gameData.setViewport(viewport);
+
         ui = new UiController(gameData);
         world = new World();
 
@@ -47,6 +91,8 @@ public class Game implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
+        viewport.update(width, height);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
     }
 
     /**
@@ -54,63 +100,30 @@ public class Game implements ApplicationListener {
      */
     @Override
     public void render() {
-        for (Controller controller : gameData.getControllers()) {
-            controller.update(world);
-        }
+        gameData.getControllers().forEach(controller -> controller.update(world));
         draw();
     }
 
     private void draw() {
+
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
         /* Clear screen*/
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         /* Draw grid */
-        int gap = Gdx.graphics.getHeight() / world.getGridLength();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.GREEN);
-        for (int i = 1; i < world.getGridLength(); i++) {
-            shapeRenderer.line(i * gap, 0, i * gap, world.getGridLength() * gap); // Vertical
-            shapeRenderer.line(0, i * gap, world.getGridLength() * gap, i * gap); // Horizontal
-
-        }
+        drawGrid();
         shapeRenderer.end();
 
         TowerController.getInstance().getStage().draw();
+
         /* Render all entities to screen*/
         batch.begin();
-        for (Drawable entity : world.getEntities(Drawable.class)) {
-            draw(entity);
-        }
+        world.getEntities(Drawable.class).forEach(Game::drawEntity);
         batch.end();
-
         ui.draw();
-    }
-
-    /**
-     * Draw a single entity to the screen
-     *
-     * @param entity Entity to be drawn
-     */
-    private void draw(Drawable entity) {
-        Texture texture = entity.getTexture();
-        Position position = entity.getPosition();
-        Vector2 vector = position.getVector();
-        batch.draw(
-                texture,                               // Texture
-                vector.x - texture.getWidth() / 2,     // Position x
-                vector.y - texture.getHeight() / 2,    // Position y
-                texture.getWidth() / 2,                // Offset by x to ensure centring
-                texture.getHeight() / 2,               // Offset by y to ensure centring
-                texture.getWidth(),                    // Texture Width
-                texture.getHeight(),                   // Texture Height
-                entity.getWidth() / texture.getWidth(),
-                entity.getHeight() / texture.getHeight(),                                         // Texture scaling
-                position.getRotation() * MathUtils.radDeg + 90, // Rotation
-                0, 0,                                         // Position of texture in source texture
-                texture.getWidth(),                    // Source Width
-                texture.getHeight(),                   // Source Height
-                false, false                                  // Flip
-        );
     }
 
     @Override

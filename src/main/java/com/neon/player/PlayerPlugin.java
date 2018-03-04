@@ -8,7 +8,7 @@ import com.neon.main.GameData;
 import com.neon.main.Plugin;
 import com.neon.main.World;
 import com.neon.main.entities.MoveAbility;
-import com.neon.main.entities.Position;
+import com.neon.main.entities.Sprite;
 
 public class PlayerPlugin implements Plugin {
 
@@ -20,16 +20,18 @@ public class PlayerPlugin implements Plugin {
     public void start(GameData gameData, World world) {
 
         player = new Player(
-                new Texture(Gdx.files.internal("images/tower1.png")),
-                new Position(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), 0),
-                new MoveAbility(new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2), 150),
-                128,
-                128
+                new MoveAbility(100),
+                new Sprite(
+                        new Texture(Gdx.files.internal("images/tower1.png")),
+                        new Vector2(World.WIDTH / 2, World.HEIGHT / 2),
+                        World.GRID_CELL_SIZE,
+                        World.GRID_CELL_SIZE
+                )
         );
 
         world.addEntity(player);
 
-        inputProcessor = new PlayerInputProcessor(player);
+        inputProcessor = new PlayerInputProcessor(player, gameData.getCamera(), gameData.getViewport());
         playerController = new PlayerController();
 
         gameData.addController(playerController);

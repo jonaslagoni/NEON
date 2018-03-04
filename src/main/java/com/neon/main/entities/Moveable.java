@@ -1,5 +1,5 @@
 package com.neon.main.entities;
 
-public interface Moveable extends Positionable {
+public interface Moveable extends Drawable {
     MoveAbility getMoveAbility();
 }

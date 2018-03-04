@@ -5,38 +5,36 @@
  */
 package com.neon.ui;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.neon.tower.Tower;
-import com.neon.tower.tower2.Tower2;
 
 /**
- *
  * @author Lagoni
  */
 public class TowerController {
     private static TowerController instance;
-    public static TowerController getInstance(){
-        if(instance == null){
+    private Stage stage;
+
+    @SuppressWarnings("WeakerAccess")
+    public TowerController() {
+        stage = new Stage();
+    }
+
+    public static TowerController getInstance() {
+        if (instance == null) {
             instance = new TowerController();
         }
         return instance;
     }
-    private Stage stage;
-    
-    public TowerController(){
-        stage = new Stage();
-    }
-    
-    public void addTower(Tower tower){
+
+    public void addTower(Tower tower) {
         stage.addActor(tower);
     }
-    
-    public void removeTower(Tower tower){
+
+    public void removeTower(Tower tower) {
         stage.getRoot().removeActor(tower);
     }
-    
+
     /**
      * @return the stage
      */

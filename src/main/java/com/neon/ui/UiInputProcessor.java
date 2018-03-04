@@ -1,13 +1,12 @@
 package com.neon.ui;
 
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 
 public class UiInputProcessor implements InputProcessor {
 
     /* How input works: https://github.com/libgdx/libgdx/wiki/Event-handling */
-    
+
     @Override
     public boolean keyDown(int keycode) {
         return false;

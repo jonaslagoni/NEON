@@ -12,36 +12,37 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.neon.tower.ITowerPlugin;
 import com.neon.tower.Tower;
-import com.neon.ui.ITowerPlacementProcessor;
 import com.neon.ui.IUiController;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Lagoni
  */
-public class Tower2Plugin implements ITowerPlugin{
+public class Tower2Plugin implements ITowerPlugin {
+    @SuppressWarnings("FieldCanBeLocal")
     private Tower2Ui towerUi;
     private IUiController controller;
-    private List<Tower> towers = new ArrayList();
-    
-    public Tower2Plugin(BitmapFont font, Skin skin, IUiController controller){
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+    private List<Tower> towers = new ArrayList<>();
+
+    public Tower2Plugin(BitmapFont font, Skin skin, IUiController controller) {
         this.setUiController(controller);
         this.addTower(font, skin);
     }
-    
+
     @Override
     public void addTower(BitmapFont font, Skin skin) {
         towerUi = new Tower2Ui(font, skin, "button");
         towerUi.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y){
+            public void clicked(InputEvent event, float x, float y) {
                 Tower tower = new Tower2(font, skin, "tower2");
                 tower.addListener(new ClickListener() {
                     @Override
-                    public void clicked(InputEvent event, float x, float y){
-                        
+                    public void clicked(InputEvent event, float x, float y) {
+
                     }
                 });
                 towers.add(tower);
@@ -50,7 +51,7 @@ public class Tower2Plugin implements ITowerPlugin{
         });
         controller.addTowerButton(towerUi);
     }
-    
+
     @Override
     public void setUiController(IUiController controller) {
         this.controller = controller;

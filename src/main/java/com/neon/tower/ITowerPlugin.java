@@ -8,15 +8,15 @@ package com.neon.tower;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.neon.ui.ITowerPlacementProcessor;
 import com.neon.ui.IUiController;
 
 /**
- *
  * @author Lagoni
  */
 public interface ITowerPlugin {
-    public void setUiController(IUiController controller);
-    public void addTower(BitmapFont font, Skin skin);
-    public void removeTower(Stage stage);
+    void setUiController(IUiController controller);
+
+    void addTower(BitmapFont font, Skin skin);
+
+    void removeTower(Stage stage);
 }
