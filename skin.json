@@ -30,5 +30,11 @@
       font: default,
       fontColor: white
     }
+	
+	upgradeTower: {
+	up: down-button,
+	font: default,
+	fontColor: white
+	}
   }
 }
