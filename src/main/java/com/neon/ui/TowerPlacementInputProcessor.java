@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.neon.main.World;
 import com.neon.tower.Tower;
 
 
@@ -11,6 +12,7 @@ public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlace
 
     private Tower tower;
     private IUiController uiController;
+    private World world = new World();
 
     @Override
     public boolean keyDown(int keycode) {
@@ -56,11 +58,21 @@ public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlace
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        if (tower != null) {
-            int posx = screenX - (int) (tower.getWidth() / 2);
-            int posy = screenY - Gdx.graphics.getHeight() + (int) (tower.getHeight() / 2);
+       if(tower != null){
+            
+            
+            int posx = screenX - (int)(tower.getWidth()/2);
+            int posy = screenY-Gdx.graphics.getHeight() + (int)(tower.getHeight()/2);
+
             posy *= -1;
-            tower.setPosition(posx, posy);
+            int blocXlenght = Gdx.graphics.getWidth()/world.getGridLength();
+            int blocYheight = blocXlenght;
+            
+            
+           
+            tower.setPosition((float)Math.floor(posx/blocXlenght)*blocXlenght-17,(float)Math.floor(posy/blocYheight)*blocYheight-17);
+         
+        
         }
         return false;
     }
