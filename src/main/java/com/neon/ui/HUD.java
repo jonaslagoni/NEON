@@ -2,17 +2,21 @@ package com.neon.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.neon.main.*;
 import com.neon.main.entities.Drawable;
+import com.neon.main.entities.Entity;
 
 import java.util.Map;
+import tower.Tower;
 
 public class HUD implements InputProcessor, Plugin {
 
@@ -32,13 +36,16 @@ public class HUD implements InputProcessor, Plugin {
     public void start(GameData gameData, World world) {
         this.world = world;
 
-        Table table = new Table(gameData.getSkin());
+        Skin skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("./assets/assets.atlas")));
+
+        Table table = new Table(skin);
+        
         table.setFillParent(true);
         hud.addActor(table);
 
         gameData.addInputProcessor(hud);
         gameData.addInputProcessor(this);
-
+        
         /*Create button for each placable item in gamedata*/
         for (Map.Entry<String, Factory> entry : gameData.getPlaceables().entrySet()) {
             TextButton button = new TextButton(entry.getKey(), gameData.getSkin());
@@ -48,7 +55,7 @@ public class HUD implements InputProcessor, Plugin {
                     selectedDrawable = entry.getValue().create(entry.getKey());
                 }
             });
-            table.addActor(button);
+            table.bottom().right().add(button);
         }
     }
 
@@ -80,11 +87,26 @@ public class HUD implements InputProcessor, Plugin {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 pos = Game.viewport.unproject(new Vector2(screenX, screenY));
 
-        if (selectedDrawable == null || isOutOfBounds(pos)) return false;
+        if(isOutOfBounds(pos)){
+            return false;
+        }
+            
+        Entity entity = world.getGridCell(pos);
+        if(entity != null){
+            if(entity instanceof Tower){
+                Tower tower = (Tower)entity;
+                System.out.println("Found tower");
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if (selectedDrawable == null) return false;
 
-        world.setGridCell(pos, selectedDrawable);
-        selectedDrawable = null;
-        return true;
+            world.setGridCell(pos, selectedDrawable);
+            selectedDrawable = null;
+            return true;
+        }
     }
 
     @Override
