@@ -40,12 +40,13 @@ public class Tower2Plugin implements ITowerPlugin {
             public void clicked(InputEvent event, float x, float y){
                 controller.deselectTowerPlacement();
                 Tower tower = new Tower2(font, skin, "tower2");
-//                tower.addListener(new ClickListener() {
-//                    @Override
-//                    public void clicked(InputEvent event, float x, float y){
-//                        
-//                    }
-//                });
+                tower.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y){
+                        System.out.println("test : " + x + " | " + y);
+                       
+                    }
+                });
                 towers.add(tower);
                 controller.addTowerToPlacement(tower);
             }

@@ -41,6 +41,8 @@ public class UiController implements IUiController {
         skin.addRegions(atlas);
         towerInput = new TowerPlacementInputProcessor();
         towerInput.setUiController(this);
+        gameData.addInputProcessor(towerInput); //must be before stage else you cant place the tower
+        gameData.addInputProcessor(stage);
         towerButtonTable = new Table();
         towerButtonTable.setVisible(true);
         towerButtonTable.bottom().right();
@@ -58,8 +60,6 @@ public class UiController implements IUiController {
         
         
         createTowers();
-        gameData.addInputProcessor(stage);
-        gameData.addInputProcessor(towerInput);
         
         
     }
