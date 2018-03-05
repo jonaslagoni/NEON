@@ -11,18 +11,12 @@ import com.neon.tower.Tower;
  * @author Lagoni
  */
 public interface IUiController {
-    void hideTowerUpgrade();
-
-    void showTowerUpgrade(Tower tower);
-
-    void showTowerPlacement();
-
-    void hideTowerPlacement();
-
-    void deselectTowerPlacement(Tower tower);
-
-    void addTowerButton(Tower tower);
-
-    void addTowerToPlacement(Tower tower);
-
+    public void hideTowerUpgrade();
+    public void showTowerUpgrade(Tower tower);
+    public void showTowerPlacement();
+    public void hideTowerPlacement();
+    public void deselectTowerPlacement();
+    public void addTowerButton(Tower tower);
+    public void addTowerToPlacement(Tower tower);
+    
 }

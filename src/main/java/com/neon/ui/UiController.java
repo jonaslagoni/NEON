@@ -41,12 +41,9 @@ public class UiController implements IUiController {
         skin.addRegions(atlas);
         towerInput = new TowerPlacementInputProcessor();
         towerInput.setUiController(this);
-        gameData.addInputProcessor(towerInput);
-        gameData.addInputProcessor(stage);
-
         towerButtonTable = new Table();
         towerButtonTable.setVisible(true);
-        towerButtonTable.setPosition(Gdx.graphics.getWidth() / 2 - 100, 0);
+        towerButtonTable.bottom().right();
         towerButtonTable.setFillParent(true);
 
         towerUpgradeGroup = new Group();
@@ -54,14 +51,17 @@ public class UiController implements IUiController {
 
         towerPlacementGroup = new Group();
         towerPlacementGroup.setVisible(true);
-
-        stage.addActor(towerButtonTable);
+        
         stage.addActor(towerUpgradeGroup);
         stage.addActor(towerPlacementGroup);
-
-
+        stage.addActor(towerButtonTable);
+        
+        
         createTowers();
-
+        gameData.addInputProcessor(stage);
+        gameData.addInputProcessor(towerInput);
+        
+        
     }
 
     private void createTowers() {
@@ -75,8 +75,9 @@ public class UiController implements IUiController {
     }
 
     @Override
-    public void deselectTowerPlacement(Tower tower) {
-        towerPlacementGroup.removeActor(tower);
+    public void deselectTowerPlacement() {
+        towerPlacementGroup.clearChildren();
+        towerInput.setSelectedTower(null);
     }
 
     @Override

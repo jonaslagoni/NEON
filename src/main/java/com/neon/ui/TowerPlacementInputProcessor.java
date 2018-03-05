@@ -14,9 +14,8 @@ public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlace
 
     @Override
     public boolean keyDown(int keycode) {
-        if (Keys.ESCAPE == keycode) {
-            uiController.deselectTowerPlacement(tower);
-            tower = null;
+        if(Keys.ESCAPE == keycode){
+            uiController.deselectTowerPlacement();
         }
         return false;
     }
@@ -37,12 +36,10 @@ public class TowerPlacementInputProcessor implements InputProcessor, ITowerPlace
         if (Buttons.LEFT == button) {
             if (tower != null) {
                 TowerController.getInstance().addTower(tower);
-                uiController.deselectTowerPlacement(tower);
-                tower = null;
+                uiController.deselectTowerPlacement();
             }
-        } else if (Buttons.RIGHT == button) {
-            uiController.deselectTowerPlacement(tower);
-            tower = null;
+        }else if(Buttons.RIGHT == button){
+            uiController.deselectTowerPlacement();
         }
         return false;
     }
