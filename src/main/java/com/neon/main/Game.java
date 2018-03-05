@@ -21,11 +21,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class Game implements ApplicationListener {
 
     private static final OrthographicCamera camera = new OrthographicCamera();
-    public static final Viewport viewport = new FitViewport(World.WIDTH, World.HEIGHT, camera);
+    public static final Viewport viewport = new ExtendViewport(World.WIDTH, World.HEIGHT, camera);
 
     private static SpriteBatch batch;
     private static ShapeRenderer shapeRenderer;
@@ -70,7 +71,7 @@ public class Game implements ApplicationListener {
     public void create() {
 
         /* Set camera such that 0,0 is bottom left */
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        //camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
 
         gameData = new GameData();
         world = new World();
@@ -87,8 +88,13 @@ public class Game implements ApplicationListener {
 
         gameData.addController(new MoveController());
 
-        camera.zoom += 0.5;
+        hud = new HUD(gameData, world, batch);
 
+        Plugin playerPlugin = new PlayerPlugin();
+        playerPlugin.start(gameData, world);
+
+        //camera.zoom += 0.5;
+        
         bg = new Texture(Gdx.files.internal("images/up-button.png"));
 
         plugins.forEach(plugin -> plugin.start(gameData, world));
