@@ -30,7 +30,7 @@ public class World {
     }
 
     @SuppressWarnings("unchecked")
-    public <E extends Entity> Iterable<E> getEntities(Class<E> type) {
+    public <E extends Entity> Array<E> getEntities(Class<E> type) {
 
         if (cache.containsKey(type)) {
             return (Array<E>) cache.get(type);

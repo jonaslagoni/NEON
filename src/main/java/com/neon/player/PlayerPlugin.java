@@ -25,7 +25,7 @@ public class PlayerPlugin implements Plugin {
         );
         sprite.setPosition(World.WIDTH / 2, World.HEIGHT / 2);
 
-        player = new Player(new MoveAbility(100), sprite);
+        player = new Player(new MoveAbility(200), sprite);
 
         world.addEntity(player);
 
