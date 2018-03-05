@@ -1,4 +1,4 @@
-package com.neon.player.Tower;
+package tower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

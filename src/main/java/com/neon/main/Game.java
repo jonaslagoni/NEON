@@ -14,8 +14,11 @@ import com.neon.enemy.EnemyPlugin;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Sprite;
 import com.neon.player.PlayerPlugin;
-import com.neon.player.Tower.TowerPlugin;
+import tower.TowerPlugin;
 import com.neon.ui.HUD;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 
@@ -74,22 +77,21 @@ public class Game implements ApplicationListener {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        Plugin enemyPlugin = new EnemyPlugin();
-        enemyPlugin.start(gameData, world);
-
-        Plugin towerPlugin = new TowerPlugin();
-        towerPlugin.start(gameData, world);
+        hud = new HUD();
+        List<Plugin> plugins = Arrays.asList(
+                new EnemyPlugin(),
+                new TowerPlugin(),
+                hud,
+                new PlayerPlugin()
+        );
 
         gameData.addController(new MoveController());
-
-        hud = new HUD(gameData, world, batch);
-
-        Plugin playerPlugin = new PlayerPlugin();
-        playerPlugin.start(gameData, world);
 
         camera.zoom += 0.5;
 
         bg = new Texture(Gdx.files.internal("images/up-button.png"));
+
+        plugins.forEach(plugin -> plugin.start(gameData, world));
     }
 
     @Override

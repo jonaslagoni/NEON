@@ -3,6 +3,8 @@ package com.neon.main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.neon.main.entities.Drawable;
 
 import java.util.HashMap;
@@ -18,12 +20,14 @@ public class GameData {
      */
     private final InputMultiplexer multiplexer = new InputMultiplexer();
     private final List<Controller> controllers = new LinkedList<>();
-
+    private Skin skin;
     private Map<String, Drawable> placeables = new HashMap<>();
 
     @SuppressWarnings("WeakerAccess")
     public GameData() {
         Gdx.input.setInputProcessor(multiplexer);
+        skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("./assets/assets.atlas")));
+
     }
 
     public void addInputProcessor(InputProcessor inputProcessor) {
@@ -52,5 +56,9 @@ public class GameData {
 
     public Map<String, Drawable> getPlaceables() {
         return placeables;
+    }
+
+    public Skin getSkin() {
+        return skin;
     }
 }

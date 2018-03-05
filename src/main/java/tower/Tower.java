@@ -1,4 +1,4 @@
-package com.neon.player.Tower;
+package tower;
 
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Sprite;
