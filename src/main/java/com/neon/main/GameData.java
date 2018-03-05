@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.neon.main.entities.Drawable;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,13 +20,12 @@ public class GameData {
     private final InputMultiplexer multiplexer = new InputMultiplexer();
     private final List<Controller> controllers = new LinkedList<>();
     private Skin skin;
-    private Map<String, Drawable> placeables = new HashMap<>();
+    private Map<String, Factory> placeables = new HashMap<>();
 
     @SuppressWarnings("WeakerAccess")
     public GameData() {
         Gdx.input.setInputProcessor(multiplexer);
         skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("./assets/assets.atlas")));
-
     }
 
     public void addInputProcessor(InputProcessor inputProcessor) {
@@ -50,11 +48,11 @@ public class GameData {
         return controllers;
     }
 
-    public void addPlaceable(String title, Drawable drawable) {
+    public void addPlaceable(String title, Factory drawable) {
         placeables.put(title, drawable);
     }
 
-    public Map<String, Drawable> getPlaceables() {
+    public Map<String, Factory> getPlaceables() {
         return placeables;
     }
 

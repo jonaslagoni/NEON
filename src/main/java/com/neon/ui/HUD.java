@@ -9,10 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.neon.main.Game;
-import com.neon.main.GameData;
-import com.neon.main.Plugin;
-import com.neon.main.World;
+import com.neon.main.*;
 import com.neon.main.entities.Drawable;
 
 import java.util.Map;
@@ -43,12 +40,12 @@ public class HUD implements InputProcessor, Plugin {
         gameData.addInputProcessor(this);
 
         /*Create button for each placable item in gamedata*/
-        for (Map.Entry<String, Drawable> entry : gameData.getPlaceables().entrySet()) {
+        for (Map.Entry<String, Factory> entry : gameData.getPlaceables().entrySet()) {
             TextButton button = new TextButton(entry.getKey(), gameData.getSkin());
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    selectedDrawable = entry.getValue();
+                    selectedDrawable = entry.getValue().create(entry.getKey());
                 }
             });
             table.addActor(button);
