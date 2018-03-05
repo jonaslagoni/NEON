@@ -2,11 +2,10 @@ package com.neon.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,9 +13,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.neon.main.*;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Entity;
+import tower.Tower;
 
 import java.util.Map;
-import tower.Tower;
 
 public class HUD implements InputProcessor, Plugin {
 
@@ -24,28 +23,21 @@ public class HUD implements InputProcessor, Plugin {
     private Drawable selectedDrawable;
     private World world;
 
-    public HUD() {
+    public HUD(Batch batch) {
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-    }
-
-    private static boolean isOutOfBounds(Vector2 v) {
-        return v.x < 0 || v.x > World.WIDTH || v.y < 0 || v.y > World.HEIGHT;
     }
 
     @Override
     public void start(GameData gameData, World world) {
         this.world = world;
 
-        Skin skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("./assets/assets.atlas")));
-
-        Table table = new Table(skin);
-        
+        Table table = new Table(gameData.getSkin());
         table.setFillParent(true);
         hud.addActor(table);
 
         gameData.addInputProcessor(hud);
         gameData.addInputProcessor(this);
-        
+
         /*Create button for each placable item in gamedata*/
         for (Map.Entry<String, Factory> entry : gameData.getPlaceables().entrySet()) {
             TextButton button = new TextButton(entry.getKey(), gameData.getSkin());
@@ -61,7 +53,7 @@ public class HUD implements InputProcessor, Plugin {
 
     @Override
     public void stop(GameData gameData, World world) {
-
+        // TODO remove hud
     }
 
     public Stage getStage() {
@@ -85,28 +77,31 @@ public class HUD implements InputProcessor, Plugin {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        /* Convert screen coordinates to world coordinates */
         Vector2 pos = Game.viewport.unproject(new Vector2(screenX, screenY));
 
-        if(isOutOfBounds(pos)){
+        /* Abandon if click is outside of the world */
+        if (World.isOutOfBounds(pos)) {
             return false;
         }
-            
-        Entity entity = world.getGridCell(pos);
-        if(entity != null){
-            if(entity instanceof Tower){
-                Tower tower = (Tower)entity;
-                System.out.println("Found tower");
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            if (selectedDrawable == null) return false;
 
+        /* If a tower is selected, place it */
+        if (selectedDrawable != null) {
             world.setGridCell(pos, selectedDrawable);
             selectedDrawable = null;
             return true;
         }
+
+        /* Select an already placed tower */
+        Entity entity = world.getGridCell(pos);
+        if (entity != null && entity instanceof Tower) {
+            Tower tower = (Tower) entity;
+            System.out.println("Found tower");
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -128,6 +123,4 @@ public class HUD implements InputProcessor, Plugin {
     public boolean scrolled(int amount) {
         return false;
     }
-
-
 }

@@ -12,14 +12,9 @@ public class PlayerInputProcessor implements InputProcessor {
 
     private Player player;
 
-
     @SuppressWarnings("WeakerAccess")
     public PlayerInputProcessor(Player player) {
         this.player = player;
-    }
-
-    private static boolean isOutOfBounds(Vector2 v) {
-        return v.x < 0 || v.x > World.WIDTH || v.y < 0 || v.y > World.HEIGHT;
     }
 
     @Override
@@ -43,19 +38,12 @@ public class PlayerInputProcessor implements InputProcessor {
         switch (button) {
             case Buttons.LEFT:
                 Vector2 target = Game.viewport.unproject(new Vector2(screenX, screenY));
-                if (isOutOfBounds(target)) break;
+                if (World.isOutOfBounds(target)) break;
                 MoveAbility moveAbility = player.getMoveAbility();
                 moveAbility.setTargetVector(target);
                 moveAbility.setTarget(true);
                 return true;
         }
-/*        System.out.println(camera.viewportHeight);
-        System.out.println(camera.viewportWidth);
-        System.out.println(screenY);
-        System.out.println(screenX);
-        System.out.println(viewport.unproject(new Vector2(screenX, screenY)));
-        System.out.println();*/
-
         return false;
     }
 

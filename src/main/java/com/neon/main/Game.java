@@ -8,19 +8,19 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.enemy.EnemyPlugin;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Sprite;
 import com.neon.player.PlayerPlugin;
-import tower.TowerPlugin;
 import com.neon.ui.HUD;
+import tower.TowerPlugin;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class Game implements ApplicationListener {
 
@@ -77,7 +77,7 @@ public class Game implements ApplicationListener {
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        hud = new HUD();
+        hud = new HUD(batch);
         List<Plugin> plugins = Arrays.asList(
                 new EnemyPlugin(),
                 new TowerPlugin(),

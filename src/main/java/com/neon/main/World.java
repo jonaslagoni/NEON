@@ -14,13 +14,15 @@ public class World {
     public static final int GRID_SPACES = 16;
     public static final int GRID_CELL_SIZE = HEIGHT / GRID_SPACES;
 
-
     private final Array<Entity> entities = new Array<>(false, 256);
-    @SuppressWarnings("MismatchedReadAndWriteOfArray")
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
     private final IdentityMap<Class<?>, Array<?>> cache = new IdentityMap<>();
 
-    public Array<Entity> getEntities() {
+    public static boolean isOutOfBounds(Vector2 v) {
+        return v.x < 0 || v.x > WIDTH || v.y < 0 || v.y > HEIGHT;
+    }
+
+    public Iterable<Entity> getEntities() {
         return entities;
     }
 
@@ -50,7 +52,6 @@ public class World {
         cache.clear();
         entities.removeValue(player, true);
     }
-
 
     public void setGridCell(Vector2 position, Drawable entity) {
         int x = MathUtils.floor(position.x / GRID_CELL_SIZE);
