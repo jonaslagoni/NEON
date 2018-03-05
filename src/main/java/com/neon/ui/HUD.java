@@ -2,9 +2,11 @@ package com.neon.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -18,6 +20,7 @@ import com.neon.main.entities.Entity;
 import com.neon.player.Tower.Tower;
 
 import java.util.Map;
+import tower.Tower;
 
 public class HUD implements InputProcessor, Plugin {
 
@@ -36,8 +39,6 @@ public class HUD implements InputProcessor, Plugin {
     @Override
     public void start(GameData gameData, World world) {
         this.world = world;
-
-        hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Skin skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("./assets/assets.atlas")));
 
