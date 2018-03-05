@@ -17,7 +17,6 @@ import com.neon.main.Plugin;
 import com.neon.main.World;
 import com.neon.main.entities.Drawable;
 import com.neon.main.entities.Entity;
-import com.neon.player.Tower.Tower;
 
 import java.util.Map;
 import tower.Tower;

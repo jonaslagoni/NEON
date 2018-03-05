@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.enemy.EnemyPlugin;
 import com.neon.main.entities.Drawable;
@@ -88,13 +87,6 @@ public class Game implements ApplicationListener {
 
         gameData.addController(new MoveController());
 
-        hud = new HUD(gameData, world, batch);
-
-        Plugin playerPlugin = new PlayerPlugin();
-        playerPlugin.start(gameData, world);
-
-        //camera.zoom += 0.5;
-        
         bg = new Texture(Gdx.files.internal("images/up-button.png"));
 
         plugins.forEach(plugin -> plugin.start(gameData, world));
