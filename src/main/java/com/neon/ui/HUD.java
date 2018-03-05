@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -22,6 +23,9 @@ public class HUD implements InputProcessor, Plugin {
     private final Stage hud;
     private Drawable selectedDrawable;
     private World world;
+    private Tower selectedTower;
+    private Group placement;
+    private Group towerUI;
 
     public HUD(Batch batch) {
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -35,6 +39,35 @@ public class HUD implements InputProcessor, Plugin {
         table.setFillParent(true);
         hud.addActor(table);
 
+        placement = new Group();
+        towerUI = new Group();
+        towerUI.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        placement.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        towerUI.setVisible(false);
+
+        Table placementTable = new Table(skin);
+        placementTable.setFillParent(true);
+
+        Table towerUITable = new Table(skin);
+        towerUITable.setFillParent(true);
+        TextButton upgrade = new TextButton("Upgrade", skin, "upgradeTower");
+        upgrade.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (selectedTower != null) {
+                    selectedTower.upgrade();
+                }
+            }
+        });
+        towerUITable.bottom().right().add(upgrade).width(150).height(30);
+
+        towerUI.addActor(towerUITable);
+
+        placement.addActor(placementTable);
+        hud.addActor(placement);
+        hud.addActor(towerUI);
+
+
         gameData.addInputProcessor(hud);
         gameData.addInputProcessor(this);
 
@@ -47,7 +80,7 @@ public class HUD implements InputProcessor, Plugin {
                     selectedDrawable = entry.getValue().create(entry.getKey());
                 }
             });
-            table.bottom().right().add(button);
+            placementTable.bottom().right().add(button);
         }
     }
 
@@ -81,6 +114,9 @@ public class HUD implements InputProcessor, Plugin {
         /* Convert screen coordinates to world coordinates */
         Vector2 pos = Game.viewport.unproject(new Vector2(screenX, screenY));
 
+        towerUI.setVisible(false);
+        placement.setVisible(true);
+
         /* Abandon if click is outside of the world */
         if (World.isOutOfBounds(pos)) {
             return false;
@@ -96,8 +132,9 @@ public class HUD implements InputProcessor, Plugin {
         /* Select an already placed tower */
         Entity entity = world.getGridCell(pos);
         if (entity != null && entity instanceof Tower) {
-            Tower tower = (Tower) entity;
-            System.out.println("Found tower");
+            selectedTower = (Tower) entity;
+            towerUI.setVisible(true);
+            placement.setVisible(false);
             return true;
         }
 

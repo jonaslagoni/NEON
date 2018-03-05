@@ -17,7 +17,7 @@ public class EnemyPlugin implements Plugin {
         Sprite sprite = new Sprite(new Texture(Gdx.files.internal("images/enemy.png")), World.HEIGHT / 32, World.HEIGHT / 32);
         sprite.setPosition(World.WIDTH / 2, World.HEIGHT);
 
-        MoveAbility moveAbility = new MoveAbility(10);
+        MoveAbility moveAbility = new MoveAbility(140);
         moveAbility.setTargetVector(new Vector2(World.WIDTH / 2, 0));
         moveAbility.setTarget(true);
 
@@ -26,6 +26,9 @@ public class EnemyPlugin implements Plugin {
 
     @Override
     public void start(GameData gameData, World world) {
+        EnemyController enemyController = new EnemyController();
+        gameData.addController(enemyController);
+
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
