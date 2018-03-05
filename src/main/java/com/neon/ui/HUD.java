@@ -45,12 +45,12 @@ public class HUD implements InputProcessor, Plugin {
         placement.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         towerUI.setVisible(false);
 
-        Table placementTable = new Table(skin);
+        Table placementTable = new Table(gameData.getSkin());
         placementTable.setFillParent(true);
 
-        Table towerUITable = new Table(skin);
+        Table towerUITable = new Table(gameData.getSkin());
         towerUITable.setFillParent(true);
-        TextButton upgrade = new TextButton("Upgrade", skin, "upgradeTower");
+        TextButton upgrade = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
         upgrade.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
