@@ -11,62 +11,76 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.neon.main.*;
-import com.neon.main.entities.Drawable;
-import com.neon.main.entities.Entity;
-import tower.Tower;
+import com.neon.libary.GameData;
+import com.neon.libary.World;
+import com.neon.libary.interfaces.Drawable;
+import com.neon.libary.interfaces.Entity;
+import com.neon.libary.interfaces.Factory;
+import com.neon.libary.interfaces.Plugin;
+import com.neon.tower.Tower;
+import com.neon.tower.TowerService;
 
 import java.util.Map;
 
 public class HUD implements InputProcessor, Plugin {
 
-    private final Stage hud;
-    private Drawable selectedDrawable;
+    private Stage hud;
+    private Entity selectedEntity;
     private World world;
+    private Batch batch;
     private Tower selectedTower;
-    private Group placement;
-    private Group towerUI;
+    private Group placementGroup;
+    private Group upgradeGroup;
+    private GameData gameData;
+    private TowerService towerService;
 
-    public HUD(Batch batch) {
-        this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+    public HUD(GameData gameData, World world, Batch batch) {
+        this.gameData = gameData;
+        this.world = world;
+        this.batch = batch;
     }
 
+
     @Override
-    public void start(GameData gameData, World world) {
-        this.world = world;
+    public void start() {
+
+        towerService = new TowerService();
+
+        this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table(gameData.getSkin());
         table.setFillParent(true);
         hud.addActor(table);
 
-        placement = new Group();
-        towerUI = new Group();
-        towerUI.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        placement.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        towerUI.setVisible(false);
+        placementGroup = new Group();
+        placementGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        upgradeGroup = new Group();
+        upgradeGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        upgradeGroup.setVisible(false);
 
         Table placementTable = new Table(gameData.getSkin());
         placementTable.setFillParent(true);
 
-        Table towerUITable = new Table(gameData.getSkin());
-        towerUITable.setFillParent(true);
-        TextButton upgrade = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
-        upgrade.addListener(new ClickListener() {
+        Table upgradeTable = new Table(gameData.getSkin());
+        upgradeTable.setFillParent(true);
+
+        TextButton upgradeButton = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
+        upgradeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectedTower != null) {
-                    selectedTower.upgrade();
+                    towerService.upgradeTower(selectedTower);
                 }
             }
         });
-        towerUITable.bottom().right().add(upgrade).width(150).height(30);
+        upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
 
-        towerUI.addActor(towerUITable);
+        upgradeGroup.addActor(upgradeTable);
 
-        placement.addActor(placementTable);
-        hud.addActor(placement);
-        hud.addActor(towerUI);
-
+        placementGroup.addActor(placementTable);
+        hud.addActor(placementGroup);
+        hud.addActor(upgradeGroup);
 
         gameData.addInputProcessor(hud);
         gameData.addInputProcessor(this);
@@ -77,7 +91,7 @@ public class HUD implements InputProcessor, Plugin {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    selectedDrawable = entry.getValue().create(entry.getKey());
+                    selectedEntity = entry.getValue().build(entry.getKey());
                 }
             });
             placementTable.bottom().right().add(button);
@@ -85,7 +99,7 @@ public class HUD implements InputProcessor, Plugin {
     }
 
     @Override
-    public void stop(GameData gameData, World world) {
+    public void stop() {
         // TODO remove hud
     }
 
@@ -112,10 +126,10 @@ public class HUD implements InputProcessor, Plugin {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         /* Convert screen coordinates to world coordinates */
-        Vector2 pos = Game.viewport.unproject(new Vector2(screenX, screenY));
+        Vector2 pos = gameData.getViewport().unproject(new Vector2(screenX, screenY));
 
-        towerUI.setVisible(false);
-        placement.setVisible(true);
+        upgradeGroup.setVisible(false);
+        placementGroup.setVisible(true);
 
         /* Abandon if click is outside of the world */
         if (World.isOutOfBounds(pos)) {
@@ -123,9 +137,9 @@ public class HUD implements InputProcessor, Plugin {
         }
 
         /* If a tower is selected, place it */
-        if (selectedDrawable != null) {
-            world.setGridCell(pos, selectedDrawable);
-            selectedDrawable = null;
+        if (selectedEntity != null && selectedEntity instanceof Drawable) {
+            world.setGridCell(pos, (Drawable) selectedEntity);
+            selectedEntity = null;
             return true;
         }
 
@@ -133,8 +147,8 @@ public class HUD implements InputProcessor, Plugin {
         Entity entity = world.getGridCell(pos);
         if (entity != null && entity instanceof Tower) {
             selectedTower = (Tower) entity;
-            towerUI.setVisible(true);
-            placement.setVisible(false);
+            upgradeGroup.setVisible(true);
+            placementGroup.setVisible(false);
             return true;
         }
 

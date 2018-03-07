@@ -1,10 +1,11 @@
-package com.neon.main;
+package com.neon.libary;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.neon.libary.interfaces.Controller;
+import com.neon.libary.interfaces.Factory;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -19,13 +20,18 @@ public class GameData {
      */
     private final InputMultiplexer multiplexer = new InputMultiplexer();
     private final List<Controller> controllers = new LinkedList<>();
+    private final Map<String, Factory> placeables = new HashMap<>();
     private Skin skin;
-    private Map<String, Factory> placeables = new HashMap<>();
+    private Viewport viewport;
 
     @SuppressWarnings("WeakerAccess")
-    public GameData() {
-        Gdx.input.setInputProcessor(multiplexer);
-        skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("./assets/assets.atlas")));
+    public GameData(Skin skin, Viewport viewport) {
+        this.skin = skin;
+        this.viewport = viewport;
+    }
+
+    public InputMultiplexer getMultiplexer() {
+        return multiplexer;
     }
 
     public void addInputProcessor(InputProcessor inputProcessor) {
@@ -58,5 +64,9 @@ public class GameData {
 
     public Skin getSkin() {
         return skin;
+    }
+
+    public Viewport getViewport() {
+        return viewport;
     }
 }

@@ -1,11 +1,14 @@
-package com.neon.main;
+package com.neon.libary;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.IdentityMap;
-import com.neon.main.entities.Drawable;
-import com.neon.main.entities.Entity;
+import com.neon.libary.interfaces.Drawable;
+import com.neon.libary.interfaces.Entity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class World {
 
@@ -14,9 +17,9 @@ public class World {
     public static final int GRID_SPACES = 16;
     public static final int GRID_CELL_SIZE = HEIGHT / GRID_SPACES;
 
-    private final Array<Entity> entities = new Array<>(false, 256);
+    private final List<Entity> entities = new ArrayList<>();
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
-    private final IdentityMap<Class<?>, Array<?>> cache = new IdentityMap<>();
+    private final Map<Class<?>, List<?>> cache = new HashMap<>();
 
     public static boolean isOutOfBounds(Vector2 v) {
         return v.x < 0 || v.x > WIDTH || v.y < 0 || v.y > HEIGHT;
@@ -32,13 +35,13 @@ public class World {
     }
 
     @SuppressWarnings("unchecked")
-    public <E extends Entity> Array<E> getEntities(Class<E> type) {
+    public <E extends Entity> List<E> getEntities(Class<E> type) {
 
         if (cache.containsKey(type)) {
-            return (Array<E>) cache.get(type);
+            return (List<E>) cache.get(type);
         }
 
-        Array<E> result = new Array<>();
+        List<E> result = new ArrayList<>();
         for (Entity entity : entities) {
             if (type.isInstance(entity)) {
                 result.add((E) entity);
@@ -50,7 +53,7 @@ public class World {
 
     public void removeEntity(Entity player) {
         cache.clear();
-        entities.removeValue(player, true);
+        entities.remove(player);
     }
 
     public void setGridCell(Vector2 position, Drawable entity) {
@@ -71,7 +74,7 @@ public class World {
     }
 
     public void removeGridCell(int x, int y) {
-        entities.removeValue(grid[x][y], true);
+        entities.remove(grid[x][y]);
         grid[x][y] = null;
     }
 

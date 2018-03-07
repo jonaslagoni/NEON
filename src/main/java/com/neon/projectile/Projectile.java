@@ -1,19 +1,18 @@
-package com.neon.player;
+package com.neon.projectile;
 
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Moveable;
 
-public class Player implements Moveable, Drawable {
+public class Projectile implements Moveable, Drawable {
 
-    private MoveAbility moveAbility;
     private Sprite sprite;
+    private MoveAbility moveAbility;
 
-    @SuppressWarnings("WeakerAccess")
-    public Player(MoveAbility moveAbility, Sprite sprite) {
-        this.moveAbility = moveAbility;
+    public Projectile(Sprite sprite, MoveAbility moveAbility) {
         this.sprite = sprite;
+        this.moveAbility = moveAbility;
     }
 
     @Override
@@ -21,10 +20,8 @@ public class Player implements Moveable, Drawable {
         return moveAbility;
     }
 
-
     @Override
     public Sprite getSprite() {
         return sprite;
     }
-
 }

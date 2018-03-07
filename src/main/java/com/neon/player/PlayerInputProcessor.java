@@ -2,19 +2,21 @@ package com.neon.player;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-import com.neon.main.Game;
-import com.neon.main.World;
-import com.neon.main.entities.MoveAbility;
+import com.neon.libary.GameData;
+import com.neon.libary.MoveAbility;
+import com.neon.libary.World;
 
 import static com.badlogic.gdx.Input.Buttons;
 
 public class PlayerInputProcessor implements InputProcessor {
 
     private Player player;
+    private GameData gameData;
 
     @SuppressWarnings("WeakerAccess")
-    public PlayerInputProcessor(Player player) {
+    public PlayerInputProcessor(Player player, GameData gameData) {
         this.player = player;
+        this.gameData = gameData;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class PlayerInputProcessor implements InputProcessor {
         /* Touch and mouse is the same */
         switch (button) {
             case Buttons.LEFT:
-                Vector2 target = Game.viewport.unproject(new Vector2(screenX, screenY));
+                Vector2 target = gameData.getViewport().unproject(new Vector2(screenX, screenY));
                 if (World.isOutOfBounds(target)) break;
                 MoveAbility moveAbility = player.getMoveAbility();
                 moveAbility.setTargetVector(target);

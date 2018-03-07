@@ -3,20 +3,27 @@ package com.neon.player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
-import com.neon.main.GameData;
-import com.neon.main.Plugin;
-import com.neon.main.World;
-import com.neon.main.entities.MoveAbility;
-import com.neon.main.entities.Sprite;
+import com.neon.libary.GameData;
+import com.neon.libary.MoveAbility;
+import com.neon.libary.Sprite;
+import com.neon.libary.World;
+import com.neon.libary.interfaces.Plugin;
 
 public class PlayerPlugin implements Plugin {
 
     private InputProcessor inputProcessor;
     private PlayerController playerController;
     private Player player;
+    private World world;
+    private GameData gameData;
+
+    public PlayerPlugin(World world, GameData gameData) {
+        this.world = world;
+        this.gameData = gameData;
+    }
 
     @Override
-    public void start(GameData gameData, World world) {
+    public void start() {
 
         Sprite sprite = new Sprite(
                 new Texture(Gdx.files.internal("images/tower1.png")),
@@ -29,7 +36,7 @@ public class PlayerPlugin implements Plugin {
 
         world.addEntity(player);
 
-        inputProcessor = new PlayerInputProcessor(player);
+        inputProcessor = new PlayerInputProcessor(player, gameData);
         playerController = new PlayerController();
 
         gameData.addController(playerController);
@@ -37,7 +44,7 @@ public class PlayerPlugin implements Plugin {
     }
 
     @Override
-    public void stop(GameData gameData, World world) {
+    public void stop() {
         world.removeEntity(player);
         gameData.removeController(playerController);
         gameData.removeInputProcessor(inputProcessor);

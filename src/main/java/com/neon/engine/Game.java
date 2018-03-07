@@ -1,4 +1,4 @@
-package com.neon.main;
+package com.neon.engine;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -7,15 +7,22 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.enemy.EnemyPlugin;
-import com.neon.main.entities.Drawable;
-import com.neon.main.entities.Sprite;
+import com.neon.libary.GameData;
+import com.neon.libary.MoveController;
+import com.neon.libary.Sprite;
+import com.neon.libary.World;
+import com.neon.libary.interfaces.Controller;
+import com.neon.libary.interfaces.Drawable;
+import com.neon.libary.interfaces.Plugin;
 import com.neon.player.PlayerPlugin;
+import com.neon.tower.TowerPlugin;
 import com.neon.ui.HUD;
-import tower.TowerPlugin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,17 +31,16 @@ import static com.badlogic.gdx.math.MathUtils.radDeg;
 
 public class Game implements ApplicationListener {
 
-    private static final OrthographicCamera camera = new OrthographicCamera();
-    public static final Viewport viewport = new ExtendViewport(World.WIDTH, World.HEIGHT, camera);
-
-    private static SpriteBatch batch;
-    private static ShapeRenderer shapeRenderer;
+    private final OrthographicCamera camera = new OrthographicCamera();
+    private final Viewport viewport = new ExtendViewport(World.WIDTH, World.HEIGHT, camera);
+    private final World world = new World();
     private GameData gameData;
+    private SpriteBatch batch;
+    private ShapeRenderer shapeRenderer;
     private HUD hud;
-    private World world;
     private Texture bg;
 
-    private static void drawEntity(Drawable drawable) {
+    private void drawEntity(Drawable drawable) {
         Sprite sprite = drawable.getSprite();
         Texture texture = sprite.getTexture();
         batch.draw(
@@ -55,7 +61,7 @@ public class Game implements ApplicationListener {
         );
     }
 
-    private static void drawGrid() {
+    private void drawGrid() {
         int gap = Gdx.graphics.getHeight() / World.GRID_SPACES;
         shapeRenderer.setColor(Color.GREEN);
         for (int i = 1; i < World.GRID_SPACES; i++) {
@@ -68,28 +74,32 @@ public class Game implements ApplicationListener {
 
     @Override
     public void create() {
+        Skin skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
+        gameData = new GameData(skin, viewport);
 
         /* Set camera such that 0,0 is bottom left */
         //camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
 
-        gameData = new GameData();
-        world = new World();
+        Gdx.input.setInputProcessor(gameData.getMultiplexer());
+
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        hud = new HUD(batch);
+        hud = new HUD(gameData, world, batch);
         List<Plugin> plugins = Arrays.asList(
-                new EnemyPlugin(),
-                new TowerPlugin(),
+                new EnemyPlugin(world, gameData),
+                new TowerPlugin(world, gameData),
                 hud,
-                new PlayerPlugin()
+                new PlayerPlugin(world, gameData)
         );
+        gameData.addController(new MoveController(world));
 
-        gameData.addController(new MoveController());
 
         bg = new Texture(Gdx.files.internal("images/up-button.png"));
 
-        plugins.forEach(plugin -> plugin.start(gameData, world));
+        /* Start plugins */
+        plugins.forEach(Plugin::start);
     }
 
     @Override
@@ -104,7 +114,7 @@ public class Game implements ApplicationListener {
      */
     @Override
     public void render() {
-        gameData.getControllers().forEach(controller -> controller.update(world));
+        gameData.getControllers().forEach(Controller::update);
         draw();
     }
 
@@ -129,7 +139,7 @@ public class Game implements ApplicationListener {
         batch.draw(bg, 0, 0, World.WIDTH, World.HEIGHT);
 
         /* Draw all entities to screen*/
-        world.getEntities(Drawable.class).forEach(Game::drawEntity);
+        world.getEntities(Drawable.class).forEach(this::drawEntity);
         batch.end();
 
         /* Draw HUD*/

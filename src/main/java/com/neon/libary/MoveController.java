@@ -1,14 +1,19 @@
-package com.neon.main;
+package com.neon.libary;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.neon.main.entities.MoveAbility;
-import com.neon.main.entities.Moveable;
-import com.neon.main.entities.Sprite;
+import com.neon.libary.interfaces.Controller;
+import com.neon.libary.interfaces.Moveable;
 
 import static com.badlogic.gdx.math.MathUtils.*;
 
 public class MoveController implements Controller {
+
+    private World world;
+
+    public MoveController(World world) {
+        this.world = world;
+    }
 
     private static float angle(Vector2 a, Vector2 b) {
         return atan2(a.y - b.y, a.x - b.x);
@@ -26,7 +31,7 @@ public class MoveController implements Controller {
         return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
     }
 
-    private static void move(Moveable moveable) {
+    private void moveEntity(Moveable moveable) {
 
         MoveAbility moveAbility = moveable.getMoveAbility();
         Sprite sprite = moveable.getSprite();
@@ -50,7 +55,7 @@ public class MoveController implements Controller {
     }
 
     @Override
-    public void update(World world) {
-        world.getEntities(Moveable.class).forEach(MoveController::move);
+    public void update() {
+        world.getEntities(Moveable.class).forEach(this::moveEntity);
     }
 }
