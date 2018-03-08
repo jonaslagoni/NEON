@@ -1,5 +1,6 @@
 package com.neon.enemy;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.interfaces.Drawable;
@@ -14,12 +15,14 @@ public class Enemy implements Moveable, Drawable {
     private MoveAbility moveAbility;
     private Sprite sprite;
     private typeIdentifier type;
+    private Texture[] texture;
     private int hp;
 
-    Enemy(Sprite sprite, MoveAbility moveAbility) {
+    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] texture) {
         type = ENEMY;
         this.moveAbility = moveAbility;
         this.sprite = sprite;
+        this.texture = texture;
     }
 
     @Override
@@ -30,6 +33,7 @@ public class Enemy implements Moveable, Drawable {
     @Override
     public Sprite getSprite() {
         return sprite;
+       
     }
 
 
@@ -46,4 +50,6 @@ public class Enemy implements Moveable, Drawable {
     public void setHp(int hp) {
         this.hp = hp;
     }
+    
+   
 }
