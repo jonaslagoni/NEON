@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.neon.collision.CollisionPlugin;
 import com.neon.enemy.EnemyPlugin;
 import com.neon.libary.GameData;
 import com.neon.libary.MoveController;
@@ -88,6 +89,7 @@ public class Game implements ApplicationListener {
 
         hud = new HUD(gameData, world, batch);
         List<Plugin> plugins = Arrays.asList(
+                new CollisionPlugin(gameData, world),
                 new EnemyPlugin(world, gameData),
                 new TowerPlugin(world, gameData),
                 hud,

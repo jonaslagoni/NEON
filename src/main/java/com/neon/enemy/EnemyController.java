@@ -6,14 +6,16 @@
 package com.neon.enemy;
 
 import com.badlogic.gdx.math.Vector2;
-import com.neon.collision.Collision;
+import com.neon.libary.GameData;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Entity;
+import com.neon.libary.interfaces.ICollisionService;
+import com.neon.player.Player;
+
 import static com.neon.libary.interfaces.Entity.typeIdentifier.PLAYER;
-import java.util.ArrayList;
 
 /**
  * @author Daniel
@@ -21,36 +23,31 @@ import java.util.ArrayList;
 public class EnemyController implements Controller {
 
     private World world;
-    private Collision collision;
+    private ICollisionService collisionService;
 
-    EnemyController(World world, Collision collision) {
-        this.collision = collision;
+    EnemyController(World world, GameData gameData) {
+        this.collisionService = gameData.getService(ICollisionService.class);
         this.world = world;
     }
 
     private void updateEnemy(Enemy enemy) {
-        Iterable<Drawable> playerEntity = world.getEntities(Drawable.class);
-        for(Drawable entity : playerEntity){
-           if (entity.getType() == PLAYER){
-               Vector2 playerPosition = entity.getSprite().getPosition();
+
+        /* Move enemy toward player */
+        for (Drawable entity : world.getEntities(Drawable.class)) {
+            if (entity.getType() == PLAYER) {
+                Vector2 playerPosition = entity.getSprite().getPosition();
                 MoveAbility ability = enemy.getMoveAbility();
                 ability.setTargetVector(playerPosition);
                 ability.setTarget(true);
-           }
-           
-        }  
-        
-        Iterable<Entity> collidingEntities = collision.getCollisions(enemy.getSprite());
-            collidingEntities.forEach(System.out::println);
-        for(Entity entities : collidingEntities){
-            if (entities.getType() == PLAYER){
-                System.out.println("helllo");
+            }
+        }
+
+        /* Remove enemy if it collides with player */
+        for (Entity entities : collisionService.getCollisions(enemy.getSprite())) {
+            if (entities.getClass() == Player.class) {
                 world.removeEntity(enemy);
             }
         }
-        
-        
-       
     }
 
     @Override

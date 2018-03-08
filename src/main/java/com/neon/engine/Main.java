@@ -1,7 +1,7 @@
 package com.neon.engine;
 
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 
@@ -12,10 +12,11 @@ public class Main {
         settings.maxHeight = 2048;
         TexturePacker.process(settings, "./images", "./assets", "assets");
 
-        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         // config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-        config.setWindowedMode(1024, 768);
+        config.height = 768;
+        config.width = 1024;
         //config.setResizable(false);
-        new Lwjgl3Application(new Game(), config);
+        new LwjglApplication(new Game(), config);
     }
 }
