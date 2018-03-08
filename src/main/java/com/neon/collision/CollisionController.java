@@ -6,6 +6,7 @@
 package com.neon.collision;
 
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.neon.libary.interfaces.Entity;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Drawable;
+import static java.lang.Math.sqrt;
+
 
 
 /**
@@ -47,9 +50,9 @@ public class CollisionController implements Collision {
             float xValueDifference = otherObjects.x - collidingObject.x;
             float yValueDifference = otherObjects.y - collidingObject.y;
 
-            float distance = (xValueDifference * xValueDifference) + (yValueDifference * yValueDifference);
+            double distance = sqrt((xValueDifference * xValueDifference) + (yValueDifference * yValueDifference));
 
-            if (CollidingObjectRadius + otherObjectRadius < distance && !(sprite == drawable.getSprite())) {
+            if (CollidingObjectRadius + otherObjectRadius > distance && !(sprite == drawable.getSprite())) {
                 returnList.add(drawable);
             }
         }

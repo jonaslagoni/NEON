@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
+import com.neon.collision.CollisionController;
 import com.neon.libary.GameData;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
@@ -15,6 +16,7 @@ public class EnemyPlugin implements Plugin {
 
     private World world;
     private GameData gameData;
+    
 
     public EnemyPlugin(World world, GameData gameData) {
         this.world = world;
@@ -34,7 +36,7 @@ public class EnemyPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addController(new EnemyController(world));
+        gameData.addController(new EnemyController(world, new CollisionController(world)));
 
         Timer.schedule(new Timer.Task() {
             @Override
