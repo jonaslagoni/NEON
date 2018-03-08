@@ -6,10 +6,14 @@
 package com.neon.enemy;
 
 import com.badlogic.gdx.math.Vector2;
+import com.neon.collision.Collision;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
-import com.neon.player.Player;
+import com.neon.libary.interfaces.Drawable;
+import com.neon.libary.interfaces.Entity;
+import static com.neon.libary.interfaces.Entity.typeIdentifier.PLAYER;
+import java.util.ArrayList;
 
 /**
  * @author Daniel
@@ -17,19 +21,36 @@ import com.neon.player.Player;
 public class EnemyController implements Controller {
 
     private World world;
+    private Collision collision;
 
-    EnemyController(World world) {
+    EnemyController(World world, Collision collision) {
+        this.collision = collision;
         this.world = world;
     }
 
     private void updateEnemy(Enemy enemy) {
-        Player player = world.getEntities(Player.class).stream().findFirst().orElse(null);
-        if (player == null) return;
-
-        Vector2 playerPosition = player.getSprite().getPosition();
-        MoveAbility ability = enemy.getMoveAbility();
-        ability.setTargetVector(playerPosition);
-        ability.setTarget(true);
+        Iterable<Drawable> playerEntity = world.getEntities(Drawable.class);
+        for(Drawable entity : playerEntity){
+           if (entity.getType() == PLAYER){
+               Vector2 playerPosition = entity.getSprite().getPosition();
+                MoveAbility ability = enemy.getMoveAbility();
+                ability.setTargetVector(playerPosition);
+                ability.setTarget(true);
+           }
+           
+        }  
+        
+        Iterable<Entity> collidingEntities = collision.getCollisions(enemy.getSprite());
+            collidingEntities.forEach(System.out::println);
+        for(Entity entities : collidingEntities){
+            if (entities.getType() == PLAYER){
+                System.out.println("helllo");
+                world.removeEntity(enemy);
+            }
+        }
+        
+        
+       
     }
 
     @Override
