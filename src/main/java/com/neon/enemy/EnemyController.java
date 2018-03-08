@@ -15,8 +15,6 @@ import com.neon.libary.interfaces.Entity;
 import com.neon.libary.interfaces.ICollisionService;
 import com.neon.player.Player;
 
-import static com.neon.libary.interfaces.Entity.typeIdentifier.PLAYER;
-
 /**
  * @author Daniel
  */
@@ -34,7 +32,7 @@ public class EnemyController implements Controller {
 
         /* Move enemy toward player */
         for (Drawable entity : world.getEntities(Drawable.class)) {
-            if (entity.getType() == PLAYER) {
+            if (entity.getClass() == Player.class) {
                 Vector2 playerPosition = entity.getSprite().getPosition();
                 MoveAbility ability = enemy.getMoveAbility();
                 ability.setTargetVector(playerPosition);
