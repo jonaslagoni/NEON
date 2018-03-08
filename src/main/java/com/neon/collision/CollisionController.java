@@ -5,14 +5,15 @@
  */
 package com.neon.collision;
 
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.neon.main.World;
-import com.neon.main.entities.Drawable;
-import com.neon.main.entities.Entity;
-import com.neon.main.entities.Sprite;
+import com.neon.libary.interfaces.Entity;
 import java.util.ArrayList;
-import java.util.List;
+import com.neon.libary.Sprite;
+import com.neon.libary.World;
+import com.neon.libary.interfaces.Drawable;
+
 
 /**
  *
@@ -31,9 +32,9 @@ public class CollisionController implements Collision {
     }
 
     @Override
-    public List<Entity> getCollisions(Sprite sprite) {
+    public ArrayList<Entity> getCollisions(Sprite sprite) {
 
-        Array<Drawable> allEntities = world.getEntities(Drawable.class);
+        ArrayList<Drawable> allEntities = (ArrayList<Drawable>) world.getEntities(Drawable.class);
         ArrayList<Entity> returnList = new ArrayList<>();
 
         float CollidingObjectRadius = sprite.getWidth() / 2;
@@ -56,4 +57,6 @@ public class CollisionController implements Collision {
         return returnList;
     
     }
+
+  
 }

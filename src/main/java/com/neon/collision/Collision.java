@@ -6,10 +6,10 @@
 package com.neon.collision;
 
 import com.badlogic.gdx.utils.Array;
-import com.neon.main.entities.Entity;
-import com.neon.main.entities.Sprite;
+import com.neon.libary.Sprite;
+import com.neon.libary.interfaces.Entity;
+import com.neon.libary.interfaces.Drawable;
 import java.util.List;
-
 /**
  *
  * @author Daniel
