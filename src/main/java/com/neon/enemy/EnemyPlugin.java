@@ -16,7 +16,6 @@ public class EnemyPlugin implements Plugin {
 
     private World world;
     private GameData gameData;
-    
 
     public EnemyPlugin(World world, GameData gameData) {
         this.world = world;
@@ -24,14 +23,26 @@ public class EnemyPlugin implements Plugin {
     }
 
     private static Entity createEnemy() {
-        Sprite sprite = new Sprite(new Texture(Gdx.files.internal("images/enemy.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-        sprite.setPosition(World.WIDTH / 2, World.HEIGHT);
-
+        
         MoveAbility moveAbility = new MoveAbility(140);
         moveAbility.setTargetVector(new Vector2(World.WIDTH / 2, 0));
         moveAbility.setTarget(true);
 
-        return new Enemy(sprite, moveAbility);
+        Texture[] texture = {
+            new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon1.png")),
+            new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon2.png")),
+            new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon3.png")),
+            new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon4.png")),
+            new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon5.png")),
+            new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon6.png"))
+        
+        };
+        
+        Sprite sprite = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+        sprite.setPosition(World.WIDTH / 2, World.HEIGHT);
+
+
+        return new Enemy(sprite, moveAbility, texture);
     }
 
     @Override
@@ -51,5 +62,7 @@ public class EnemyPlugin implements Plugin {
         for (Enemy enemy : world.getEntities(Enemy.class)) {
             world.removeEntity(enemy);
         }
+
     }
+
 }
