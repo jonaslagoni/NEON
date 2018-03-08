@@ -16,6 +16,7 @@ public class Enemy implements Moveable, Drawable {
     private Sprite sprite;
     private typeIdentifier type;
     private Texture[] texture;
+    private int hp;
 
     Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] texture) {
         type = ENEMY;
