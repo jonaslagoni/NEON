@@ -89,9 +89,9 @@ public class Game implements ApplicationListener {
 
         hud = new HUD(gameData, world, batch);
         List<Plugin> plugins = Arrays.asList(
+                new TowerPlugin(world, gameData),
                 new CollisionPlugin(gameData, world),
                 new EnemyPlugin(world, gameData),
-                new TowerPlugin(world, gameData),
                 hud,
                 new PlayerPlugin(world, gameData)
         );
