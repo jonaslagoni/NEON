@@ -43,7 +43,10 @@ public class EnemyController implements Controller {
         /* Remove enemy if it collides with player */
         for (Entity entities : collisionService.getCollisions(enemy.getSprite())) {
             if (entities.getClass() == Player.class) {
-                world.removeEntity(enemy);
+                if(enemy.getHp()<=0) {
+                    world.removeEntity(enemy);
+                }
+                enemy.setHp(enemy.getHp()-1);
             }
         }
     }
