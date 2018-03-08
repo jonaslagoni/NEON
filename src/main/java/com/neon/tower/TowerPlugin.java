@@ -1,7 +1,9 @@
 package com.neon.tower;
 
+import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
+import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Plugin;
 
 public class TowerPlugin implements Plugin {
@@ -16,7 +18,11 @@ public class TowerPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addPlaceable("laser-tower", new TowerFactory());
+        TowerFactory factory = new TowerFactory();
+        gameData.addPlaceable("laser-tower", factory);
+        //gameData.addService(ITowerService.class, new TowerService());
+        world.setGridCell(new Vector2(1024, 1024), (Drawable) factory.build("laser-tower"));
+
     }
 
     @Override

@@ -13,8 +13,7 @@ public class PlayerInputProcessor implements InputProcessor {
     private Player player;
     private GameData gameData;
 
-    @SuppressWarnings("WeakerAccess")
-    public PlayerInputProcessor(Player player, GameData gameData) {
+    PlayerInputProcessor(Player player, GameData gameData) {
         this.player = player;
         this.gameData = gameData;
     }

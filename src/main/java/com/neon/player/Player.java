@@ -10,8 +10,7 @@ public class Player implements Moveable, Drawable {
     private MoveAbility moveAbility;
     private Sprite sprite;
 
-    @SuppressWarnings("WeakerAccess")
-    public Player(MoveAbility moveAbility, Sprite sprite) {
+    Player(MoveAbility moveAbility, Sprite sprite) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;
     }
@@ -21,10 +20,8 @@ public class Player implements Moveable, Drawable {
         return moveAbility;
     }
 
-
     @Override
     public Sprite getSprite() {
         return sprite;
     }
-
 }

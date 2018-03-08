@@ -12,8 +12,7 @@ public class Tower implements Drawable {
     private Texture[] texture;
     private Entity weapon;
 
-    @SuppressWarnings("WeakerAccess")
-    public Tower(Sprite sprite, Texture[] texture) {
+    Tower(Sprite sprite, Texture[] texture) {
         this.sprite = sprite;
         this.texture = texture;
     }
@@ -33,5 +32,13 @@ public class Tower implements Drawable {
 
     public Texture[] getTexture() {
         return texture;
+    }
+
+    public Entity getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Entity weapon) {
+        this.weapon = weapon;
     }
 }

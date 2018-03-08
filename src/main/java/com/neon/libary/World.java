@@ -1,6 +1,5 @@
 package com.neon.libary;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Entity;
@@ -23,10 +22,6 @@ public class World {
 
     public static boolean isOutOfBounds(Vector2 v) {
         return v.x < 0 || v.x > WIDTH || v.y < 0 || v.y > HEIGHT;
-    }
-
-    public Iterable<Entity> getEntities() {
-        return entities;
     }
 
     public void addEntity(Entity entity) {
@@ -57,26 +52,24 @@ public class World {
     }
 
     public void setGridCell(Vector2 position, Drawable entity) {
-        int x = MathUtils.floor(position.x / GRID_CELL_SIZE);
-        int y = MathUtils.floor(position.y / GRID_CELL_SIZE);
-        entities.add(entity);
+        int x = (int) position.x / GRID_CELL_SIZE;
+        int y = (int) position.y / GRID_CELL_SIZE;
+        addEntity(entity);
         grid[x][y] = entity;
         entity.getSprite().setPosition(
                 x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2,
-                y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2)
-        ;
+                y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2
+        );
     }
 
     public Entity getGridCell(Vector2 position) {
-        int x = MathUtils.floor(position.x / GRID_CELL_SIZE);
-        int y = MathUtils.floor(position.y / GRID_CELL_SIZE);
+        int x = (int) position.x / GRID_CELL_SIZE;
+        int y = (int) position.y / GRID_CELL_SIZE;
         return grid[x][y];
     }
 
     public void removeGridCell(int x, int y) {
-        entities.remove(grid[x][y]);
+        removeEntity(grid[x][y]);
         grid[x][y] = null;
     }
-
 }
-

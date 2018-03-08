@@ -13,12 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
-import com.neon.libary.interfaces.Drawable;
-import com.neon.libary.interfaces.Entity;
-import com.neon.libary.interfaces.Factory;
-import com.neon.libary.interfaces.Plugin;
-import com.neon.tower.Tower;
-import com.neon.tower.TowerService;
+import com.neon.libary.interfaces.*;
 
 import java.util.Map;
 
@@ -28,24 +23,24 @@ public class HUD implements InputProcessor, Plugin {
     private Entity selectedEntity;
     private World world;
     private Batch batch;
-    private Tower selectedTower;
+    private Entity selectedTower;
     private Group placementGroup;
     private Group upgradeGroup;
     private GameData gameData;
-    private TowerService towerService;
+    private ITowerService towerService;
 
-    public HUD(GameData gameData, World world, Batch batch) {
+    public HUD(GameData gameData,
+               World world,
+               Batch batch) {
         this.gameData = gameData;
         this.world = world;
         this.batch = batch;
     }
 
-
     @Override
     public void start() {
 
-        towerService = new TowerService();
-
+        this.towerService = gameData.getService(ITowerService.class);
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table(gameData.getSkin());
@@ -70,12 +65,11 @@ public class HUD implements InputProcessor, Plugin {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectedTower != null) {
-                    towerService.upgradeTower(selectedTower);
+                    towerService.upgrade(selectedTower);
                 }
             }
         });
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
-
         upgradeGroup.addActor(upgradeTable);
 
         placementGroup.addActor(placementTable);
@@ -145,8 +139,8 @@ public class HUD implements InputProcessor, Plugin {
 
         /* Select an already placed tower */
         Entity entity = world.getGridCell(pos);
-        if (entity != null && entity instanceof Tower) {
-            selectedTower = (Tower) entity;
+        if (entity != null) {
+            selectedTower = entity;
             upgradeGroup.setVisible(true);
             placementGroup.setVisible(false);
             return true;

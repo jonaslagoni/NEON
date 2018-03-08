@@ -12,6 +12,7 @@ public class Enemy implements Moveable, Drawable {
 
     private MoveAbility moveAbility;
     private Sprite sprite;
+    private int hp;
 
     Enemy(Sprite sprite, MoveAbility moveAbility) {
         this.moveAbility = moveAbility;
@@ -26,5 +27,13 @@ public class Enemy implements Moveable, Drawable {
     @Override
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }

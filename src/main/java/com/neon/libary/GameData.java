@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Factory;
+import com.neon.libary.interfaces.Service;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,10 +22,13 @@ public class GameData {
     private final InputMultiplexer multiplexer = new InputMultiplexer();
     private final List<Controller> controllers = new LinkedList<>();
     private final Map<String, Factory> placeables = new HashMap<>();
+    /**
+     * TODO Eventually replace with a premade service system.
+     */
+    private final Map<Class<?>, Service> services = new HashMap<>();
     private Skin skin;
     private Viewport viewport;
 
-    @SuppressWarnings("WeakerAccess")
     public GameData(Skin skin, Viewport viewport) {
         this.skin = skin;
         this.viewport = viewport;
@@ -54,8 +58,8 @@ public class GameData {
         return controllers;
     }
 
-    public void addPlaceable(String title, Factory drawable) {
-        placeables.put(title, drawable);
+    public void addPlaceable(String title, Factory factory) {
+        placeables.put(title, factory);
     }
 
     public Map<String, Factory> getPlaceables() {
@@ -68,5 +72,14 @@ public class GameData {
 
     public Viewport getViewport() {
         return viewport;
+    }
+
+    public <T extends Service> void addService(Class<T> iface, Service service) {
+        services.put(iface, service);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <E extends Service> E getService(Class<E> iface) {
+        return (E) services.get(iface);
     }
 }
