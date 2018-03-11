@@ -3,16 +3,14 @@ package com.neon.tower;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
-import com.neon.libary.interfaces.IWeaponService;
+import com.neon.weapon.Weapon;
 
 public class TowerController implements Controller {
 
     private World world;
-    private IWeaponService weaponService;
 
-    public TowerController(World world, GameData gameData) {
+    TowerController(World world, GameData gameData) {
         this.world = world;
-        this.weaponService = gameData.getService(IWeaponService.class);
     }
 
     @Override
@@ -22,8 +20,9 @@ public class TowerController implements Controller {
 
     private void updateTower(Tower tower) {
 
-        float angle = 0;
+        if (!world.getEntities(Weapon.class).contains(tower.getWeapon())) {
+            world.addEntity(tower.getWeapon());
+        }
 
-        weaponService.fire(tower.getWeapon(), tower.getSprite().getPosition(), angle);
     }
 }

@@ -11,6 +11,12 @@ public class Sprite {
     private float rotation;
     private Texture texture;
 
+    /**
+     * @param texture  texture
+     * @param height   height
+     * @param width    width
+     * @param rotation rotation
+     */
     public Sprite(Texture texture,
                   float height,
                   float width,
@@ -19,6 +25,11 @@ public class Sprite {
         this.rotation = rotation;
     }
 
+    /**
+     * @param texture texture
+     * @param height  height
+     * @param width   width
+     */
     public Sprite(Texture texture,
                   float height,
                   float width) {

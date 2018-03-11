@@ -18,7 +18,7 @@ public class CollisionPlugin implements Plugin {
     private GameData gameData;
     private World world;
 
-    public CollisionPlugin(GameData gameData, World world) {
+    public CollisionPlugin(World world, GameData gameData) {
         this.gameData = gameData;
         this.world = world;
     }

@@ -1,11 +1,10 @@
 package com.neon.libary;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Moveable;
 
-import static com.badlogic.gdx.math.MathUtils.*;
+import static com.badlogic.gdx.math.MathUtils.PI;
+import static com.neon.libary.VectorUtils.*;
 
 public class MoveController implements Controller {
 
@@ -15,21 +14,6 @@ public class MoveController implements Controller {
         this.world = world;
     }
 
-    private static float angle(Vector2 a, Vector2 b) {
-        return atan2(a.y - b.y, a.x - b.x);
-    }
-
-    private static float deltaX(float angle, float velocity) {
-        return cos(angle) * velocity * Gdx.graphics.getDeltaTime();
-    }
-
-    private static float deltaY(float angle, float velocity) {
-        return sin(angle) * velocity * Gdx.graphics.getDeltaTime();
-    }
-
-    private static float distanceSquare(Vector2 a, Vector2 b) {
-        return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
-    }
 
     private void moveEntity(Moveable moveable) {
 

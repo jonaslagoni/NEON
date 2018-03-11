@@ -22,8 +22,10 @@ import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Plugin;
 import com.neon.player.PlayerPlugin;
+import com.neon.projectile.ProjectilePlugin;
 import com.neon.tower.TowerPlugin;
 import com.neon.ui.HUD;
+import com.neon.weapon.WeaponPlugin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -78,25 +80,22 @@ public class Game implements ApplicationListener {
         Skin skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
         gameData = new GameData(skin, viewport);
 
-        /* Set camera such that 0,0 is bottom left */
-        //camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
-
         Gdx.input.setInputProcessor(gameData.getMultiplexer());
-
 
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        hud = new HUD(gameData, world, batch);
+        hud = new HUD(world, gameData, batch);
         List<Plugin> plugins = Arrays.asList(
                 new TowerPlugin(world, gameData),
-                new CollisionPlugin(gameData, world),
+                new CollisionPlugin(world, gameData),
                 new EnemyPlugin(world, gameData),
                 hud,
-                new PlayerPlugin(world, gameData)
+                new PlayerPlugin(world, gameData),
+                new WeaponPlugin(world, gameData),
+                new ProjectilePlugin(world, gameData)
         );
         gameData.addController(new MoveController(world));
-
 
         bg = new Texture(Gdx.files.internal("images/up-button.png"));
 
@@ -121,7 +120,6 @@ public class Game implements ApplicationListener {
     }
 
     private void draw() {
-
         camera.update();
         batch.setProjectionMatrix(camera.combined);
 

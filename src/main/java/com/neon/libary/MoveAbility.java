@@ -11,6 +11,7 @@ public class MoveAbility {
     public MoveAbility(Vector2 targetVector, float velocity) {
         this.targetVector = targetVector;
         this.velocity = velocity;
+        target = true;
     }
 
     public MoveAbility(float velocity) {

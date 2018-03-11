@@ -6,6 +6,7 @@ import com.neon.libary.Sprite;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Entity;
 import com.neon.libary.interfaces.Factory;
+import com.neon.weapon.Weapon;
 
 public class TowerFactory implements Factory {
 
@@ -26,7 +27,9 @@ public class TowerFactory implements Factory {
                         new Texture(Gdx.files.internal("images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 4.png"))
                 };
 
-                return new Tower(sprite, upgrades);
+                Weapon weapon = new Weapon(sprite.getPosition(), 512);
+
+                return new Tower(sprite, upgrades, weapon);
         }
         return null;
     }

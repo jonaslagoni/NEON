@@ -29,8 +29,8 @@ public class HUD implements InputProcessor, Plugin {
     private GameData gameData;
     private ITowerService towerService;
 
-    public HUD(GameData gameData,
-               World world,
+    public HUD(World world,
+               GameData gameData,
                Batch batch) {
         this.gameData = gameData;
         this.world = world;

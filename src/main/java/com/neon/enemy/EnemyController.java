@@ -6,9 +6,7 @@
 package com.neon.enemy;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.GameData;
-import com.neon.libary.MoveAbility;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
@@ -21,26 +19,23 @@ import com.neon.player.Player;
  */
 public class EnemyController implements Controller {
 
-    private World world;
-    private ICollisionService collisionService;
+    private final World world;
+    private final ICollisionService collisionService;
 
     EnemyController(World world, GameData gameData) {
         this.collisionService = gameData.getService(ICollisionService.class);
         this.world = world;
     }
 
-    private void updateEnemy(Enemy enemy) {
-
+    private void updateEnemy(final Enemy enemy) {
 
         enemy.damageTimer += Gdx.graphics.getDeltaTime();
 
         /* Move enemy toward player */
         for (Drawable entity : world.getEntities(Drawable.class)) {
             if (entity.getClass() == Player.class) {
-                Vector2 playerPosition = entity.getSprite().getPosition();
-                MoveAbility ability = enemy.getMoveAbility();
-                ability.setTargetVector(playerPosition);
-                ability.setTarget(true);
+                enemy.moveAbility.setTargetVector(entity.getSprite().getPosition());
+                enemy.moveAbility.setTarget(true);
             }
         }
 
@@ -48,11 +43,9 @@ public class EnemyController implements Controller {
         for (Entity entity : collisionService.getCollisions(enemy.getSprite())) {
             if (entity.getClass() == Player.class) {
                 if (enemy.damageTimer >= 0.1) {
-                    /* Apply damage */
                     enemy.hp -= 10;
                     /* Set texture based on hp */
                     enemy.sprite.setTexture(enemy.texture[enemy.hp * enemy.texture.length / enemy.maxHp]);
-                    /* Reset collision timer */
                     enemy.damageTimer = 0;
                 }
                 if (enemy.hp <= 0) {
@@ -61,8 +54,6 @@ public class EnemyController implements Controller {
                 break;
             }
         }
-
-
     }
 
     @Override

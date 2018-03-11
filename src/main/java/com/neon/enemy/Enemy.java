@@ -34,27 +34,4 @@ public class Enemy implements Moveable, Drawable {
         return sprite;
     }
 
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public float getDamageTimer() {
-        return damageTimer;
-    }
-
-    public void setDamageTimer(float damageTimer) {
-        this.damageTimer = damageTimer;
-    }
-
-    public Texture[] getTexture() {
-        return texture;
-    }
-
-    public int getMaxHp() {
-        return maxHp;
-    }
 }

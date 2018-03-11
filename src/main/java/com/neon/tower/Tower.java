@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.neon.libary.Sprite;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Entity;
+import com.neon.weapon.Weapon;
 
 public class Tower implements Drawable {
 
@@ -12,9 +13,10 @@ public class Tower implements Drawable {
     private Texture[] texture;
     private Entity weapon;
 
-    Tower(Sprite sprite, Texture[] texture) {
+    Tower(Sprite sprite, Texture[] texture, Weapon weapon) {
         this.sprite = sprite;
         this.texture = texture;
+        this.weapon = weapon;
     }
 
     @Override
