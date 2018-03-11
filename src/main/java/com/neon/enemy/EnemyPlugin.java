@@ -40,7 +40,6 @@ public class EnemyPlugin implements Plugin {
         Sprite sprite = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
         sprite.setPosition(World.WIDTH / 2, World.HEIGHT);
 
-
         return new Enemy(sprite, moveAbility, texture);
     }
 
@@ -60,7 +59,5 @@ public class EnemyPlugin implements Plugin {
         for (Enemy enemy : world.getEntities(Enemy.class)) {
             world.removeEntity(enemy);
         }
-
     }
-
 }
