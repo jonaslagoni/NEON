@@ -47,9 +47,9 @@ public class Game implements ApplicationListener {
         Sprite sprite = drawable.getSprite();
         Texture texture = sprite.getTexture();
         batch.draw(
-                texture,
-                sprite.getPosition().x - texture.getWidth() / 2,
-                sprite.getPosition().y - texture.getHeight() / 2,
+                texture, //The texture to use
+                sprite.getPosition().x - texture.getWidth() / 2, //Position x to draw
+                sprite.getPosition().y - texture.getHeight() / 2, //Position y to draw
                 texture.getWidth() / 2,
                 texture.getHeight() / 2,
                 texture.getWidth(),
@@ -130,7 +130,7 @@ public class Game implements ApplicationListener {
         /* Draw grid */
         // shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         // drawGrid();
-        // shapeRenderer.end();
+        // shapeRenderer.END();
 
         viewport.apply();
         batch.begin();

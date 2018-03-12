@@ -12,7 +12,7 @@ package com.neon.common.search;
  * 
  * @author Kevin Glass
  */
-public interface AStarHeuristic {
+public interface HeuristicCost {
 
 	/**
 	 * Get the additional heuristic cost of the given tile. This controls the

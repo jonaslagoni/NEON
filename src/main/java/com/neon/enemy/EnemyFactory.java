@@ -17,7 +17,7 @@ public class EnemyFactory {
     public static Entity createEnemy(String tier, int type) {
 
         MoveAbility moveAbility = new MoveAbility(140);
-        moveAbility.setTargetVector(new Vector2(World.WIDTH / 2, 0));
+        moveAbility.setTargetVector(new Vector2(World.WIDTH / 2, World.HEIGHT));
 
 
         switch (tier) {

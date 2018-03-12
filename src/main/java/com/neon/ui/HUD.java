@@ -129,7 +129,9 @@ public class HUD implements InputProcessor, Plugin {
         if (World.isOutOfBounds(pos)) {
             return false;
         }
-
+        if(!world.isValidPosition(pos)){
+            return false;
+        }
         /* If a tower is selected, place it */
         if (selectedEntity != null && selectedEntity instanceof Drawable) {
             world.setGridCell(pos, (Drawable) selectedEntity);

@@ -1,6 +1,7 @@
 package com.neon.enemy;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.neon.common.search.Path;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.interfaces.Drawable;
@@ -18,7 +19,8 @@ class Enemy implements Moveable, Drawable, Targetable {
     int hp;
     int maxHp;
     float damageTimer;
-
+    Path path;
+    int counter;
     Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] textures, int hp) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;

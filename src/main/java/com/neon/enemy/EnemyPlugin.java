@@ -20,22 +20,14 @@ public class EnemyPlugin implements Plugin {
     private World world;
     private GameData gameData;
 
-
-
-
     public EnemyPlugin(World world, GameData gameData) {
         this.world = world;
         this.gameData = gameData;
-
-
     }
 
     @Override
     public void start() {
-
         gameData.addController(new EnemyController(world, gameData));
-
-
     }
 
     @Override

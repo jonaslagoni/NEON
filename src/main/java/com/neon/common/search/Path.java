@@ -42,7 +42,10 @@ public class Path {
 	 * @return The step information, the position on the map.
 	 */
 	public Step getStep(int index) {
-		return (Step) steps.get(index);
+            if(steps.size() < index+1){
+                return null;
+            }
+            return (Step) steps.get(index);
 	}
 	
 	/**

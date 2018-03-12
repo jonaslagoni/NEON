@@ -5,6 +5,8 @@
  */
 package com.neon.common.search;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * A description of an implementation that can find a path from one 
  * location on a tile map to another based on information provided
@@ -31,4 +33,19 @@ public interface PathFinder {
 	 * @return The path found from start to end, or null if no path can be found.
 	 */
 	public Path findPath(Mover mover, int sx, int sy, int tx, int ty);
+
+	/**
+	 * Find a path from the starting location provided (sx,sy) to the target
+	 * location (tx,ty) avoiding blockages and attempting to honour costs 
+	 * provided by the tile map.
+	 * 
+	 * @param mover The entity that will be moving along the path. This provides
+	 * a place to pass context information about the game entity doing the moving, e.g.
+	 * can it fly? can it swim etc.
+        * @param start
+        * @param end
+	 * 
+	 * @return The path found from start to end, or null if no path can be found.
+	 */
+	public Path findPath(Mover mover, Vector2 start, Vector2 end);
 }

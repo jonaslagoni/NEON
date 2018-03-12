@@ -5,9 +5,9 @@
  */
 package com.neon.search.heuristic.closest;
 
-import com.neon.common.search.AStarHeuristic;
 import com.neon.common.search.Mover;
 import com.neon.common.search.TileBasedMap;
+import com.neon.common.search.HeuristicCost;
 
 /**
  * A heuristic that uses the tile that is closest to the target
@@ -15,9 +15,9 @@ import com.neon.common.search.TileBasedMap;
  * 
  * @author Kevin Glass
  */
-public class ClosestHeuristic implements AStarHeuristic {
+public class ClosestHeuristic implements HeuristicCost {
 	/**
-	 * @see AStarHeuristic#getCost(TileBasedMap, Mover, int, int, int, int)
+	 * @see HeuristicCost#getCost(TileBasedMap, Mover, int, int, int, int)
 	 */
 	public float getCost(TileBasedMap map, Mover mover, int x, int y, int tx, int ty) {		
 		float dx = tx - x;
