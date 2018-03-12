@@ -3,8 +3,8 @@ package com.neon.libary;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Moveable;
 
-import static com.badlogic.gdx.math.MathUtils.PI;
-import static com.neon.libary.VectorUtils.*;
+import static com.neon.libary.VectorUtils.deltaX;
+import static com.neon.libary.VectorUtils.deltaY;
 
 public class MoveController implements Controller {
 
@@ -14,27 +14,10 @@ public class MoveController implements Controller {
         this.world = world;
     }
 
-
     private void moveEntity(Moveable moveable) {
-
-        MoveAbility moveAbility = moveable.getMoveAbility();
-        Sprite sprite = moveable.getSprite();
-
-        /* Don't Move if player is on target.
-         * It is not necessary to calculate the actual distance, just the square of it. */
-
-        if (!moveAbility.hasTarget() && distanceSquare(sprite.getPosition(), moveAbility.getTargetVector()) < 6) {
-            moveAbility.setTarget(false);
-            return;
-        }
-
-        /* Calculate angle
-         * https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors */
-        sprite.setRotation(angle(sprite.getPosition(), moveAbility.getTargetVector()) + PI);
-
         /* Move */
-        sprite.translateX(deltaX(sprite.getRotation(), moveAbility.getVelocity()));
-        sprite.translateY(deltaY(sprite.getRotation(), moveAbility.getVelocity()));
+        moveable.getSprite().translateX(deltaX(moveable.getSprite().getRotation(), moveable.getMoveAbility().getVelocity()));
+        moveable.getSprite().translateY(deltaY(moveable.getSprite().getRotation(), moveable.getMoveAbility().getVelocity()));
     }
 
     @Override

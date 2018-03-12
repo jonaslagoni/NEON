@@ -42,7 +42,9 @@ public class Sprite {
     public Sprite(Texture texture,
                   float height,
                   float width,
+                  float rotation,
                   Vector2 position) {
+        this.rotation = rotation;
         this.height = height;
         this.width = width;
         this.texture = texture;

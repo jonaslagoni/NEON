@@ -8,10 +8,10 @@ import com.neon.weapon.Weapon;
 
 public class Tower implements Drawable {
 
-    private Sprite sprite;
-    private int level;
-    private Texture[] texture;
-    private Entity weapon;
+    Sprite sprite;
+    int level;
+    Texture[] texture;
+    Entity weapon;
 
     Tower(Sprite sprite, Texture[] texture, Weapon weapon) {
         this.sprite = sprite;

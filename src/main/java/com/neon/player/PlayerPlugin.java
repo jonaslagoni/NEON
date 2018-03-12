@@ -37,7 +37,7 @@ public class PlayerPlugin implements Plugin {
         world.addEntity(player);
 
         inputProcessor = new PlayerInputProcessor(player, gameData);
-        playerController = new PlayerController();
+        playerController = new PlayerController(world);
 
         gameData.addController(playerController);
         gameData.addInputProcessor(inputProcessor);

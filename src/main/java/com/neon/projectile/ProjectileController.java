@@ -16,7 +16,7 @@ public class ProjectileController implements Controller {
     }
 
     private void updateProjectile(Projectile projectile) {
-        if (!projectile.getMoveAbility().hasTarget()) {
+        if (World.isOutOfBounds(projectile.getSprite().getPosition())) {
             world.removeEntity(projectile);
         }
     }

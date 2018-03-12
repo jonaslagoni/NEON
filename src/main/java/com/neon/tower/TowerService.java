@@ -9,9 +9,9 @@ public class TowerService implements ITowerService {
     public void upgrade(Entity entity) {
         if (!(entity instanceof Tower)) return;
         Tower tower = (Tower) entity;
-        if (tower.getLevel() < 2) {
-            tower.setLevel(tower.getLevel() + 1);
-            tower.getSprite().setTexture(tower.getTexture()[tower.getLevel()]);
+        if (tower.level < 2) {
+            tower.level++;
+            tower.sprite.setTexture(tower.texture[tower.level]);
         }
     }
 }

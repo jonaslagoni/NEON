@@ -12,6 +12,7 @@ import com.neon.libary.interfaces.ICollisionService;
 import com.neon.libary.interfaces.Targetable;
 import com.neon.projectile.Projectile;
 
+import static com.neon.libary.VectorUtils.angle;
 import static com.neon.libary.VectorUtils.distanceSquare;
 
 public class WeaponController implements Controller {
@@ -25,13 +26,15 @@ public class WeaponController implements Controller {
     }
 
     private static Projectile newProjectile(Vector2 spawn, Vector2 target) {
+        float angle = angle(target, spawn);
         return new Projectile(
                 new Sprite(
                         new Texture(Gdx.files.internal("images/checked-button.png")),
-                        6, 16,
+                        32, 32,
+                        angle,
                         new Vector2(spawn)
                 ),
-                new MoveAbility(new Vector2(target), 1500)
+                new MoveAbility(1000)
         );
     }
 
