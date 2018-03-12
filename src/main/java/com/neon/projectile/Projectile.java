@@ -7,8 +7,8 @@ import com.neon.libary.interfaces.Moveable;
 
 public class Projectile implements Moveable, Drawable {
 
-    private Sprite sprite;
-    private MoveAbility moveAbility;
+    Sprite sprite;
+    MoveAbility moveAbility;
 
     public Projectile(Sprite sprite, MoveAbility moveAbility) {
         this.sprite = sprite;

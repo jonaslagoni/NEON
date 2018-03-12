@@ -17,7 +17,6 @@ import com.neon.projectile.Projectile;
 
 import static com.badlogic.gdx.math.MathUtils.PI;
 import static com.neon.libary.VectorUtils.angle;
-import static com.neon.libary.VectorUtils.distanceSquare;
 
 /**
  * @author Daniel
@@ -36,16 +35,10 @@ public class EnemyController implements Controller {
 
         /* Don't Move if player is on target.
          * It is not necessary to calculate the actual distance, just the square of it. */
-
-        if (!enemy.moveAbility.hasTarget() && distanceSquare(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector()) < 2) {
-            enemy.moveAbility.setTarget(false);
-            return;
-        }
+        // if ( distanceSquare(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector()) < 2)
 
         /* Calculate angle
          * https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors */
-        enemy.sprite.setRotation(angle(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector()) + PI);
-
 
         enemy.damageTimer += Gdx.graphics.getDeltaTime();
 
@@ -53,20 +46,19 @@ public class EnemyController implements Controller {
         for (Drawable entity : world.getEntities(Drawable.class)) {
             if (entity.getClass() == Player.class) {
                 enemy.moveAbility.setTargetVector(entity.getSprite().getPosition());
-                enemy.moveAbility.setTarget(true);
             }
         }
 
+        enemy.sprite.setRotation(angle(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector()) + PI);
+
         /* Remove enemy if it collides with player */
-        for (Entity entity : collisionService.getCollisions(enemy.getSprite())) {
-            if (enemy.damageTimer >= 1) {
-                if (entity.getClass() == Player.class) {
-                    enemy.hp -= 10;
-                    enemy.damageTimer = 0;
-                } else if (entity.getClass() == Projectile.class) {
-                    enemy.hp -= 50;
-                    enemy.damageTimer = 0;
-                }
+        for (Entity entity : collisionService.getCollisions(enemy.sprite)) {
+            if (enemy.damageTimer >= 1 && entity.getClass() == Player.class) {
+                enemy.hp -= 10;
+                enemy.damageTimer = 0;
+            } else if (entity.getClass() == Projectile.class) {
+                enemy.hp -= 50;
+                world.removeEntity(entity);
             }
         }
 
@@ -75,7 +67,7 @@ public class EnemyController implements Controller {
             return;
         }
 
-        enemy.sprite.setTexture(enemy.texture[enemy.hp * (enemy.texture.length - 1) / enemy.maxHp]);
+        enemy.sprite.setTexture(enemy.textures[enemy.hp * (enemy.textures.length - 1) / enemy.maxHp]);
     }
 
     @Override

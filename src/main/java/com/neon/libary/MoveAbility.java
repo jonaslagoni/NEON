@@ -6,12 +6,10 @@ public class MoveAbility {
 
     private float velocity;
     private Vector2 targetVector = new Vector2();
-    private boolean target;
 
     public MoveAbility(Vector2 targetVector, float velocity) {
         this.targetVector = targetVector;
         this.velocity = velocity;
-        target = true;
     }
 
     public MoveAbility(float velocity) {
@@ -32,13 +30,5 @@ public class MoveAbility {
 
     public void setTargetVector(Vector2 targetVector) {
         this.targetVector = targetVector;
-    }
-
-    public boolean hasTarget() {
-        return target;
-    }
-
-    public void setTarget(boolean target) {
-        this.target = target;
     }
 }

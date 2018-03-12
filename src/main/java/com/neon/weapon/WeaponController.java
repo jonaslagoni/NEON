@@ -15,7 +15,7 @@ import com.neon.projectile.Projectile;
 import static com.neon.libary.VectorUtils.angle;
 import static com.neon.libary.VectorUtils.distanceSquare;
 
-public class WeaponController implements Controller {
+class WeaponController implements Controller {
 
     private final World world;
     private final ICollisionService collisionService;
@@ -34,7 +34,7 @@ public class WeaponController implements Controller {
                         angle,
                         new Vector2(spawn)
                 ),
-                new MoveAbility(1000)
+                new MoveAbility(100)
         );
     }
 
@@ -51,7 +51,7 @@ public class WeaponController implements Controller {
 
         weapon.fireCooldown += Gdx.graphics.getDeltaTime();
 
-        if (weapon.fireCooldown < 2) return;
+        if (weapon.fireCooldown < 0.5) return;
 
         Drawable closest = null;
 

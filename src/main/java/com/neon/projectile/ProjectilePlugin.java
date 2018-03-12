@@ -5,6 +5,7 @@ import com.neon.libary.World;
 import com.neon.libary.interfaces.Plugin;
 
 public class ProjectilePlugin implements Plugin {
+
     private World world;
     private GameData gameData;
 
@@ -20,6 +21,5 @@ public class ProjectilePlugin implements Plugin {
 
     @Override
     public void stop() {
-
     }
 }

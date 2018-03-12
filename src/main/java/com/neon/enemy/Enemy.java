@@ -10,19 +10,19 @@ import com.neon.libary.interfaces.Targetable;
 /**
  * Created by sam on 02-03-2018.
  */
-public class Enemy implements Moveable, Drawable, Targetable {
+class Enemy implements Moveable, Drawable, Targetable {
 
     MoveAbility moveAbility;
     Sprite sprite;
-    Texture[] texture;
+    Texture[] textures;
     int hp = 200;
     int maxHp = hp;
     float damageTimer;
 
-    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] texture) {
+    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] textures) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;
-        this.texture = texture;
+        this.textures = textures;
     }
 
     @Override

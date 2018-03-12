@@ -25,7 +25,6 @@ public class EnemyPlugin implements Plugin {
 
         MoveAbility moveAbility = new MoveAbility(140);
         moveAbility.setTargetVector(new Vector2(World.WIDTH / 2, 0));
-        moveAbility.setTarget(true);
 
         Texture[] texture = {
             new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon1.png")),

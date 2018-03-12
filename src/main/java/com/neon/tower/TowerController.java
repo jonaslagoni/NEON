@@ -20,7 +20,7 @@ public class TowerController implements Controller {
 
     private void updateTower(Tower tower) {
 
-        //noinspection SuspiciousMethodCalls
+        // noinspection SuspiciousMethodCalls
         if (!world.getEntities(Weapon.class).contains(tower.weapon)) {
             world.addEntity(tower.getWeapon());
         }

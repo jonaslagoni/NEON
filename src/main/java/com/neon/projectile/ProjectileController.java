@@ -4,6 +4,7 @@ import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 
 public class ProjectileController implements Controller {
+
     private World world;
 
     ProjectileController(World world) {
@@ -16,7 +17,7 @@ public class ProjectileController implements Controller {
     }
 
     private void updateProjectile(Projectile projectile) {
-        if (World.isOutOfBounds(projectile.getSprite().getPosition())) {
+        if (World.isOutOfBounds(projectile.sprite.getPosition())) {
             world.removeEntity(projectile);
         }
     }

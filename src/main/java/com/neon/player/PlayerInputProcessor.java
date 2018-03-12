@@ -3,7 +3,6 @@ package com.neon.player;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.GameData;
-import com.neon.libary.MoveAbility;
 import com.neon.libary.World;
 
 import static com.badlogic.gdx.Input.Buttons;
@@ -40,9 +39,7 @@ public class PlayerInputProcessor implements InputProcessor {
             case Buttons.LEFT:
                 Vector2 target = gameData.getViewport().unproject(new Vector2(screenX, screenY));
                 if (World.isOutOfBounds(target)) break;
-                MoveAbility moveAbility = player.getMoveAbility();
-                moveAbility.setTargetVector(target);
-                moveAbility.setTarget(true);
+                player.moveAbility.setTargetVector(target);
                 return true;
         }
         return false;

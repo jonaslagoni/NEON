@@ -6,7 +6,7 @@ import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Entity;
 import com.neon.weapon.Weapon;
 
-public class Tower implements Drawable {
+class Tower implements Drawable {
 
     Sprite sprite;
     int level;
