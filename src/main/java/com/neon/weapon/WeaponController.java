@@ -29,7 +29,7 @@ public class WeaponController implements Controller {
         float angle = angle(target, spawn);
         return new Projectile(
                 new Sprite(
-                        new Texture(Gdx.files.internal("images/checked-button.png")),
+                        new Texture(Gdx.files.internal("images/beam-peashooter.png")),
                         32, 32,
                         angle,
                         new Vector2(spawn)
