@@ -22,9 +22,8 @@ public class MoveController implements Controller {
 
         /* Don't Move if player is on target.
          * It is not necessary to calculate the actual distance, just the square of it. */
-        if (!moveAbility.hasTarget()) return;
 
-        if (distanceSquare(sprite.getPosition(), moveAbility.getTargetVector()) < 2) {
+        if (!moveAbility.hasTarget() && distanceSquare(sprite.getPosition(), moveAbility.getTargetVector()) < 6) {
             moveAbility.setTarget(false);
             return;
         }

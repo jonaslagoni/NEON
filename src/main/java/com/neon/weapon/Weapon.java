@@ -9,7 +9,8 @@ public class Weapon implements Entity {
     float fireCooldown;
     float range;
 
-    public Weapon(Vector2 position, float range) {
+    public Weapon(Vector2 position,
+                  float range) {
         this.position = position;
         this.range = range;
     }

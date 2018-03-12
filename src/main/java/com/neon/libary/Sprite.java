@@ -7,7 +7,7 @@ public class Sprite {
 
     private float height;
     private float width;
-    private Vector2 position = new Vector2();
+    private Vector2 position;
     private float rotation;
     private Texture texture;
 
@@ -36,6 +36,17 @@ public class Sprite {
         this.height = height;
         this.width = width;
         this.texture = texture;
+        this.position = new Vector2();
+    }
+
+    public Sprite(Texture texture,
+                  float height,
+                  float width,
+                  Vector2 position) {
+        this.height = height;
+        this.width = width;
+        this.texture = texture;
+        this.position = position;
     }
 
     public float getHeight() {

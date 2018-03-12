@@ -5,11 +5,12 @@ import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Moveable;
+import com.neon.libary.interfaces.Targetable;
 
 /**
  * Created by sam on 02-03-2018.
  */
-public class Enemy implements Moveable, Drawable {
+public class Enemy implements Moveable, Drawable, Targetable {
 
     MoveAbility moveAbility;
     Sprite sprite;
