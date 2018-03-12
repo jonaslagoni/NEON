@@ -8,27 +8,32 @@ package com.neon.enemy;
 import com.badlogic.gdx.Gdx;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
-import com.neon.libary.interfaces.Controller;
-import com.neon.libary.interfaces.Drawable;
-import com.neon.libary.interfaces.Entity;
-import com.neon.libary.interfaces.ICollisionService;
+import com.neon.libary.interfaces.*;
 import com.neon.player.Player;
+import com.neon.wave.Wave;
 import com.neon.projectile.Projectile;
 
 import static com.badlogic.gdx.math.MathUtils.PI;
 import static com.neon.libary.VectorUtils.angle;
 
-/**
- * @author Daniel
- */
+import java.util.List;
+
+
 public class EnemyController implements Controller {
 
     private final World world;
     private final ICollisionService collisionService;
+    private float enemyCooldown;
+    private float waveCooldown;
+    private IWaveService iWaveService;
+    private int enemyListPos;
+    List<Entity> enemyList;
 
     EnemyController(World world, GameData gameData) {
         this.collisionService = gameData.getService(ICollisionService.class);
         this.world = world;
+        this.iWaveService = new Wave(world, gameData);
+        this.enemyList = iWaveService.createWave();
     }
 
     private void updateEnemy(final Enemy enemy) {
@@ -72,6 +77,29 @@ public class EnemyController implements Controller {
 
     @Override
     public void update() {
+        // Add enemies iterator here.
+
+
+        enemyCooldown += Gdx.graphics.getDeltaTime();
+
+
+        if (enemyCooldown > 1 && enemyListPos < enemyList.size()) {
+
+            world.addEntity(enemyList.get(enemyListPos++));
+            enemyCooldown = 0;
+        }
+
+        if (enemyListPos == enemyList.size()) {
+
+            waveCooldown += Gdx.graphics.getDeltaTime();
+
+            if (waveCooldown > 20) {
+
+                enemyList = iWaveService.createWave();
+                enemyListPos = 0;
+                waveCooldown = 0;
+            }
+        }
         world.getEntities(Enemy.class).forEach(this::updateEnemy);
     }
 }
