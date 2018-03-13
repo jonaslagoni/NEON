@@ -34,7 +34,7 @@ class WeaponController implements Controller {
                         angle,
                         new Vector2(spawn)
                 ),
-                new MoveAbility(100)
+                new MoveAbility(400)
         );
     }
 
@@ -51,7 +51,7 @@ class WeaponController implements Controller {
 
         weapon.fireCooldown += Gdx.graphics.getDeltaTime();
 
-        if (weapon.fireCooldown < 0.5) return;
+        if (weapon.fireCooldown < 0.3) return;
 
         Drawable closest = null;
 

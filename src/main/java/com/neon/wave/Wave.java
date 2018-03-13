@@ -16,9 +16,9 @@ public class Wave implements IWaveService {
 
     private World world;
     private GameData gameData;
-    private int waveCount = 30;
+    private int waveDifficulty = 0;
     private int waveScore = 0;
-    private int currentTier;
+    private int waveCount = 0;
 
     private final int[] tierScore;
 
@@ -30,7 +30,7 @@ public class Wave implements IWaveService {
         tierScore[0] = 1;
         tierScore[1] = 20;
         tierScore[2] = 75;
-        tierScore[3] = 150;
+        tierScore[3] = 200;
 
     }
 
@@ -38,50 +38,40 @@ public class Wave implements IWaveService {
 
         ArrayList<Entity> enemyList = new ArrayList<>();
 
+        waveDifficulty++;
         waveCount++;
 
-        waveScore = (int) (Math.ceil(waveCount + waveCount * 2.0));
+        waveScore = (int) (Math.ceil(waveDifficulty + waveDifficulty * 2.0));
 
-        System.out.println(waveScore);
+        System.out.println(waveCount);
 
         while (waveScore > 0) {
+            int randomType = (int)(Math.random()*3+1);
+            int randomTypeTier2 = (int)(Math.random()*2+1);
             if (waveScore >= tierScore[3]) {
 
                 waveScore = waveScore - tierScore[3];
-                enemyList.add(EnemyFactory.createEnemy("tier3", "star"));
+                enemyList.add(EnemyFactory.createEnemy("boss", randomType));
 
 
             } else if (waveScore >= tierScore[2]) {
 
                 waveScore = waveScore - tierScore[2];
-                enemyList.add(EnemyFactory.createEnemy("tier3", "star"));
+                enemyList.add(EnemyFactory.createEnemy("tier3", randomType));
 
             } else if (waveScore >= tierScore[1]) {
 
                 waveScore = waveScore - tierScore[1];
-                enemyList.add(EnemyFactory.createEnemy("tier2", "hexagon"));
+                enemyList.add(EnemyFactory.createEnemy("tier2", randomTypeTier2));
 
             } else if (waveScore >= tierScore[0]) {
 
                 waveScore = waveScore - tierScore[0];
-                enemyList.add(EnemyFactory.createEnemy("tier1", "circle"));
+                enemyList.add(EnemyFactory.createEnemy("tier1", randomType));
             }
         }
 
 
         return enemyList;
     }
-/*
-    private int getFibonacci(int n) {
-        if (n == 0 || n == 1) {
-            return n;
-        } else {
-            return getFibonacci(n - 1) + getFibonacci(n - 2);
-        }
-    }
-
-    private int getNumberOfEnemies() {
-        return (3 + getFibonacci(waveCount / currentTier));
-    }*/
-
 }

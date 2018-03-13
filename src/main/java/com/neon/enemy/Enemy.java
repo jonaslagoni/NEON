@@ -15,14 +15,16 @@ class Enemy implements Moveable, Drawable, Targetable {
     MoveAbility moveAbility;
     Sprite sprite;
     Texture[] textures;
-    int hp = 200;
-    int maxHp = hp;
+    int hp;
+    int maxHp;
     float damageTimer;
 
-    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] textures) {
+    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] textures, int hp) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;
         this.textures = textures;
+        this.hp = hp;
+        this.maxHp = hp;
     }
 
     @Override

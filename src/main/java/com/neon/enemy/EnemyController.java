@@ -62,7 +62,7 @@ public class EnemyController implements Controller {
                 enemy.hp -= 10;
                 enemy.damageTimer = 0;
             } else if (entity.getClass() == Projectile.class) {
-                enemy.hp -= 50;
+                enemy.hp -= 25;
                 world.removeEntity(entity);
             }
         }
