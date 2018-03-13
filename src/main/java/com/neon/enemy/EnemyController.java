@@ -28,6 +28,7 @@ public class EnemyController implements Controller {
     private IWaveService iWaveService;
     private int enemyListPos;
     List<Entity> enemyList;
+    private int enemyDeathCount;
 
     EnemyController(World world, GameData gameData) {
         this.collisionService = gameData.getService(ICollisionService.class);
@@ -68,6 +69,7 @@ public class EnemyController implements Controller {
         }
 
         if (enemy.hp <= 0) {
+            enemyDeathCount--;
             world.removeEntity(enemy);
             return;
         }
@@ -89,13 +91,14 @@ public class EnemyController implements Controller {
             enemyCooldown = 0;
         }
 
-        if (enemyListPos == enemyList.size()) {
+        if (enemyDeathCount <= 0) {
 
             waveCooldown += Gdx.graphics.getDeltaTime();
 
             if (waveCooldown > 20) {
 
                 enemyList = iWaveService.createWave();
+                enemyDeathCount = enemyList.size();
                 enemyListPos = 0;
                 waveCooldown = 0;
             }

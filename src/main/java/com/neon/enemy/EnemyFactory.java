@@ -93,7 +93,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite1, moveAbility, texture1, 500);
+                        return new Enemy(sprite1, moveAbility, texture1, 2000);
 
                     case 2:
 
@@ -110,7 +110,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite2, moveAbility, texture2, 600);
+                        return new Enemy(sprite2, moveAbility, texture2, 2250);
 
                     case 3:
 
@@ -127,7 +127,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite3, moveAbility, texture3, 700);
+                        return new Enemy(sprite3, moveAbility, texture3, 2500);
                 }
 
             case "tier3":
@@ -146,7 +146,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite1, moveAbility, texture1, 1000);
+                        return new Enemy(sprite1, moveAbility, texture1, 10000);
 
                     case 2:
                         Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
@@ -162,7 +162,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite2, moveAbility, texture2, 1250);
+                        return new Enemy(sprite2, moveAbility, texture2, 11250);
 
                     case 3:
                         Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
@@ -178,7 +178,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite3, moveAbility, texture3, 1500);
+                        return new Enemy(sprite3, moveAbility, texture3, 12500);
                 }
                 return null;
 
@@ -198,7 +198,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite1, moveAbility, texture1, 2000);
+                        return new Enemy(sprite1, moveAbility, texture1, 100000);
 
                     case 2:
                         Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")), World.HEIGHT / 16, World.HEIGHT / 16);
@@ -214,7 +214,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite2, moveAbility, texture2, 2500);
+                        return new Enemy(sprite2, moveAbility, texture2, 112500);
 
                     case 3:
                         Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")), World.HEIGHT / 16, World.HEIGHT / 16);
@@ -230,7 +230,7 @@ public class EnemyFactory {
 
                         };
 
-                        return new Enemy(sprite3, moveAbility, texture3, 3000);
+                        return new Enemy(sprite3, moveAbility, texture3, 125000);
                 }
                 return null;
         }
