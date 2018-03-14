@@ -4,6 +4,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
+import com.neon.libary.vectors.Vector2f;
 
 import static com.badlogic.gdx.Input.Buttons;
 
@@ -37,7 +38,8 @@ public class PlayerInputProcessor implements InputProcessor {
         /* Touch and mouse is the same */
         switch (button) {
             case Buttons.LEFT:
-                Vector2 target = gameData.getViewport().unproject(new Vector2(screenX, screenY));
+                Vector2 vector = gameData.getViewport().unproject(new Vector2(screenX, screenY));
+                Vector2f target = new Vector2f(vector.x, vector.y);
                 if (World.isOutOfBounds(target)) break;
                 player.moveAbility.setTargetVector(target);
                 return true;

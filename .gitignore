@@ -28,3 +28,4 @@ hs_err_pid*
 !gradle-wrapper.jar
 /.nb-gradle/
 assets/
+assets/assets.atlas

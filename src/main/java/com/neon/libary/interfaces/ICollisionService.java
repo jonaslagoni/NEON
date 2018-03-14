@@ -5,8 +5,8 @@
  */
 package com.neon.libary.interfaces;
 
-import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.Sprite;
+import com.neon.libary.vectors.Vector2f;
 
 import java.util.List;
 
@@ -17,6 +17,6 @@ public interface ICollisionService extends Service {
 
     List<Drawable> getCollisions(Sprite sprite);
 
-    List<Drawable> getCollisions(Vector2 position, float range);
+    List<Drawable> getCollisions(Vector2f position, float range);
 
 }

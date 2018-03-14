@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
+import com.neon.libary.vectors.Vector2f;
 
 import java.util.Map;
 
@@ -120,7 +121,8 @@ public class HUD implements InputProcessor, Plugin {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
         /* Convert screen coordinates to world coordinates */
-        Vector2 pos = gameData.getViewport().unproject(new Vector2(screenX, screenY));
+        Vector2 vector = gameData.getViewport().unproject(new Vector2(screenX, screenY));
+        Vector2f pos = new Vector2f(vector.x, vector.y);
 
         upgradeGroup.setVisible(false);
         placementGroup.setVisible(true);

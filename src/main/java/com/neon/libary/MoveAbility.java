@@ -1,18 +1,15 @@
 package com.neon.libary;
 
-import com.badlogic.gdx.math.Vector2;
+import com.neon.libary.vectors.Vector2f;
 
 public class MoveAbility {
 
     private float velocity;
-    private Vector2 targetVector = new Vector2();
-
-    public MoveAbility(Vector2 targetVector, float velocity) {
-        this.targetVector = targetVector;
-        this.velocity = velocity;
-    }
+    private Vector2f targetVector;
+    private boolean move;
 
     public MoveAbility(float velocity) {
+        this.targetVector = new Vector2f(0f, 0f);
         this.velocity = velocity;
     }
 
@@ -24,11 +21,19 @@ public class MoveAbility {
         this.velocity = velocity;
     }
 
-    public Vector2 getTargetVector() {
+    public Vector2f getTargetVector() {
         return targetVector;
     }
 
-    public void setTargetVector(Vector2 targetVector) {
+    public void setTargetVector(Vector2f targetVector) {
         this.targetVector = targetVector;
+    }
+
+    public boolean isMove() {
+        return move;
+    }
+
+    public void setMove(boolean move) {
+        this.move = move;
     }
 }
