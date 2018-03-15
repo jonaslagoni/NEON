@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
+import com.neon.neonCoin.NeonCoin;
 import com.neon.player.Player;
 import com.neon.wave.Wave;
 import com.neon.projectile.Projectile;
@@ -32,12 +33,15 @@ public class EnemyController implements Controller {
     private int enemyListPos;
     List<Entity> enemyList;
     private int enemyDeathCount;
+    private INeonWallet wallet;
 
-    EnemyController(World world, GameData gameData) {
+    EnemyController(World world, GameData gameData, INeonWallet wallet, IWaveService waveService) {
         this.collisionService = gameData.getService(ICollisionService.class);
         this.world = world;
-        this.iWaveService = new Wave(world, gameData);
+        this.iWaveService = waveService;
         this.enemyList = iWaveService.createWave();
+        this.wallet = wallet;
+
     }
 
     private void updateEnemy(final Enemy enemy) {
@@ -87,12 +91,15 @@ public class EnemyController implements Controller {
             }
         }
 
+        // If enemy is killed
         if (enemy.hp <= 0) {
             enemyDeathCount--;
             world.removeEntity(enemy);
+            wallet.addCoins(enemy.coinValue);
             return;
         }
-        
+
+        // If enemy survives and leaves
         if (enemy.getSprite().getPosition().y < 0){
             enemyDeathCount--;
             world.removeEntity(enemy);

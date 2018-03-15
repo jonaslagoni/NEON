@@ -9,6 +9,7 @@ import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Entity;
+import com.neon.libary.interfaces.INeonWallet;
 import com.neon.libary.interfaces.IWaveService;
 import com.neon.libary.interfaces.Plugin;
 import com.neon.wave.Wave;
@@ -27,7 +28,7 @@ public class EnemyPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addController(new EnemyController(world, gameData));
+        gameData.addController(new EnemyController(world, gameData, gameData.getService(INeonWallet.class),gameData.getService(IWaveService.class)));
     }
 
     @Override

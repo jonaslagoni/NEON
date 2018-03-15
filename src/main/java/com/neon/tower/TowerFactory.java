@@ -29,8 +29,9 @@ public class TowerFactory implements Factory {
 
                 Weapon weapon = new Weapon(sprite.getPosition(), 512);
 
-                return new Tower(sprite, upgrades, weapon);
+                return new Tower(sprite, upgrades, weapon, 10);
         }
+
         return null;
     }
 }

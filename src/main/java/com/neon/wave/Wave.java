@@ -20,6 +20,7 @@ public class Wave implements IWaveService {
     private int waveDifficulty = 1;
     private int waveScore = 0;
     private int waveCount = 0;
+    private int enemyScore;
 
     private final int[] tierScore;
 
@@ -35,6 +36,14 @@ public class Wave implements IWaveService {
 
     }
 
+    public int getWaveScore() {
+        return enemyScore;
+    }
+
+    public int getWaveCount() {
+        return waveCount;
+    }
+
     public ArrayList<Entity> createWave() {
 
         ArrayList<Entity> enemyList = new ArrayList<>();
@@ -43,7 +52,8 @@ public class Wave implements IWaveService {
         waveCount++;
 
         waveScore += (int) (Math.ceil(waveDifficulty + waveDifficulty * waveCount));
-        
+
+        enemyScore = waveScore;
 
         System.out.println(waveCount);
 

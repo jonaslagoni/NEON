@@ -12,11 +12,13 @@ class Tower implements Drawable {
     int level;
     Texture[] texture;
     Entity weapon;
+    int cost;
 
-    Tower(Sprite sprite, Texture[] texture, Weapon weapon) {
+    Tower(Sprite sprite, Texture[] texture, Weapon weapon, int cost) {
         this.sprite = sprite;
         this.texture = texture;
         this.weapon = weapon;
+        this.cost = cost;
     }
 
     @Override
@@ -42,5 +44,9 @@ class Tower implements Drawable {
 
     public void setWeapon(Entity weapon) {
         this.weapon = weapon;
+    }
+
+    public int getCost() {
+        return cost;
     }
 }

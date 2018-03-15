@@ -21,10 +21,12 @@ import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Plugin;
+import com.neon.neonCoin.NeonCoinPlugin;
 import com.neon.player.PlayerPlugin;
 import com.neon.projectile.ProjectilePlugin;
 import com.neon.tower.TowerPlugin;
 import com.neon.ui.HUD;
+import com.neon.wave.WavePlugin;
 import com.neon.weapon.WeaponPlugin;
 
 import java.util.Arrays;
@@ -89,6 +91,8 @@ public class Game implements ApplicationListener {
         List<Plugin> plugins = Arrays.asList(
                 new TowerPlugin(world, gameData),
                 new CollisionPlugin(world, gameData),
+                new NeonCoinPlugin(world, gameData),
+                new WavePlugin(world, gameData),
                 new EnemyPlugin(world, gameData),
                 hud,
                 new PlayerPlugin(world, gameData),

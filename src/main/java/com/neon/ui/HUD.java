@@ -22,7 +22,7 @@ import javafx.scene.control.TextField;
 
 import java.util.Map;
 
-public class HUD implements InputProcessor, Plugin {
+public class HUD implements InputProcessor, Plugin, Controller {
 
     private Stage hud;
     private Entity selectedEntity;
@@ -31,8 +31,15 @@ public class HUD implements InputProcessor, Plugin {
     private Entity selectedTower;
     private Group placementGroup;
     private Group upgradeGroup;
+    private Group statsGroup;
     private GameData gameData;
     private ITowerService towerService;
+    private Label waveCounterLabel;
+    private Label waveScoreLabel;
+    private Label coinLabel;
+    private IWaveService waveService;
+    private INeonWallet neonWallet;
+
 
     public HUD(World world,
                GameData gameData,
@@ -40,17 +47,24 @@ public class HUD implements InputProcessor, Plugin {
         this.gameData = gameData;
         this.world = world;
         this.batch = batch;
+
     }
 
     @Override
     public void start() {
+        gameData.addController(this);
 
         this.towerService = gameData.getService(ITowerService.class);
+        this.waveService = gameData.getService(IWaveService.class);
+        this.neonWallet = gameData.getService(INeonWallet.class);
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table(gameData.getSkin());
         table.setFillParent(true);
         hud.addActor(table);
+
+        statsGroup = new Group();
+        statsGroup.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         placementGroup = new Group();
         placementGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -59,11 +73,21 @@ public class HUD implements InputProcessor, Plugin {
         upgradeGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         upgradeGroup.setVisible(false);
 
+        Table statsTable = new Table(gameData.getSkin());
+        statsTable.setFillParent(true);
+
         Table placementTable = new Table(gameData.getSkin());
         placementTable.setFillParent(true);
 
         Table upgradeTable = new Table(gameData.getSkin());
         upgradeTable.setFillParent(true);
+
+        waveCounterLabel = new Label("", gameData.getSkin());
+        waveScoreLabel = new Label("",gameData.getSkin());
+        coinLabel = new Label("",gameData.getSkin());
+        //statsTable.add(waveCounterLabel);
+        //statsTable.add(waveScoreLabel);
+        //statsTable.add(coinLabel);
 
         TextButton upgradeButton = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
         upgradeButton.addListener(new ClickListener() {
@@ -77,8 +101,15 @@ public class HUD implements InputProcessor, Plugin {
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
 
 
-        upgradeGroup.addActor(upgradeTable);
+        statsTable.top().left().add(waveCounterLabel).width(-1550).row();
+        statsTable.left().add(waveScoreLabel).width(-1550).row();
+        statsTable.left().add(coinLabel).width(-1550).row();
+
+        statsGroup.addActor(statsTable);
         placementGroup.addActor(placementTable);
+        upgradeGroup.addActor(upgradeTable);
+
+        hud.addActor(statsGroup);
         hud.addActor(placementGroup);
         hud.addActor(upgradeGroup);
 
@@ -175,5 +206,13 @@ public class HUD implements InputProcessor, Plugin {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    @Override
+    public void update() {
+        waveCounterLabel.setText("Wave: " + Integer.toString(waveService.getWaveCount()));
+        waveScoreLabel.setText("EnemyScore: " + Integer.toString(waveService.getWaveScore()));
+        coinLabel.setText("Neon Coins: " + Integer.toString(neonWallet.getCoins()));
+
     }
 }
