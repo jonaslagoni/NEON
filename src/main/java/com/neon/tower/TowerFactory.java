@@ -33,7 +33,7 @@ public class TowerFactory implements Factory {
                 Sprite meleeTower = new Sprite(
                         new Texture(Gdx.files.internal("C:/Users/Lagoni/Documents/SmartGit/NEON/images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 1.1.png")),
                         World.GRID_CELL_SIZE,
-                        World.GRID_CELL_SIZE
+                        World.GRID_CELL_SIZE, 0, new Vector2f(0, 0)
                 );
 
                 Texture[] meleeUpgrades = {
