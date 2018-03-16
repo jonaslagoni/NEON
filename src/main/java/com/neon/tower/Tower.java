@@ -13,12 +13,13 @@ class Tower implements Drawable {
     Texture[] texture;
     Entity weapon;
     int cost;
-
-    Tower(Sprite sprite, Texture[] texture, Weapon weapon, int cost) {
+    int maxLevel;
+    Tower(Sprite sprite, Texture[] texture, Weapon weapon, int cost, int maxLevel) {
         this.sprite = sprite;
         this.texture = texture;
         this.weapon = weapon;
         this.cost = cost;
+        this.maxLevel = maxLevel;
     }
 
     @Override

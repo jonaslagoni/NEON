@@ -21,9 +21,10 @@ public class TowerPlugin implements Plugin {
     public void start() {
         gameData.addService(ITowerService.class, new TowerService());
         gameData.addController(new TowerController(world, gameData));
-
         TowerFactory factory = new TowerFactory();
+        
         gameData.addPlaceable("laser-tower", factory);
+        
         world.setGridCell(new Vector2f(800, 1024), (Drawable) factory.build("laser-tower"));
         world.setGridCell(new Vector2f(925, 1024), (Drawable) factory.build("laser-tower"));
         world.setGridCell(new Vector2f(1024, 1024), (Drawable) factory.build("laser-tower"));
