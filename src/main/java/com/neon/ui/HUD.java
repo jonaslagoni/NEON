@@ -25,7 +25,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private Entity selectedEntity;
     private World world;
     private Batch batch;
-    private Entity selectedTower;
+    private ITower selectedTower;
     private Group placementGroup;
     private Group upgradeGroup;
     private Group statsGroup;
@@ -82,15 +82,13 @@ public class HUD implements InputProcessor, Plugin, Controller {
         waveCounterLabel = new Label("", gameData.getSkin());
         waveScoreLabel = new Label("", gameData.getSkin());
         coinLabel = new Label("", gameData.getSkin());
-        //statsTable.add(waveCounterLabel);
-        //statsTable.add(waveScoreLabel);
-        //statsTable.add(coinLabel);
 
         TextButton upgradeButton = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
         upgradeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (selectedTower != null) {
+                if (selectedTower != null && neonWallet.subtractCoins(selectedTower.getCost()) 
+                        && selectedTower.getLevel() != selectedTower.getMaxLevel()) {
                     towerService.upgrade(selectedTower);
                 }
             }
@@ -119,7 +117,9 @@ public class HUD implements InputProcessor, Plugin, Controller {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    selectedEntity = entry.getValue().build(entry.getKey());
+                    if(neonWallet.subtractCoins(10)){
+                        selectedEntity = entry.getValue().build(entry.getKey());
+                    }
                 }
             });
             placementTable.bottom().right().add(button);
@@ -177,7 +177,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         /* Select an already placed tower */
         Entity entity = world.getGridCell(pos);
         if (entity != null) {
-            selectedTower = entity;
+            selectedTower = (ITower) entity;
             upgradeGroup.setVisible(true);
             placementGroup.setVisible(false);
             return true;
