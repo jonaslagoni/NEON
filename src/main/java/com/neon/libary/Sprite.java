@@ -11,34 +11,6 @@ public class Sprite {
     private float rotation;
     private Texture texture;
 
-    /**
-     * @param texture  texture
-     * @param height   height
-     * @param width    width
-     * @param rotation rotation
-     */
-    public Sprite(Texture texture,
-                  float height,
-                  float width,
-                  float rotation) {
-        this(texture, height, width);
-        this.rotation = rotation;
-    }
-
-    /**
-     * @param texture texture
-     * @param height  height
-     * @param width   width
-     */
-    public Sprite(Texture texture,
-                  float height,
-                  float width) {
-        this.height = height;
-        this.width = width;
-        this.texture = texture;
-        this.position = new Vector2f(0f, 0f);
-    }
-
     public Sprite(Texture texture,
                   float height,
                   float width,
@@ -63,13 +35,9 @@ public class Sprite {
         return position;
     }
 
-    public void setPosition(Vector2f position) {
-        this.position = position;
-    }
-
     public void setPosition(float x, float y) {
-        position.x = x;
-        position.y = y;
+        position.setY(y);
+        position.setX(x);
     }
 
     public float getRotation() {
@@ -89,10 +57,10 @@ public class Sprite {
     }
 
     public void translateX(float x) {
-        position.x += x;
+        position.setX(position.getX() + x);
     }
 
     public void translateY(float y) {
-        position.y += y;
+        position.setY(position.getY() + y);
     }
 }

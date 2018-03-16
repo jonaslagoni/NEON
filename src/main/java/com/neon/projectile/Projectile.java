@@ -8,11 +8,13 @@ import com.neon.libary.interfaces.Moveable;
 public class Projectile implements Moveable, Drawable {
 
     Sprite sprite;
+    @SuppressWarnings("WeakerAccess")
     MoveAbility moveAbility;
 
     public Projectile(Sprite sprite, MoveAbility moveAbility) {
         this.sprite = sprite;
         this.moveAbility = moveAbility;
+        this.moveAbility.setMove(true);
     }
 
     @Override

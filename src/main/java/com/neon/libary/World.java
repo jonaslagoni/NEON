@@ -6,6 +6,7 @@ import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Entity;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.libary.vectors.Vector2i;
+import pathfinding.PathFinder;
 
 import java.util.*;
 
@@ -17,7 +18,9 @@ public class World {
     public static final int MAX_HEIGHT = HEIGHT - 1;
     public static final int GRID_SPACES = 16;
     public static final int GRID_CELL_SIZE = HEIGHT / GRID_SPACES;
+    @SuppressWarnings("WeakerAccess")
     public static final Vector2f START = new Vector2f(WIDTH / 2, HEIGHT);
+    @SuppressWarnings("WeakerAccess")
     public static final Vector2f END = new Vector2f(WIDTH / 2, 0);
 
     private final List<Entity> entities = new ArrayList<>();
@@ -25,11 +28,11 @@ public class World {
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
 
     public static boolean isOutOfBounds(Vector2f v) {
-        return v.x < 0 || v.x > WIDTH || v.y < 0 || v.y > HEIGHT;
+        return v.getX() < 0 || v.getX() > WIDTH || v.getY() < 0 || v.getY() > HEIGHT;
     }
 
     public static Vector2i gridProject(Vector2f v) {
-        return new Vector2i((int) v.x / GRID_CELL_SIZE, (int) v.y / GRID_CELL_SIZE);
+        return new Vector2i((int) v.getX() / GRID_CELL_SIZE, (int) v.getY() / GRID_CELL_SIZE);
     }
 
     public static Vector2f gridUnproject(Vector2i v) {
@@ -70,15 +73,16 @@ public class World {
         Vector2i v = gridProject(position);
         addEntity(entity);
         grid[v.x][v.y] = entity;
-        entity.getSprite().setPosition(gridUnproject(v));
+        Vector2f v1 = gridUnproject(v);
+        entity.getSprite().setPosition(v1.getX(), v1.getY());
     }
 
     public boolean isValidPosition(Vector2f position) {
         setGridCell(position, () -> new Sprite(
                 new Texture(Gdx.files.internal("images/laser-tower.png")),
-                GRID_CELL_SIZE, GRID_CELL_SIZE
+                GRID_CELL_SIZE, GRID_CELL_SIZE, 0, new Vector2f(0, 0)
         ));
-        Queue<Vector2f> path = PathFinder.findPath(getPositionGridCell(START), getPositionGridCell(END), this);
+        Queue<Vector2f> path = new PathFinder(this).findPath(getPositionGridCell(START), getPositionGridCell(END));
         Vector2i v = gridProject(position);
         removeEntity(grid[v.x][v.y]);
         grid[v.x][v.y] = null;
@@ -90,7 +94,7 @@ public class World {
         return grid[v.x][v.y];
     }
 
-    public Vector2i getPositionGridCell(Vector2f position) {
+    private Vector2i getPositionGridCell(Vector2f position) {
         Vector2i v = gridProject(position);
         return new Vector2i(v.x < 0 ? 0 : v.x, v.y < 0 ? 0 : v.y);
     }

@@ -21,13 +21,14 @@ import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Plugin;
-import com.neon.neonCoin.NeonCoinPlugin;
+import com.neon.neon_coin.NeonCoinPlugin;
 import com.neon.player.PlayerPlugin;
 import com.neon.projectile.ProjectilePlugin;
 import com.neon.tower.TowerPlugin;
 import com.neon.ui.HUD;
 import com.neon.wave.WavePlugin;
 import com.neon.weapon.WeaponPlugin;
+import pathfinding.PathfindingPlugin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,8 +51,8 @@ public class Game implements ApplicationListener {
         Texture texture = sprite.getTexture();
         batch.draw(
                 texture, //The texture to use
-                sprite.getPosition().x - texture.getWidth() / 2, //Position x to draw
-                sprite.getPosition().y - texture.getHeight() / 2, //Position y to draw
+                sprite.getPosition().getX() - texture.getWidth() / 2, //Position x to draw
+                sprite.getPosition().getY() - texture.getHeight() / 2, //Position y to draw
                 texture.getWidth() / 2,
                 texture.getHeight() / 2,
                 texture.getWidth(),
@@ -89,6 +90,7 @@ public class Game implements ApplicationListener {
 
         hud = new HUD(world, gameData, batch);
         List<Plugin> plugins = Arrays.asList(
+                new PathfindingPlugin(gameData, world),
                 new TowerPlugin(world, gameData),
                 new CollisionPlugin(world, gameData),
                 new NeonCoinPlugin(world, gameData),

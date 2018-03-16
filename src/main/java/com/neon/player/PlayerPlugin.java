@@ -8,6 +8,7 @@ import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Plugin;
+import com.neon.libary.vectors.Vector2f;
 
 public class PlayerPlugin implements Plugin {
 
@@ -28,7 +29,7 @@ public class PlayerPlugin implements Plugin {
         Sprite sprite = new Sprite(
                 new Texture(Gdx.files.internal("images/tower1.png")),
                 World.GRID_CELL_SIZE,
-                World.GRID_CELL_SIZE
+                World.GRID_CELL_SIZE, 0, new Vector2f(0, 0)
         );
         sprite.setPosition(World.WIDTH / 2, World.HEIGHT / 2);
 

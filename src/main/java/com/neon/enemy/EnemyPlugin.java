@@ -1,20 +1,8 @@
 package com.neon.enemy;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 import com.neon.libary.GameData;
-import com.neon.libary.MoveAbility;
-import com.neon.libary.Sprite;
 import com.neon.libary.World;
-import com.neon.libary.interfaces.Entity;
-import com.neon.libary.interfaces.INeonWallet;
-import com.neon.libary.interfaces.IWaveService;
-import com.neon.libary.interfaces.Plugin;
-import com.neon.wave.Wave;
-
-import java.util.List;
+import com.neon.libary.interfaces.*;
 
 public class EnemyPlugin implements Plugin {
 
@@ -28,7 +16,13 @@ public class EnemyPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addController(new EnemyController(world, gameData, gameData.getService(INeonWallet.class),gameData.getService(IWaveService.class)));
+        gameData.addController(new EnemyController(
+                world, gameData,
+                gameData.getService(ICollisionService.class),
+                gameData.getService(INeonWallet.class),
+                gameData.getService(IWaveService.class),
+                gameData.getService(IPathFindingService.class)
+        ));
     }
 
     @Override

@@ -1,27 +1,22 @@
-package com.neon.neonCoin;
+package pathfinding;
 
 import com.neon.libary.GameData;
 import com.neon.libary.World;
-import com.neon.libary.interfaces.INeonWallet;
+import com.neon.libary.interfaces.IPathFindingService;
 import com.neon.libary.interfaces.Plugin;
 
-/**
- * Created by sam on 15-03-2018.
- */
-public class NeonCoinPlugin implements Plugin {
-
+public class PathfindingPlugin implements Plugin {
     private GameData gameData;
     private World world;
 
-    public NeonCoinPlugin(World world, GameData gameData) {
+    public PathfindingPlugin(GameData gameData, World world) {
         this.gameData = gameData;
         this.world = world;
     }
 
     @Override
     public void start() {
-        gameData.addService(INeonWallet.class, new NeonCoin());
-
+        gameData.addService(IPathFindingService.class, new PathFinder(world));
     }
 
     @Override

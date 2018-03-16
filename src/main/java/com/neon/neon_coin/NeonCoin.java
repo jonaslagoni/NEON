@@ -1,4 +1,4 @@
-package com.neon.neonCoin;
+package com.neon.neon_coin;
 
 import com.neon.libary.interfaces.INeonWallet;
 
@@ -11,13 +11,11 @@ public class NeonCoin implements INeonWallet {
 
     @Override
     public boolean subtractCoins(int i) {
-        int a = neonCoins - i;
-        if (a < 0) {
-            return false;
-        } else {
+        if (neonCoins - i >= 0) {
             neonCoins -= i;
             return true;
         }
+        return false;
     }
 
     @Override

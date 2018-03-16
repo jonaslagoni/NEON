@@ -6,15 +6,15 @@ import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Entity;
+import com.neon.libary.vectors.Vector2f;
 
 /**
  * Created by sam on 12-03-2018.
  */
 public class EnemyFactory {
 
-    private static int START_POS_X = 960;
-    private static int START_POS_Y = 2047;
-
+    private static final int START_POS_X = 960;
+    private static final int START_POS_Y = 2047;
 
     public static Entity createEnemy(String tier, int type) {
 
@@ -29,7 +29,7 @@ public class EnemyFactory {
 
                         Sprite sprite1 = new Sprite(
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/6.png")),
-                                World.HEIGHT / 32, World.HEIGHT / 32
+                                World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0)
                         );
                         sprite1.setPosition(START_POS_X, START_POS_Y);
 
@@ -47,7 +47,7 @@ public class EnemyFactory {
 
                     case 2:
 
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
@@ -64,7 +64,7 @@ public class EnemyFactory {
 
                     case 3:
 
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {
@@ -85,7 +85,7 @@ public class EnemyFactory {
                 switch (type) {
                     case 1:
 
-                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite1.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture1 = {
@@ -102,7 +102,7 @@ public class EnemyFactory {
 
                     case 2:
 
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
@@ -119,7 +119,7 @@ public class EnemyFactory {
 
                     case 3:
 
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {
@@ -138,7 +138,7 @@ public class EnemyFactory {
             case "tier3":
                 switch (type) {
                     case 1:
-                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite1.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture1 = {
@@ -154,7 +154,7 @@ public class EnemyFactory {
                         return new Enemy(sprite1, moveAbility, texture1, 10000, 200);
 
                     case 2:
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
@@ -170,7 +170,7 @@ public class EnemyFactory {
                         return new Enemy(sprite2, moveAbility, texture2, 11250, 200);
 
                     case 3:
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
+                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
                         sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {
@@ -190,7 +190,7 @@ public class EnemyFactory {
             case "boss":
                 switch (type) {
                     case 1:
-                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")), World.HEIGHT / 16, World.HEIGHT / 16);
+                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")), World.HEIGHT / 16, World.HEIGHT / 16, 0, new Vector2f(0, 0));
                         sprite1.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture1 = {
@@ -206,7 +206,7 @@ public class EnemyFactory {
                         return new Enemy(sprite1, moveAbility, texture1, 100000, 1000);
 
                     case 2:
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")), World.HEIGHT / 16, World.HEIGHT / 16);
+                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")), World.HEIGHT / 16, World.HEIGHT / 16, 0, new Vector2f(0, 0));
                         sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
@@ -222,7 +222,7 @@ public class EnemyFactory {
                         return new Enemy(sprite2, moveAbility, texture2, 112500, 1000);
 
                     case 3:
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")), World.HEIGHT / 16, World.HEIGHT / 16);
+                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")), World.HEIGHT / 16, World.HEIGHT / 16, 0, new Vector2f(0, 0));
                         sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {

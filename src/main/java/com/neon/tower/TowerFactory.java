@@ -6,6 +6,7 @@ import com.neon.libary.Sprite;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Entity;
 import com.neon.libary.interfaces.Factory;
+import com.neon.libary.vectors.Vector2f;
 import com.neon.weapon.Weapon;
 
 public class TowerFactory implements Factory {
@@ -18,7 +19,7 @@ public class TowerFactory implements Factory {
                 Sprite sprite = new Sprite(
                         new Texture(Gdx.files.internal("images/laser-tower.png")),
                         World.GRID_CELL_SIZE,
-                        World.GRID_CELL_SIZE
+                        World.GRID_CELL_SIZE, 0, new Vector2f(0, 0)
                 );
 
                 Texture[] upgrades = {

@@ -21,21 +21,21 @@ import java.util.Map;
 
 public class HUD implements InputProcessor, Plugin, Controller {
 
+    private final World world;
+    private final Batch batch;
+    private final GameData gameData;
     private Stage hud;
-    private Entity selectedEntity;
-    private World world;
-    private Batch batch;
-    private Entity selectedTower;
     private Group placementGroup;
     private Group upgradeGroup;
     private Group statsGroup;
-    private GameData gameData;
-    private ITowerService towerService;
     private Label waveCounterLabel;
     private Label waveScoreLabel;
     private Label coinLabel;
     private IWaveService waveService;
     private INeonWallet neonWallet;
+    private ITowerService towerService;
+    private Entity selectedEntity;
+    private Entity selectedTower;
 
 
     public HUD(World world,
@@ -82,9 +82,6 @@ public class HUD implements InputProcessor, Plugin, Controller {
         waveCounterLabel = new Label("", gameData.getSkin());
         waveScoreLabel = new Label("", gameData.getSkin());
         coinLabel = new Label("", gameData.getSkin());
-        //statsTable.add(waveCounterLabel);
-        //statsTable.add(waveScoreLabel);
-        //statsTable.add(coinLabel);
 
         TextButton upgradeButton = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
         upgradeButton.addListener(new ClickListener() {
@@ -96,7 +93,6 @@ public class HUD implements InputProcessor, Plugin, Controller {
             }
         });
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
-
 
         statsTable.top().left().add(waveCounterLabel).width(-1550).row();
         statsTable.left().add(waveScoreLabel).width(-1550).row();
@@ -210,6 +206,5 @@ public class HUD implements InputProcessor, Plugin, Controller {
         waveCounterLabel.setText("Wave: " + Integer.toString(waveService.getWaveCount()));
         waveScoreLabel.setText("EnemyScore: " + Integer.toString(waveService.getWaveScore()));
         coinLabel.setText("Neon Coins: " + Integer.toString(neonWallet.getCoins()));
-
     }
 }

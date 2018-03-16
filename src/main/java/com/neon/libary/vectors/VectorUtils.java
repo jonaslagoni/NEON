@@ -12,7 +12,7 @@ public final class VectorUtils {
     }
 
     public static float angle(Vector2f a, Vector2f b) {
-        return atan2(a.y - b.y, a.x - b.x);
+        return atan2(a.getY() - b.getY(), a.getX() - b.getX());
     }
 
     public static float deltaX(float angle, float velocity) {
@@ -24,10 +24,10 @@ public final class VectorUtils {
     }
 
     public static float distanceSquare(Vector2f a, Vector2f b) {
-        return ((a.x - b.x) * (a.x - b.x)) + (a.y - b.y) * (a.y - b.y);
+        return ((a.getX() - b.getX()) * (a.getX() - b.getX())) + (a.getY() - b.getY()) * (a.getY() - b.getY());
     }
 
     public static float distance(Vector2f a, Vector2f b) {
-        return (float) sqrt(((a.x - b.x) * (a.x - b.x)) + ((a.y - b.y) * (a.y - b.y)));
+        return (float) sqrt((a.getX() - b.getX()) * (a.getX() - b.getX()) + (a.getY() - b.getY()) * (a.getY() - b.getY()));
     }
 }

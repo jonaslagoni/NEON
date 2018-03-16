@@ -7,7 +7,6 @@ package com.neon.enemy;
 
 import com.badlogic.gdx.Gdx;
 import com.neon.libary.GameData;
-import com.neon.libary.PathFinder;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2i;
@@ -20,23 +19,29 @@ import static com.badlogic.gdx.math.MathUtils.PI;
 import static com.neon.libary.vectors.VectorUtils.angle;
 import static com.neon.libary.vectors.VectorUtils.distance;
 
-
 public class EnemyController implements Controller {
 
     private final World world;
     private final ICollisionService collisionService;
     private final IWaveService iWaveService;
     private final INeonWallet wallet;
+    private final IPathFindingService pathFindingService;
     private List<Entity> enemyList;
     private float enemyCooldown;
     private float waveCooldown;
     private int enemyListPos;
     private int enemyDeathCount;
 
-    EnemyController(World world, GameData gameData, INeonWallet wallet, IWaveService waveService) {
-        this.collisionService = gameData.getService(ICollisionService.class);
+    EnemyController(World world,
+                    GameData gameData,
+                    ICollisionService collisionService,
+                    INeonWallet wallet,
+                    IWaveService waveService,
+                    IPathFindingService pathFindingService) {
+        this.collisionService = collisionService;
         this.world = world;
         this.iWaveService = waveService;
+        this.pathFindingService = pathFindingService;
         this.enemyList = iWaveService.createWave();
         this.wallet = wallet;
     }
@@ -63,14 +68,8 @@ public class EnemyController implements Controller {
         }
 
         if (enemy.path == null) {
-            enemy.path = PathFinder.findPath(start, end, world);
+            enemy.path = pathFindingService.findPath(start, end);
         }
-
-
-        // float difx = Math.abs(enemy.moveAbility.getTargetVector().x - Math.abs(enemy.getSprite().getPosition().x));
-        // float dify = Math.abs(enemy.moveAbility.getTargetVector().y - Math.abs(enemy.getSprite().getPosition().y));
-        //check if we should find a new position
-
 
         if (enemy.path.peek() != null && distance(enemy.sprite.getPosition(), enemy.path.peek()) < 2) {
             enemy.path.remove();
@@ -104,7 +103,7 @@ public class EnemyController implements Controller {
         }
 
         // If enemy survives and leaves
-        if (enemy.getSprite().getPosition().y < 0) {
+        if (enemy.getSprite().getPosition().getY() < 0) {
             enemyDeathCount--;
             world.removeEntity(enemy);
             return;

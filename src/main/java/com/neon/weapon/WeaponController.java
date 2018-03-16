@@ -31,7 +31,7 @@ class WeaponController implements Controller {
                         new Texture(Gdx.files.internal("images/beam-peashooter.png")),
                         32, 32,
                         angle(target, spawn),
-                        new Vector2f(spawn.x, spawn.y)
+                        new Vector2f(spawn.getX(), spawn.getY())
                 ),
                 new MoveAbility(750)
         );

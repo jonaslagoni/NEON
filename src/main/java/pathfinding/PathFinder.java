@@ -1,13 +1,21 @@
-package com.neon.libary;
+package pathfinding;
 
+import com.neon.libary.World;
+import com.neon.libary.interfaces.IPathFindingService;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.libary.vectors.Vector2i;
 
 import java.util.*;
 
-public class PathFinder {
+public class PathFinder implements IPathFindingService {
 
-    public static Queue<Vector2f> findPath(Vector2i start, Vector2i goal, World world) {
+    private World world;
+
+    public PathFinder(World world) {
+        this.world = world;
+    }
+
+    public Queue<Vector2f> findPath(Vector2i start, Vector2i goal) {
 
         /* Implementation of the a* algorithm from:
          * https://en.wikipedia.org/wiki/A*_search_algorithm */

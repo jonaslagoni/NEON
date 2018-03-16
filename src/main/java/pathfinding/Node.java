@@ -1,5 +1,6 @@
-package com.neon.libary;
+package pathfinding;
 
+import com.neon.libary.World;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.libary.vectors.Vector2i;
 
@@ -24,6 +25,10 @@ class Node {
         this.vector = vector;
     }
 
+    private Node(int x, int y) {
+        this.vector = new Vector2i(x, y);
+    }
+
     public LinkedList<Vector2f> reconstructPath(Node node) {
         Node current = node;
         LinkedList<Node> path = new LinkedList<>(Collections.singleton(current));
@@ -43,6 +48,29 @@ class Node {
 
     public int manhattanDistance(Node b) {
         return Math.abs(vector.x - b.vector.x) + Math.abs(vector.y - b.vector.y);
+    }
+
+    public List<Node> neighbors(World world) {
+        List<Node> neighbors = new ArrayList<>();
+        for (Vector2i direction : directions) {
+            if (!world.blocked(vector.x + direction.x, vector.y + direction.y)) {
+                neighbors.add(new Node(vector.x + direction.x, vector.y + direction.y));
+            }
+        }
+        return neighbors;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return vector.equals(node.vector);
+    }
+
+    @Override
+    public int hashCode() {
+        return vector.hashCode();
     }
 
     private Vector2i getVector() {
@@ -67,28 +95,5 @@ class Node {
 
     public void setParent(Node parent) {
         this.parent = parent;
-    }
-
-    public List<Node> neighbors(World world) {
-        List<Node> neighbors = new ArrayList<>();
-        for (Vector2i direction : directions) {
-            if (!world.blocked(vector.x + direction.x, vector.y + direction.y)) {
-                neighbors.add(new Node(new Vector2i(vector.x + direction.x, vector.y + direction.y)));
-            }
-        }
-        return neighbors;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Node node = (Node) o;
-        return vector.equals(node.vector);
-    }
-
-    @Override
-    public int hashCode() {
-        return vector.hashCode();
     }
 }
