@@ -9,10 +9,10 @@ import com.neon.libary.interfaces.Factory;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.weapon.Weapon;
 
-public class TowerFactory implements Factory {
+public class TowerFactory {
 
-    @Override
-    public Entity build(String key) {
+    
+    public static Tower build(String key) {
         switch (key) {
             case "laser-tower":
                 Sprite laserSprite = new Sprite(

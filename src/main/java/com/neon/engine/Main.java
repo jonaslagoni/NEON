@@ -14,8 +14,9 @@ public class Main {
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         // config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-        config.height = 768;
-        config.width = 1024;
+        config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
+        //config.height = 768;
+        //config.width = 1024;
         config.resizable = false;
         new LwjglApplication(new Game(), config);
     }

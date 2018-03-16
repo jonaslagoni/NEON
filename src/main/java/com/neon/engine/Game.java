@@ -91,9 +91,9 @@ public class Game implements ApplicationListener {
         hud = new HUD(world, gameData, batch);
         List<Plugin> plugins = Arrays.asList(
                 new PathfindingPlugin(gameData, world),
+                new NeonCoinPlugin(world, gameData),
                 new TowerPlugin(world, gameData),
                 new CollisionPlugin(world, gameData),
-                new NeonCoinPlugin(world, gameData),
                 new WavePlugin(world, gameData),
                 new EnemyPlugin(world, gameData),
                 hud,

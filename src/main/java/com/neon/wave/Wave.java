@@ -48,7 +48,7 @@ public class Wave implements IWaveService {
 
         ArrayList<Entity> enemyList = new ArrayList<>();
 
-        waveDifficulty *= 3;
+        waveDifficulty *= 2;
         waveCount++;
 
         waveScore += (int) (Math.ceil(waveDifficulty + waveDifficulty * waveCount));

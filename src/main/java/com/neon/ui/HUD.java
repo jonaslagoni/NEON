@@ -25,7 +25,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private final Batch batch;
     private final GameData gameData;
     private Stage hud;
-    private Entity selectedEntity;
+    private String selectedEntity;
     private ITower selectedTower;
     private Group placementGroup;
     private Group upgradeGroup;
@@ -112,12 +112,12 @@ public class HUD implements InputProcessor, Plugin, Controller {
         gameData.addInputProcessor(this);
 
         /*Create button for each placable item in gamedata*/
-        for (Map.Entry<String, Factory> entry : gameData.getPlaceables().entrySet()) {
-            TextButton button = new TextButton("", gameData.getSkin(), entry.getKey());
+        for (String title : gameData.getPlaceables()) {
+            TextButton button = new TextButton("", gameData.getSkin(), title);
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    selectedEntity = entry.getValue().build(entry.getKey());
+                    selectedEntity = title;
                 }
             });
             placementTable.bottom().right().add(button).width(World.GRID_CELL_SIZE/2).height(World.GRID_CELL_SIZE/2);
@@ -166,8 +166,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
             return false;
         }
         /* If a tower is selected, place it */
-        if (selectedEntity != null && selectedEntity instanceof Drawable) {
-            world.setGridCell(pos, (Drawable) selectedEntity);
+        if (selectedEntity != null){
+            towerService.placeTower(pos, selectedEntity);
             selectedEntity = null;
             return true;
         }

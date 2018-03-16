@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Factory;
 import com.neon.libary.interfaces.Service;
+import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,7 +22,7 @@ public class GameData {
      */
     private final InputMultiplexer multiplexer = new InputMultiplexer();
     private final List<Controller> controllers = new LinkedList<>();
-    private final Map<String, Factory> placeables = new HashMap<>();
+    private final List<String> placeables = new ArrayList<>();
     /**
      * TODO Eventually replace with a premade service system.
      */
@@ -58,11 +59,11 @@ public class GameData {
         return controllers;
     }
 
-    public void addPlaceable(String title, Factory factory) {
-        placeables.put(title, factory);
+    public void addPlaceable(String title) {
+        placeables.add(title);
     }
 
-    public Map<String, Factory> getPlaceables() {
+    public List<String> getPlaceables() {
         return placeables;
     }
 
