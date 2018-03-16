@@ -117,9 +117,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if(neonWallet.subtractCoins(10)){
-                        selectedEntity = entry.getValue().build(entry.getKey());
-                    }
+                    selectedEntity = entry.getValue().build(entry.getKey());
                 }
             });
             placementTable.bottom().right().add(button).width(World.GRID_CELL_SIZE/2).height(World.GRID_CELL_SIZE/2);
