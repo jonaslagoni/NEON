@@ -24,14 +24,14 @@ class Node {
         this.vector = vector;
     }
 
-    public LinkedList<Vector2f> reconstructPath(Node v) {
-        Node current = v;
-        LinkedList<Node> total_path = new LinkedList<>(Collections.singleton(current));
+    public LinkedList<Vector2f> reconstructPath(Node node) {
+        Node current = node;
+        LinkedList<Node> path = new LinkedList<>(Collections.singleton(current));
         while (current.parent != null) {
             current = current.parent;
-            total_path.addFirst(current);
+            path.addFirst(current);
         }
-        return total_path.stream()
+        return path.stream()
                 .map(Node::getVector)
                 .map(World::gridUnproject)
                 .collect(Collectors.toCollection(LinkedList::new));

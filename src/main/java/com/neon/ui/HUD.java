@@ -131,7 +131,7 @@ public class HUD implements InputProcessor, Plugin {
         if (World.isOutOfBounds(pos)) {
             return false;
         }
-        if(!world.isValidPosition(pos)){
+        if (!world.isValidPosition(pos)) {
             return false;
         }
         /* If a tower is selected, place it */
@@ -149,7 +149,6 @@ public class HUD implements InputProcessor, Plugin {
             placementGroup.setVisible(false);
             return true;
         }
-
         return false;
     }
 
