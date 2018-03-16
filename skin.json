@@ -34,7 +34,48 @@
       "up": "down-button",
       "font": "default",
       "fontColor": "white"
+    },
+    "laser-tower": {
+      "up": "laser-tower",
+      "font": "default",
+      "fontColor": "white"
+    },
+    "melee-glaive-tower": {
+      "up": "melee-glaive-tower",
+      "font": "default",
+      "fontColor": "white"
+    },
+	"pea-shooter": {
+      "up": "pea-shooter",
+      "font": "default",
+      "fontColor": "white"
+    },
+	"range-powerup": {
+      "up": "range-powerup",
+      "font": "default",
+      "fontColor": "white"
+    },
+	"strenght-powerup": {
+      "up": "strenght-powerup",
+      "font": "default",
+      "fontColor": "white"
+    },
+	"railgun-tower": {
+      "up": "railgun-tower",
+      "font": "default",
+      "fontColor": "white"
+    },
+	"rocket-tower": {
+      "up": "rocket-tower",
+      "font": "default",
+      "fontColor": "white"
+    },
+	"splash-tower": {
+      "up": "splash-tower",
+      "font": "default",
+      "fontColor": "white"
     }
+	
   },
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
     "default": {

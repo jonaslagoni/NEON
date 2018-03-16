@@ -86,7 +86,7 @@ public class World {
         Vector2i v = gridProject(position);
         removeEntity(grid[v.x][v.y]);
         grid[v.x][v.y] = null;
-        return path != null;
+        return path.size() > 0;
     }
 
     public Entity getGridCell(Vector2f position) {

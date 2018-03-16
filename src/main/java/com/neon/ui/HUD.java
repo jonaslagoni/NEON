@@ -113,7 +113,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
         /*Create button for each placable item in gamedata*/
         for (Map.Entry<String, Factory> entry : gameData.getPlaceables().entrySet()) {
-            TextButton button = new TextButton(entry.getKey(), gameData.getSkin());
+            TextButton button = new TextButton("", gameData.getSkin(), entry.getKey());
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -122,7 +122,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
                     }
                 }
             });
-            placementTable.bottom().right().add(button);
+            placementTable.bottom().right().add(button).width(World.GRID_CELL_SIZE/2).height(World.GRID_CELL_SIZE/2);
         }
     }
 

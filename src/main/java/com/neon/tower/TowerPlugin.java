@@ -23,11 +23,21 @@ public class TowerPlugin implements Plugin {
         TowerFactory factory = new TowerFactory();
 
         gameData.addPlaceable("laser-tower", factory);
+        gameData.addPlaceable("melee-glaive-tower", factory);
+        gameData.addPlaceable("pea-shooter", factory);
+        gameData.addPlaceable("range-powerup", factory);
+        gameData.addPlaceable("strenght-powerup", factory);
+        gameData.addPlaceable("railgun-tower", factory);
+        gameData.addPlaceable("rocket-tower", factory);
+        gameData.addPlaceable("splash-tower", factory);
+        
+       
         int[] ints = {800, 925, 1024, 1185};
         for (int i : ints) {
             Tower drawable = (Tower) factory.build("laser-tower");
             world.setGridCell(new Vector2f(i, 1024), drawable);
         }
+        
     }
 
     @Override
