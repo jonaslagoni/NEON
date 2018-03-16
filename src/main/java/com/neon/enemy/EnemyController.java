@@ -103,6 +103,12 @@ public class EnemyController implements Controller {
             world.removeEntity(enemy);
             return;
         }
+        
+        if (enemy.getSprite().getPosition().y < 0){
+            enemyDeathCount--;
+            world.removeEntity(enemy);
+            return;
+        }
 
         enemy.sprite.setTexture(enemy.textures[enemy.hp * (enemy.textures.length - 1) / enemy.maxHp]);
     }

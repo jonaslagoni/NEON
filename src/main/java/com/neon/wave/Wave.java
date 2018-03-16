@@ -17,7 +17,7 @@ public class Wave implements IWaveService {
 
     private World world;
     private GameData gameData;
-    private int waveDifficulty = 0;
+    private int waveDifficulty = 1;
     private int waveScore = 0;
     private int waveCount = 0;
 
@@ -39,10 +39,11 @@ public class Wave implements IWaveService {
 
         ArrayList<Entity> enemyList = new ArrayList<>();
 
-        waveDifficulty++;
+        waveDifficulty = waveDifficulty*3;
         waveCount++;
 
-        waveScore = (int) (Math.ceil(waveDifficulty + waveDifficulty * 2.0));
+        waveScore += (int) (Math.ceil(waveDifficulty + waveDifficulty * waveCount));
+        
 
         System.out.println(waveCount);
 
@@ -58,6 +59,8 @@ public class Wave implements IWaveService {
                 waveScore += tierScore[3]*5;
             }
         }
+        
+        System.out.println("wave score = " + waveScore + " waveCount = " + waveCount + " waveDiff = " + waveDifficulty);
 
         while (waveScore > 0) {
 
@@ -94,6 +97,8 @@ public class Wave implements IWaveService {
 
         // Randomizes the arrayList of enemies
         Collections.shuffle(enemyList);
+        
+           
 
 
         return enemyList;
