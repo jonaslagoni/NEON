@@ -10,15 +10,9 @@ import com.neon.libary.GameData;
 import com.neon.libary.PathFinder;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
-import com.neon.neonCoin.NeonCoin;
-import com.neon.libary.interfaces.Controller;
-import com.neon.libary.interfaces.Entity;
-import com.neon.libary.interfaces.ICollisionService;
-import com.neon.libary.interfaces.IWaveService;
 import com.neon.libary.vectors.Vector2i;
 import com.neon.player.Player;
 import com.neon.projectile.Projectile;
-import com.neon.wave.Wave;
 
 import java.util.List;
 
@@ -31,14 +25,13 @@ public class EnemyController implements Controller {
 
     private final World world;
     private final ICollisionService collisionService;
-
+    private final IWaveService iWaveService;
+    private final INeonWallet wallet;
     private List<Entity> enemyList;
     private float enemyCooldown;
     private float waveCooldown;
-    private IWaveService iWaveService;
     private int enemyListPos;
     private int enemyDeathCount;
-    private INeonWallet wallet;
 
     EnemyController(World world, GameData gameData, INeonWallet wallet, IWaveService waveService) {
         this.collisionService = gameData.getService(ICollisionService.class);
@@ -46,7 +39,6 @@ public class EnemyController implements Controller {
         this.iWaveService = waveService;
         this.enemyList = iWaveService.createWave();
         this.wallet = wallet;
-
     }
 
     private void updateEnemy(final Enemy enemy) {
@@ -112,7 +104,7 @@ public class EnemyController implements Controller {
         }
 
         // If enemy survives and leaves
-        if (enemy.getSprite().getPosition().y < 0){
+        if (enemy.getSprite().getPosition().y < 0) {
             enemyDeathCount--;
             world.removeEntity(enemy);
             return;

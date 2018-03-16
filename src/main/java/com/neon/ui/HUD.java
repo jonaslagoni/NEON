@@ -2,9 +2,7 @@ package com.neon.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,8 +16,6 @@ import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;
-import com.neon.wave.Wave;
-import javafx.scene.control.TextField;
 
 import java.util.Map;
 
@@ -65,7 +61,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         hud.addActor(table);
 
         statsGroup = new Group();
-        statsGroup.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        statsGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         placementGroup = new Group();
         placementGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -84,8 +80,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
         upgradeTable.setFillParent(true);
 
         waveCounterLabel = new Label("", gameData.getSkin());
-        waveScoreLabel = new Label("",gameData.getSkin());
-        coinLabel = new Label("",gameData.getSkin());
+        waveScoreLabel = new Label("", gameData.getSkin());
+        coinLabel = new Label("", gameData.getSkin());
         //statsTable.add(waveCounterLabel);
         //statsTable.add(waveScoreLabel);
         //statsTable.add(coinLabel);

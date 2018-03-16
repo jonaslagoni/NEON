@@ -21,14 +21,10 @@ class Enemy implements Moveable, Drawable, Targetable {
     int hp;
     int maxHp;
     float damageTimer;
-
     int coinValue;
-
-    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] textures, int hp, int coinValue) {
     Queue<Vector2f> path;
 
-
-    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] textures, int hp) {
+    Enemy(Sprite sprite, MoveAbility moveAbility, Texture[] textures, int hp, int coinValue) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;
         this.textures = textures;
