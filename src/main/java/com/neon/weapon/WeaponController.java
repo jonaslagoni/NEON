@@ -2,7 +2,6 @@ package com.neon.weapon;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
@@ -10,10 +9,11 @@ import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.ICollisionService;
 import com.neon.libary.interfaces.Targetable;
+import com.neon.libary.vectors.Vector2f;
 import com.neon.projectile.Projectile;
 
-import static com.neon.libary.VectorUtils.angle;
-import static com.neon.libary.VectorUtils.distanceSquare;
+import static com.neon.libary.vectors.VectorUtils.angle;
+import static com.neon.libary.vectors.VectorUtils.distanceSquare;
 
 class WeaponController implements Controller {
 
@@ -25,20 +25,19 @@ class WeaponController implements Controller {
         this.collisionService = collisionService;
     }
 
-    private static Projectile newProjectile(Vector2 spawn, Vector2 target) {
-        float angle = angle(target, spawn);
+    private static Projectile newProjectile(Vector2f spawn, Vector2f target) {
         return new Projectile(
                 new Sprite(
                         new Texture(Gdx.files.internal("images/beam-peashooter.png")),
                         32, 32,
-                        angle,
-                        new Vector2(spawn)
+                        angle(target, spawn),
+                        new Vector2f(spawn.x, spawn.y)
                 ),
                 new MoveAbility(750)
         );
     }
 
-    private static boolean isCloser(Vector2 source, Vector2 first, Vector2 second) {
+    private static boolean isCloser(Vector2f source, Vector2f first, Vector2f second) {
         return distanceSquare(first, source) < distanceSquare(first, second);
     }
 

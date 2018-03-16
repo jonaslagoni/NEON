@@ -1,11 +1,11 @@
 package com.neon.tower;
 
-import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.ITowerService;
 import com.neon.libary.interfaces.Plugin;
+import com.neon.libary.vectors.Vector2f;
 
 public class TowerPlugin implements Plugin {
 
@@ -24,10 +24,10 @@ public class TowerPlugin implements Plugin {
 
         TowerFactory factory = new TowerFactory();
         gameData.addPlaceable("laser-tower", factory);
-        world.setGridCell(new Vector2(800, 1024), (Drawable) factory.build("laser-tower"));
-        world.setGridCell(new Vector2(925, 1024), (Drawable) factory.build("laser-tower"));
-        world.setGridCell(new Vector2(1024, 1024), (Drawable) factory.build("laser-tower"));
-        world.setGridCell(new Vector2(1185, 1024), (Drawable) factory.build("laser-tower"));
+        world.setGridCell(new Vector2f(800, 1024), (Drawable) factory.build("laser-tower"));
+        world.setGridCell(new Vector2f(925, 1024), (Drawable) factory.build("laser-tower"));
+        world.setGridCell(new Vector2f(1024, 1024), (Drawable) factory.build("laser-tower"));
+        world.setGridCell(new Vector2f(1185, 1024), (Drawable) factory.build("laser-tower"));
     }
 
     @Override

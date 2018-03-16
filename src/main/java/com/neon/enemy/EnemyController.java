@@ -7,31 +7,36 @@ package com.neon.enemy;
 
 import com.badlogic.gdx.Gdx;
 import com.neon.libary.GameData;
+import com.neon.libary.PathFinder;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.neonCoin.NeonCoin;
+import com.neon.libary.interfaces.Controller;
+import com.neon.libary.interfaces.Entity;
+import com.neon.libary.interfaces.ICollisionService;
+import com.neon.libary.interfaces.IWaveService;
+import com.neon.libary.vectors.Vector2i;
 import com.neon.player.Player;
-import com.neon.wave.Wave;
 import com.neon.projectile.Projectile;
-
-import static com.badlogic.gdx.math.MathUtils.PI;
-import com.badlogic.gdx.math.Vector2;
-import com.neon.common.search.Path;
-import com.neon.common.search.Step;
-import static com.neon.libary.VectorUtils.angle;
+import com.neon.wave.Wave;
 
 import java.util.List;
+
+import static com.badlogic.gdx.math.MathUtils.PI;
+import static com.neon.libary.vectors.VectorUtils.angle;
+import static com.neon.libary.vectors.VectorUtils.distance;
 
 
 public class EnemyController implements Controller {
 
     private final World world;
     private final ICollisionService collisionService;
+
+    private List<Entity> enemyList;
     private float enemyCooldown;
     private float waveCooldown;
     private IWaveService iWaveService;
     private int enemyListPos;
-    List<Entity> enemyList;
     private int enemyDeathCount;
     private INeonWallet wallet;
 
@@ -54,32 +59,39 @@ public class EnemyController implements Controller {
          * https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors */
 
         enemy.damageTimer += Gdx.graphics.getDeltaTime();
-        
-        if(enemy.path == null){
-            Vector2 gridVector2Start = world.getPositionGridCell(enemy.getSprite().getPosition());
-            Vector2 gridVector2End = world.getPositionGridCell(World.END);
-            Path path = world.getFinder().findPath(null, gridVector2Start, gridVector2End);
-            if(path == null){
-                world.removeEntity(enemy);
-            }else{
-                enemy.path = path;
-                enemy.counter = 0;
-            }
+
+
+        Vector2i start = World.gridProject(enemy.getSprite().getPosition()); // Find current grid position
+        Vector2i end = new Vector2i(8, 0); // Find goal grid position
+
+        if (start.equals(end)) {
+            enemyDeathCount--;
+            world.removeEntity(enemy);
+            return;
         }
-        float difx = Math.abs(enemy.moveAbility.getTargetVector().x-Math.abs(enemy.getSprite().getPosition().x));
-        float dify = Math.abs(enemy.moveAbility.getTargetVector().y-Math.abs(enemy.getSprite().getPosition().y));
+
+        if (enemy.path == null) {
+            enemy.path = PathFinder.findPath(start, end, world);
+        }
+
+
+        // float difx = Math.abs(enemy.moveAbility.getTargetVector().x - Math.abs(enemy.getSprite().getPosition().x));
+        // float dify = Math.abs(enemy.moveAbility.getTargetVector().y - Math.abs(enemy.getSprite().getPosition().y));
         //check if we should find a new position
-        if(difx < 10 && dify < 10){
-            Step next = enemy.path.getStep(enemy.counter++);
-            if(next != null){
-                float distX = next.getX()*World.GRID_CELL_SIZE+(World.GRID_CELL_SIZE/2);
-                float distY = next.getY()*World.GRID_CELL_SIZE+(World.GRID_CELL_SIZE/2);
-                enemy.moveAbility.setTargetVector(new Vector2(distX, distY));
-                float angleToLocation = angle(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector())+PI;
-                enemy.sprite.setRotation(angleToLocation);
-            }
+
+
+        if (enemy.path.peek() != null && distance(enemy.sprite.getPosition(), enemy.path.peek()) < 2) {
+            enemy.path.remove();
         }
-        
+
+        // Set target vector
+        if (enemy.path.peek() != null) {
+            enemy.moveAbility.setTargetVector(enemy.path.element());
+        }
+        enemy.moveAbility.setMove(true);
+        enemy.sprite.setRotation(angle(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector()) + PI);
+
+
         /* Remove enemy if it collides with player */
         for (Entity entity : collisionService.getCollisions(enemy.sprite)) {
             if (enemy.damageTimer >= 1 && entity.getClass() == Player.class) {
@@ -115,7 +127,6 @@ public class EnemyController implements Controller {
 
 
         enemyCooldown += Gdx.graphics.getDeltaTime();
-
 
         if (enemyCooldown > 1 && enemyListPos < enemyList.size()) {
 

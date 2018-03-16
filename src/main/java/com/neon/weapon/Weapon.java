@@ -1,15 +1,15 @@
 package com.neon.weapon;
 
-import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.interfaces.Entity;
+import com.neon.libary.vectors.Vector2f;
 
 public class Weapon implements Entity {
 
-    Vector2 position;
+    Vector2f position;
     float fireCooldown;
     float range;
 
-    public Weapon(Vector2 position,
+    public Weapon(Vector2f position,
                   float range) {
         this.position = position;
         this.range = range;

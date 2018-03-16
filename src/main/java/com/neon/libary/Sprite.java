@@ -1,13 +1,13 @@
 package com.neon.libary;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
+import com.neon.libary.vectors.Vector2f;
 
 public class Sprite {
 
     private float height;
     private float width;
-    private Vector2 position;
+    private Vector2f position;
     private float rotation;
     private Texture texture;
 
@@ -36,14 +36,14 @@ public class Sprite {
         this.height = height;
         this.width = width;
         this.texture = texture;
-        this.position = new Vector2();
+        this.position = new Vector2f(0f, 0f);
     }
 
     public Sprite(Texture texture,
                   float height,
                   float width,
                   float rotation,
-                  Vector2 position) {
+                  Vector2f position) {
         this.rotation = rotation;
         this.height = height;
         this.width = width;
@@ -59,11 +59,11 @@ public class Sprite {
         return width;
     }
 
-    public Vector2 getPosition() {
+    public Vector2f getPosition() {
         return position;
     }
 
-    public void setPosition(Vector2 position) {
+    public void setPosition(Vector2f position) {
         this.position = position;
     }
 

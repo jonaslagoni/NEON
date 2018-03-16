@@ -2,7 +2,6 @@ package com.neon.enemy;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
@@ -13,20 +12,26 @@ import com.neon.libary.interfaces.Entity;
  */
 public class EnemyFactory {
 
+    private static int START_POS_X = 960;
+    private static int START_POS_Y = 2047;
+
 
     public static Entity createEnemy(String tier, int type) {
 
-        MoveAbility moveAbility = new MoveAbility(140);
-        moveAbility.setTargetVector(new Vector2(World.WIDTH / 2, World.HEIGHT));
+        // TODO clean tier and type switch
 
+        MoveAbility moveAbility = new MoveAbility(140);
 
         switch (tier) {
             case "tier1":
                 switch (type) {
                     case 1:
 
-                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite1.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        Sprite sprite1 = new Sprite(
+                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/6.png")),
+                                World.HEIGHT / 32, World.HEIGHT / 32
+                        );
+                        sprite1.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture1 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/1.png")),
@@ -43,12 +48,12 @@ public class EnemyFactory {
                     case 2:
 
                         Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite2.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/1.png")),
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/triangle/3.png")),
+                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/3.png")),
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/4.png")),
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/5.png")),
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/6.png"))
@@ -60,7 +65,7 @@ public class EnemyFactory {
                     case 3:
 
                         Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite3.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/1.png")),
@@ -81,7 +86,7 @@ public class EnemyFactory {
                     case 1:
 
                         Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite1.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite1.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture1 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/1.png")),
@@ -98,7 +103,7 @@ public class EnemyFactory {
                     case 2:
 
                         Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite2.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/1.png")),
@@ -115,7 +120,7 @@ public class EnemyFactory {
                     case 3:
 
                         Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite3.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/1.png")),
@@ -134,7 +139,7 @@ public class EnemyFactory {
                 switch (type) {
                     case 1:
                         Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite1.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite1.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture1 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/1.png")),
@@ -150,7 +155,7 @@ public class EnemyFactory {
 
                     case 2:
                         Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite2.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/1.png")),
@@ -166,7 +171,7 @@ public class EnemyFactory {
 
                     case 3:
                         Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/6.png")), World.HEIGHT / 32, World.HEIGHT / 32);
-                        sprite3.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/1.png")),
@@ -186,7 +191,7 @@ public class EnemyFactory {
                 switch (type) {
                     case 1:
                         Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")), World.HEIGHT / 16, World.HEIGHT / 16);
-                        sprite1.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite1.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture1 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")),
@@ -202,7 +207,7 @@ public class EnemyFactory {
 
                     case 2:
                         Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")), World.HEIGHT / 16, World.HEIGHT / 16);
-                        sprite2.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite2.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture2 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")),
@@ -218,7 +223,7 @@ public class EnemyFactory {
 
                     case 3:
                         Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")), World.HEIGHT / 16, World.HEIGHT / 16);
-                        sprite3.setPosition(World.WIDTH / 2, World.HEIGHT);
+                        sprite3.setPosition(START_POS_X, START_POS_Y);
 
                         Texture[] texture3 = {
                                 new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")),

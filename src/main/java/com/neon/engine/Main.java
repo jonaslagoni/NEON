@@ -18,5 +18,6 @@ public class Main {
         config.width = 1024;
         //config.setResizable(false);
         new LwjglApplication(new Game(), config);
+
     }
 }

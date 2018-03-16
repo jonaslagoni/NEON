@@ -4,7 +4,7 @@ import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 
 import static com.badlogic.gdx.math.MathUtils.PI;
-import static com.neon.libary.VectorUtils.angle;
+import static com.neon.libary.vectors.VectorUtils.angle;
 
 public class PlayerController implements Controller {
     private World world;

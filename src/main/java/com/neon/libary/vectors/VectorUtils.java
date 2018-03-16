@@ -1,7 +1,6 @@
-package com.neon.libary;
+package com.neon.libary.vectors;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 
 import static com.badlogic.gdx.math.MathUtils.*;
 import static java.lang.Math.sqrt;
@@ -12,7 +11,7 @@ public final class VectorUtils {
     private VectorUtils() {
     }
 
-    public static float angle(Vector2 a, Vector2 b) {
+    public static float angle(Vector2f a, Vector2f b) {
         return atan2(a.y - b.y, a.x - b.x);
     }
 
@@ -24,11 +23,11 @@ public final class VectorUtils {
         return sin(angle) * velocity * Gdx.graphics.getDeltaTime();
     }
 
-    public static float distanceSquare(Vector2 a, Vector2 b) {
-        return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
+    public static float distanceSquare(Vector2f a, Vector2f b) {
+        return ((a.x - b.x) * (a.x - b.x)) + (a.y - b.y) * (a.y - b.y);
     }
 
-    public static float distance(Vector2 a, Vector2 b) {
-        return (float) sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+    public static float distance(Vector2f a, Vector2f b) {
+        return (float) sqrt(((a.x - b.x) * (a.x - b.x)) + ((a.y - b.y) * (a.y - b.y)));
     }
 }
