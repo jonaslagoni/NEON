@@ -15,22 +15,35 @@ public class TowerFactory implements Factory {
     public Entity build(String key) {
         switch (key) {
             case "laser-tower":
-
-                Sprite sprite = new Sprite(
-                        new Texture(Gdx.files.internal("images/laser-tower.png")),
+                Sprite laserSprite = new Sprite(
+                        new Texture(Gdx.files.internal("images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 1.png")),
                         World.GRID_CELL_SIZE,
                         World.GRID_CELL_SIZE, 0, new Vector2f(0, 0)
                 );
 
-                Texture[] upgrades = {
+                Texture[] laserUpgrades = {
                         new Texture(Gdx.files.internal("images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 2.png")),
                         new Texture(Gdx.files.internal("images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 3.png")),
                         new Texture(Gdx.files.internal("images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 4.png"))
                 };
 
-                Weapon weapon = new Weapon(sprite.getPosition(), 512);
+                Weapon laserWeapon = new Weapon(laserSprite.getPosition(), 512);
+                return new Tower(laserSprite, laserUpgrades, laserWeapon, 10, 4);
+            case "melee-glaive-tower":
+                Sprite meleeTower = new Sprite(
+                        new Texture(Gdx.files.internal("C:/Users/Lagoni/Documents/SmartGit/NEON/images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 1.1.png")),
+                        World.GRID_CELL_SIZE,
+                        World.GRID_CELL_SIZE
+                );
 
-                return new Tower(sprite, upgrades, weapon, 10);
+                Texture[] meleeUpgrades = {
+                        new Texture(Gdx.files.internal("C:/Users/Lagoni/Documents/SmartGit/NEON/images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 2.1.png")),
+                        new Texture(Gdx.files.internal("C:/Users/Lagoni/Documents/SmartGit/NEON/images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 3.1.png")),
+                        new Texture(Gdx.files.internal("C:/Users/Lagoni/Documents/SmartGit/NEON/images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 4.1.png"))
+                };
+
+                Weapon meleeWeapon = new Weapon(meleeTower.getPosition(), 512);
+                return new Tower(meleeTower, meleeUpgrades, meleeWeapon, 10, 4);
         }
 
         return null;

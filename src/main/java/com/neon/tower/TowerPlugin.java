@@ -20,8 +20,8 @@ public class TowerPlugin implements Plugin {
     public void start() {
         gameData.addService(ITowerService.class, new TowerService());
         gameData.addController(new TowerController(world, gameData));
-
         TowerFactory factory = new TowerFactory();
+
         gameData.addPlaceable("laser-tower", factory);
         int[] ints = {800, 925, 1024, 1185};
         for (int i : ints) {
