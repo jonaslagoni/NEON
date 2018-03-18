@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.Entity;
 import com.neon.libary.vectors.Vector2f;
+
+import java.util.Arrays;
+
+import static com.neon.libary.World.HEIGHT;
 
 /**
  * Created by sam on 12-03-2018.
@@ -15,230 +17,131 @@ public class EnemyFactory {
 
     private static final int START_POS_X = 960;
     private static final int START_POS_Y = 2047;
+    private static final int MOVE_SPEED = 200;
+    private static final int REGULAR_SIZE = HEIGHT / 32;
+    private static final int BOSS_SIZE = REGULAR_SIZE * 2;
 
-    public static Entity createEnemy(String tier, int type) {
-
-        // TODO clean tier and type switch
-
-        MoveAbility moveAbility = new MoveAbility(140);
-
+    public static Enemy build(String tier, int type) {
         switch (tier) {
             case "tier1":
                 switch (type) {
                     case 1:
-
-                        Sprite sprite1 = new Sprite(
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/6.png")),
-                                World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0)
-                        );
-                        sprite1.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture1 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Circle/6.png"))
-
-                        };
-
-                        return new Enemy(sprite1, moveAbility, texture1, 200, 10);
-
+                        return build(REGULAR_SIZE, 200, 10,
+                                "images/Enemies/Tier1/Circle/1.png",
+                                "images/Enemies/Tier1/Circle/2.png",
+                                "images/Enemies/Tier1/Circle/3.png",
+                                "images/Enemies/Tier1/Circle/4.png",
+                                "images/Enemies/Tier1/Circle/5.png",
+                                "images/Enemies/Tier1/Circle/6.png");
                     case 2:
-
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite2.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture2 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Triangle/6.png"))
-
-                        };
-
-                        return new Enemy(sprite2, moveAbility, texture2, 150, 10);
-
+                        return build(REGULAR_SIZE, 150, 10,
+                                "images/Enemies/Tier1/Triangle/1.png",
+                                "images/Enemies/Tier1/Triangle/2.png",
+                                "images/Enemies/Tier1/Triangle/3.png",
+                                "images/Enemies/Tier1/Triangle/4.png",
+                                "images/Enemies/Tier1/Triangle/5.png",
+                                "images/Enemies/Tier1/Triangle/6.png");
                     case 3:
-
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite3.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture3 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier1/Square/6.png"))
-
-                        };
-
-                        return new Enemy(sprite3, moveAbility, texture3, 250, 10);
-
+                        return build(REGULAR_SIZE, 250, 10,
+                                "images/Enemies/Tier1/Square/1.png",
+                                "images/Enemies/Tier1/Square/2.png",
+                                "images/Enemies/Tier1/Square/3.png",
+                                "images/Enemies/Tier1/Square/4.png",
+                                "images/Enemies/Tier1/Square/5.png",
+                                "images/Enemies/Tier1/Square/6.png");
                 }
-
             case "tier2":
                 switch (type) {
                     case 1:
-
-                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite1.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture1 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Pentagon/6.png"))
-
-                        };
-
-                        return new Enemy(sprite1, moveAbility, texture1, 2000, 50);
-
+                        return build(REGULAR_SIZE, 2000, 50,
+                                "images/Enemies/Tier2/Pentagon/1.png",
+                                "images/Enemies/Tier2/Pentagon/2.png",
+                                "images/Enemies/Tier2/Pentagon/3.png",
+                                "images/Enemies/Tier2/Pentagon/4.png",
+                                "images/Enemies/Tier2/Pentagon/5.png",
+                                "images/Enemies/Tier2/Pentagon/6.png");
                     case 2:
-
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite2.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture2 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Hexagon/6.png"))
-
-                        };
-
-                        return new Enemy(sprite2, moveAbility, texture2, 2250, 50);
-
+                        return build(REGULAR_SIZE, 2250, 50,
+                                "images/Enemies/Tier2/Hexagon/1.png",
+                                "images/Enemies/Tier2/Hexagon/2.png",
+                                "images/Enemies/Tier2/Hexagon/3.png",
+                                "images/Enemies/Tier2/Hexagon/4.png",
+                                "images/Enemies/Tier2/Hexagon/5.png",
+                                "images/Enemies/Tier2/Hexagon/6.png");
                     case 3:
-
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite3.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture3 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier2/Octagon/6.png"))
-
-                        };
-
-                        return new Enemy(sprite3, moveAbility, texture3, 2500, 50);
+                        return build(REGULAR_SIZE, 2500, 50,
+                                "images/Enemies/Tier2/Octagon/1.png",
+                                "images/Enemies/Tier2/Octagon/2.png",
+                                "images/Enemies/Tier2/Octagon/3.png",
+                                "images/Enemies/Tier2/Octagon/4.png",
+                                "images/Enemies/Tier2/Octagon/5.png",
+                                "images/Enemies/Tier2/Octagon/6.png");
                 }
-
             case "tier3":
                 switch (type) {
                     case 1:
-                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite1.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture1 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Star/6.png"))
-
-                        };
-
-                        return new Enemy(sprite1, moveAbility, texture1, 10000, 200);
-
+                        return build(REGULAR_SIZE, 10000, 200,
+                                "images/Enemies/Tier3/Star/1.png",
+                                "images/Enemies/Tier3/Star/2.png",
+                                "images/Enemies/Tier3/Star/3.png",
+                                "images/Enemies/Tier3/Star/4.png",
+                                "images/Enemies/Tier3/Star/5.png",
+                                "images/Enemies/Tier3/Star/6.png");
                     case 2:
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite2.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture2 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Cross/6.png"))
-
-                        };
-
-                        return new Enemy(sprite2, moveAbility, texture2, 11250, 200);
-
+                        return build(REGULAR_SIZE, 11250, 200,
+                                "images/Enemies/Tier3/Cross/1.png",
+                                "images/Enemies/Tier3/Cross/2.png",
+                                "images/Enemies/Tier3/Cross/3.png",
+                                "images/Enemies/Tier3/Cross/4.png",
+                                "images/Enemies/Tier3/Cross/5.png",
+                                "images/Enemies/Tier3/Cross/6.png");
                     case 3:
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/6.png")), World.HEIGHT / 32, World.HEIGHT / 32, 0, new Vector2f(0, 0));
-                        sprite3.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture3 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/1.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/2.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/3.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/4.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/5.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Tier3/Fidget/6.png"))
-
-                        };
-
-                        return new Enemy(sprite3, moveAbility, texture3, 12500, 200);
+                        return build(REGULAR_SIZE, 12500, 200,
+                                "images/Enemies/Tier3/Fidget/1.png",
+                                "images/Enemies/Tier3/Fidget/2.png",
+                                "images/Enemies/Tier3/Fidget/3.png",
+                                "images/Enemies/Tier3/Fidget/4.png",
+                                "images/Enemies/Tier3/Fidget/5.png",
+                                "images/Enemies/Tier3/Fidget/6.png");
                 }
                 return null;
-
             case "boss":
                 switch (type) {
                     case 1:
-                        Sprite sprite1 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")), World.HEIGHT / 16, World.HEIGHT / 16, 0, new Vector2f(0, 0));
-                        sprite1.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture1 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Green.png"))
-
-                        };
-
-                        return new Enemy(sprite1, moveAbility, texture1, 100000, 1000);
+                        return build(BOSS_SIZE, 100000, 1000,
+                                "images/Enemies/Boss/Green.png",
+                                "images/Enemies/Boss/Green.png",
+                                "images/Enemies/Boss/Green.png",
+                                "images/Enemies/Boss/Green.png",
+                                "images/Enemies/Boss/Green.png",
+                                "images/Enemies/Boss/Green.png");
 
                     case 2:
-                        Sprite sprite2 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")), World.HEIGHT / 16, World.HEIGHT / 16, 0, new Vector2f(0, 0));
-                        sprite2.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture2 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Red.png"))
-
-                        };
-
-                        return new Enemy(sprite2, moveAbility, texture2, 112500, 1000);
-
+                        return build(BOSS_SIZE, 112500, 1000,
+                                "images/Enemies/Boss/Red.png",
+                                "images/Enemies/Boss/Red.png",
+                                "images/Enemies/Boss/Red.png",
+                                "images/Enemies/Boss/Red.png",
+                                "images/Enemies/Boss/Red.png",
+                                "images/Enemies/Boss/Red.png");
                     case 3:
-                        Sprite sprite3 = new Sprite(new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")), World.HEIGHT / 16, World.HEIGHT / 16, 0, new Vector2f(0, 0));
-                        sprite3.setPosition(START_POS_X, START_POS_Y);
-
-                        Texture[] texture3 = {
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png")),
-                                new Texture(Gdx.files.internal("images/Enemies/Boss/Blue.png"))
-
-                        };
-
-                        return new Enemy(sprite3, moveAbility, texture3, 125000, 1000);
+                        return build(BOSS_SIZE, 125000, 1000,
+                                "images/Enemies/Boss/Blue.png",
+                                "images/Enemies/Boss/Blue.png",
+                                "images/Enemies/Boss/Blue.png",
+                                "images/Enemies/Boss/Blue.png",
+                                "images/Enemies/Boss/Blue.png",
+                                "images/Enemies/Boss/Blue.png");
                 }
                 return null;
         }
         return null;
+    }
+
+    private static Enemy build(int size, int hp, int value, String... paths) {
+        Texture[] textures = Arrays.stream(paths).map(Gdx.files::internal).map(Texture::new).toArray(Texture[]::new);
+        return new Enemy(new Sprite(textures[textures.length - 1], new Vector2f(START_POS_X, START_POS_Y),
+                new Vector2f(0, MOVE_SPEED), size, size), new MoveAbility(new Vector2f(0, 0), true),
+                textures, hp, value); // wat
     }
 }

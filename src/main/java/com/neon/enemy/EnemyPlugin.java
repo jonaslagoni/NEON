@@ -17,7 +17,7 @@ public class EnemyPlugin implements Plugin {
     @Override
     public void start() {
         gameData.addController(new EnemyController(
-                world, gameData,
+                world,
                 gameData.getService(ICollisionService.class),
                 gameData.getService(INeonWallet.class),
                 gameData.getService(IWaveService.class),

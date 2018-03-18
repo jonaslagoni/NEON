@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
 import com.neon.libary.vectors.Vector2f;
-import com.neon.weapon.Weapon;
+
+import java.util.Arrays;
 
 public class TowerFactory {
+    private TowerFactory() {
+    }
 
     public static Tower build(String key) {
         switch (key) {
@@ -68,12 +71,14 @@ public class TowerFactory {
     }
 
     private static Tower build(String... files) {
-        Texture[] textures = new Texture[files.length];
-        for (int i = 0; i < files.length; i++) {
-            textures[i] = new Texture(Gdx.files.internal(files[i]));
-        }
+        Texture[] textures = Arrays.stream(files).map(Gdx.files::internal).map(Texture::new).toArray(Texture[]::new);
         Vector2f position = new Vector2f(0, 0);
-        return new Tower(new Sprite(textures[0], World.GRID_CELL_SIZE, World.GRID_CELL_SIZE, 0, position),
-                textures, new Weapon(position, 512), 10, 4);
+        return new Tower(new Sprite(
+                textures[0],
+                position,
+                new Vector2f(0, 0),
+                World.GRID_CELL_SIZE,
+                World.GRID_CELL_SIZE
+        ), textures, 10, 4);
     }
 }

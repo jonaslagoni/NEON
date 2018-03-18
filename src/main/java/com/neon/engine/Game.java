@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
+import static com.neon.libary.vectors.VectorUtils.angle;
 
 public class Game implements ApplicationListener {
 
@@ -59,7 +60,7 @@ public class Game implements ApplicationListener {
                 texture.getHeight(),
                 sprite.getWidth() / texture.getWidth(),
                 sprite.getHeight() / texture.getHeight(),
-                sprite.getRotation() * radDeg,
+                angle(sprite.getVelocity()) * radDeg,
                 0, 0,
                 texture.getWidth(),
                 texture.getHeight(),
@@ -98,8 +99,8 @@ public class Game implements ApplicationListener {
                 new EnemyPlugin(world, gameData),
                 hud,
                 new PlayerPlugin(world, gameData),
-                new WeaponPlugin(world, gameData),
-                new ProjectilePlugin(world, gameData)
+                new ProjectilePlugin(world, gameData),
+                new WeaponPlugin(world, gameData)
         );
         gameData.addController(new MoveController(world));
 

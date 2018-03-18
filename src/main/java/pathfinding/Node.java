@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 class Node {
 
-    private static List<Vector2i> directions = Arrays.asList(
+    private final static List<Vector2i> directions = Arrays.asList(
             new Vector2i(0, 1),
             new Vector2i(0, -1),
             new Vector2i(1, 0),

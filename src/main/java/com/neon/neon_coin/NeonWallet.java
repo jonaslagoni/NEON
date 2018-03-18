@@ -5,9 +5,9 @@ import com.neon.libary.interfaces.INeonWallet;
 /**
  * Created by sam on 15-03-2018.
  */
-public class NeonCoin implements INeonWallet {
+public class NeonWallet implements INeonWallet {
 
-    private int neonCoins = 0;
+    private int neonCoins = 100;
 
     @Override
     public boolean subtractCoins(int i) {

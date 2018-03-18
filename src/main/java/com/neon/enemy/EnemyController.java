@@ -6,18 +6,16 @@
 package com.neon.enemy;
 
 import com.badlogic.gdx.Gdx;
-import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2i;
 import com.neon.player.Player;
 import com.neon.projectile.Projectile;
 
-import java.util.List;
+import java.util.Queue;
 
-import static com.badlogic.gdx.math.MathUtils.PI;
-import static com.neon.libary.vectors.VectorUtils.angle;
 import static com.neon.libary.vectors.VectorUtils.distance;
+import static com.neon.libary.vectors.VectorUtils.translateVelocity;
 
 public class EnemyController implements Controller {
 
@@ -26,14 +24,12 @@ public class EnemyController implements Controller {
     private final IWaveService iWaveService;
     private final INeonWallet wallet;
     private final IPathFindingService pathFindingService;
-    private List<Entity> enemyList;
+    private Queue<Entity> wave;
     private float enemyCooldown;
     private float waveCooldown;
-    private int enemyListPos;
     private int enemyDeathCount;
 
     EnemyController(World world,
-                    GameData gameData,
                     ICollisionService collisionService,
                     INeonWallet wallet,
                     IWaveService waveService,
@@ -42,7 +38,7 @@ public class EnemyController implements Controller {
         this.world = world;
         this.iWaveService = waveService;
         this.pathFindingService = pathFindingService;
-        this.enemyList = iWaveService.createWave();
+        this.wave = iWaveService.createWave();
         this.wallet = wallet;
     }
 
@@ -50,13 +46,12 @@ public class EnemyController implements Controller {
 
         /* Don't Move if player is on target.
          * It is not necessary to calculate the actual distance, just the square of it. */
-        // if ( distanceSquare(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector()) < 2)
+        // if ( distanceSquare(enemy.sprite.getPosition(), enemy.moveAbility.getTarget()) < 2)
 
         /* Calculate angle
          * https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors */
 
         enemy.damageTimer += Gdx.graphics.getDeltaTime();
-
 
         Vector2i start = World.gridProject(enemy.getSprite().getPosition()); // Find current grid position
         Vector2i end = new Vector2i(8, 0); // Find goal grid position
@@ -71,16 +66,16 @@ public class EnemyController implements Controller {
             enemy.path = pathFindingService.findPath(start, end);
         }
 
-        if (enemy.path.peek() != null && distance(enemy.sprite.getPosition(), enemy.path.peek()) < 2) {
+        if (!enemy.path.isEmpty() && distance(enemy.sprite.getPosition(), enemy.path.peek()) < 2) {
             enemy.path.remove();
         }
 
         // Set target vector
-        if (enemy.path.peek() != null) {
-            enemy.moveAbility.setTargetVector(enemy.path.element());
+        if (!enemy.path.isEmpty()) {
+            enemy.moveAbility.setTarget(enemy.path.element());
         }
         enemy.moveAbility.setMove(true);
-        enemy.sprite.setRotation(angle(enemy.sprite.getPosition(), enemy.moveAbility.getTargetVector()) + PI);
+        enemy.sprite.setVelocity(translateVelocity(enemy.sprite.getPosition(), enemy.moveAbility.getTarget(), enemy.sprite.getVelocity()));
 
 
         /* Remove enemy if it collides with player */
@@ -114,14 +109,12 @@ public class EnemyController implements Controller {
 
     @Override
     public void update() {
+
         // Add enemies iterator here.
-
-
         enemyCooldown += Gdx.graphics.getDeltaTime();
 
-        if (enemyCooldown > 1 && enemyListPos < enemyList.size()) {
-
-            world.addEntity(enemyList.get(enemyListPos++));
+        if (enemyCooldown > 1 && !wave.isEmpty()) {
+            world.addEntity(wave.remove());
             enemyCooldown = 0;
         }
 
@@ -130,10 +123,8 @@ public class EnemyController implements Controller {
             waveCooldown += Gdx.graphics.getDeltaTime();
 
             if (waveCooldown > 20) {
-
-                enemyList = iWaveService.createWave();
-                enemyDeathCount = enemyList.size();
-                enemyListPos = 0;
+                wave = iWaveService.createWave();
+                enemyDeathCount = wave.size();
                 waveCooldown = 0;
             }
         }

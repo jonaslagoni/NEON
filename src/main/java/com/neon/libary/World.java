@@ -10,11 +10,15 @@ import pathfinding.PathFinder;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 public class World {
 
     public static final int WIDTH = 2048;
     public static final int HEIGHT = 2048;
+    @SuppressWarnings("WeakerAccess")
     public static final int MAX_WIDTH = WIDTH - 1;
+    @SuppressWarnings("WeakerAccess")
     public static final int MAX_HEIGHT = HEIGHT - 1;
     public static final int GRID_SPACES = 16;
     public static final int GRID_CELL_SIZE = HEIGHT / GRID_SPACES;
@@ -36,10 +40,7 @@ public class World {
     }
 
     public static Vector2f gridUnproject(Vector2i v) {
-        return new Vector2f(
-                v.x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2,
-                v.y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2
-        );
+        return new Vector2f(v.x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2, v.y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2);
     }
 
     public void addEntity(Entity entity) {
@@ -48,18 +49,9 @@ public class World {
     }
 
     @SuppressWarnings("unchecked")
-    public <E extends Entity> List<E> getEntities(Class<E> type) {
-
-        if (cache.containsKey(type)) {
-            return (List<E>) cache.get(type);
-        }
-
-        List<E> result = new ArrayList<>();
-        for (Entity entity : entities) {
-            if (type.isInstance(entity)) {
-                result.add((E) entity);
-            }
-        }
+    public final <E extends Entity> List<E> getEntities(final Class<E> type) {
+        if (cache.containsKey(type)) return (List<E>) cache.get(type);
+        final List<E> result = entities.stream().filter(type::isInstance).map(type::cast).collect(toList());
         cache.put(type, result);
         return result;
     }
@@ -74,13 +66,16 @@ public class World {
         addEntity(entity);
         grid[v.x][v.y] = entity;
         Vector2f v1 = gridUnproject(v);
-        entity.getSprite().setPosition(v1.getX(), v1.getY());
+        entity.getSprite().setPosition(v1);
     }
 
     public boolean isValidPosition(Vector2f position) {
         setGridCell(position, () -> new Sprite(
                 new Texture(Gdx.files.internal("images/laser-tower.png")),
-                GRID_CELL_SIZE, GRID_CELL_SIZE, 0, new Vector2f(0, 0)
+                new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
+                new Vector2f(0, 200),
+                GRID_CELL_SIZE,
+                GRID_CELL_SIZE
         ));
         Queue<Vector2f> path = new PathFinder(this).findPath(getPositionGridCell(START), getPositionGridCell(END));
         Vector2i v = gridProject(position);

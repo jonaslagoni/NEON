@@ -1,39 +1,30 @@
 package com.neon.wave;
 
 import com.neon.enemy.EnemyFactory;
-import com.neon.libary.GameData;
-import com.neon.libary.World;
 import com.neon.libary.interfaces.Entity;
 import com.neon.libary.interfaces.IWaveService;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by sam on 12-03-2018.
  */
-public class Wave implements IWaveService {
+public class WaveService implements IWaveService {
 
     private final int[] tierScore;
-    @SuppressWarnings("FieldCanBeLocal")
-    private World world;
-    @SuppressWarnings("FieldCanBeLocal")
-    private GameData gameData;
     private int waveDifficulty = 1;
     private int waveScore = 0;
     private int waveCount = 0;
     private int enemyScore;
 
-    Wave(World world, GameData gameData) {
-        this.world = world;
-        this.gameData = gameData;
-
+    WaveService() {
         this.tierScore = new int[4];
         tierScore[0] = 1;
         tierScore[1] = 20;
         tierScore[2] = 100;
         tierScore[3] = 1000;
-
     }
 
     public int getWaveScore() {
@@ -44,9 +35,9 @@ public class Wave implements IWaveService {
         return waveCount;
     }
 
-    public ArrayList<Entity> createWave() {
+    public Queue<Entity> createWave() {
 
-        ArrayList<Entity> enemyList = new ArrayList<>();
+        LinkedList<Entity> enemyList = new LinkedList<>();
 
         waveDifficulty *= 2;
         waveCount++;
@@ -83,19 +74,19 @@ public class Wave implements IWaveService {
             if (waveScore >= tierScore[3]) {
                 // Spawns bosses if waveScore is high enough
                 waveScore -= tierScore[3];
-                enemyList.add(EnemyFactory.createEnemy("boss", randomType));
+                enemyList.add(EnemyFactory.build("boss", randomType));
             } else if (waveScore >= tierScore[2]) {
                 // Spawns tier 3 enemies if there is enough waveScore
                 waveScore = waveScore - tierScore[2];
-                enemyList.add(EnemyFactory.createEnemy("tier3", randomType));
+                enemyList.add(EnemyFactory.build("tier3", randomType));
             } else if (waveScore >= tierScore[1]) {
                 // Spawns tier 2 enemies if there is enough waveScore
                 waveScore -= -tierScore[1];
-                enemyList.add(EnemyFactory.createEnemy("tier2", randomTypeTier2));
+                enemyList.add(EnemyFactory.build("tier2", randomTypeTier2));
             } else if (waveScore >= tierScore[0]) {
                 // Spawns tier 1 enemies if there is any waveScore left
                 waveScore -= tierScore[0];
-                enemyList.add(EnemyFactory.createEnemy("tier1", randomType));
+                enemyList.add(EnemyFactory.build("tier1", randomType));
             }
         }
         // Randomizes the arrayList of enemies

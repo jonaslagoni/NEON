@@ -15,8 +15,8 @@ import com.neon.libary.interfaces.Plugin;
  */
 public class CollisionPlugin implements Plugin {
 
-    private GameData gameData;
-    private World world;
+    private final GameData gameData;
+    private final World world;
 
     public CollisionPlugin(World world, GameData gameData) {
         this.gameData = gameData;

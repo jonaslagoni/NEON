@@ -1,16 +1,16 @@
 package com.neon.libary.interfaces;
 
-import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by sam on 12-03-2018.
  */
-public interface IWaveService extends Service{
+public interface IWaveService extends Service {
 
-    List<Entity> createWave();
+    Queue<Entity> createWave();
+
     int getWaveScore();
+
     int getWaveCount();
-
-
 }
 

@@ -41,7 +41,7 @@ public class PlayerInputProcessor implements InputProcessor {
                 Vector2 vector = gameData.getViewport().unproject(new Vector2(screenX, screenY));
                 Vector2f target = new Vector2f(vector.x, vector.y);
                 if (World.isOutOfBounds(target)) break;
-                player.moveAbility.setTargetVector(target);
+                player.moveAbility.setTarget(target);
                 return true;
         }
         return false;

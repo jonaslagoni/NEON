@@ -5,13 +5,12 @@ import com.neon.libary.vectors.Vector2f;
 
 public class Weapon implements Entity {
 
-    Vector2f position;
     float fireCooldown;
     float range;
+    Vector2f position;
 
-    public Weapon(Vector2f position,
-                  float range) {
-        this.position = position;
+    public Weapon(float range, Vector2f position) {
         this.range = range;
+        this.position = position;
     }
 }

@@ -3,8 +3,9 @@ package com.neon.libary.vectors;
 import java.util.Objects;
 
 public class Vector2i {
-    public int x;
-    public int y;
+
+    public final int x;
+    public final int y;
 
     public Vector2i(int x, int y) {
         this.x = x;

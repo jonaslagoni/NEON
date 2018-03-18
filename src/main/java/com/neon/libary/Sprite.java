@@ -5,22 +5,30 @@ import com.neon.libary.vectors.Vector2f;
 
 public class Sprite {
 
-    private float height;
-    private float width;
+    private final float height;
+    private final float width;
     private Vector2f position;
-    private float rotation;
+    private Vector2f velocity;
     private Texture texture;
 
     public Sprite(Texture texture,
+                  Vector2f position,
+                  Vector2f velocity,
                   float height,
-                  float width,
-                  float rotation,
-                  Vector2f position) {
-        this.rotation = rotation;
+                  float width) {
         this.height = height;
         this.width = width;
         this.texture = texture;
+        this.velocity = velocity;
         this.position = position;
+    }
+
+    public Vector2f getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(Vector2f velocity) {
+        this.velocity = velocity;
     }
 
     public float getHeight() {
@@ -35,17 +43,8 @@ public class Sprite {
         return position;
     }
 
-    public void setPosition(float x, float y) {
-        position.setY(y);
-        position.setX(x);
-    }
-
-    public float getRotation() {
-        return rotation;
-    }
-
-    public void setRotation(float rotation) {
-        this.rotation = rotation;
+    public void setPosition(Vector2f position) {
+        this.position = position;
     }
 
     public Texture getTexture() {
@@ -54,13 +53,5 @@ public class Sprite {
 
     public void setTexture(Texture texture) {
         this.texture = texture;
-    }
-
-    public void translateX(float x) {
-        position.setX(position.getX() + x);
-    }
-
-    public void translateY(float y) {
-        position.setY(position.getY() + y);
     }
 }

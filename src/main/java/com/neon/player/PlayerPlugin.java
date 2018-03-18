@@ -25,16 +25,13 @@ public class PlayerPlugin implements Plugin {
 
     @Override
     public void start() {
-
-        Sprite sprite = new Sprite(
+        player = new Player(new Sprite(
                 new Texture(Gdx.files.internal("images/tower1.png")),
+                new Vector2f(World.WIDTH / 2, World.HEIGHT / 2),
+                new Vector2f(0, 200),
                 World.GRID_CELL_SIZE,
-                World.GRID_CELL_SIZE, 0, new Vector2f(0, 0)
-        );
-        sprite.setPosition(World.WIDTH / 2, World.HEIGHT / 2);
-
-        player = new Player(new MoveAbility(200), sprite);
-
+                World.GRID_CELL_SIZE),
+                new MoveAbility(new Vector2f(0, 0), false));
         world.addEntity(player);
 
         inputProcessor = new PlayerInputProcessor(player, gameData);

@@ -2,13 +2,13 @@ package com.neon.libary;
 
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Moveable;
+import com.neon.libary.vectors.Vector2f;
 
-import static com.neon.libary.vectors.VectorUtils.deltaX;
-import static com.neon.libary.vectors.VectorUtils.deltaY;
+import static com.neon.libary.vectors.VectorUtils.translate;
 
 public class MoveController implements Controller {
 
-    private World world;
+    private final World world;
 
     public MoveController(World world) {
         this.world = world;
@@ -22,14 +22,11 @@ public class MoveController implements Controller {
 
         if (!moveAbility.isMove()) return;
 
-        float rotation = sprite.getRotation();
-        float velocity = moveAbility.getVelocity();
+        Vector2f velocity = sprite.getVelocity();
+        Vector2f position = sprite.getPosition();
 
-        float deltaX = deltaX(rotation, velocity);
-        float deltaY = deltaY(rotation, velocity);
-
-        sprite.translateX(deltaX);
-        sprite.translateY(deltaY);
+        Vector2f newPosition = translate(position, velocity);
+        sprite.setPosition(newPosition);
     }
 
     @Override

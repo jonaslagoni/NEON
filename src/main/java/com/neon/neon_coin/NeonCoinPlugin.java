@@ -20,7 +20,7 @@ public class NeonCoinPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(INeonWallet.class, new NeonCoin());
+        gameData.addService(INeonWallet.class, new NeonWallet());
     }
 
     @Override

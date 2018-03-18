@@ -4,29 +4,20 @@ import com.neon.libary.vectors.Vector2f;
 
 public class MoveAbility {
 
-    private float velocity;
-    private Vector2f targetVector;
+    private Vector2f target;
     private boolean move;
 
-    public MoveAbility(float velocity) {
-        this.targetVector = new Vector2f(0f, 0f);
-        this.velocity = velocity;
+    public MoveAbility(Vector2f target, boolean move) {
+        this.target = target;
+        this.move = move;
     }
 
-    public float getVelocity() {
-        return velocity;
+    public Vector2f getTarget() {
+        return target;
     }
 
-    public void setVelocity(float velocity) {
-        this.velocity = velocity;
-    }
-
-    public Vector2f getTargetVector() {
-        return targetVector;
-    }
-
-    public void setTargetVector(Vector2f targetVector) {
-        this.targetVector = targetVector;
+    public void setTarget(Vector2f target) {
+        this.target = target;
     }
 
     public boolean isMove() {

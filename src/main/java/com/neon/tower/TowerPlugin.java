@@ -2,14 +2,15 @@ package com.neon.tower;
 
 import com.neon.libary.GameData;
 import com.neon.libary.World;
+import com.neon.libary.interfaces.INeonWallet;
 import com.neon.libary.interfaces.ITowerService;
 import com.neon.libary.interfaces.Plugin;
 import com.neon.libary.vectors.Vector2f;
 
 public class TowerPlugin implements Plugin {
 
-    private World world;
-    private GameData gameData;
+    private final World world;
+    private final GameData gameData;
 
     public TowerPlugin(World world, GameData gameData) {
         this.world = world;
@@ -18,9 +19,9 @@ public class TowerPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(ITowerService.class, new TowerService(gameData, world));
-        gameData.addController(new TowerController(world, gameData));
-        TowerFactory factory = new TowerFactory();
+        TowerService towerService = new TowerService(world, gameData.getService(INeonWallet.class));
+        gameData.addService(ITowerService.class, towerService);
+        gameData.addController(new TowerController(world));
 
         gameData.addPlaceable("laser-tower");
         gameData.addPlaceable("melee-glaive-tower");
@@ -30,14 +31,9 @@ public class TowerPlugin implements Plugin {
         gameData.addPlaceable("railgun-tower");
         gameData.addPlaceable("rocket-tower");
         gameData.addPlaceable("splash-tower");
-        
-       
+
         int[] ints = {800, 925, 1024, 1185};
-        for (int i : ints) {
-            Tower drawable = (Tower) factory.build("laser-tower");
-            world.setGridCell(new Vector2f(i, 1024), drawable);
-        }
-        
+        for (int i : ints) towerService.placeTower(new Vector2f(i, 1024), "laser-tower");
     }
 
     @Override
