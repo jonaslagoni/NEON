@@ -164,11 +164,11 @@ public class HUD implements InputProcessor, Plugin, Controller {
         if (World.isOutOfBounds(pos)) {
             return false;
         }
-        if (!world.isValidPosition(pos)) {
-            return false;
-        }
         /* If a tower is selected, place it */
         if (!selectedEntity.trim().equals("")) {
+            if (!world.isValidPosition(pos)) {
+                return false;
+            }
             towerService.placeTower(pos, selectedEntity);
             selectedEntity = "";
             return false;
