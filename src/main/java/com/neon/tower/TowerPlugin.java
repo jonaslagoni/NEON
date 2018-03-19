@@ -2,10 +2,9 @@ package com.neon.tower;
 
 import com.neon.libary.GameData;
 import com.neon.libary.World;
-import com.neon.libary.interfaces.INeonWallet;
+import com.neon.libary.interfaces.INeonService;
 import com.neon.libary.interfaces.ITowerService;
 import com.neon.libary.interfaces.Plugin;
-import com.neon.libary.vectors.Vector2f;
 
 public class TowerPlugin implements Plugin {
 
@@ -19,7 +18,7 @@ public class TowerPlugin implements Plugin {
 
     @Override
     public void start() {
-        TowerService towerService = new TowerService(world, gameData.getService(INeonWallet.class));
+        TowerService towerService = new TowerService(world, gameData.getService(INeonService.class));
         gameData.addService(ITowerService.class, towerService);
         gameData.addController(new TowerController(world));
 
@@ -32,8 +31,8 @@ public class TowerPlugin implements Plugin {
         gameData.addPlaceable("rocket-tower");
         gameData.addPlaceable("splash-tower");
 
-        int[] ints = {800, 925, 1024, 1185};
-        for (int i : ints) towerService.placeTower(new Vector2f(i, 1024), "laser-tower");
+//        int[] ints = {800, 925, 1024, 1185};
+//        for (int i : ints) towerService.placeTower(new Vector2f(i, 1024), "laser-tower");
     }
 
     @Override

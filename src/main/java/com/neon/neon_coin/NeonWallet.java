@@ -1,11 +1,11 @@
 package com.neon.neon_coin;
 
-import com.neon.libary.interfaces.INeonWallet;
+import com.neon.libary.interfaces.INeonService;
 
 /**
  * Created by sam on 15-03-2018.
  */
-public class NeonWallet implements INeonWallet {
+public class NeonWallet implements INeonService {
 
     private int neonCoins = 100;
 
