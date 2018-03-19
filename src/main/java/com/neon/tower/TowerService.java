@@ -2,17 +2,17 @@ package com.neon.tower;
 
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Entity;
-import com.neon.libary.interfaces.INeonWallet;
+import com.neon.libary.interfaces.INeonService;
 import com.neon.libary.interfaces.ITowerService;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.weapon.Weapon;
 
 class TowerService implements ITowerService {
 
-    private INeonWallet neonWallet;
+    private INeonService neonWallet;
     private World world;
 
-    TowerService(World world, INeonWallet neonWallet) {
+    TowerService(World world, INeonService neonWallet) {
         this.neonWallet = neonWallet;
         this.world = world;
     }

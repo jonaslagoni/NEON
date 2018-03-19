@@ -4,6 +4,8 @@ import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 
+import javax.imageio.event.IIOReadProgressListener;
+
 public class EnemyPlugin implements Plugin {
 
     private World world;
@@ -19,10 +21,15 @@ public class EnemyPlugin implements Plugin {
         gameData.addController(new EnemyController(
                 world,
                 gameData.getService(ICollisionService.class),
-                gameData.getService(INeonWallet.class),
+                gameData.getService(INeonService.class),
                 gameData.getService(IWaveService.class),
                 gameData.getService(IPathFindingService.class)
         ));
+        gameData.addService(IEnemyService.class,new EnemyController(world,
+                gameData.getService(ICollisionService.class),
+                gameData.getService(INeonService.class),
+                gameData.getService(IWaveService.class),
+                gameData.getService(IPathFindingService.class)));
     }
 
     @Override

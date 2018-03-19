@@ -28,8 +28,8 @@ class WeaponController implements Controller {
         return distanceSquare(first, source) < distanceSquare(first, second);
     }
 
-    
-    
+
+
 
     @Override
     public void update() {
@@ -48,18 +48,18 @@ class WeaponController implements Controller {
             if (closest == null || isCloser(weapon.position, target.getSprite().getPosition(), closest.getSprite().getPosition()))
                 if (target instanceof Targetable)
                     closest = target;
-            
-          
-                    
+
+
+
         }
-        
+
 
         if (closest != null) {
             projectileService.newProjectile(weapon.position, closest.getSprite().getPosition(), weapon.getShotType());
-          
+
             weapon.fireCooldown = 0;
         }
-        
+
 
 /**
  * Implements the Targeting system for towers
@@ -70,11 +70,11 @@ class WeaponController implements Controller {
       //        }
     }
     private Vector2f findTarget(Drawable targetSprite, Weapon weapon) {
-        
+
             Vector2f newTarget;
-        
+
             return newTarget = targetingService.calculateTargetVector(weapon.position, targetSprite.getSprite());
-       
+
     }
 }
     

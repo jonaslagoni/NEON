@@ -31,9 +31,11 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private Label waveScoreLabel;
     private Label coinLabel;
     private Label towers;
+    private Label waveCountdown;
     private IWaveService waveService;
-    private INeonWallet neonWallet;
+    private INeonService neonService;
     private ITowerService towerService;
+    private IEnemyService enemyService;
     private int counter;
 
     public HUD(World world,
@@ -51,7 +53,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
         this.towerService = gameData.getService(ITowerService.class);
         this.waveService = gameData.getService(IWaveService.class);
-        this.neonWallet = gameData.getService(INeonWallet.class);
+        this.neonService = gameData.getService(INeonService.class);
+        this.enemyService = gameData.getService(IEnemyService.class);
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table(gameData.getSkin());
@@ -81,6 +84,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         waveScoreLabel = new Label("", gameData.getSkin());
         coinLabel = new Label("", gameData.getSkin());
         towers = new Label("", gameData.getSkin());
+        waveCountdown = new Label("", gameData.getSkin());
 
         TextButton upgradeButton = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
         upgradeButton.addListener(new ClickListener() {
@@ -95,13 +99,23 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
         statsTable.add("Wave: ").expandX().align(Align.left);
         statsTable.add(waveCounterLabel).expandX().align(Align.right).row();
+
         statsTable.add("Enemy Difficulty Value: ").expandX().align(Align.left);
         statsTable.add(waveScoreLabel).expandX().align(Align.right).row();
+
+        statsTable.add("").row();
+
+        statsTable.add("Next wave in: ").expandX().align(Align.left);
+        statsTable.add(waveCountdown).expandX().align(Align.right).row();
+
+        statsTable.add("").row();
+
         statsTable.add("Neon Coins: ").expandX().align(Align.left);
         statsTable.add(coinLabel).expandX().align(Align.right).row();
+
         statsTable.add("Towers: ").expandX().align(Align.left);
         statsTable.add(towers).expandX().align(Align.right).row();
-        statsTable.align(Align.right).padBottom(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/5).padRight(Gdx.graphics.getWidth()/100);
+        statsTable.align(Align.right).align(Align.top).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/9*2).padRight(Gdx.graphics.getWidth()/100);
 
         statsGroup.addActor(statsTable);
         placementGroup.addActor(placementTable);
@@ -115,7 +129,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         gameData.addInputProcessor(this);
 
         /*Create button for each placable item in gamedata*/
-        
+
         for (String title : gameData.getPlaceables()) {
             TextButton button = new TextButton("", gameData.getSkin(), title);
             button.addListener(new ClickListener() {
@@ -124,7 +138,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
                     selectedEntity = title;
                 }
             });
-            
+
             if(counter % 4 == 0){
                 placementTable.row();
             }
@@ -216,7 +230,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
     public void update() {
         waveCounterLabel.setText(""+ waveService.getWaveCount());
         waveScoreLabel.setText("" + waveService.getWaveScore());
-        coinLabel.setText("" + neonWallet.getCoins());
+        coinLabel.setText("" + neonService.getCoins());
         towers.setText("" + world.getNumberOfTowers());
+        waveCountdown.setText("" + enemyService.getWaveCountdown());
     }
 }

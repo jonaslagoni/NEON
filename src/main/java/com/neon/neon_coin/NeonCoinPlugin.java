@@ -2,7 +2,7 @@ package com.neon.neon_coin;
 
 import com.neon.libary.GameData;
 import com.neon.libary.World;
-import com.neon.libary.interfaces.INeonWallet;
+import com.neon.libary.interfaces.INeonService;
 import com.neon.libary.interfaces.Plugin;
 
 /**
@@ -20,7 +20,7 @@ public class NeonCoinPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(INeonWallet.class, new NeonWallet());
+        gameData.addService(INeonService.class, new NeonWallet());
     }
 
     @Override

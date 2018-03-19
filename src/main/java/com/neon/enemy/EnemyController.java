@@ -17,21 +17,22 @@ import java.util.Queue;
 import static com.neon.libary.vectors.VectorUtils.distance;
 import static com.neon.libary.vectors.VectorUtils.translateVelocity;
 
-public class EnemyController implements Controller {
+public class EnemyController implements Controller, IEnemyService{
 
     private final World world;
     private final ICollisionService collisionService;
     private final IWaveService iWaveService;
-    private final INeonWallet wallet;
+    private final INeonService wallet;
     private final IPathFindingService pathFindingService;
     private Queue<Entity> wave;
     private float enemyCooldown;
-    private float waveCooldown;
+    private float waveCooldown = 20;
+    private float waveTimeCounter;
     private int enemyDeathCount;
 
     EnemyController(World world,
                     ICollisionService collisionService,
-                    INeonWallet wallet,
+                    INeonService wallet,
                     IWaveService waveService,
                     IPathFindingService pathFindingService) {
         this.collisionService = collisionService;
@@ -120,14 +121,20 @@ public class EnemyController implements Controller {
 
         if (enemyDeathCount <= 0) {
 
-            waveCooldown += Gdx.graphics.getDeltaTime();
+            waveTimeCounter += Gdx.graphics.getDeltaTime();
 
-            if (waveCooldown > 20) {
+            if (waveTimeCounter > waveCooldown) {
                 wave = iWaveService.createWave();
                 enemyDeathCount = wave.size();
-                waveCooldown = 0;
+                waveTimeCounter = 0;
             }
         }
         world.getEntities(Enemy.class).forEach(this::updateEnemy);
+    }
+
+    @Override
+    public int getWaveCountdown() {
+
+        return (int) (waveCooldown-waveTimeCounter);
     }
 }
