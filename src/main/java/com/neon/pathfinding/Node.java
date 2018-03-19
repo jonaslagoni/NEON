@@ -5,8 +5,12 @@ import com.neon.libary.vectors.Vector2f;
 import com.neon.libary.vectors.Vector2i;
 import com.neon.libary.vectors.VectorUtils;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import static java.util.Collections.singleton;
+import static java.util.stream.Collectors.toList;
 
 class Node {
 
@@ -32,19 +36,18 @@ class Node {
 
     public LinkedList<Vector2f> reconstructPath(Node node) {
         Node current = node;
-        LinkedList<Node> path = new LinkedList<>(Collections.singleton(current));
+        LinkedList<Vector2f> path = new LinkedList<>(singleton(World.gridUnproject(current.vector)));
         while (current.parent != null) {
             current = current.parent;
-            path.addFirst(current);
+            path.addFirst(World.gridUnproject(current.vector));
         }
-        return path.stream()
-                .map(Node::getVector)
-                .map(World::gridUnproject)
-                .collect(Collectors.toCollection(LinkedList::new));
+        return path;
     }
 
     public float heuristicCostEstimate(Node goalState) {
-        return VectorUtils.distance(World.gridUnproject(this.vector), World.gridUnproject(goalState.vector)) / World.WIDTH;
+        Vector2f v0 = World.gridUnproject(this.vector);
+        Vector2f v1 = World.gridUnproject(goalState.vector);
+        return VectorUtils.distance(v0, v1) / World.GRID_CELL_SIZE;
     }
 
     public int manhattanDistance(Node b) {
@@ -52,14 +55,10 @@ class Node {
     }
 
     public List<Node> neighbors(World world) {
-        List<Node> neighbors = new ArrayList<>();
-        for (Vector2i direction : directions) {
-            if (!world.blocked(vector.x + direction.x, vector.y + direction.y)) {
-                neighbors.add(new Node(vector.x + direction.x, vector.y + direction.y));
-            }
-        }
-        Collections.shuffle(neighbors);
-        return neighbors;
+        return directions.stream()
+                .filter(d -> !world.blocked(vector.x + d.x, vector.y + d.y))
+                .map(d -> new Node(vector.x + d.x, vector.y + d.y))
+                .collect(toList());
     }
 
     @Override

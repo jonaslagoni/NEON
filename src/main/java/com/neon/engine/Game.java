@@ -2,13 +2,11 @@ package com.neon.engine;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -25,6 +23,7 @@ import com.neon.neon_coin.NeonCoinPlugin;
 import com.neon.pathfinding.PathfindingPlugin;
 import com.neon.player.PlayerPlugin;
 import com.neon.projectile.ProjectilePlugin;
+import com.neon.targeting.TargetingPlugin;
 import com.neon.tower.TowerPlugin;
 import com.neon.ui.HUD;
 import com.neon.wave.WavePlugin;
@@ -35,7 +34,6 @@ import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 import static com.neon.libary.vectors.VectorUtils.angle;
-import com.neon.targeting.TargetingPlugin;
 
 public class Game implements ApplicationListener {
 
@@ -44,7 +42,6 @@ public class Game implements ApplicationListener {
     private final World world = new World();
     private GameData gameData;
     private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
     private HUD hud;
     private Texture bg;
 
@@ -69,17 +66,6 @@ public class Game implements ApplicationListener {
         );
     }
 
-    private void drawGrid() {
-        int gap = Gdx.graphics.getHeight() / World.GRID_SPACES;
-        shapeRenderer.setColor(Color.GREEN);
-        for (int i = 1; i < World.GRID_SPACES; i++) {
-            /* Vertical */
-            shapeRenderer.line(i * gap, 0, i * gap, World.GRID_SPACES * gap);
-            /* Horizontal */
-            shapeRenderer.line(0, i * gap, World.GRID_SPACES * gap, i * gap);
-        }
-    }
-
     @Override
     public void create() {
         Skin skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
@@ -88,7 +74,6 @@ public class Game implements ApplicationListener {
         Gdx.input.setInputProcessor(gameData.getMultiplexer());
 
         batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
 
         hud = new HUD(world, gameData, batch);
         List<Plugin> plugins = Arrays.asList(
@@ -135,11 +120,6 @@ public class Game implements ApplicationListener {
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        /* Draw grid */
-        // shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        // drawGrid();
-        // shapeRenderer.END();
 
         viewport.apply();
         batch.begin();

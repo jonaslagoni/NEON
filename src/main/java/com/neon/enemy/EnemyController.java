@@ -18,19 +18,19 @@ import java.util.Queue;
 import static com.neon.libary.vectors.VectorUtils.distance;
 import static com.neon.libary.vectors.VectorUtils.translateVelocity;
 
-public class EnemyController implements Controller, IEnemyService{
+public class EnemyController implements Controller, IEnemyService {
 
-    private final World world;
     private final ICollisionService collisionService;
-    private final IWaveService iWaveService;
+    private final IWaveService waveService;
     private final INeonService wallet;
     private final IPathFindingService pathFindingService;
+    private final World world;
+    private final float WAVE_COOLDOWN = 20;
 
     private Queue<Entity> wave;
     private float enemyCooldown;
-    private final float waveCooldown = 20;
-    private float waveTimeCounter;
-    private int enemyDeathCount;
+    private float waveCounter;
+    private int deathCount;
 
     EnemyController(World world,
                     ICollisionService collisionService,
@@ -39,19 +39,13 @@ public class EnemyController implements Controller, IEnemyService{
                     IPathFindingService pathFindingService) {
         this.collisionService = collisionService;
         this.world = world;
-        this.iWaveService = waveService;
+        this.waveService = waveService;
         this.pathFindingService = pathFindingService;
         this.wallet = wallet;
     }
 
     private void updateEnemy(final Enemy enemy) {
 
-        /* Don't Move if player is on target.
-         * It is not necessary to calculate the actual distance, just the square of it. */
-        // if ( distanceSquare(enemy.sprite.getPosition(), enemy.moveAbility.getTarget()) < 2)
-
-        /* Calculate angle
-         * https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors */
         enemy.damageTimer += Gdx.graphics.getDeltaTime();
 
         Vector2f position = enemy.sprite.getPosition();
@@ -62,7 +56,7 @@ public class EnemyController implements Controller, IEnemyService{
         Vector2i end = new Vector2i(8, 0); // Find goal grid position
         /* Remove enemy if it is at goal */
         if (start.equals(end)) {
-            enemyDeathCount--;
+            deathCount--;
             world.removeEntity(enemy);
             return;
         }
@@ -93,7 +87,7 @@ public class EnemyController implements Controller, IEnemyService{
         }
         /* If enemy is killed */
         if (enemy.hp <= 0) {
-            enemyDeathCount--;
+            deathCount--;
             world.removeEntity(enemy);
             wallet.addCoins(enemy.coinValue);
             return;
@@ -106,18 +100,18 @@ public class EnemyController implements Controller, IEnemyService{
     public void update() {
 
         enemyCooldown += Gdx.graphics.getDeltaTime();
-        waveTimeCounter += Gdx.graphics.getDeltaTime();
+        waveCounter += Gdx.graphics.getDeltaTime();
         /* Generate new Wave */
-        if (enemyDeathCount <= 0 && waveTimeCounter > waveCooldown) {
-            wave = iWaveService.createWave();
-            enemyDeathCount = wave.size();
-            waveTimeCounter = 0;
+        if (deathCount <= 0 && waveCounter > WAVE_COOLDOWN) {
+            wave = waveService.createWave();
+            deathCount = wave.size();
+            waveCounter = 0;
         }
         /* Spawn new enemy */
         if (enemyCooldown > 1 && wave != null && !wave.isEmpty()) {
             world.addEntity(wave.remove());
             enemyCooldown = 0;
-            waveTimeCounter = 0;
+            waveCounter = 0;
         }
         /* Update enemies */
         world.getEntities(Enemy.class).forEach(this::updateEnemy);
@@ -125,7 +119,6 @@ public class EnemyController implements Controller, IEnemyService{
 
     @Override
     public int getWaveCountdown() {
-
-        return (int) (waveCooldown-waveTimeCounter);
+        return (int) (WAVE_COOLDOWN - waveCounter);
     }
 }

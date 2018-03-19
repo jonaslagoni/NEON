@@ -4,12 +4,10 @@ import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 
-import javax.imageio.event.IIOReadProgressListener;
-
 public class EnemyPlugin implements Plugin {
 
-    private World world;
-    private GameData gameData;
+    private final World world;
+    private final GameData gameData;
 
     public EnemyPlugin(World world, GameData gameData) {
         this.world = world;
@@ -18,14 +16,12 @@ public class EnemyPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addController(new EnemyController(
-                world,
+        gameData.addController(new EnemyController(world,
                 gameData.getService(ICollisionService.class),
                 gameData.getService(INeonService.class),
                 gameData.getService(IWaveService.class),
-                gameData.getService(IPathFindingService.class)
-        ));
-        gameData.addService(IEnemyService.class,new EnemyController(world,
+                gameData.getService(IPathFindingService.class)));
+        gameData.addService(IEnemyService.class, new EnemyController(world,
                 gameData.getService(ICollisionService.class),
                 gameData.getService(INeonService.class),
                 gameData.getService(IWaveService.class),
@@ -34,8 +30,6 @@ public class EnemyPlugin implements Plugin {
 
     @Override
     public void stop() {
-        for (Enemy enemy : world.getEntities(Enemy.class)) {
-            world.removeEntity(enemy);
-        }
+        world.getEntities(Enemy.class).forEach(world::removeEntity);
     }
 }
