@@ -7,7 +7,7 @@ import com.neon.libary.interfaces.ITowerService;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.weapon.Weapon;
 
-public class TowerService implements ITowerService {
+class TowerService implements ITowerService {
 
     private INeonWallet neonWallet;
     private World world;

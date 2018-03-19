@@ -1,4 +1,4 @@
-package pathfinding;
+package com.neon.pathfinding;
 
 import com.neon.libary.GameData;
 import com.neon.libary.World;

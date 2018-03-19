@@ -1,8 +1,9 @@
-package pathfinding;
+package com.neon.pathfinding;
 
 import com.neon.libary.World;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.libary.vectors.Vector2i;
+import com.neon.libary.vectors.VectorUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ class Node {
     private Node parent;
     private Vector2i vector;
     private int gCost = Integer.MAX_VALUE;
-    private int fCost = Integer.MAX_VALUE;
+    private float fCost = Float.MAX_VALUE;
 
     Node(Vector2i vector) {
         this.vector = vector;
@@ -42,8 +43,8 @@ class Node {
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    public int heuristicCostEstimate(Node goalState) {
-        return manhattanDistance(goalState);
+    public float heuristicCostEstimate(Node goalState) {
+        return VectorUtils.distance(World.gridUnproject(this.vector), World.gridUnproject(goalState.vector)) / World.WIDTH;
     }
 
     public int manhattanDistance(Node b) {
@@ -57,6 +58,7 @@ class Node {
                 neighbors.add(new Node(vector.x + direction.x, vector.y + direction.y));
             }
         }
+        Collections.shuffle(neighbors);
         return neighbors;
     }
 
@@ -85,11 +87,11 @@ class Node {
         this.gCost = gCost;
     }
 
-    public int getfCost() {
+    public float getfCost() {
         return fCost;
     }
 
-    public void setfCost(int fCost) {
+    public void setfCost(float fCost) {
         this.fCost = fCost;
     }
 

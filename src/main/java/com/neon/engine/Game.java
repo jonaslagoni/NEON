@@ -22,13 +22,13 @@ import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Plugin;
 import com.neon.neon_coin.NeonCoinPlugin;
+import com.neon.pathfinding.PathfindingPlugin;
 import com.neon.player.PlayerPlugin;
 import com.neon.projectile.ProjectilePlugin;
 import com.neon.tower.TowerPlugin;
 import com.neon.ui.HUD;
 import com.neon.wave.WavePlugin;
 import com.neon.weapon.WeaponPlugin;
-import pathfinding.PathfindingPlugin;
 
 import java.util.Arrays;
 import java.util.List;

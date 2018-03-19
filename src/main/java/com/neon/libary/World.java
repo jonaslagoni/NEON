@@ -6,7 +6,7 @@ import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Entity;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.libary.vectors.Vector2i;
-import pathfinding.PathFinder;
+import com.neon.pathfinding.PathFinder;
 
 import java.util.*;
 
@@ -61,22 +61,25 @@ public class World {
         entities.remove(player);
     }
 
-    public void setGridCell(Vector2f position, Drawable entity) {
+    public boolean setGridCell(Vector2f position, Drawable entity) {
         Vector2i v = gridProject(position);
-        addEntity(entity);
+        if (grid[v.x][v.y] != null) return false;
         grid[v.x][v.y] = entity;
+        addEntity(entity);
         Vector2f v1 = gridUnproject(v);
         entity.getSprite().setPosition(v1);
+        return true;
     }
 
     public boolean isValidPosition(Vector2f position) {
-        setGridCell(position, () -> new Sprite(
+        boolean b = setGridCell(position, () -> new Sprite(
                 new Texture(Gdx.files.internal("images/laser-tower.png")),
                 new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
                 new Vector2f(0, 200),
                 GRID_CELL_SIZE,
                 GRID_CELL_SIZE
         ));
+        if (!b) return false;
         Queue<Vector2f> path = new PathFinder(this).findPath(getPositionGridCell(START), getPositionGridCell(END));
         Vector2i v = gridProject(position);
         removeEntity(grid[v.x][v.y]);
@@ -102,5 +105,4 @@ public class World {
     public boolean blocked(int x, int y) {
         return x >= World.GRID_SPACES || y >= World.GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
     }
-
 }

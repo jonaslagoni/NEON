@@ -8,7 +8,7 @@ import com.neon.libary.vectors.Vector2f;
 
 import java.util.Arrays;
 
-public class TowerFactory {
+class TowerFactory {
     private TowerFactory() {
     }
 

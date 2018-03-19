@@ -3,7 +3,7 @@ package com.neon.tower;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 
-public class TowerController implements Controller {
+class TowerController implements Controller {
 
     private final World world;
 
@@ -17,7 +17,6 @@ public class TowerController implements Controller {
     }
 
     private void updateTower(Tower tower) {
-
         tower.sprite.setTexture(tower.textures[tower.level]);
     }
 }

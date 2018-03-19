@@ -1,4 +1,4 @@
-package pathfinding;
+package com.neon.pathfinding;
 
 import com.neon.libary.World;
 import com.neon.libary.interfaces.IPathFindingService;
@@ -9,7 +9,7 @@ import java.util.*;
 
 public class PathFinder implements IPathFindingService {
 
-    private World world;
+    private final World world;
 
     public PathFinder(World world) {
         this.world = world;
