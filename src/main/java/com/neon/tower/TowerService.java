@@ -19,20 +19,70 @@ class TowerService implements ITowerService {
 
     @Override
     public void upgrade(Entity entity) {
-        if (!(entity instanceof Tower)) return;
-        Tower tower = (Tower) entity;
-        if (tower.level >= tower.maxLevel || !neonWallet.subtractCoins(tower.getCost()))
+        if (!(entity instanceof Tower)) {
             return;
+        }
+        Tower tower = (Tower) entity;
+        if (tower.level >= tower.maxLevel || !neonWallet.subtractCoins(tower.getCost())) {
+            return;
+        }
         tower.level++;
     }
 
     @Override
     public void placeTower(Vector2f pos, String key) {
+        String shotType;
         Tower tower = TowerFactory.build(key);
-        if (tower == null) return;
+        if (tower == null) {
+            return;
+        }
         if (neonWallet.subtractCoins(tower.getCost())) {
             world.setGridCell(pos, tower);
-            world.addEntity(new Weapon(512, tower.sprite.getPosition())); // Todo
+
+            switch (key) {
+                case "laser-tower":
+                    shotType = "green_beam";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+                case "melee-glaive-tower":
+                    shotType = "yellow_beam";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+                case "pea-shooter":
+                    shotType = "blue_beam";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+                case "range-powerup":
+                    shotType = "yellow_beam";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+                case "strenght-powerup":
+                    shotType = "red_beam";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+                case "railgun-tower":
+                    shotType = "pink_laser";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+                case "rocket-tower":
+                    shotType = "rocket_shot";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+                case "splash-tower":
+                    shotType = "green_bomb_smaller";
+                    world.addEntity(new Weapon(512, tower.sprite.getPosition(), shotType)); // Todo
+                    break;
+
+            }
+            
+            shotType = "";
         }
     }
 

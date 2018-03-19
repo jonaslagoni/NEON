@@ -7,10 +7,16 @@ public class Weapon implements Entity {
 
     float fireCooldown;
     float range;
+    String shotType;
     Vector2f position;
 
-    public Weapon(float range, Vector2f position) {
+    public Weapon(float range, Vector2f position, String shotType) {
         this.range = range;
         this.position = position;
+        this.shotType = shotType;
+    }
+    
+    public String getShotType(){
+        return shotType;
     }
 }
