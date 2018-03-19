@@ -22,7 +22,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private final Batch batch;
     private final GameData gameData;
     private Stage hud;
-    private String selectedEntity;
+    private String selectedEntity = "";
     private Entity selectedTower;
     private Group placementGroup;
     private Group upgradeGroup;
@@ -30,6 +30,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private Label waveCounterLabel;
     private Label waveScoreLabel;
     private Label coinLabel;
+    private Label towers;
     private IWaveService waveService;
     private INeonWallet neonWallet;
     private ITowerService towerService;
@@ -78,6 +79,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         waveCounterLabel = new Label("", gameData.getSkin());
         waveScoreLabel = new Label("", gameData.getSkin());
         coinLabel = new Label("", gameData.getSkin());
+        towers = new Label("", gameData.getSkin());
 
         TextButton upgradeButton = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
         upgradeButton.addListener(new ClickListener() {
@@ -96,6 +98,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
         statsTable.add(waveScoreLabel).expandX().align(Align.right).row();
         statsTable.add("Neon Coins: ").expandX().align(Align.left);
         statsTable.add(coinLabel).expandX().align(Align.right).row();
+        statsTable.add("Towers: ").expandX().align(Align.left);
+        statsTable.add(towers).expandX().align(Align.right).row();
         statsTable.align(Align.right).padBottom(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/5);
 
         statsGroup.addActor(statsTable);
@@ -164,10 +168,10 @@ public class HUD implements InputProcessor, Plugin, Controller {
             return false;
         }
         /* If a tower is selected, place it */
-        if (selectedEntity != null) {
+        if (!selectedEntity.trim().equals("")) {
             towerService.placeTower(pos, selectedEntity);
-            selectedEntity = null;
-            return true;
+            selectedEntity = "";
+            return false;
         }
 
         /* Select an already placed tower */
@@ -176,7 +180,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
             selectedTower = entity;
             upgradeGroup.setVisible(true);
             placementGroup.setVisible(false);
-            return true;
+            return false;
         }
         return false;
     }
@@ -206,5 +210,6 @@ public class HUD implements InputProcessor, Plugin, Controller {
         waveCounterLabel.setText(""+ waveService.getWaveCount());
         waveScoreLabel.setText("" + waveService.getWaveScore());
         coinLabel.setText("" + neonWallet.getCoins());
+        towers.setText("" + world.getNumberOfTowers());
     }
 }

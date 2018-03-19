@@ -32,8 +32,8 @@ public class TowerPlugin implements Plugin {
         gameData.addPlaceable("rocket-tower");
         gameData.addPlaceable("splash-tower");
 
-        int[] ints = {800, 925, 1024, 1185};
-        for (int i : ints) towerService.placeTower(new Vector2f(i, 1024), "laser-tower");
+//        int[] ints = {800, 925, 1024, 1185};
+//        for (int i : ints) towerService.placeTower(new Vector2f(i, 1024), "laser-tower");
     }
 
     @Override

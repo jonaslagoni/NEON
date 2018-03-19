@@ -29,6 +29,7 @@ public class World {
 
     private final List<Entity> entities = new ArrayList<>();
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
+    private int numberOfTowers = 0;
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
 
     public static boolean isOutOfBounds(Vector2f v) {
@@ -45,7 +46,13 @@ public class World {
 
     public void addEntity(Entity entity) {
         cache.clear();
-        entities.add(entity);
+        if(entities.size() > 0){
+            Entity e = entities.get(entities.size()-1);
+            entities.set(entities.size()-1, entity);
+            entities.add(e);
+        }else{
+            entities.add(entity);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -63,11 +70,12 @@ public class World {
 
     public boolean setGridCell(Vector2f position, Drawable entity) {
         Vector2i v = gridProject(position);
-        if (grid[v.x][v.y] != null) return false;
+        if (grid[v.x][v.y] != null || entity == null) return false;
         grid[v.x][v.y] = entity;
         addEntity(entity);
         Vector2f v1 = gridUnproject(v);
         entity.getSprite().setPosition(v1);
+        numberOfTowers++;
         return true;
     }
 
@@ -82,8 +90,7 @@ public class World {
         if (!b) return false;
         Queue<Vector2f> path = new PathFinder(this).findPath(getPositionGridCell(START), getPositionGridCell(END));
         Vector2i v = gridProject(position);
-        removeEntity(grid[v.x][v.y]);
-        grid[v.x][v.y] = null;
+        removeGridCell(v.x, v.y);
         return path.size() > 0;
     }
 
@@ -98,11 +105,19 @@ public class World {
     }
 
     public void removeGridCell(int x, int y) {
+        numberOfTowers--;
         removeEntity(grid[x][y]);
         grid[x][y] = null;
     }
 
     public boolean blocked(int x, int y) {
         return x >= World.GRID_SPACES || y >= World.GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
+    }
+
+    /**
+     * @return the numberOfTowers
+     */
+    public int getNumberOfTowers() {
+        return numberOfTowers;
     }
 }
