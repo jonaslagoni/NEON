@@ -91,11 +91,11 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
 
         statsTable.add("Wave: ").expandX().align(Align.left);
-        statsTable.add(waveCounterLabel).expandX().align(Align.left).row();
+        statsTable.add(waveCounterLabel).expandX().align(Align.right).row();
         statsTable.add("Enemy Difficulty Value: ").expandX().align(Align.left);
-        statsTable.add(waveScoreLabel).expandX().align(Align.left).row();
+        statsTable.add(waveScoreLabel).expandX().align(Align.right).row();
         statsTable.add("Neon Coins: ").expandX().align(Align.left);
-        statsTable.add(coinLabel).expandX().align(Align.left).row();
+        statsTable.add(coinLabel).expandX().align(Align.right).row();
         statsTable.align(Align.right).padBottom(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/5);
 
         statsGroup.addActor(statsTable);
