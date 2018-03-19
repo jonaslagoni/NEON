@@ -7,10 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
@@ -88,11 +87,16 @@ public class HUD implements InputProcessor, Plugin, Controller {
             }
         });
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
+        statsTable.top().right();
 
 
-        statsTable.top().left().add(waveCounterLabel).width(-1550).row();
-        statsTable.left().add(waveScoreLabel).width(-1550).row();
-        statsTable.left().add(coinLabel).width(-1550).row();
+        statsTable.add("Wave: ").expandX().align(Align.left);
+        statsTable.add(waveCounterLabel).expandX().align(Align.left).row();
+        statsTable.add("Enemy Difficulty Value: ").expandX().align(Align.left);
+        statsTable.add(waveScoreLabel).expandX().align(Align.left).row();
+        statsTable.add("Neon Coins: ").expandX().align(Align.left);
+        statsTable.add(coinLabel).expandX().align(Align.left).row();
+        statsTable.align(Align.right).padBottom(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/5);
 
         statsGroup.addActor(statsTable);
         placementGroup.addActor(placementTable);
@@ -199,8 +203,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
     @Override
     public void update() {
-        waveCounterLabel.setText("WaveService: " + waveService.getWaveCount());
-        waveScoreLabel.setText("EnemyScore: " + waveService.getWaveScore());
-        coinLabel.setText("Neon Coins: " + neonWallet.getCoins());
+        waveCounterLabel.setText(""+ waveService.getWaveCount());
+        waveScoreLabel.setText("" + waveService.getWaveScore());
+        coinLabel.setText("" + neonWallet.getCoins());
     }
 }
