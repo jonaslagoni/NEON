@@ -35,6 +35,7 @@ import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 import static com.neon.libary.vectors.VectorUtils.angle;
+import com.neon.targeting.TargetingPlugin;
 
 public class Game implements ApplicationListener {
 
@@ -100,7 +101,8 @@ public class Game implements ApplicationListener {
                 hud,
                 new PlayerPlugin(world, gameData),
                 new ProjectilePlugin(world, gameData),
-                new WeaponPlugin(world, gameData)
+                new WeaponPlugin(world, gameData),
+                new TargetingPlugin(world, gameData)
         );
         gameData.addController(new MoveController(world));
 
