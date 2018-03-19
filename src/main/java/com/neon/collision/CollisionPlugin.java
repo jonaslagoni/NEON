@@ -30,6 +30,5 @@ public class CollisionPlugin implements Plugin {
 
     @Override
     public void stop() {
-
     }
 }
