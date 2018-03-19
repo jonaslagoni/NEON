@@ -26,7 +26,7 @@ public class EnemyFactory {
             case "tier1":
                 switch (type) {
                     case 1:
-                        return build(REGULAR_SIZE, 200, 10,
+                        return build(REGULAR_SIZE, 200, 1,
                                 "images/Enemies/Tier1/Circle/1.png",
                                 "images/Enemies/Tier1/Circle/2.png",
                                 "images/Enemies/Tier1/Circle/3.png",
@@ -34,7 +34,7 @@ public class EnemyFactory {
                                 "images/Enemies/Tier1/Circle/5.png",
                                 "images/Enemies/Tier1/Circle/6.png");
                     case 2:
-                        return build(REGULAR_SIZE, 150, 10,
+                        return build(REGULAR_SIZE, 150, 1,
                                 "images/Enemies/Tier1/Triangle/1.png",
                                 "images/Enemies/Tier1/Triangle/2.png",
                                 "images/Enemies/Tier1/Triangle/3.png",
@@ -42,7 +42,7 @@ public class EnemyFactory {
                                 "images/Enemies/Tier1/Triangle/5.png",
                                 "images/Enemies/Tier1/Triangle/6.png");
                     case 3:
-                        return build(REGULAR_SIZE, 250, 10,
+                        return build(REGULAR_SIZE, 250, 1,
                                 "images/Enemies/Tier1/Square/1.png",
                                 "images/Enemies/Tier1/Square/2.png",
                                 "images/Enemies/Tier1/Square/3.png",
@@ -53,7 +53,7 @@ public class EnemyFactory {
             case "tier2":
                 switch (type) {
                     case 1:
-                        return build(REGULAR_SIZE, 2000, 50,
+                        return build(REGULAR_SIZE, 2000, 10,
                                 "images/Enemies/Tier2/Pentagon/1.png",
                                 "images/Enemies/Tier2/Pentagon/2.png",
                                 "images/Enemies/Tier2/Pentagon/3.png",
@@ -61,7 +61,7 @@ public class EnemyFactory {
                                 "images/Enemies/Tier2/Pentagon/5.png",
                                 "images/Enemies/Tier2/Pentagon/6.png");
                     case 2:
-                        return build(REGULAR_SIZE, 2250, 50,
+                        return build(REGULAR_SIZE, 2250, 10,
                                 "images/Enemies/Tier2/Hexagon/1.png",
                                 "images/Enemies/Tier2/Hexagon/2.png",
                                 "images/Enemies/Tier2/Hexagon/3.png",
@@ -69,7 +69,7 @@ public class EnemyFactory {
                                 "images/Enemies/Tier2/Hexagon/5.png",
                                 "images/Enemies/Tier2/Hexagon/6.png");
                     case 3:
-                        return build(REGULAR_SIZE, 2500, 50,
+                        return build(REGULAR_SIZE, 2500, 10,
                                 "images/Enemies/Tier2/Octagon/1.png",
                                 "images/Enemies/Tier2/Octagon/2.png",
                                 "images/Enemies/Tier2/Octagon/3.png",
@@ -80,7 +80,7 @@ public class EnemyFactory {
             case "tier3":
                 switch (type) {
                     case 1:
-                        return build(REGULAR_SIZE, 10000, 200,
+                        return build(REGULAR_SIZE, 10000, 50,
                                 "images/Enemies/Tier3/Star/1.png",
                                 "images/Enemies/Tier3/Star/2.png",
                                 "images/Enemies/Tier3/Star/3.png",
@@ -88,7 +88,7 @@ public class EnemyFactory {
                                 "images/Enemies/Tier3/Star/5.png",
                                 "images/Enemies/Tier3/Star/6.png");
                     case 2:
-                        return build(REGULAR_SIZE, 11250, 200,
+                        return build(REGULAR_SIZE, 11250, 50,
                                 "images/Enemies/Tier3/Cross/1.png",
                                 "images/Enemies/Tier3/Cross/2.png",
                                 "images/Enemies/Tier3/Cross/3.png",
@@ -96,7 +96,7 @@ public class EnemyFactory {
                                 "images/Enemies/Tier3/Cross/5.png",
                                 "images/Enemies/Tier3/Cross/6.png");
                     case 3:
-                        return build(REGULAR_SIZE, 12500, 200,
+                        return build(REGULAR_SIZE, 12500, 50,
                                 "images/Enemies/Tier3/Fidget/1.png",
                                 "images/Enemies/Tier3/Fidget/2.png",
                                 "images/Enemies/Tier3/Fidget/3.png",
@@ -108,7 +108,7 @@ public class EnemyFactory {
             case "boss":
                 switch (type) {
                     case 1:
-                        return build(BOSS_SIZE, 100000, 1000,
+                        return build(BOSS_SIZE, 100000, 200,
                                 "images/Enemies/Boss/Green.png",
                                 "images/Enemies/Boss/Green.png",
                                 "images/Enemies/Boss/Green.png",
@@ -117,7 +117,7 @@ public class EnemyFactory {
                                 "images/Enemies/Boss/Green.png");
 
                     case 2:
-                        return build(BOSS_SIZE, 112500, 1000,
+                        return build(BOSS_SIZE, 112500, 200,
                                 "images/Enemies/Boss/Red.png",
                                 "images/Enemies/Boss/Red.png",
                                 "images/Enemies/Boss/Red.png",
@@ -125,7 +125,7 @@ public class EnemyFactory {
                                 "images/Enemies/Boss/Red.png",
                                 "images/Enemies/Boss/Red.png");
                     case 3:
-                        return build(BOSS_SIZE, 125000, 1000,
+                        return build(BOSS_SIZE, 125000, 200,
                                 "images/Enemies/Boss/Blue.png",
                                 "images/Enemies/Boss/Blue.png",
                                 "images/Enemies/Boss/Blue.png",

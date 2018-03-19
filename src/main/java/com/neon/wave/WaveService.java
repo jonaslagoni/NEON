@@ -39,27 +39,14 @@ public class WaveService implements IWaveService {
 
         LinkedList<Entity> enemyList = new LinkedList<>();
 
-        waveDifficulty *= 2;
+        waveDifficulty += 2;
         waveCount++;
 
-        waveScore += (int) (Math.ceil(waveDifficulty + waveDifficulty * waveCount));
+        waveScore += (int) (Math.ceil(waveDifficulty * waveCount));
 
         enemyScore = waveScore;
 
 //        System.out.println(waveCount);
-
-        // Adds tier 2 every 10th wave
-        if (waveCount % 10 == 0) {
-            waveScore += tierScore[1] * 2;
-            // Adds tier 3 at 50th wave
-            if (waveCount == 50) {
-                waveScore += tierScore[2] * 2;
-            }
-            // Adds bosses at 100th wave
-            if (waveCount == 100) {
-                waveScore += tierScore[3] * 5;
-            }
-        }
 
 //        System.out.println("wave score = " + waveScore +
 //                " waveCount = " + waveCount +
@@ -71,20 +58,26 @@ public class WaveService implements IWaveService {
             int randomType = (int) (Math.random() * 3 + 1);
             int randomTypeTier2 = (int) (Math.random() * 2 + 1);
 
-            if (waveScore >= tierScore[3]) {
-                // Spawns bosses if waveScore is high enough
+            // add boss to enemyList if wave % 10 == 0 AND if wave >= 20
+            // Spawns bosses if waveScore is high enough
+            if (waveScore >= tierScore[3] && waveCount%10==0 && waveCount >= 20) {
                 waveScore -= tierScore[3];
                 enemyList.add(EnemyFactory.build("boss", randomType));
-            } else if (waveScore >= tierScore[2]) {
+
+                // add tier 3 to enemyList if wave >= 10
                 // Spawns tier 3 enemies if there is enough waveScore
-                waveScore = waveScore - tierScore[2];
+            } else if (waveScore >= tierScore[2] && waveCount >= 10) {
+                waveScore -= tierScore[2];
                 enemyList.add(EnemyFactory.build("tier3", randomType));
-            } else if (waveScore >= tierScore[1]) {
+
+                // add tier 2 to enemyList if wave >= 5
                 // Spawns tier 2 enemies if there is enough waveScore
-                waveScore -= -tierScore[1];
+            } else if (waveScore >= tierScore[1] && waveCount >= 5) {
+                waveScore -= tierScore[1];
                 enemyList.add(EnemyFactory.build("tier2", randomTypeTier2));
-            } else if (waveScore >= tierScore[0]) {
+
                 // Spawns tier 1 enemies if there is any waveScore left
+            } else if (waveScore >= tierScore[0]) {
                 waveScore -= tierScore[0];
                 enemyList.add(EnemyFactory.build("tier1", randomType));
             }
