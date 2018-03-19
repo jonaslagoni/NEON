@@ -34,6 +34,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private IWaveService waveService;
     private INeonWallet neonWallet;
     private ITowerService towerService;
+    private int counter;
 
     public HUD(World world,
                GameData gameData,
@@ -71,7 +72,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         statsTable.setFillParent(true);
 
         Table placementTable = new Table(gameData.getSkin());
-        placementTable.setFillParent(true);
+        placementTable.padRight(Gdx.graphics.getWidth()/100).padBottom(Gdx.graphics.getHeight()/100).setFillParent(true);
 
         Table upgradeTable = new Table(gameData.getSkin());
         upgradeTable.setFillParent(true);
@@ -100,7 +101,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         statsTable.add(coinLabel).expandX().align(Align.right).row();
         statsTable.add("Towers: ").expandX().align(Align.left);
         statsTable.add(towers).expandX().align(Align.right).row();
-        statsTable.align(Align.right).padBottom(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/5);
+        statsTable.align(Align.right).padBottom(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/10).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/5).padRight(Gdx.graphics.getWidth()/100);
 
         statsGroup.addActor(statsTable);
         placementGroup.addActor(placementTable);
@@ -114,6 +115,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         gameData.addInputProcessor(this);
 
         /*Create button for each placable item in gamedata*/
+        
         for (String title : gameData.getPlaceables()) {
             TextButton button = new TextButton("", gameData.getSkin(), title);
             button.addListener(new ClickListener() {
@@ -122,7 +124,12 @@ public class HUD implements InputProcessor, Plugin, Controller {
                     selectedEntity = title;
                 }
             });
+            
+            if(counter % 4 == 0){
+                placementTable.row();
+            }
             placementTable.bottom().right().add(button).width(World.GRID_CELL_SIZE / 2).height(World.GRID_CELL_SIZE / 2);
+            counter++;
         }
     }
 
