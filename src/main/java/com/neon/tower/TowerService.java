@@ -34,92 +34,92 @@ class TowerService implements ITowerService {
             case LASER_TOWER:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(20, 10, 0.08f);
                         break;
                     case 3:
-                        tower.getWeapon().affectWeapon(85, 20, 0.12f);
+                        tower.getWeapon().affectWeapon(40, 20, 0.12f);
                         break;
                     case 4:
-                        tower.getWeapon().affectWeapon(125, 30, 0.15f);
+                        tower.getWeapon().affectWeapon(80, 30, 0.15f);
                         break;
                 }
                 break;
             case MELEE_GLAIVE_TOWER:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(30, 5, 0.08f);
                         break;
                     case 3:
-                        tower.getWeapon().affectWeapon(85, 20, 0.12f);
+                        tower.getWeapon().affectWeapon(60, 10, 0.12f);
                         break;
                     case 4:
-                        tower.getWeapon().affectWeapon(125, 30, 0.15f);
+                        tower.getWeapon().affectWeapon(120, 15, 0.15f);
                         break;
                 }
                 break;
             case PEA_SHOOTER:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(40, 15, 0.05f);
                         break;
                     case 3:
-                        tower.getWeapon().affectWeapon(85, 20, 0.12f);
+                        tower.getWeapon().affectWeapon(80, 20, 0.08f);
                         break;
                     case 4:
-                        tower.getWeapon().affectWeapon(125, 30, 0.15f);
+                        tower.getWeapon().affectWeapon(160, 25, 0.12f);
                         break;
                 }
                 break;
             case RANGE_POWERUP:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(0, 20, 0.08f);
                         break;
                 }
                 break;
             case STRENGTH_POWERUP:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(100, 0, 0.08f);
                         break;
                 }
                 break;
             case RAILGUN_TOWER:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(5, 20, 0.10f);
                         break;
                     case 3:
-                        tower.getWeapon().affectWeapon(85, 20, 0.12f);
+                        tower.getWeapon().affectWeapon(10, 40, 0.15f);
                         break;
                     case 4:
-                        tower.getWeapon().affectWeapon(125, 30, 0.15f);
+                        tower.getWeapon().affectWeapon(20, 60, 0.20f);
                         break;
                 }
                 break;
             case ROCKET_TOWER:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(50, 10, 0.04f);
                         break;
                     case 3:
-                        tower.getWeapon().affectWeapon(85, 20, 0.12f);
+                        tower.getWeapon().affectWeapon(100, 20, 0.06f);
                         break;
                     case 4:
-                        tower.getWeapon().affectWeapon(125, 30, 0.15f);
+                        tower.getWeapon().affectWeapon(150, 30, 0.08f);
                         break;
                 }
                 break;
             case SPLASH_TOWER:
                 switch(tower.getLevel()){
                     case 2:
-                        tower.getWeapon().affectWeapon(50, 10, 0.08f);
+                        tower.getWeapon().affectWeapon(50, 10, 0.06f);
                         break;
                     case 3:
-                        tower.getWeapon().affectWeapon(85, 20, 0.12f);
+                        tower.getWeapon().affectWeapon(85, 20, 0.08f);
                         break;
                     case 4:
-                        tower.getWeapon().affectWeapon(125, 30, 0.15f);
+                        tower.getWeapon().affectWeapon(125, 30, 0.10f);
                         break;
                 }
                 break;
@@ -137,49 +137,49 @@ class TowerService implements ITowerService {
             world.setGridCell(pos, tower);
             switch (key) {
                 case LASER_TOWER:
-                    WeaponEntity weapon = new Weapon(512, tower.sprite.getPosition(), ShotType.GREEN_BEAM, -200);
+                    WeaponEntity weapon = new Weapon(512, tower.sprite.getPosition(), ShotType.GREEN_BEAM, 10);
                     tower.setWeapon(weapon);
                     world.addEntity(weapon);
                     break;
 
                 case MELEE_GLAIVE_TOWER:
-                    WeaponEntity meleeWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, -200);
+                    WeaponEntity meleeWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, 10);
                     tower.setWeapon(meleeWeapon);
                     world.addEntity(meleeWeapon);
                     break;
 
                 case PEA_SHOOTER:
-                    WeaponEntity peaWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.BLUE_BEAM, -200);
+                    WeaponEntity peaWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.BLUE_BEAM, 10);
                     tower.setWeapon(peaWeapon);
                     world.addEntity(peaWeapon);
                     break;
 
                 case RANGE_POWERUP:
-                    WeaponEntity rangePowerup = new Weapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, -200);
+                    WeaponEntity rangePowerup = new Weapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, 10);
                     tower.setWeapon(rangePowerup);
                     world.addEntity(rangePowerup);
                     break;
 
                 case STRENGTH_POWERUP:
-                    WeaponEntity strengthPowerup = new Weapon(512, tower.sprite.getPosition(), ShotType.RED_BEAM, -200);
+                    WeaponEntity strengthPowerup = new Weapon(512, tower.sprite.getPosition(), ShotType.RED_BEAM, 10);
                     tower.setWeapon(strengthPowerup);
                     world.addEntity(strengthPowerup);
                     break;
 
                 case RAILGUN_TOWER:
-                    WeaponEntity railWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.PINK_LASER, -200);
+                    WeaponEntity railWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.PINK_LASER, 10);
                     tower.setWeapon(railWeapon);
                     world.addEntity(railWeapon);
                     break;
 
                 case ROCKET_TOWER:
-                    WeaponEntity rocketWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.ROCKET_SHOT, -200);
+                    WeaponEntity rocketWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.ROCKET_SHOT, 10);
                     tower.setWeapon(rocketWeapon);
                     world.addEntity(rocketWeapon);
                     break;
 
                 case SPLASH_TOWER:
-                    WeaponEntity splashWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.GREEN_BOMB_SMALLER, -200);
+                    WeaponEntity splashWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.GREEN_BOMB_SMALLER, 10);
                     tower.setWeapon(splashWeapon);
                     world.addEntity(splashWeapon);
                     break;

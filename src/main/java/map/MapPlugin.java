@@ -26,13 +26,19 @@ public class MapPlugin implements Plugin {
     @Override
     public void start() {
         Random random = new Random();
+        Texture[] textures = {new Texture(Gdx.files.internal("images/Map/rocks/blue1.png")),
+                new Texture(Gdx.files.internal("images/Map/rocks/blue2.png")),
+                new Texture(Gdx.files.internal("images/Map/rocks/blue3.png")),
+                new Texture(Gdx.files.internal("images/Map/rocks/blue4.png")),
+                new Texture(Gdx.files.internal("images/Map/rocks/blue5.png")),
+                new Texture(Gdx.files.internal("images/Map/rocks/blue6.png"))};
         for (int i = 0; i < NUM_OBSTACLES; i++) {
             world.setGridCell(
                     new Vector2f((float) random.nextInt(World.WIDTH), (float) random.nextInt(World.HEIGHT)),
                     new Obstacle(new Sprite(
-                            new Texture(Gdx.files.internal("images/down-button.png")),
+                            textures[random.nextInt(textures.length)],
                             new Vector2f(0, 0),
-                            new Vector2f(0, 0),
+                            new Vector2f(random.nextInt(2), random.nextInt(2)),
                             World.GRID_CELL_SIZE,
                             World.GRID_CELL_SIZE
                     ))
