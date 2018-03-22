@@ -101,6 +101,7 @@ public class EnemyController implements Controller, IEnemyService {
 
         enemyCooldown += Gdx.graphics.getDeltaTime();
         waveCounter += Gdx.graphics.getDeltaTime();
+        System.out.println(waveCounter);
         /* Generate new Wave */
         if (deathCount <= 0 && waveCounter > WAVE_COOLDOWN) {
             wave = waveService.createWave();
@@ -115,6 +116,7 @@ public class EnemyController implements Controller, IEnemyService {
         }
         /* Update enemies */
         world.getEntities(Enemy.class).forEach(this::updateEnemy);
+
     }
 
     @Override

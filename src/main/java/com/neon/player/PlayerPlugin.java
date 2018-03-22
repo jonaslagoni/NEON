@@ -17,6 +17,7 @@ public class PlayerPlugin implements Plugin {
     private Player player;
     private World world;
     private GameData gameData;
+    private static final int PLAYER_SIZE = 64;
 
     public PlayerPlugin(World world, GameData gameData) {
         this.world = world;
@@ -29,8 +30,8 @@ public class PlayerPlugin implements Plugin {
                 new Texture(Gdx.files.internal("images/tower1.png")),
                 new Vector2f(World.WIDTH / 2, World.HEIGHT / 2),
                 new Vector2f(0, 200),
-                World.GRID_CELL_SIZE,
-                World.GRID_CELL_SIZE),
+                PLAYER_SIZE,
+                PLAYER_SIZE),
                 new MoveAbility(new Vector2f(0, 0), false));
         world.addEntity(player);
 

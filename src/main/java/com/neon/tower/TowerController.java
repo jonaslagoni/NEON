@@ -17,6 +17,6 @@ class TowerController implements Controller {
     }
 
     private void updateTower(Tower tower) {
-        tower.sprite.setTexture(tower.textures[tower.level]);
+        tower.sprite.setTexture(tower.textures[tower.level-1]);
     }
 }

@@ -16,16 +16,13 @@ public class EnemyPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addController(new EnemyController(world,
+        EnemyController enemyController = new EnemyController(world,
                 gameData.getService(ICollisionService.class),
                 gameData.getService(INeonService.class),
                 gameData.getService(IWaveService.class),
-                gameData.getService(IPathFindingService.class)));
-        gameData.addService(IEnemyService.class, new EnemyController(world,
-                gameData.getService(ICollisionService.class),
-                gameData.getService(INeonService.class),
-                gameData.getService(IWaveService.class),
-                gameData.getService(IPathFindingService.class)));
+                gameData.getService(IPathFindingService.class));
+        gameData.addController(enemyController);
+        gameData.addService(IEnemyService.class, enemyController);
     }
 
     @Override
