@@ -28,6 +28,7 @@ import com.neon.tower.TowerPlugin;
 import com.neon.ui.HUD;
 import com.neon.wave.WavePlugin;
 import com.neon.weapon.WeaponPlugin;
+import map.MapPlugin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,7 +88,8 @@ public class Game implements ApplicationListener {
                 new PlayerPlugin(world, gameData),
                 new ProjectilePlugin(world, gameData),
                 new WeaponPlugin(world, gameData),
-                new TargetingPlugin(world, gameData)
+                new TargetingPlugin(world, gameData),
+                new MapPlugin(world, gameData)
         );
         gameData.addController(new MoveController(world));
 
