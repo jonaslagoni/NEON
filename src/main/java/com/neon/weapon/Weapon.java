@@ -24,9 +24,12 @@ public class Weapon implements WeaponEntity {
         return shotType;
     }
     
+    @Override
     public void affectWeapon(float additiveDamage, float additiveRange, float additiveFireCooldown){
         damage += additiveDamage;
-        range += additiveRange;
-        fireRate -= additiveFireCooldown;
+        range = Math.abs(range += additiveRange);
+        if(fireRate - additiveFireCooldown >= 0.1){
+            fireRate -= additiveFireCooldown;
+        }
     }
 }

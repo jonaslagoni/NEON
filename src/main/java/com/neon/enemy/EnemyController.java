@@ -80,7 +80,9 @@ public class EnemyController implements Controller, IEnemyService {
         /* Remove enemy if it collides with player */
         for (Entity entity : collisionService.getCollisions(enemy.sprite)) {
             if (entity instanceof ProjectileEntity) {
-                enemy.hp -= 25;
+                if(enemy.hp - ((ProjectileEntity) entity).getDamage() <= enemy.maxHp){
+                    enemy.hp -= ((ProjectileEntity) entity).getDamage();
+                }
                 world.removeEntity(entity);
             }
         }

@@ -30,8 +30,8 @@ public class Projectile implements Moveable, ProjectileEntity {
     }
 
     @Override
-    public int getDamage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public float getDamage() {
+        return damage;
     }
 
 
