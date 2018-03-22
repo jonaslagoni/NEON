@@ -8,8 +8,8 @@ import com.badlogic.gdx.tools.texturepacker.TexturePacker.Settings;
 public class Main {
     public static void main(String[] args) {
         Settings settings = new Settings();
-        settings.maxWidth = 2048;
-        settings.maxHeight = 2048;
+        settings.maxWidth = 4096;
+        settings.maxHeight = 4096;
         TexturePacker.process(settings, "./images", "./assets", "assets");
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();

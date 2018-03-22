@@ -95,7 +95,7 @@ public class Game implements ApplicationListener {
         );
         gameData.addController(new MoveController(world));
 
-        bg = new Texture(Gdx.files.internal("images/up-button.png"));
+        bg = new Texture(Gdx.files.internal("images/background2048.png"));
 
         /* Start plugins */
         plugins.forEach(Plugin::start);
