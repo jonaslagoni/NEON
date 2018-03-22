@@ -22,19 +22,22 @@ class Enemy implements Moveable, Drawable, Targetable {
     int maxHp;
     float damageTimer;
     int coinValue;
+    int damage;
     Queue<Vector2f> path;
 
     Enemy(Sprite sprite,
           MoveAbility moveAbility,
           Texture[] textures,
           int hp,
-          int coinValue) {
+          int coinValue,
+          int damage) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;
         this.textures = textures;
         this.hp = hp;
         this.maxHp = hp;
         this.coinValue = coinValue;
+        this.damage = damage;
     }
 
     @Override

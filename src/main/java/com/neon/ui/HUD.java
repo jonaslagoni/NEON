@@ -32,10 +32,12 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private Label coinLabel;
     private Label towers;
     private Label waveCountdown;
+    private Label lifeLabel;
     private IWaveService waveService;
     private INeonService neonService;
     private ITowerService towerService;
     private IEnemyService enemyService;
+    private ILifeService lifeService;
     private int counter;
 
     public HUD(World world,
@@ -55,6 +57,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         this.waveService = gameData.getService(IWaveService.class);
         this.neonService = gameData.getService(INeonService.class);
         this.enemyService = gameData.getService(IEnemyService.class);
+        this.lifeService = gameData.getService(ILifeService.class);
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table(gameData.getSkin());
@@ -85,6 +88,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         coinLabel = new Label("", gameData.getSkin());
         towers = new Label("", gameData.getSkin());
         waveCountdown = new Label("", gameData.getSkin());
+        lifeLabel = new Label("", gameData.getSkin());
 
         TextButton upgradeButton = new TextButton("Upgrade", gameData.getSkin(), "upgradeTower");
         upgradeButton.addListener(new ClickListener() {
@@ -109,6 +113,9 @@ public class HUD implements InputProcessor, Plugin, Controller {
         statsTable.add(waveCountdown).expandX().align(Align.right).row();
 
         statsTable.add("").row();
+
+        statsTable.add("Life: ").expandX().align(Align.left);
+        statsTable.add(lifeLabel).expandX().align(Align.right).row();
 
         statsTable.add("Neon Coins: ").expandX().align(Align.left);
         statsTable.add(coinLabel).expandX().align(Align.right).row();
@@ -230,6 +237,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
     public void update() {
         waveCounterLabel.setText(""+ waveService.getWaveCount());
         waveScoreLabel.setText("" + waveService.getWaveScore());
+        lifeLabel.setText("" + lifeService.getLife());
         coinLabel.setText("" + neonService.getCoins());
         towers.setText("" + world.getNumberOfTowers());
         waveCountdown.setText("" + enemyService.getWaveCountdown());

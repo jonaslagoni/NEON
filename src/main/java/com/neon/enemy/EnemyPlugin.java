@@ -20,6 +20,7 @@ public class EnemyPlugin implements Plugin {
                 gameData.getService(ICollisionService.class),
                 gameData.getService(INeonService.class),
                 gameData.getService(IWaveService.class),
+                gameData.getService(ILifeService.class),
                 gameData.getService(IPathFindingService.class));
         gameData.addController(enemyController);
         gameData.addService(IEnemyService.class, enemyController);

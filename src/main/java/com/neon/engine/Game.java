@@ -19,6 +19,7 @@ import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Plugin;
+import com.neon.life.LifePlugin;
 import com.neon.neon_coin.NeonCoinPlugin;
 import com.neon.pathfinding.PathfindingPlugin;
 import com.neon.player.PlayerPlugin;
@@ -82,6 +83,7 @@ public class Game implements ApplicationListener {
                 new NeonCoinPlugin(world, gameData),
                 new TowerPlugin(world, gameData),
                 new CollisionPlugin(world, gameData),
+                new LifePlugin(world, gameData),
                 new WavePlugin(world, gameData),
                 new EnemyPlugin(world, gameData),
                 hud,

@@ -23,6 +23,7 @@ public class EnemyController implements Controller, IEnemyService {
     private final ICollisionService collisionService;
     private final IWaveService waveService;
     private final INeonService wallet;
+    private final ILifeService lifeService;
     private final IPathFindingService pathFindingService;
     private final World world;
     private final float WAVE_COOLDOWN = 20;
@@ -36,10 +37,12 @@ public class EnemyController implements Controller, IEnemyService {
                     ICollisionService collisionService,
                     INeonService wallet,
                     IWaveService waveService,
+                    ILifeService lifeService,
                     IPathFindingService pathFindingService) {
         this.collisionService = collisionService;
         this.world = world;
         this.waveService = waveService;
+        this.lifeService = lifeService;
         this.pathFindingService = pathFindingService;
         this.wallet = wallet;
     }
@@ -58,6 +61,7 @@ public class EnemyController implements Controller, IEnemyService {
         if (start.equals(end)) {
             deathCount--;
             world.removeEntity(enemy);
+            lifeService.subtracLife(enemy.damage);
             return;
         }
         /* Generate path if it doesn't have one */
