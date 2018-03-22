@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.neon.libary.GameData;
+import com.neon.libary.TowerType;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;
@@ -22,7 +23,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private final Batch batch;
     private final GameData gameData;
     private Stage hud;
-    private String selectedEntity = "";
+    private TowerType selectedEntity;
     private Entity selectedTower;
     private Group placementGroup;
     private Group upgradeGroup;
@@ -137,8 +138,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
         /*Create button for each placable item in gamedata*/
 
-        for (String title : gameData.getPlaceables()) {
-            TextButton button = new TextButton("", gameData.getSkin(), title);
+        for (TowerType title : gameData.getPlaceables()) {
+            TextButton button = new TextButton("", gameData.getSkin(), title.toString());
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -193,12 +194,12 @@ public class HUD implements InputProcessor, Plugin, Controller {
             return false;
         }
         /* If a tower is selected, place it */
-        if (!selectedEntity.trim().equals("")) {
+        if (selectedEntity != null) {
             if (!world.isValidPosition(pos)) {
                 return false;
             }
             towerService.placeTower(pos, selectedEntity);
-            selectedEntity = "";
+            selectedEntity = null;
             return false;
         }
 
@@ -208,7 +209,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
             selectedTower = entity;
             upgradeGroup.setVisible(true);
             placementGroup.setVisible(false);
-            return false;
+            return true;
         }
         return false;
     }

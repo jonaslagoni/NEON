@@ -10,8 +10,6 @@ import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;
 import com.neon.libary.vectors.Vector2i;
-import com.neon.player.Player;
-import com.neon.projectile.Projectile;
 
 import java.util.Queue;
 
@@ -81,10 +79,7 @@ public class EnemyController implements Controller, IEnemyService {
 
         /* Remove enemy if it collides with player */
         for (Entity entity : collisionService.getCollisions(enemy.sprite)) {
-            if (enemy.damageTimer >= 1 && entity.getClass() == Player.class) {
-                enemy.hp -= 10;
-                enemy.damageTimer = 0;
-            } else if (entity.getClass() == Projectile.class) {
+            if (entity instanceof ProjectileEntity) {
                 enemy.hp -= 25;
                 world.removeEntity(entity);
             }

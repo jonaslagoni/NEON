@@ -1,6 +1,7 @@
 package com.neon.tower;
 
 import com.neon.libary.GameData;
+import com.neon.libary.TowerType;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.INeonService;
 import com.neon.libary.interfaces.ITowerService;
@@ -22,14 +23,8 @@ public class TowerPlugin implements Plugin {
         gameData.addService(ITowerService.class, towerService);
         gameData.addController(new TowerController(world));
 
-        gameData.addPlaceable("laser-tower");
-        gameData.addPlaceable("melee-glaive-tower");
-        gameData.addPlaceable("pea-shooter");
-        gameData.addPlaceable("range-powerup");
-        gameData.addPlaceable("strenght-powerup");
-        gameData.addPlaceable("railgun-tower");
-        gameData.addPlaceable("rocket-tower");
-        gameData.addPlaceable("splash-tower");
+        for(TowerType t : TowerType.values())
+        gameData.addPlaceable(t);
 
 //        int[] ints = {800, 925, 1024, 1185};
 //        for (int i : ints) towerService.placeTower(new Vector2f(i, 1024), "laser-tower");

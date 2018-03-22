@@ -22,7 +22,7 @@ public class GameData {
      */
     private final InputMultiplexer multiplexer = new InputMultiplexer();
     private final List<Controller> controllers = new LinkedList<>();
-    private final List<String> placeables = new ArrayList<>();
+    private final List<TowerType> placeables = new ArrayList<>();
     /**
      * TODO Eventually replace with a premade service system.
      */
@@ -59,11 +59,11 @@ public class GameData {
         return controllers;
     }
 
-    public void addPlaceable(String title) {
+    public void addPlaceable(TowerType title) {
         placeables.add(title);
     }
 
-    public List<String> getPlaceables() {
+    public List<TowerType> getPlaceables() {
         return placeables;
     }
 

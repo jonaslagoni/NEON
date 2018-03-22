@@ -3,6 +3,7 @@ package com.neon.enemy;
 import com.badlogic.gdx.graphics.Texture;
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;
+import com.neon.libary.interfaces.DamageAble;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Moveable;
 import com.neon.libary.interfaces.Targetable;
@@ -13,7 +14,7 @@ import java.util.Queue;
 /**
  * Created by sam on 02-03-2018.
  */
-class Enemy implements Moveable, Drawable, Targetable {
+class Enemy implements Moveable, Drawable, Targetable, DamageAble {
 
     MoveAbility moveAbility;
     Sprite sprite;
@@ -48,6 +49,11 @@ class Enemy implements Moveable, Drawable, Targetable {
     @Override
     public Sprite getSprite() {
         return sprite;
+    }
+
+    @Override
+    public void setDamage(int damage) {
+        this.hp -= damage;
     }
 
 }

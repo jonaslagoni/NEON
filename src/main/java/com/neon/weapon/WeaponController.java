@@ -40,7 +40,7 @@ class WeaponController implements Controller {
 
         weapon.fireCooldown += Gdx.graphics.getDeltaTime();
 
-        if (weapon.fireCooldown < 0.5) return;
+        if (weapon.fireCooldown < weapon.fireRate) return;
 
         Drawable closest = null;
 
@@ -55,7 +55,7 @@ class WeaponController implements Controller {
 
 
         if (closest != null) {
-            projectileService.newProjectile(weapon.position, closest.getSprite().getPosition(), weapon.getShotType());
+            projectileService.newProjectile(weapon.position, closest.getSprite().getPosition(), weapon.getShotType(), weapon.damage);
 
             weapon.fireCooldown = 0;
         }
