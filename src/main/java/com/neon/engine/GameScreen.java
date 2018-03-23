@@ -1,13 +1,11 @@
 package com.neon.engine;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.collision.CollisionPlugin;
@@ -37,47 +35,28 @@ import java.util.List;
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 import static com.neon.libary.vectors.VectorUtils.angle;
 
-public class Game implements ApplicationListener {
+public class GameScreen implements Screen {
 
+    private final Neon game;
+    private final World world = new World();
+    private Texture bg;
+    private HUD hud;
+    private GameData gameData;
     private final OrthographicCamera camera = new OrthographicCamera();
     private final Viewport viewport = new ExtendViewport(World.WIDTH, World.HEIGHT, camera);
-    private final World world = new World();
-    private GameData gameData;
-    private SpriteBatch batch;
-    private HUD hud;
-    private Texture bg;
 
-    private void drawEntity(Drawable drawable) {
-        Sprite sprite = drawable.getSprite();
-        Texture texture = sprite.getTexture();
-        batch.draw(
-                texture, //The texture to use
-                sprite.getPosition().getX() - texture.getWidth() / 2, //Position x to draw
-                sprite.getPosition().getY() - texture.getHeight() / 2, //Position y to draw
-                texture.getWidth() / 2,
-                texture.getHeight() / 2,
-                texture.getWidth(),
-                texture.getHeight(),
-                sprite.getWidth() / texture.getWidth(),
-                sprite.getHeight() / texture.getHeight(),
-                angle(sprite.getVelocity()) * radDeg,
-                0, 0,
-                texture.getWidth(),
-                texture.getHeight(),
-                false, false
-        );
-    }
 
-    @Override
-    public void create() {
-        Skin skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
-        gameData = new GameData(skin, viewport);
+
+    public GameScreen(final Neon game) {
+
+        this.game = game;
+
+        gameData = new GameData(game.skin, viewport,game);
 
         Gdx.input.setInputProcessor(gameData.getMultiplexer());
 
-        batch = new SpriteBatch();
 
-        hud = new HUD(world, gameData, batch);
+        hud = new HUD(world, gameData, game.batch);
         List<Plugin> plugins = Arrays.asList(
                 new PathfindingPlugin(gameData, world),
                 new NeonCoinPlugin(world, gameData),
@@ -99,45 +78,71 @@ public class Game implements ApplicationListener {
 
         /* Start plugins */
         plugins.forEach(Plugin::start);
+
+    }
+
+    private void drawEntity(Drawable drawable) {
+        Sprite sprite = drawable.getSprite();
+        Texture texture = sprite.getTexture();
+        game.batch.draw(
+                texture, //The texture to use
+                sprite.getPosition().getX() - texture.getWidth() / 2, //Position x to draw
+                sprite.getPosition().getY() - texture.getHeight() / 2, //Position y to draw
+                texture.getWidth() / 2,
+                texture.getHeight() / 2,
+                texture.getWidth(),
+                texture.getHeight(),
+                sprite.getWidth() / texture.getWidth(),
+                sprite.getHeight() / texture.getHeight(),
+                angle(sprite.getVelocity()) * radDeg,
+                0, 0,
+                texture.getWidth(),
+                texture.getHeight(),
+                false, false
+        );
     }
 
     @Override
-    public void resize(int width, int height) {
-        viewport.update(width, height);
-        hud.getStage().getViewport().update(width, height);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+    public void show() {
+
     }
 
-    /**
-     * Main Loop that runs before each frame
-     */
     @Override
-    public void render() {
+    public void render(float delta) {
+
         gameData.getControllers().forEach(Controller::update);
-        draw();
-    }
-
-    private void draw() {
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
 
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         viewport.apply();
-        batch.begin();
+
+        camera.update();
+        game.batch.setProjectionMatrix(camera.combined);
+
+        game.batch.begin();
 
         /* Draw background */
-        batch.draw(bg, 0, 0, World.WIDTH, World.HEIGHT);
+        game.batch.draw(bg, 0, 0, World.WIDTH, World.HEIGHT);
 
         /* Draw all entities to screen*/
         world.getEntities(Drawable.class).forEach(this::drawEntity);
-        batch.end();
+        game.batch.end();
 
         /* Draw HUD*/
         hud.getStage().getViewport().apply();
         hud.getStage().draw();
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+        viewport.update(width, height);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+
+        hud.getStage().getViewport().update(width, height);
     }
 
     @Override
@@ -151,7 +156,12 @@ public class Game implements ApplicationListener {
     }
 
     @Override
+    public void hide() {
+
+    }
+
+    @Override
     public void dispose() {
-        batch.dispose();
+
     }
 }

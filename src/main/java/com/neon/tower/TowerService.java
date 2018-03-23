@@ -90,10 +90,10 @@ class TowerService implements ITowerService {
                         tower.getWeapon().affectWeapon(5, 20, 0.10f);
                         break;
                     case 3:
-                        tower.getWeapon().affectWeapon(10, 40, 0.15f);
+                        tower.getWeapon().affectWeapon(10, 40, 0.13f);
                         break;
                     case 4:
-                        tower.getWeapon().affectWeapon(20, 60, 0.20f);
+                        tower.getWeapon().affectWeapon(20, 60, 0.17f);
                         break;
                 }
                 break;

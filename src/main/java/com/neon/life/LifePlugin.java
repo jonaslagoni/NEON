@@ -3,9 +3,7 @@ package com.neon.life;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.ILifeService;
-import com.neon.libary.interfaces.INeonService;
 import com.neon.libary.interfaces.Plugin;
-import com.neon.neon_coin.NeonWallet;
 
 public class LifePlugin implements Plugin {
 
@@ -19,7 +17,7 @@ public class LifePlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(ILifeService.class, new Life());
+        gameData.addService(ILifeService.class, new Life(20,gameData));
     }
 
     @Override

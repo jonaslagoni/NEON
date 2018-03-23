@@ -1,9 +1,12 @@
 package com.neon.libary;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.neon.engine.EndScreen;
+import com.neon.engine.Neon;
 import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Factory;
 import com.neon.libary.interfaces.Service;
@@ -29,10 +32,12 @@ public class GameData {
     private final Map<Class<?>, Service> services = new HashMap<>();
     private Skin skin;
     private Viewport viewport;
+    private Neon game;
 
-    public GameData(Skin skin, Viewport viewport) {
+    public GameData(Skin skin, Viewport viewport, Neon game) {
         this.skin = skin;
         this.viewport = viewport;
+        this.game = game;
     }
 
     public InputMultiplexer getMultiplexer() {
@@ -82,5 +87,9 @@ public class GameData {
     @SuppressWarnings("unchecked")
     public <E extends Service> E getService(Class<E> iface) {
         return (E) services.get(iface);
+    }
+
+    public void endGame() {
+        game.endGame();
     }
 }

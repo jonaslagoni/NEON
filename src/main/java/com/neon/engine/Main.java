@@ -18,6 +18,6 @@ public class Main {
         //config.height = 768;
         //config.width = 1024;
         config.resizable = false;
-        new LwjglApplication(new Game(), config);
+        new LwjglApplication(new Neon(), config);
     }
 }

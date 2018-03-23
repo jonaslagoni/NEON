@@ -5,6 +5,7 @@
  */
 package com.neon.life;
 
+import com.neon.libary.GameData;
 import com.neon.libary.interfaces.ILifeService;
 
 /**
@@ -14,10 +15,19 @@ import com.neon.libary.interfaces.ILifeService;
 public class Life implements ILifeService {
     
     private int life = 20;
-    
+    private GameData gameData;
+
+    public Life(int life, GameData gameData) {
+        this.life = life;
+        this.gameData = gameData;
+    }
+
     @Override
     public int subtracLife(int i) {
         life -= i;
+        if (life <= 0) {
+            gameData.endGame();
+        }
         return life;
     }
 
