@@ -28,7 +28,7 @@ public class Weapon implements WeaponEntity {
     public void affectWeapon(float additiveDamage, float additiveRange, float additiveFireCooldown){
         damage += additiveDamage;
         range = Math.abs(range += additiveRange);
-        if(fireRate - additiveFireCooldown >= 0.1){
+        if(fireRate - additiveFireCooldown >= 0.01){
             fireRate -= additiveFireCooldown;
         }
     }
