@@ -16,6 +16,7 @@ import com.neon.libary.TowerType;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;
+import org.lwjgl.openal.AL;
 
 public class HUD implements InputProcessor, Plugin, Controller {
 
@@ -123,6 +124,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
         statsTable.add("Towers: ").expandX().align(Align.left);
         statsTable.add(towers).expandX().align(Align.right).row();
+
         statsTable.align(Align.right).align(Align.top).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/9*2).padRight(Gdx.graphics.getWidth()/100);
 
         statsGroup.addActor(statsTable);

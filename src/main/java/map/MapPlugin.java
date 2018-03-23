@@ -34,7 +34,7 @@ public class MapPlugin implements Plugin {
                 new Texture(Gdx.files.internal("images/Map/rocks/blue6.png"))};
         for (int i = 0; i < NUM_OBSTACLES; i++) {
             world.setGridCell(
-                    new Vector2f((float) random.nextInt(World.WIDTH), (float) random.nextInt(World.HEIGHT)),
+                    new Vector2f((float) (random.nextInt(World.WIDTH-256)+128), (float) random.nextInt(World.HEIGHT-256)+128),
                     new Obstacle(new Sprite(
                             textures[random.nextInt(textures.length)],
                             new Vector2f(0, 0),
