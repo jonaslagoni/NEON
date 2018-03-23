@@ -6,7 +6,6 @@
 package com.neon.libary;
 
 /**
- *
  * @author Mathias
  */
 public enum TowerType {
@@ -18,13 +17,14 @@ public enum TowerType {
     RAILGUN_TOWER("railgun-tower"),
     ROCKET_TOWER("rocket-tower"),
     SPLASH_TOWER("splash-tower");
-    
+
     private String title;
-    
-    TowerType(String title){
+
+    TowerType(String title) {
         this.title = title;
     }
-    public String toString(){
+
+    public String toString() {
         return title;
     }
 }

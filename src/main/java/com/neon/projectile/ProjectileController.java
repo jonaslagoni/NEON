@@ -1,6 +1,5 @@
 package com.neon.projectile;
 
-import com.neon.collision.CollisionService;
 import com.neon.libary.GameData;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;
@@ -19,7 +18,7 @@ public class ProjectileController implements Controller {
     }
 
     @Override
-    public void update() {
+    public void update(float dt) {
         world.getEntities(Projectile.class).forEach(this::updateProjectile);
     }
 
@@ -28,11 +27,11 @@ public class ProjectileController implements Controller {
             world.removeEntity(projectile);
         }
 
-        for (Entity entity : collisionService.getCollisions(projectile.sprite)){
-                if(entity instanceof DamageAble) {
-                    ((DamageAble) entity).setDamage(projectile.damage);
-                    world.removeEntity(projectile);
-                }
+        for (Entity entity : collisionService.getCollisions(projectile.sprite)) {
+            if (entity instanceof DamageAble) {
+                ((DamageAble) entity).setDamage(projectile.damage);
+                world.removeEntity(projectile);
+            }
         }
     }
 

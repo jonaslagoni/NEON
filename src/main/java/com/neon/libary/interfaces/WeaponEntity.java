@@ -6,11 +6,10 @@
 package com.neon.libary.interfaces;
 
 /**
- *
  * @author Mathias
  */
 public interface WeaponEntity extends Entity {
-    
-    public void affectWeapon(float additiveDamage, float additiveRange, float additiveFireCooldown);
-    
+
+    void affectWeapon(float additiveDamage, float additiveRange, float additiveFireCooldown);
+
 }

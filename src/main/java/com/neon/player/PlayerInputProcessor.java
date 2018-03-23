@@ -10,8 +10,8 @@ import static com.badlogic.gdx.Input.Buttons;
 
 public class PlayerInputProcessor implements InputProcessor {
 
-    private Player player;
-    private GameData gameData;
+    private final Player player;
+    private final GameData gameData;
 
     PlayerInputProcessor(Player player, GameData gameData) {
         this.player = player;

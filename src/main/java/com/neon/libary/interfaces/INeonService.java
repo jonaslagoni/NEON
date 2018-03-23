@@ -5,8 +5,11 @@ package com.neon.libary.interfaces;
  */
 public interface INeonService extends Service {
 
-    public boolean subtractCoins(int i);
-    public void addCoins(int i);
-    public int getCoins();
-    public void setCoins(int i);
+    boolean subtractCoins(int i);
+
+    void addCoins(int i);
+
+    int getCoins();
+
+    void setCoins(int i);
 }

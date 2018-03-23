@@ -1,6 +1,5 @@
 package com.neon.libary.vectors;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 
 import static com.badlogic.gdx.math.MathUtils.atan2;
@@ -45,8 +44,7 @@ public final class VectorUtils {
         return new Vector2f(v.x * f, v.y * f);
     }
 
-    public static Vector2f translate(Vector2f p, Vector2f v) {
-        float dt = Gdx.graphics.getDeltaTime();
+    public static Vector2f translate(Vector2f p, Vector2f v, float dt) {
 
         float dx = p.x + v.x * dt;
         float dy = p.y + v.y * dt;

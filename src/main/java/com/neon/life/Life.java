@@ -9,21 +9,21 @@ import com.neon.libary.GameData;
 import com.neon.libary.interfaces.ILifeService;
 
 /**
- *
  * @author Ejer
  */
 public class Life implements ILifeService {
-    
-    private int life = 20;
+
+    private int life;
+
     private GameData gameData;
 
-    public Life(int life, GameData gameData) {
+    Life(int life, GameData gameData) {
         this.life = life;
         this.gameData = gameData;
     }
 
     @Override
-    public int subtracLife(int i) {
+    public int subtractLife(int i) {
         life -= i;
         if (life <= 0) {
             gameData.endGame();
@@ -38,7 +38,5 @@ public class Life implements ILifeService {
 
     @Override
     public void setLife() {
-
     }
-
 }

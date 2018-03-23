@@ -5,7 +5,6 @@
  */
 package com.neon.enemy;
 
-import com.badlogic.gdx.Gdx;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;
@@ -18,7 +17,6 @@ import static com.neon.libary.vectors.VectorUtils.translateVelocity;
 
 public class EnemyController implements Controller, IEnemyService {
 
-    private final ICollisionService collisionService;
     private final IWaveService waveService;
     private final INeonService wallet;
     private final ILifeService lifeService;
@@ -32,12 +30,10 @@ public class EnemyController implements Controller, IEnemyService {
     private int deathCount;
 
     EnemyController(World world,
-                    ICollisionService collisionService,
                     INeonService wallet,
                     IWaveService waveService,
                     ILifeService lifeService,
                     IPathFindingService pathFindingService) {
-        this.collisionService = collisionService;
         this.world = world;
         this.waveService = waveService;
         this.lifeService = lifeService;
@@ -45,9 +41,9 @@ public class EnemyController implements Controller, IEnemyService {
         this.wallet = wallet;
     }
 
-    private void updateEnemy(final Enemy enemy) {
+    private void updateEnemy(final Enemy enemy, float dt) {
 
-        enemy.damageTimer += Gdx.graphics.getDeltaTime();
+        enemy.damageTimer += dt;
 
         Vector2f position = enemy.sprite.getPosition();
         Vector2f velocity = enemy.sprite.getVelocity();
@@ -59,7 +55,7 @@ public class EnemyController implements Controller, IEnemyService {
         if (start.equals(end)) {
             deathCount--;
             world.removeEntity(enemy);
-            lifeService.subtracLife(enemy.damage);
+            lifeService.subtractLife(enemy.damage);
             return;
         }
         /* Generate path if it doesn't have one */
@@ -67,10 +63,10 @@ public class EnemyController implements Controller, IEnemyService {
             enemy.path = pathFindingService.findPath(start, end);
         }
         /* Move to next step in the path if it has reached the step */
-        if (!enemy.path.isEmpty() && distance(position, enemy.path.element()) < 2) {
+        if (!enemy.path.isEmpty() && distance(position, enemy.path.element()) < 6) {
             enemy.path.remove();
         }
-        // Set target vector
+        /* Set target vector */
         if (!enemy.path.isEmpty()) {
             enemy.moveAbility.setTarget(enemy.path.element());
         }
@@ -89,10 +85,10 @@ public class EnemyController implements Controller, IEnemyService {
     }
 
     @Override
-    public void update() {
+    public void update(float dt) {
 
-        enemyCooldown += Gdx.graphics.getDeltaTime();
-        waveCounter += Gdx.graphics.getDeltaTime();
+        enemyCooldown += dt;
+        waveCounter += dt;
         /* Generate new Wave */
         if (deathCount <= 0 && waveCounter > WAVE_COOLDOWN) {
             wave = waveService.createWave();
@@ -106,7 +102,7 @@ public class EnemyController implements Controller, IEnemyService {
             waveCounter = 0;
         }
         /* Update enemies */
-        world.getEntities(Enemy.class).forEach(this::updateEnemy);
+        world.getEntities(Enemy.class).forEach(enemy -> updateEnemy(enemy, dt));
 
     }
 

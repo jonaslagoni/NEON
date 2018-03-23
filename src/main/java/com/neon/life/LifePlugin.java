@@ -7,8 +7,9 @@ import com.neon.libary.interfaces.Plugin;
 
 public class LifePlugin implements Plugin {
 
-    private GameData gameData;
-    private World world;
+    private final GameData gameData;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final World world;
 
     public LifePlugin(World world, GameData gameData) {
         this.gameData = gameData;
@@ -17,7 +18,7 @@ public class LifePlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(ILifeService.class, new Life(20,gameData));
+        gameData.addService(ILifeService.class, new Life(20, gameData));
     }
 
     @Override

@@ -1,10 +1,8 @@
 package com.neon.weapon;
 
-import com.badlogic.gdx.Gdx;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;
-import com.neon.libary.vectors.VectorUtils;
 
 import static com.neon.libary.vectors.VectorUtils.distanceSquare;
 
@@ -29,51 +27,36 @@ class WeaponController implements Controller {
     }
 
 
-
-
     @Override
-    public void update() {
-        world.getEntities(Weapon.class).forEach(this::updateWeapon);
+    public void update(float dt) {
+        world.getEntities(Weapon.class).forEach(weapon -> updateWeapon(weapon, dt));
     }
 
-    private void updateWeapon(Weapon weapon) {
+    private void updateWeapon(Weapon weapon, float dt) {
 
-        weapon.fireCooldown += Gdx.graphics.getDeltaTime();
+        weapon.fireCooldown += dt;
 
         if (weapon.fireCooldown < weapon.fireRate) return;
 
         Drawable closest = null;
 
         for (Drawable target : collisionService.getCollisions(weapon.position, weapon.range)) {
+
             if (closest == null || isCloser(weapon.position, target.getSprite().getPosition(), closest.getSprite().getPosition()))
                 if (target instanceof Targetable)
                     closest = target;
-
-
-
         }
-
 
         if (closest != null) {
-            projectileService.newProjectile(weapon.position, closest.getSprite().getPosition(), weapon.getShotType(), weapon.damage);
+            Vector2f position = closest.getSprite().getPosition();
 
+            projectileService.newProjectile(weapon.position, position, weapon.getShotType(), weapon.damage);
             weapon.fireCooldown = 0;
         }
-
-
-/**
- * Implements the Targeting system for towers
- */
-      //  if (closest != null) {
-      //     projectileService.newProjectile(weapon.position, findTarget(closest, weapon));
-      //      weapon.fireCooldown = 0;
-      //        }
     }
+
     private Vector2f findTarget(Drawable targetSprite, Weapon weapon) {
-
-            Vector2f newTarget;
-
-            return newTarget = targetingService.calculateTargetVector(weapon.position, targetSprite.getSprite());
+        return targetingService.calculateTargetVector(weapon.position, targetSprite.getSprite());
 
     }
 }

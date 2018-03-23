@@ -25,14 +25,14 @@ class TowerService implements ITowerService {
         if (!(entity instanceof Tower)) {
             return;
         }
-         Tower tower = (Tower) entity;
+        Tower tower = (Tower) entity;
         if (tower.getLevel() >= tower.maxLevel || !neonWallet.subtractCoins(tower.getCost())) {
             return;
         }
         tower.increaseLevel();
-        switch(tower.getTowerType()){
+        switch (tower.getTowerType()) {
             case LASER_TOWER:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(20, 10, 0.08f);
                         break;
@@ -45,7 +45,7 @@ class TowerService implements ITowerService {
                 }
                 break;
             case MELEE_GLAIVE_TOWER:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(30, 5, 0.08f);
                         break;
@@ -58,7 +58,7 @@ class TowerService implements ITowerService {
                 }
                 break;
             case PEA_SHOOTER:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(40, 15, 0.05f);
                         break;
@@ -71,21 +71,21 @@ class TowerService implements ITowerService {
                 }
                 break;
             case RANGE_POWERUP:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(0, 20, 0.08f);
                         break;
                 }
                 break;
             case STRENGTH_POWERUP:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(100, 0, 0.08f);
                         break;
                 }
                 break;
             case RAILGUN_TOWER:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(5, 20, 0.10f);
                         break;
@@ -98,7 +98,7 @@ class TowerService implements ITowerService {
                 }
                 break;
             case ROCKET_TOWER:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(50, 10, 0.04f);
                         break;
@@ -111,7 +111,7 @@ class TowerService implements ITowerService {
                 }
                 break;
             case SPLASH_TOWER:
-                switch(tower.getLevel()){
+                switch (tower.getLevel()) {
                     case 2:
                         tower.getWeapon().affectWeapon(50, 10, 0.06f);
                         break;
@@ -124,9 +124,9 @@ class TowerService implements ITowerService {
                 }
                 break;
         }
-        
+
     }
-    
+
     @Override
     public void placeTower(Vector2f pos, TowerType key) {
         Tower tower = TowerFactory.build(key);

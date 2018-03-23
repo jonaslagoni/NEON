@@ -1,11 +1,12 @@
 package com.neon.engine;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.neon.collision.CollisionPlugin;
@@ -14,7 +15,6 @@ import com.neon.libary.GameData;
 import com.neon.libary.MoveController;
 import com.neon.libary.Sprite;
 import com.neon.libary.World;
-import com.neon.libary.interfaces.Controller;
 import com.neon.libary.interfaces.Drawable;
 import com.neon.libary.interfaces.Plugin;
 import com.neon.life.LifePlugin;
@@ -39,22 +39,17 @@ public class GameScreen implements Screen {
 
     private final Neon game;
     private final World world = new World();
+    private final OrthographicCamera camera = new OrthographicCamera();
+    private final Viewport viewport = new ExtendViewport(World.WIDTH, World.HEIGHT, camera);
     private Texture bg;
     private HUD hud;
     private GameData gameData;
-    private final OrthographicCamera camera = new OrthographicCamera();
-    private final Viewport viewport = new ExtendViewport(World.WIDTH, World.HEIGHT, camera);
+    private boolean speedUp;
 
-
-
-    public GameScreen(final Neon game) {
-
+    GameScreen(final Neon game) {
         this.game = game;
-
-        gameData = new GameData(game.skin, viewport,game);
-
+        gameData = new GameData(game.skin, viewport, game);
         Gdx.input.setInputProcessor(gameData.getMultiplexer());
-
 
         hud = new HUD(world, gameData, game.batch);
         List<Plugin> plugins = Arrays.asList(
@@ -78,6 +73,53 @@ public class GameScreen implements Screen {
 
         /* Start plugins */
         plugins.forEach(Plugin::start);
+
+        gameData.addInputProcessor(new InputProcessor() {
+            @Override
+            public boolean keyDown(int keycode) {
+                switch (keycode) {
+                    case Input.Keys.SPACE:
+                        speedUp = !speedUp;
+                        return true;
+                }
+                return false;
+            }
+
+            @Override
+            public boolean keyUp(int keycode) {
+                return false;
+            }
+
+            @Override
+            public boolean keyTyped(char character) {
+                return false;
+            }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                return false;
+            }
+
+            @Override
+            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+                return false;
+            }
+
+            @Override
+            public boolean touchDragged(int screenX, int screenY, int pointer) {
+                return false;
+            }
+
+            @Override
+            public boolean mouseMoved(int screenX, int screenY) {
+                return false;
+            }
+
+            @Override
+            public boolean scrolled(int amount) {
+                return false;
+            }
+        });
 
     }
 
@@ -110,7 +152,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        gameData.getControllers().forEach(Controller::update);
+        gameData.getControllers().forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
 
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);

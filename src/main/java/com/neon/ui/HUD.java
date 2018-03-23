@@ -7,7 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -16,7 +18,6 @@ import com.neon.libary.TowerType;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;
-import org.lwjgl.openal.AL;
 
 public class HUD implements InputProcessor, Plugin, Controller {
 
@@ -80,7 +81,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         statsTable.setFillParent(true);
 
         Table placementTable = new Table(gameData.getSkin());
-        placementTable.padRight(Gdx.graphics.getWidth()/100).padBottom(Gdx.graphics.getHeight()/100).setFillParent(true);
+        placementTable.padRight(Gdx.graphics.getWidth() / 100).padBottom(Gdx.graphics.getHeight() / 100).setFillParent(true);
 
         Table upgradeTable = new Table(gameData.getSkin());
         upgradeTable.setFillParent(true);
@@ -125,7 +126,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
         statsTable.add("Towers: ").expandX().align(Align.left);
         statsTable.add(towers).expandX().align(Align.right).row();
 
-        statsTable.align(Align.right).align(Align.top).padLeft(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/9*2).padRight(Gdx.graphics.getWidth()/100);
+        statsTable.align(Align.right).align(Align.top).padLeft(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 9 * 2).padRight(Gdx.graphics.getWidth() / 100);
 
         statsGroup.addActor(statsTable);
         placementGroup.addActor(placementTable);
@@ -149,7 +150,7 @@ public class HUD implements InputProcessor, Plugin, Controller {
                 }
             });
 
-            if(counter % 4 == 0){
+            if (counter % 4 == 0) {
                 placementTable.row();
             }
             placementTable.bottom().right().add(button).width(World.GRID_CELL_SIZE / 2).height(World.GRID_CELL_SIZE / 2);
@@ -237,8 +238,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
     }
 
     @Override
-    public void update() {
-        waveCounterLabel.setText(""+ waveService.getWaveCount());
+    public void update(float dt) {
+        waveCounterLabel.setText("" + waveService.getWaveCount());
         waveScoreLabel.setText("" + waveService.getWaveScore());
         lifeLabel.setText("" + lifeService.getLife());
         coinLabel.setText("" + neonService.getCoins());

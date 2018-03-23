@@ -1,5 +1,5 @@
 package com.neon.libary.interfaces;
 
 public interface Controller {
-    void update();
+    void update(float dt);
 }

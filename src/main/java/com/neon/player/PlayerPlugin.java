@@ -12,12 +12,12 @@ import com.neon.libary.vectors.Vector2f;
 
 public class PlayerPlugin implements Plugin {
 
+    private static final int PLAYER_SIZE = 64;
     private InputProcessor inputProcessor;
     private PlayerController playerController;
     private Player player;
     private World world;
     private GameData gameData;
-    private static final int PLAYER_SIZE = 64;
 
     public PlayerPlugin(World world, GameData gameData) {
         this.world = world;

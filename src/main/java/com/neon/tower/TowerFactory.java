@@ -1,9 +1,9 @@
 package com.neon.tower;
 
-import com.neon.libary.TowerType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.neon.libary.Sprite;
+import com.neon.libary.TowerType;
 import com.neon.libary.World;
 import com.neon.libary.vectors.Vector2f;
 

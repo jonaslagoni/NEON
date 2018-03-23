@@ -10,8 +10,8 @@ import com.neon.libary.interfaces.Plugin;
  */
 public class NeonCoinPlugin implements Plugin {
 
-    private GameData gameData;
-    private World world;
+    private final GameData gameData;
+    private final World world;
 
     public NeonCoinPlugin(World world, GameData gameData) {
         this.gameData = gameData;

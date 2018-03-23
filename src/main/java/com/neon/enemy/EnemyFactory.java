@@ -85,7 +85,7 @@ public class EnemyFactory {
             case "tier3":
                 switch (type) {
                     case 1:
-                        return build(REGULAR_SIZE, 10000, tier3Value, damage, 
+                        return build(REGULAR_SIZE, 10000, tier3Value, damage,
                                 "images/Enemies/Tier3/Star/1.png",
                                 "images/Enemies/Tier3/Star/2.png",
                                 "images/Enemies/Tier3/Star/3.png",
@@ -122,7 +122,7 @@ public class EnemyFactory {
                                 "images/Enemies/Boss/Green.png");
 
                     case 2:
-                        return build(BOSS_SIZE, 112500, bossValue, damage, 
+                        return build(BOSS_SIZE, 112500, bossValue, damage,
                                 "images/Enemies/Boss/Red.png",
                                 "images/Enemies/Boss/Red.png",
                                 "images/Enemies/Boss/Red.png",

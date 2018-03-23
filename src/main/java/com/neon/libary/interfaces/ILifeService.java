@@ -6,13 +6,14 @@
 package com.neon.libary.interfaces;
 
 /**
- *
  * @author Ejer
  */
 public interface ILifeService extends Service {
 
-    public int subtracLife(int i);
-    public int getLife();
-    public void setLife();
+    int subtractLife(int i);
+
+    int getLife();
+
+    void setLife();
 
 }

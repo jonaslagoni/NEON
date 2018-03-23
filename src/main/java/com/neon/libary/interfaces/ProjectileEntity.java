@@ -6,7 +6,6 @@
 package com.neon.libary.interfaces;
 
 /**
- *
  * @author Mathias
  */
 public interface ProjectileEntity extends Entity {

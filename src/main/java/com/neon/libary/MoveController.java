@@ -14,9 +14,8 @@ public class MoveController implements Controller {
         this.world = world;
     }
 
-    private void moveEntity(Moveable moveable) {
+    private void moveEntity(Moveable moveable, float dt) {
         /* Move */
-
         MoveAbility moveAbility = moveable.getMoveAbility();
         Sprite sprite = moveable.getSprite();
 
@@ -25,12 +24,12 @@ public class MoveController implements Controller {
         Vector2f velocity = sprite.getVelocity();
         Vector2f position = sprite.getPosition();
 
-        Vector2f newPosition = translate(position, velocity);
+        Vector2f newPosition = translate(position, velocity, dt);
         sprite.setPosition(newPosition);
     }
 
     @Override
-    public void update() {
-        world.getEntities(Moveable.class).forEach(this::moveEntity);
+    public void update(float dt) {
+        world.getEntities(Moveable.class).forEach(m -> moveEntity(m, dt));
     }
 }

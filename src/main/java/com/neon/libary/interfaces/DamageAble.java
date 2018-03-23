@@ -6,11 +6,10 @@
 package com.neon.libary.interfaces;
 
 /**
- *
  * @author Mathias
  */
 public interface DamageAble {
-    
+
     void setDamage(float damage);
-    
+
 }

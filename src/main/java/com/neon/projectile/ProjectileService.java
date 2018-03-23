@@ -23,7 +23,7 @@ public class ProjectileService implements IProjectileService {
     public void newProjectile(Vector2f spawn, Vector2f target, ShotType shotType, float damage) {
 
         switch (shotType) {
-       
+
             case GREEN_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -36,9 +36,9 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-               
+
             case YELLOW_BEAM:
-                 world.addEntity(new Projectile(
+                world.addEntity(new Projectile(
                         new Sprite(
                                 new Texture(Gdx.files.internal("images/beams/yellow_beam.png")),
                                 new Vector2f(spawn.getX(), spawn.getY()),
@@ -75,7 +75,7 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-               
+
             case PINK_LASER:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -87,7 +87,7 @@ public class ProjectileService implements IProjectileService {
                         new MoveAbility(new Vector2f(0, 0), true),
                         damage
                 ));
-               break;
+                break;
 
             case ROCKET_SHOT:
                 world.addEntity(new Projectile(
@@ -114,7 +114,7 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-              
+
         }
     }
 

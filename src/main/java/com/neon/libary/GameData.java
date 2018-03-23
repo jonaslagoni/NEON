@@ -1,21 +1,14 @@
 package com.neon.libary;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.neon.engine.EndScreen;
 import com.neon.engine.Neon;
 import com.neon.libary.interfaces.Controller;
-import com.neon.libary.interfaces.Factory;
 import com.neon.libary.interfaces.Service;
-import java.util.ArrayList;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameData {
 

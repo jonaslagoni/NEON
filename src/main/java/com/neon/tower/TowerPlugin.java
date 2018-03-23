@@ -23,11 +23,8 @@ public class TowerPlugin implements Plugin {
         gameData.addService(ITowerService.class, towerService);
         gameData.addController(new TowerController(world));
 
-        for(TowerType t : TowerType.values())
-        gameData.addPlaceable(t);
-
-//        int[] ints = {800, 925, 1024, 1185};
-//        for (int i : ints) towerService.placeTower(new Vector2f(i, 1024), "laser-tower");
+        for (TowerType t : TowerType.values())
+            gameData.addPlaceable(t);
     }
 
     @Override

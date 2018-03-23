@@ -20,6 +20,7 @@ public class World {
     public static final int MAX_WIDTH = WIDTH - 1;
     @SuppressWarnings("WeakerAccess")
     public static final int MAX_HEIGHT = HEIGHT - 1;
+    @SuppressWarnings("WeakerAccess")
     public static final int GRID_SPACES = 16;
     public static final int GRID_CELL_SIZE = HEIGHT / GRID_SPACES;
     @SuppressWarnings("WeakerAccess")
@@ -29,8 +30,8 @@ public class World {
 
     private final List<Entity> entities = new ArrayList<>();
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
-    private int numberOfTowers = 0;
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
+    private int numberOfTowers = 0;
 
     public static boolean isOutOfBounds(Vector2f v) {
         return v.getX() < 0 || v.getX() > WIDTH || v.getY() < 0 || v.getY() > HEIGHT;
@@ -46,11 +47,11 @@ public class World {
 
     public void addEntity(Entity entity) {
         cache.clear();
-        if(entities.size() > 0){
-            Entity e = entities.get(entities.size()-1);
-            entities.set(entities.size()-1, entity);
+        if (entities.size() > 0) {
+            Entity e = entities.get(entities.size() - 1);
+            entities.set(entities.size() - 1, entity);
             entities.add(e);
-        }else{
+        } else {
             entities.add(entity);
         }
     }
@@ -104,7 +105,7 @@ public class World {
         return new Vector2i(v.x < 0 ? 0 : v.x, v.y < 0 ? 0 : v.y);
     }
 
-    public void removeGridCell(int x, int y) {
+    private void removeGridCell(int x, int y) {
         numberOfTowers--;
         removeEntity(grid[x][y]);
         grid[x][y] = null;

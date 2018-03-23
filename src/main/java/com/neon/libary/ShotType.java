@@ -6,7 +6,6 @@
 package com.neon.libary;
 
 /**
- *
  * @author Mathias
  */
 public enum ShotType {

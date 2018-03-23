@@ -10,10 +10,9 @@ import com.neon.libary.Sprite;
 import com.neon.libary.vectors.Vector2f;
 
 /**
- *
  * @author Daniel
  */
 public interface ITargetingService extends Service {
-    
+
     Vector2f calculateTargetVector(Vector2f weaponPosition, Sprite enemy);
 }

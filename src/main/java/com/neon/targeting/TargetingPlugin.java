@@ -11,27 +11,26 @@ import com.neon.libary.interfaces.ITargetingService;
 import com.neon.libary.interfaces.Plugin;
 
 /**
- *
  * @author Daniel
  */
 public class TargetingPlugin implements Plugin {
-    
-    World world;
-    GameData gameData;
-    
-    public TargetingPlugin(World world, GameData gameData){
+
+    private World world;
+    private GameData gameData;
+
+    public TargetingPlugin(World world, GameData gameData) {
         this.gameData = gameData;
         this.world = world;
     }
 
     @Override
     public void start() {
-        gameData.addService(ITargetingService.class, new TargetCalculation(world, gameData));
+        gameData.addService(ITargetingService.class, new TargetingService(world, gameData));
     }
 
     @Override
     public void stop() {
-        
+
     }
-    
+
 }
