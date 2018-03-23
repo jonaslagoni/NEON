@@ -77,15 +77,6 @@ public class EnemyController implements Controller, IEnemyService {
         enemy.moveAbility.setMove(true);
         enemy.sprite.setVelocity(translateVelocity(position, target, velocity));
 
-        /* Remove enemy if it collides with player */
-        for (Entity entity : collisionService.getCollisions(enemy.sprite)) {
-            if (entity instanceof ProjectileEntity) {
-                if(enemy.hp - ((ProjectileEntity) entity).getDamage() <= enemy.maxHp){
-                    enemy.hp -= ((ProjectileEntity) entity).getDamage();
-                }
-                world.removeEntity(entity);
-            }
-        }
         /* If enemy is killed */
         if (enemy.hp <= 0) {
             deathCount--;

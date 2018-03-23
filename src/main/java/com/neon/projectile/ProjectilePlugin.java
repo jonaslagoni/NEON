@@ -17,7 +17,7 @@ public class ProjectilePlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addController(new ProjectileController(world));
+        gameData.addController(new ProjectileController(world, gameData));
         gameData.addService(IProjectileService.class, new ProjectileService(world));
     }
 
