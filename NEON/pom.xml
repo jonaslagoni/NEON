@@ -74,7 +74,11 @@
         <module>neon_coin</module>
         <module>PathFinding</module>
         <module>Targeting</module>
+        <module>OSGiLibGDX</module>
+        <module>OSGiExtender</module>
+        <module>OSGiCore</module>
     </modules>
+
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>
         <brandingToken>neon</brandingToken>

@@ -4,7 +4,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.neon.engine.Neon;
 
 import java.util.*;
 
@@ -18,12 +17,10 @@ public class GameData {
     private final List<TowerType> placeables = new ArrayList<>();
     private Skin skin;
     private Viewport viewport;
-    private Neon game;
 
-    public GameData(Skin skin, Viewport viewport, Neon game) {
+    public GameData(Skin skin, Viewport viewport) {
         this.skin = skin;
         this.viewport = viewport;
-        this.game = game;
     }
 
     public InputMultiplexer getMultiplexer() {
@@ -54,7 +51,4 @@ public class GameData {
         return viewport;
     }
 
-    public void endGame() {
-        game.endGame();
-    }
 }

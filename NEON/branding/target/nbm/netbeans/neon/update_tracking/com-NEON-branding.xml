@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="com.NEON.branding">
-    <module_version install_time="1522912919153" last="true" origin="installer" specification_version="0.1">
+    <module_version install_time="1522920686955" last="true" origin="installer" specification_version="0.1">
         <file crc="3161677988" name="config/Modules/com-NEON-branding.xml"/>
-        <file crc="3422506189" name="modules/com-NEON-branding.jar"/>
+        <file crc="2028435703" name="modules/com-NEON-branding.jar"/>
     </module_version>
 </module>
