@@ -1,20 +1,23 @@
 package com.projectile;
 
-import com.neon.libary.GameData;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.Controller;
-import com.neon.libary.interfaces.DamageAble;
-import com.neon.libary.interfaces.Entity;
-import com.neon.libary.interfaces.ICollisionService;
+import com.library.GameData;
+import com.library.World;
+import com.library.interfaces.Controller;
+import com.library.interfaces.DamageAble;
+import com.library.interfaces.Entity;
+import com.library.interfaces.ICollisionService;
 
 public class ProjectileController implements Controller {
 
-    private World world;
+    private final World world;
     private ICollisionService collisionService;
 
     ProjectileController(World world, GameData gameData) {
         this.world = world;
-        this.collisionService = gameData.getService(ICollisionService.class);
+    }
+
+    public void setCollisionService(ICollisionService collisionService) {
+        this.collisionService = collisionService;
     }
 
     @Override
@@ -34,6 +37,5 @@ public class ProjectileController implements Controller {
             }
         }
     }
-
 
 }

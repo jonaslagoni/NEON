@@ -2,14 +2,13 @@ package com.projectile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.neon.libary.MoveAbility;
-import com.neon.libary.ShotType;
-import com.neon.libary.Sprite;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.IProjectileService;
-import com.neon.libary.vectors.Vector2f;
-
-import static com.neon.libary.vectors.VectorUtils.translateVelocity;
+import com.library.MoveAbility;
+import com.library.ShotType;
+import com.library.Sprite;
+import com.library.World;
+import com.library.interfaces.IProjectileService;
+import com.library.vectors.Vector2f;
+import static com.library.vectors.VectorUtils.translateVelocity;
 
 public class ProjectileService implements IProjectileService {
 
@@ -23,7 +22,6 @@ public class ProjectileService implements IProjectileService {
     public void newProjectile(Vector2f spawn, Vector2f target, ShotType shotType, float damage) {
 
         switch (shotType) {
-
             case GREEN_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -36,7 +34,6 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-
             case YELLOW_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -49,7 +46,6 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-
             case BLUE_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -62,7 +58,6 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-
             case RED_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -75,7 +70,6 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-
             case PINK_LASER:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -88,7 +82,6 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-
             case ROCKET_SHOT:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -101,7 +94,6 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-
             case GREEN_BOMB_SMALLER:
                 world.addEntity(new Projectile(
                         new Sprite(
@@ -114,8 +106,6 @@ public class ProjectileService implements IProjectileService {
                         damage
                 ));
                 break;
-
         }
     }
-
 }

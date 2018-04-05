@@ -1,9 +1,8 @@
 package com.projectile;
 
-import com.neon.libary.GameData;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.IProjectileService;
-import com.neon.libary.interfaces.Plugin;
+import com.library.GameData;
+import com.library.World;
+import com.library.interfaces.Plugin;
 
 public class ProjectilePlugin implements Plugin {
 
@@ -17,8 +16,6 @@ public class ProjectilePlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addController(new ProjectileController(world, gameData));
-        gameData.addService(IProjectileService.class, new ProjectileService(world));
     }
 
     @Override

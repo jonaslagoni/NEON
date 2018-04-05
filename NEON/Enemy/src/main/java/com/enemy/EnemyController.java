@@ -5,20 +5,14 @@
  */
 package com.enemy;
 
+import com.library.interfaces.Controller;
 import com.library.interfaces.Entity;
+import com.library.interfaces.IEnemyService;
 import com.library.interfaces.ILifeService;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.IPathFindingService;
 import com.library.interfaces.IWaveService;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.*;
-import com.neon.libary.vectors.Vector2f;
-import com.neon.libary.vectors.Vector2i;
-
 import java.util.Queue;
-
-import static com.neon.libary.vectors.VectorUtils.distance;
-import static com.neon.libary.vectors.VectorUtils.translateVelocity;
 
 public class EnemyController implements Controller, IEnemyService {
 
@@ -35,10 +29,10 @@ public class EnemyController implements Controller, IEnemyService {
     private int deathCount;
 
     EnemyController(World world,
-                    INeonService wallet,
-                    IWaveService waveService,
-                    ILifeService lifeService,
-                    IPathFindingService pathFindingService) {
+            INeonService wallet,
+            IWaveService waveService,
+            ILifeService lifeService,
+            IPathFindingService pathFindingService) {
         this.world = world;
         this.waveService = waveService;
         this.lifeService = lifeService;

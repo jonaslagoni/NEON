@@ -1,9 +1,9 @@
 package com.projectile;
 
-import com.neon.libary.MoveAbility;
-import com.neon.libary.Sprite;
-import com.neon.libary.interfaces.Moveable;
-import com.neon.libary.interfaces.ProjectileEntity;
+import com.library.MoveAbility;
+import com.library.Sprite;
+import com.library.interfaces.Moveable;
+import com.library.interfaces.ProjectileEntity;
 
 public class Projectile implements Moveable, ProjectileEntity {
 
@@ -33,6 +33,5 @@ public class Projectile implements Moveable, ProjectileEntity {
     public float getDamage() {
         return damage;
     }
-
 
 }

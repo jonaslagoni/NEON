@@ -1,11 +1,9 @@
 package com.tower;
 
-import com.libary.GameData;
-import com.libary.TowerType;
-import com.libary.World;
-import com.libary.interfaces.INeonService;
-import com.libary.interfaces.ITowerService;
-import com.libary.interfaces.Plugin;
+import com.library.GameData;
+import com.library.TowerType;
+import com.library.World;
+import com.library.interfaces.Plugin;
 
 public class TowerPlugin implements Plugin {
 
@@ -19,12 +17,9 @@ public class TowerPlugin implements Plugin {
 
     @Override
     public void start() {
-        TowerService towerService = new TowerService(world, gameData.getService(INeonService.class));
-        gameData.addService(ITowerService.class, towerService);
-        gameData.addController(new TowerController(world));
-
-        for (TowerType t : TowerType.values())
+        for (TowerType t : TowerType.values()) {
             gameData.addPlaceable(t);
+        }
     }
 
     @Override

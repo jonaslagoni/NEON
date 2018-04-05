@@ -2,14 +2,16 @@ package com.tower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.libary.Sprite;
-import com.libary.TowerType;
-import com.libary.World;
-import com.libary.vectors.Vector2f;
+import com.library.Sprite;
+import com.library.TowerType;
+import com.library.World;
+import com.library.vectors.Vector2f;
+import static com.library.TowerType.*;
 
 import java.util.Arrays;
 
 class TowerFactory {
+
     private TowerFactory() {
     }
 

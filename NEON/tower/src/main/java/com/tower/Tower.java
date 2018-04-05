@@ -1,10 +1,11 @@
 package com.tower;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.libary.Sprite;
-import com.libary.TowerType;
-import com.libary.interfaces.Drawable;
-import com.libary.interfaces.WeaponEntity;
+import com.library.Sprite;
+import com.library.TowerType;
+import com.library.interfaces.Drawable;
+import com.library.interfaces.WeaponEntity;
+
 
 @SuppressWarnings("WeakerAccess")
 class Tower implements Drawable {
