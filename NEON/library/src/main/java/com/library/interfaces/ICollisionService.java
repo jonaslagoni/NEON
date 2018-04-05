@@ -5,8 +5,8 @@
  */
 package com.library.interfaces;
 
+import com.library.Sprite;
 import com.library.vectors.Vector2f;
-import com.neon.libary.Sprite;
 import java.util.List;
 
 /**

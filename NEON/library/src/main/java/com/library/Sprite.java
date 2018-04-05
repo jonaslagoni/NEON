@@ -1,7 +1,7 @@
 package com.library;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.neon.libary.vectors.Vector2f;
+import com.library.vectors.Vector2f;
 
 public class Sprite {
 

@@ -1,10 +1,9 @@
 package com.library;
 
-import com.neon.libary.interfaces.Controller;
-import com.neon.libary.interfaces.Moveable;
-import com.neon.libary.vectors.Vector2f;
-
-import static com.neon.libary.vectors.VectorUtils.translate;
+import com.library.interfaces.Controller;
+import com.library.interfaces.Moveable;
+import com.library.vectors.Vector2f;
+import static com.library.vectors.VectorUtils.translate;
 
 public class MoveController implements Controller {
 
@@ -19,7 +18,9 @@ public class MoveController implements Controller {
         MoveAbility moveAbility = moveable.getMoveAbility();
         Sprite sprite = moveable.getSprite();
 
-        if (!moveAbility.isMove()) return;
+        if (!moveAbility.isMove()) {
+            return;
+        }
 
         Vector2f velocity = sprite.getVelocity();
         Vector2f position = sprite.getPosition();

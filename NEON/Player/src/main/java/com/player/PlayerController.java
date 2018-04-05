@@ -1,11 +1,11 @@
 package com.player;
 
-import com.neon.libary.World;
-import com.neon.libary.interfaces.Controller;
-import com.neon.libary.vectors.Vector2f;
+import com.library.World;
+import com.library.interfaces.Controller;
+import com.library.vectors.Vector2f;
+import static com.library.vectors.VectorUtils.distanceSquare;
+import static com.library.vectors.VectorUtils.translateVelocity;
 
-import static com.neon.libary.vectors.VectorUtils.distanceSquare;
-import static com.neon.libary.vectors.VectorUtils.translateVelocity;
 
 public class PlayerController implements Controller {
 

@@ -1,6 +1,6 @@
 package com.library.interfaces;
 
-import com.neon.libary.Sprite;
+import com.library.Sprite;
 
 public interface Drawable extends Entity {
 

@@ -2,11 +2,10 @@ package com.library;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.neon.libary.interfaces.Drawable;
-import com.neon.libary.interfaces.Entity;
-import com.neon.libary.vectors.Vector2f;
-import com.neon.libary.vectors.Vector2i;
-import com.neon.pathfinding.PathFinder;
+import com.library.interfaces.Entity;
+import com.library.vectors.Vector2f;
+import com.library.vectors.Vector2i;
+
 
 import java.util.*;
 

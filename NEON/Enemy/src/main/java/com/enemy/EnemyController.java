@@ -5,6 +5,11 @@
  */
 package com.enemy;
 
+import com.library.interfaces.Entity;
+import com.library.interfaces.ILifeService;
+import com.library.interfaces.INeonService;
+import com.library.interfaces.IPathFindingService;
+import com.library.interfaces.IWaveService;
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;
 import com.neon.libary.vectors.Vector2f;

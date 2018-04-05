@@ -16,9 +16,6 @@ public class GameData {
      */
     private final InputMultiplexer multiplexer = new InputMultiplexer();
     private final List<TowerType> placeables = new ArrayList<>();
-    /**
-     * TODO Eventually replace with a premade service system.
-     */
     private Skin skin;
     private Viewport viewport;
     private Neon game;

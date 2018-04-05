@@ -1,4 +1,4 @@
-package com.neon.libary.interfaces;
+package com.library.interfaces;
 
 public interface Entity {
 
