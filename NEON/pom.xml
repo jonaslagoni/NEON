@@ -60,13 +60,16 @@
             </plugins>
         </pluginManagement>
     </build>
-
     <modules>
         <module>branding</module>
         <module>application</module>
         <module>library</module>
+        <module>Player</module>
+        <module>Weapon</module>
+        <module>tower</module>
+        <module>Projectile</module>
+        <module>Enemy</module>
     </modules>
-
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>
         <brandingToken>neon</brandingToken>

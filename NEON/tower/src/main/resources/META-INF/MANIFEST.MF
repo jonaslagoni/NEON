@@ -1,0 +1,3 @@
+Bundle-SymbolicName: Tower OSGi Bundle
+Bundle-ActivationPolicy: lazy
+Service-Component: META-INF/entitycontroller.xml META-INF/entityplugin.xml
