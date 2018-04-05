@@ -1,0 +1,4 @@
+Bundle-SymbolicName: Player OSGi Bundle
+Bundle-ActivationPolicy: lazy
+Service-Component: META-INF/EntityController.xml, META-INF/EntityPlugin.xml
+
