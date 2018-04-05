@@ -80,6 +80,7 @@
         <module>OSGiCore</module>
    
     <module>HUD</module>
+    <module>Wave</module>
   </modules>
 
     <properties>
