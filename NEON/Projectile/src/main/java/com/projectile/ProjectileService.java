@@ -1,4 +1,4 @@
-package com.neon.projectile;
+package com.projectile;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

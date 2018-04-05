@@ -1,4 +1,4 @@
-package com.neon.player;
+package com.player;
 
 import com.neon.libary.World;
 import com.neon.libary.interfaces.Controller;

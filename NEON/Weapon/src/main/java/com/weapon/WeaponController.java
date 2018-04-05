@@ -1,4 +1,4 @@
-package com.neon.weapon;
+package com.weapon;
 
 import com.neon.libary.World;
 import com.neon.libary.interfaces.*;

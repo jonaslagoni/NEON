@@ -1,4 +1,4 @@
-package com.neon.projectile;
+package com.projectile;
 
 import com.neon.libary.MoveAbility;
 import com.neon.libary.Sprite;

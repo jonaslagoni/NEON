@@ -1,4 +1,4 @@
-package com.neon.player;
+package com.player;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;

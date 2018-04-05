@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.neon.player">
-    <implementation class="com.neon.player.PlayerController"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.player">
+    <implementation class="com.player.PlayerController"/>
     <service>
-        <provide interface="com.neon.libary.interfaces.Controller"/>
+        <provide interface="com.libary.interfaces.Controller"/>
     </service>
 </scr:component>
