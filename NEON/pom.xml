@@ -71,7 +71,7 @@
         <module>Projectile</module>
         <module>Enemy</module>
         <module>Life</module>
-    
+    <module>neon_coin</module>
   </modules>
 
     <properties>
