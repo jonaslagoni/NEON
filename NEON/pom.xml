@@ -72,6 +72,7 @@
         <module>Enemy</module>
         <module>Life</module>
     <module>neon_coin</module>
+    <module>PathFinding</module>
   </modules>
 
     <properties>
