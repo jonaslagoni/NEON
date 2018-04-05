@@ -58,8 +58,12 @@
     <modules>
         <module>branding</module>
         <module>application</module>
+
     <module>Player</module>
     <module>Weapon</module>
+
+    <module>tower</module>
+
   </modules>
 
     <properties>
