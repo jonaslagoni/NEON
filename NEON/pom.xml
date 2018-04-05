@@ -70,16 +70,7 @@
         <module>tower</module>
         <module>Projectile</module>
         <module>Enemy</module>
-    </modules>
-
-    <module>Player</module>
-    <module>Weapon</module>
-    <module>tower</module>
-
-    <module>Projectile</module>
-
-    <module>Enemy</module>
-    <module>Life</module>
+        <module>Life</module>
     
   </modules>
 
