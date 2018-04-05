@@ -3,6 +3,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.cbse.osgiasteroids.AsteroidPlugin">
     <implementation class="com.tower.TowerPlugin"/>
     <service>
-        <provide interface="com.tower.ITowerService"/>
+        <provide interface="com.tower.Plugin"/>
     </service>
 </scr:component>
