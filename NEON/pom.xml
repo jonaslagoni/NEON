@@ -62,7 +62,11 @@
     <module>Player</module>
     <module>Weapon</module>
     <module>tower</module>
+
     <module>Projectile</module>
+
+    <module>Enemy</module>
+
   </modules>
 
     <properties>
