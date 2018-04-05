@@ -1,0 +1,4 @@
+Bundle-SymbolicName: Life OSGi Bundle
+Bundle-ActivationPolicy: lazy
+Service-Component: META-INF/EntityPlugin.xml, META-INF/LifeService.xml
+

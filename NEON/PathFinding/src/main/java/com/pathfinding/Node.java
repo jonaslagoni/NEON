@@ -1,0 +1,100 @@
+package com.pathfinding;
+
+import com.neon.libary.World;
+import com.neon.libary.vectors.Vector2f;
+import com.neon.libary.vectors.Vector2i;
+import com.neon.libary.vectors.VectorUtils;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import static java.util.Collections.singleton;
+import static java.util.stream.Collectors.toList;
+
+class Node {
+
+    private final static List<Vector2i> directions = Arrays.asList(
+            new Vector2i(0, 1),
+            new Vector2i(0, -1),
+            new Vector2i(1, 0),
+            new Vector2i(-1, 0)
+    );
+
+    private Node parent;
+    private Vector2i vector;
+    private int gCost = Integer.MAX_VALUE;
+    private float fCost = Float.MAX_VALUE;
+
+    Node(Vector2i vector) {
+        this.vector = vector;
+    }
+
+    private Node(int x, int y) {
+        this.vector = new Vector2i(x, y);
+    }
+
+    public LinkedList<Vector2f> reconstructPath(Node node) {
+        Node current = node;
+        LinkedList<Vector2f> path = new LinkedList<>(singleton(World.gridUnproject(current.vector)));
+        while (current.parent != null) {
+            current = current.parent;
+            path.addFirst(World.gridUnproject(current.vector));
+        }
+        return path;
+    }
+
+    public float heuristicCostEstimate(Node goalState) {
+        Vector2f v0 = World.gridUnproject(this.vector);
+        Vector2f v1 = World.gridUnproject(goalState.vector);
+        return VectorUtils.distance(v0, v1) / World.GRID_CELL_SIZE;
+    }
+
+    public int manhattanDistance(Node b) {
+        return Math.abs(vector.x - b.vector.x) + Math.abs(vector.y - b.vector.y);
+    }
+
+    public List<Node> neighbors(World world) {
+        return directions.stream()
+                .filter(d -> !world.blocked(vector.x + d.x, vector.y + d.y))
+                .map(d -> new Node(vector.x + d.x, vector.y + d.y))
+                .collect(toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return vector.equals(node.vector);
+    }
+
+    @Override
+    public int hashCode() {
+        return vector.hashCode();
+    }
+
+    private Vector2i getVector() {
+        return vector;
+    }
+
+    public int getgCost() {
+        return gCost;
+    }
+
+    public void setgCost(int gCost) {
+        this.gCost = gCost;
+    }
+
+    public float getfCost() {
+        return fCost;
+    }
+
+    public void setfCost(float fCost) {
+        this.fCost = fCost;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
+    }
+}

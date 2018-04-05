@@ -1,0 +1,4 @@
+Bundle-SymbolicName: Pathfinding OSGi Bundle
+Bundle-ActivationPolicy: lazy
+Service-Component: META-INF/PathfindingService.xml, META-INF/EntityPlugin.xml
+

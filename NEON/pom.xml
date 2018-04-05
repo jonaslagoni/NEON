@@ -70,6 +70,10 @@
         <module>Projectile</module>
         <module>Enemy</module>
         <module>updater</module>
+        <module>Life</module>
+        <module>neon_coin</module>
+        <module>PathFinding</module>
+        <module>Targeting</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>
