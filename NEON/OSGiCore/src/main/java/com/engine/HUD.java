@@ -44,8 +44,8 @@ public class HUD implements InputProcessor, Plugin, Controller {
     private int counter;
 
     public HUD(World world,
-               GameData gameData,
-               Batch batch) {
+            GameData gameData,
+            Batch batch) {
         this.gameData = gameData;
         this.world = world;
         this.batch = batch;
@@ -97,12 +97,13 @@ public class HUD implements InputProcessor, Plugin, Controller {
         upgradeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (selectedTower != null) towerService.upgrade(selectedTower);
+                if (selectedTower != null) {
+                    towerService.upgrade(selectedTower);
+                }
             }
         });
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
         statsTable.top().right();
-
 
         statsTable.add("Wave: ").expandX().align(Align.left);
         statsTable.add(waveCounterLabel).expandX().align(Align.right).row();
@@ -140,7 +141,6 @@ public class HUD implements InputProcessor, Plugin, Controller {
         gameData.addInputProcessor(this);
 
         /*Create button for each placable item in gamedata*/
-
         for (TowerType title : gameData.getPlaceables()) {
             TextButton button = new TextButton("", gameData.getSkin(), title.toString());
             button.addListener(new ClickListener() {

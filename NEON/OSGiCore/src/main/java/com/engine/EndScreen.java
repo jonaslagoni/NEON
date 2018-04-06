@@ -14,9 +14,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class EndScreen implements Screen {
 
     private final Neon game;
-    private TextButton endGameButton;
-    private Viewport viewport;
-    private Stage stage;
+    private final Viewport viewport;
+    private final Stage stage;
 
     EndScreen(final Neon game) {
         this.game = game;
@@ -42,7 +41,8 @@ public class EndScreen implements Screen {
 
     @Override
     public void show() {
-
+        viewport.apply();
+        viewport.getCamera().update();
     }
 
     @Override
@@ -51,37 +51,28 @@ public class EndScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        viewport.apply();
-        viewport.getCamera().update();
-
         game.batch.setProjectionMatrix(viewport.getCamera().combined);
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override
     public void dispose() {
-
         stage.dispose();
-
     }
 }

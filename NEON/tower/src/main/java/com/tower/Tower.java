@@ -11,7 +11,6 @@ class Tower implements Drawable, Entity {
     Sprite sprite;
     String[] textures;
     int level = 1;
-    @SuppressWarnings("WeakerAccess")
     int cost;
     int maxLevel;
     WeaponEntity weapon;

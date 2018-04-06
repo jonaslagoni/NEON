@@ -11,14 +11,9 @@ import com.library.interfaces.WorldService;
 public class EnemyPlugin implements Plugin {
 
     private WorldService world;
-    private final GameData gameData;
+    private GameData gameData;
     private IAssetManager assetManager;
     private Map<String, String> map;
-
-    public EnemyPlugin(World world, GameData gameData) {
-        this.world = world;
-        this.gameData = gameData;
-    }
 
     public void setWorld(World world) {
         this.world = world;
@@ -91,6 +86,7 @@ public class EnemyPlugin implements Plugin {
         map.put("triangle5", "assets/triangle5.png");
         map.put("triangle6", "assets/triangle6.png");
 
+        /* Load assets */
         map.forEach((k, v) -> assetManager.loadAsset(k, v));
     }
 

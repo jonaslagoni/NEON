@@ -6,8 +6,6 @@ import com.library.GameData;
 import com.library.World;
 import com.library.vectors.Vector2f;
 
-import static com.badlogic.gdx.Input.Buttons;
-
 public class PlayerInputProcessor implements InputProcessor {
 
     private final Player player;

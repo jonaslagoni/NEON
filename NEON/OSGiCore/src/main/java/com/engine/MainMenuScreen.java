@@ -14,8 +14,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class MainMenuScreen implements Screen {
 
     private final Neon game;
-    private Viewport viewport;
-    private Stage stage;
+    private final Viewport viewport;
+    private final Stage stage;
 
     MainMenuScreen(final Neon game) {
         this.game = game;

@@ -8,7 +8,6 @@ import com.library.interfaces.ProjectileEntity;
 public class Projectile implements Moveable, ProjectileEntity {
 
     Sprite sprite;
-    @SuppressWarnings("WeakerAccess")
     MoveAbility moveAbility;
     float damage;
 
