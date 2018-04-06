@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse;
+package com.engine;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;

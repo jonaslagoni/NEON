@@ -1,7 +1,7 @@
 package com.map;
 
-import com.neon.libary.Sprite;
-import com.neon.libary.interfaces.Drawable;
+import com.library.Sprite;
+import com.library.interfaces.Drawable;
 
 public class Obstacle implements Drawable {
 

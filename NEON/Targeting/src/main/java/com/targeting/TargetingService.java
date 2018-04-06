@@ -5,12 +5,12 @@
  */
 package com.targeting;
 
-import com.neon.libary.GameData;
-import com.neon.libary.Sprite;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.ITargetingService;
-import com.neon.libary.vectors.Vector2f;
-import com.neon.libary.vectors.VectorUtils;
+import com.library.GameData;
+import com.library.Sprite;
+import com.library.World;
+import com.library.interfaces.ITargetingService;
+import com.library.vectors.Vector2f;
+import com.library.vectors.VectorUtils;
 
 /**
  * @author Daniel

@@ -1,9 +1,9 @@
 package com.life;
 
-import com.neon.libary.GameData;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.ILifeService;
-import com.neon.libary.interfaces.Plugin;
+import com.library.GameData;
+import com.library.World;
+import com.library.interfaces.ILifeService;
+import com.library.interfaces.Plugin;
 
 public class LifePlugin implements Plugin {
 
@@ -18,7 +18,7 @@ public class LifePlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(ILifeService.class, new Life(20, gameData));
+//        gameData.addService(ILifeService.class, new Life(20, gameData));
     }
 
     @Override

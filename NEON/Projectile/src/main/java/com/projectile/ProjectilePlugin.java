@@ -1,8 +1,7 @@
 package com.projectile;
 
 import com.library.GameData;
-import com.library.World
-import com.library.interfaces.IProjectileService;
+import com.library.World;
 import com.library.interfaces.Plugin;
 
 public class ProjectilePlugin implements Plugin {

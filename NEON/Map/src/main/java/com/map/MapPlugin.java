@@ -2,11 +2,11 @@ package com.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.neon.libary.GameData;
-import com.neon.libary.Sprite;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.Plugin;
-import com.neon.libary.vectors.Vector2f;
+import com.library.GameData;
+import com.library.Sprite;
+import com.library.World;
+import com.library.interfaces.Plugin;
+import com.library.vectors.Vector2f;
 
 import java.util.Random;
 

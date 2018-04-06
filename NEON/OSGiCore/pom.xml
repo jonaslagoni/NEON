@@ -42,11 +42,10 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.3.7</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>dk.sdu.mmmi.cbse.Activator</Bundle-Activator>
+                        <Bundle-Activator>com.engine.Activator</Bundle-Activator>
                         <Export-Package />
                     </instructions>
                 </configuration>

@@ -5,8 +5,8 @@
  */
 package com.life;
 
-import com.neon.libary.GameData;
-import com.neon.libary.interfaces.ILifeService;
+import com.library.GameData;
+import com.library.interfaces.ILifeService;
 
 /**
  * @author Ejer
@@ -26,7 +26,7 @@ public class Life implements ILifeService {
     public int subtractLife(int i) {
         life -= i;
         if (life <= 0) {
-            gameData.endGame();
+//            gameData.endGame();
         }
         return life;
     }
