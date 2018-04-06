@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.enemy.enemycontroller">
+    <implementation class="com.enemy.EnemyController"/>
+
+    <reference bind="setWaveService" cardinality="0..1"
+               interface="com.library.interfaces.IWaveService"
+               name="waveService" policy="dynamic" unbind="removeWaveService"/>
+    
+    <reference bind="setWallet" cardinality="0..1"
+               interface="com.library.interfaces.INeonService"
+               name="wallet" policy="dynamic" unbind="removeWallet"/>
+    
+    
+    <reference bind="setLifeService" cardinality="0..1"
+               interface="com.library.interfaces.ILifeService"
+               name="lifeService" policy="dynamic" unbind="removeLifeService"/>
+    
+    
+    <reference bind="setPathFindingService" cardinality="0..1"
+               interface="com.library.interfaces.IPathFindingService"
+               name="pathfindingService" policy="dynamic" unbind="removePathFindingService"/>
+    
+    
+    <reference bind="setWorld" cardinality="0..1"
+               interface="com.library.interfaces.WorldService"
+               name="worldService" policy="dynamic" unbind="removeWorld"/>
+    
+    
+
+</scr:component>
