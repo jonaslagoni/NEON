@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.weapon">
+    <implementation class="com.weapon.WeaponPlugin"/>
+
+    <reference bind="addGameData" cardinality="0..1"
+               interface="com.library.GameData"
+               name="GameData" policy="dynamic" unbind="removeGameData"/>
+
+    <reference bind="addWorld" cardinality="0..1"
+               interface="com.library.World"
+               name="World" policy="dynamic" unbind="removeWorld"/>
+
+    
+</scr:component>

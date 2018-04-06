@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.weapon">
+    <implementation class="com.weapon.WeaponController"/>
+
+    <reference bind="setCollisionService" cardinality="0..1"
+               interface="com.library.ICollisionService"
+               name="ICollisionService" policy="dynamic" unbind="removeCollisionService"/>
+
+    <reference bind="setProjectileService" cardinality="0..1"
+               interface="com.library.IProjectileService"
+               name="IProjectileService" policy="dynamic" unbind="removeProjectileService"/>
+
+    <reference bind="setTargetingService" cardinality="0..1"
+               interface="com.library.ITargetingService"
+               name="ITargetingService" policy="dynamic" unbind="removeTargetingService"/>
+    
+    
+</scr:component>

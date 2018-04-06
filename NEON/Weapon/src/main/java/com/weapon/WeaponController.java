@@ -12,19 +12,10 @@ import static com.library.vectors.VectorUtils.distanceSquare;
 
 class WeaponController implements Controller {
 
-    private final World world;
-    private final ICollisionService collisionService;
-    private final IProjectileService projectileService;
-    private final ITargetingService targetingService;
-
-    WeaponController(World world,
-            ICollisionService collisionService,
-            IProjectileService projectileService, ITargetingService targetingService) {
-        this.world = world;
-        this.collisionService = collisionService;
-        this.projectileService = projectileService;
-        this.targetingService = targetingService;
-    }
+    private World world;
+    private ICollisionService collisionService;
+    private IProjectileService projectileService;
+    private ITargetingService targetingService;
 
     private static boolean isCloser(Vector2f source, Vector2f first, Vector2f second) {
         return distanceSquare(first, source) < distanceSquare(first, second);
@@ -65,5 +56,29 @@ class WeaponController implements Controller {
     private Vector2f findTarget(Drawable targetSprite, Weapon weapon) {
         return targetingService.calculateTargetVector(weapon.position, targetSprite.getSprite());
 
+    }
+
+    public void setCollisionService(ICollisionService ics) {
+        this.collisionService = ics;
+    }
+
+    public void removeCollisionService() {
+        this.collisionService = null;
+    }
+
+    public void setProjectileService(IProjectileService ips) {
+        this.projectileService = ips;
+    }
+
+    public void removeProjectileService() {
+        this.projectileService = null;
+    }
+
+    public void setTargetingService(ITargetingService its) {
+        this.targetingService = its;
+    }
+
+    public void removeTargetingService() {
+        this.targetingService = null;
     }
 }
