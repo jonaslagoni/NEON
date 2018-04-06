@@ -13,6 +13,7 @@ import com.library.interfaces.ILifeService;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.IPathFindingService;
 import com.library.interfaces.IWaveService;
+import com.library.interfaces.WorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 import static com.library.vectors.VectorUtils.distance;
@@ -21,11 +22,13 @@ import java.util.Queue;
 
 public class EnemyController implements Controller, IEnemyService {
 
-    private final IWaveService waveService;
-    private final INeonService wallet;
-    private final ILifeService lifeService;
-    private final IPathFindingService pathFindingService;
-    private final World world;
+    
+
+    private IWaveService waveService;
+    private INeonService wallet;
+    private ILifeService lifeService;
+    private IPathFindingService pathFindingService;
+    private WorldService world;
     private final float WAVE_COOLDOWN = 20;
 
     private Queue<Entity> wave;
@@ -44,6 +47,48 @@ public class EnemyController implements Controller, IEnemyService {
         this.pathFindingService = pathFindingService;
         this.wallet = wallet;
     }
+    
+    public void setWaveService(IWaveService waveService) {
+        this.waveService = waveService;
+    }
+
+    public void setWallet(INeonService wallet) {
+        this.wallet = wallet;
+    }
+
+    public void setLifeService(ILifeService lifeService) {
+        this.lifeService = lifeService;
+    }
+
+    public void setPathFindingService(IPathFindingService pathFindingService) {
+        this.pathFindingService = pathFindingService;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
+    
+    public void removeWaveService(){
+        this.waveService = null;
+    }
+    
+    public void removeWallet(){
+        this.wallet = null;
+    }
+    
+    public void removeLifeService(){
+        this.lifeService = null;
+    }
+     
+        public void removePathFindingService(){
+        this.pathFindingService = null;
+    }
+    
+    public void removeWorld(){
+        this.world = null;
+    }
+    
+    
 
     private void updateEnemy(final Enemy enemy, float dt) {
 
