@@ -7,7 +7,6 @@ import com.library.interfaces.Plugin;
 public class LifePlugin implements Plugin {
 
     private final GameData gameData;
-    @SuppressWarnings("FieldCanBeLocal")
     private final World world;
 
     public LifePlugin(World world, GameData gameData) {

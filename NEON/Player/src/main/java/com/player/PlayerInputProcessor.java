@@ -2,9 +2,9 @@ package com.player;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-import com.neon.libary.GameData;
-import com.neon.libary.World;
-import com.neon.libary.vectors.Vector2f;
+import com.library.GameData;
+import com.library.World;
+import com.library.vectors.Vector2f;
 
 import static com.badlogic.gdx.Input.Buttons;
 

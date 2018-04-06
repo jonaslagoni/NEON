@@ -20,6 +20,20 @@ class TowerService implements ITowerService {
         this.world = world;
     }
 
+    public void setNeonWallet(INeonService neonWallet) {
+        this.neonWallet = neonWallet;
+    }
+    public void removeNeonWallet() {
+        this.neonWallet = null;
+    }
+    public void setWorld (World world) {
+        this.world = world;
+    }
+    public void removeWorld() {
+        this.world = null;
+    }
+    
+
     @Override
     public void upgrade(Entity entity) {
         if (!(entity instanceof Tower)) {

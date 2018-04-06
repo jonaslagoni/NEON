@@ -7,7 +7,6 @@ package com.targeting;
 
 import com.library.GameData;
 import com.library.World;
-import com.library.interfaces.ITargetingService;
 import com.library.interfaces.Plugin;
 
 /**
@@ -25,7 +24,6 @@ public class TargetingPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(ITargetingService.class, new TargetingService(world, gameData));
     }
 
     @Override

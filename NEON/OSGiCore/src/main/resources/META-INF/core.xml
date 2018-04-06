@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.engin.GameScreen">
+    <implementation class="com.engin.GameScreen"/>
+
+    <reference bind="addEntityProcessingService" cardinality="0..n"
+               interface="com.library.interfaces.Controller"
+               name="Controller" policy="dynamic" unbind="removeEntityProcessingService"/>
+
+    <reference bind="addGamePluginService" cardinality="0..n"
+               interface="com.library.interfaces.Plugin"
+               name="Plugin" policy="dynamic" unbind="removeGamePluginService"/>
+</scr:component>

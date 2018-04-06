@@ -22,7 +22,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>library</artifactId>
             <version>${project.version}</version>
         </dependency>

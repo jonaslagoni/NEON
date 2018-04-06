@@ -6,7 +6,6 @@
         <groupId>com</groupId>
         <version>0.1</version>
     </parent>
-
     <groupId>com</groupId>
     <artifactId>neon-coin</artifactId>
     <version>0.1</version>

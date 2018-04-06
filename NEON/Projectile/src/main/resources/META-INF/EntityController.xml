@@ -2,6 +2,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.projectile">
     <implementation class="com.projectile.ProjectileController"/>
     <service>
-        <provide interface="com.libary.interfaces.Controller"/>
+        <provide interface="com.library.interfaces.Controller"/>
     </service>
 </scr:component>

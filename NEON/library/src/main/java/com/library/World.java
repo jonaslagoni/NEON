@@ -1,8 +1,8 @@
 package com.library;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.library.interfaces.Drawable;
 import com.library.interfaces.Entity;
+import com.library.interfaces.WorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 
@@ -11,7 +11,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
-public class World {
+public class World implements WorldService{
 
     public static final int WIDTH = 2048;
     public static final int HEIGHT = 2048;
@@ -80,18 +80,19 @@ public class World {
     }
 
     public boolean isValidPosition(Vector2f position) {
-        boolean b = setGridCell(position, () -> new Sprite(
-                new Texture(Gdx.files.internal("images/laser-tower.png")),
-                new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
-                new Vector2f(0, 200),
-                GRID_CELL_SIZE,
-                GRID_CELL_SIZE
-        ));
-        if (!b) return false;
-        Queue<Vector2f> path = new PathFinder(this).findPath(getPositionGridCell(START), getPositionGridCell(END));
-        Vector2i v = gridProject(position);
-        removeGridCell(v.x, v.y);
-        return path.size() > 0;
+//        boolean b = setGridCell(position, () -> new Sprite(
+//                new Texture(Gdx.files.internal("images/laser-tower.png")),
+//                new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
+//                new Vector2f(0, 200),
+//                GRID_CELL_SIZE,
+//                GRID_CELL_SIZE
+//        ));
+//        if (!b) return false;
+//        Queue<Vector2f> path = new PathFinder(this).findPath(getPositionGridCell(START), getPositionGridCell(END));
+//        Vector2i v = gridProject(position);
+//        removeGridCell(v.x, v.y);
+//        return path.size() > 0;
+        return true;
     }
 
     public Entity getGridCell(Vector2f position) {

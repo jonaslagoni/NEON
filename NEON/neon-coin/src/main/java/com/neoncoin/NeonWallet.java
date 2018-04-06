@@ -1,4 +1,4 @@
-package com.neon-coin;
+package com.neoncoin;
 
 import com.library.interfaces.INeonService;
 

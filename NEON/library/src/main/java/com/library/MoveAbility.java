@@ -2,7 +2,6 @@ package com.library;
 
 import com.library.vectors.Vector2f;
 
-
 public class MoveAbility {
 
     private Vector2f target;

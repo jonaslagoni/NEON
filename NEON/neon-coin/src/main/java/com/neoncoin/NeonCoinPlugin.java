@@ -1,4 +1,5 @@
-package com.neon-coin;
+package com.neoncoin;
+
 
 import com.library.GameData;
 import com.library.World;

@@ -25,7 +25,7 @@ public class Life implements ILifeService {
     public int subtractLife(int i) {
         life -= i;
         if (life <= 0) {
-            gameData.endGame();
+//            gameData.endGame();
         }
         return life;
     }
