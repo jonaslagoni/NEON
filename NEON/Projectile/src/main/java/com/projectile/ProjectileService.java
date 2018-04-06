@@ -1,7 +1,5 @@
 package com.projectile;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.library.MoveAbility;
 import com.library.ShotType;
 import com.library.Sprite;
@@ -25,7 +23,7 @@ public class ProjectileService implements IProjectileService {
             case GREEN_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                new Texture(Gdx.files.internal("images/beams/green_beam.png")),
+                                "images/beams/green_beam.png",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 32, 32
@@ -37,7 +35,7 @@ public class ProjectileService implements IProjectileService {
             case YELLOW_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                new Texture(Gdx.files.internal("images/beams/yellow_beam.png")),
+                                "images/beams/yellow_beam.png",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 42, 41
@@ -49,7 +47,7 @@ public class ProjectileService implements IProjectileService {
             case BLUE_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                new Texture(Gdx.files.internal("images/beams/blue_bomb.png")),
+                                "images/beams/blue_bomb.png",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 80, 145
@@ -61,7 +59,7 @@ public class ProjectileService implements IProjectileService {
             case RED_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                new Texture(Gdx.files.internal("images/beams/red_beam.png")),
+                                "images/beams/red_beam.png",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 37, 41
@@ -73,7 +71,7 @@ public class ProjectileService implements IProjectileService {
             case PINK_LASER:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                new Texture(Gdx.files.internal("images/beams/pink_laser.png")),
+                                "images/beams/pink_laser.png",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 26, 50
@@ -85,7 +83,7 @@ public class ProjectileService implements IProjectileService {
             case ROCKET_SHOT:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                new Texture(Gdx.files.internal("images/beams/rocket_shot.png")),
+                                "images/beams/rocket_shot.png",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 28, 98
@@ -97,7 +95,7 @@ public class ProjectileService implements IProjectileService {
             case GREEN_BOMB_SMALLER:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                new Texture(Gdx.files.internal("images/beams/green_bomb.png")),
+                                "images/beams/green_bomb.png",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 67, 127

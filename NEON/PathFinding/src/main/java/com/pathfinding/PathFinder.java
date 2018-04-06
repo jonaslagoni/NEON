@@ -34,21 +34,25 @@ public class PathFinder implements IPathFindingService {
         while (!openSet.isEmpty()) {
             Node current = openSet.remove();
 
-            if (current.equals(goalState))
+            if (current.equals(goalState)) {
                 return current.reconstructPath(current);
+            }
 
             openSet.remove(current);
             closedSet.add(current);
 
             for (Node neighbor : current.neighbors(world)) {
-                if (closedSet.contains(neighbor))
+                if (closedSet.contains(neighbor)) {
                     continue;
-                if (!openSet.contains(neighbor))
+                }
+                if (!openSet.contains(neighbor)) {
                     openSet.add(neighbor);
+                }
 
                 int tentativeGcost = current.getgCost() + current.manhattanDistance(neighbor);
-                if (tentativeGcost >= neighbor.getgCost())
+                if (tentativeGcost >= neighbor.getgCost()) {
                     continue;
+                }
 
                 neighbor.setParent(current);
                 neighbor.setgCost(tentativeGcost);

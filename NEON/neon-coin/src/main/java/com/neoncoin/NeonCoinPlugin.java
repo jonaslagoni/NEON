@@ -1,6 +1,5 @@
 package com.neoncoin;
 
-
 import com.library.GameData;
 import com.library.World;
 import com.library.interfaces.Plugin;

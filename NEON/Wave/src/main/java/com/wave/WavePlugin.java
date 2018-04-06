@@ -20,7 +20,7 @@ public class WavePlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(IWaveService.class, new WaveService());
+//        gameData.addService(IWaveService.class, new WaveService());
     }
 
     @Override

@@ -1,17 +1,15 @@
 package com.tower;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.library.Sprite;
 import com.library.TowerType;
 import com.library.interfaces.Drawable;
 import com.library.interfaces.WeaponEntity;
 import com.library.interfaces.Entity;
 
-@SuppressWarnings("WeakerAccess")
 class Tower implements Drawable, Entity {
 
     Sprite sprite;
-    Texture[] textures;
+    String[] textures;
     int level = 1;
     @SuppressWarnings("WeakerAccess")
     int cost;
@@ -19,7 +17,11 @@ class Tower implements Drawable, Entity {
     WeaponEntity weapon;
     TowerType towerType;
 
-    Tower(Sprite sprite, Texture[] textures, int cost, int maxLevel, TowerType towerType) {
+    Tower(Sprite sprite,
+            String[] textures,
+            int cost,
+            int maxLevel,
+            TowerType towerType) {
         this.sprite = sprite;
         this.textures = textures;
         this.cost = cost;

@@ -1,14 +1,10 @@
 package com.tower;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.library.Sprite;
 import com.library.TowerType;
 import com.library.World;
 import com.library.vectors.Vector2f;
 import static com.library.TowerType.*;
-
-import java.util.Arrays;
 
 class TowerFactory {
 
@@ -74,17 +70,13 @@ class TowerFactory {
     }
 
     private static Tower build(TowerType key, String... files) {
-        Texture[] textures = Arrays.stream(files)
-                .map(Gdx.files::internal)
-                .map(Texture::new)
-                .toArray(Texture[]::new);
         Vector2f position = new Vector2f(0, 0);
         return new Tower(new Sprite(
-                textures[0],
+                files[0],
                 position,
                 new Vector2f(0, 0),
                 World.GRID_CELL_SIZE,
                 World.GRID_CELL_SIZE
-        ), textures, 10, 4, key);
+        ), files, 10, 4, key);
     }
 }
