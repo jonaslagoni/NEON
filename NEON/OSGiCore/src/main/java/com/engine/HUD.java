@@ -1,4 +1,4 @@
-package com.hud;
+package com.engine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -13,11 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.neon.libary.GameData;
-import com.neon.libary.TowerType;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.*;
-import com.neon.libary.vectors.Vector2f;
+import com.library.GameData;
+import com.library.TowerType;
+import com.library.World;
+import com.library.interfaces.*;
+import com.library.vectors.Vector2f;
 
 public class HUD implements InputProcessor, Plugin, Controller {
 
@@ -54,13 +54,13 @@ public class HUD implements InputProcessor, Plugin, Controller {
 
     @Override
     public void start() {
-        gameData.addController(this);
-
-        this.towerService = gameData.getService(ITowerService.class);
-        this.waveService = gameData.getService(IWaveService.class);
-        this.neonService = gameData.getService(INeonService.class);
-        this.enemyService = gameData.getService(IEnemyService.class);
-        this.lifeService = gameData.getService(ILifeService.class);
+//        gameData.addController(this);
+//
+//        this.towerService = gameData.getService(ITowerService.class);
+//        this.waveService = gameData.getService(IWaveService.class);
+//        this.neonService = gameData.getService(INeonService.class);
+//        this.enemyService = gameData.getService(IEnemyService.class);
+//        this.lifeService = gameData.getService(ILifeService.class);
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table(gameData.getSkin());
