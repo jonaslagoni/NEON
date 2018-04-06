@@ -61,27 +61,12 @@
         </pluginManagement>
     </build>
     <modules>
-        <module>branding</module>
         <module>application</module>
         <module>library</module>
-        <module>Player</module>
-        <module>Weapon</module>
-        <module>tower</module>
-        <module>Projectile</module>
-        <module>Enemy</module>
         <module>updater</module>
-        <module>Life</module>
-
-        <module>neon_coin</module>
-        <module>PathFinding</module>
-        <module>Targeting</module>
         <module>OSGiLibGDX</module>
         <module>OSGiExtender</module>
         <module>OSGiCore</module>
-   
-    <module>HUD</module>
-    <module>Wave</module>
-    <module>Map</module>
   </modules>
 
     <properties>
