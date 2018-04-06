@@ -1,8 +1,8 @@
 package com.weapon;
 
-import com.neon.libary.ShotType;
-import com.neon.libary.interfaces.WeaponEntity;
-import com.neon.libary.vectors.Vector2f;
+import com.library.ShotType;
+import com.library.interfaces.WeaponEntity;
+import com.library.vectors.Vector2f;
 
 public class Weapon implements WeaponEntity {
 

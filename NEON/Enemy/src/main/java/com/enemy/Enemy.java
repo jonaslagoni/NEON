@@ -1,6 +1,5 @@
 package com.enemy;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.library.MoveAbility;
 import com.library.Sprite;
 import com.library.interfaces.DamageAble;
@@ -18,7 +17,7 @@ class Enemy implements Moveable, Drawable, Targetable, DamageAble {
 
     MoveAbility moveAbility;
     Sprite sprite;
-    Texture[] textures;
+    String[] textures;
     int hp;
     int maxHp;
     float damageTimer;
@@ -28,7 +27,7 @@ class Enemy implements Moveable, Drawable, Targetable, DamageAble {
 
     Enemy(Sprite sprite,
             MoveAbility moveAbility,
-            Texture[] textures,
+            String[] textures,
             int hp,
             int coinValue,
             int damage) {

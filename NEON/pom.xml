@@ -40,7 +40,7 @@
                     <!-- NetBeans 6.9+ requires JDK 6, starting NetBeans 7.4 source 1.7 is required -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.6.1</version>
+                    <version>3.7.0</version>
                     <configuration>
                         <source>1.8</source>
                         <target>1.8</target>
@@ -71,7 +71,7 @@
         <module>Enemy</module>
         <module>updater</module>
         <module>Life</module>
-        <module>neon_coin</module>
+        <module>neon-coin</module>
         <module>PathFinding</module>
         <module>Targeting</module>
     </modules>

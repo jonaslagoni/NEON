@@ -5,10 +5,10 @@ import com.library.Sprite;
 import com.library.TowerType;
 import com.library.interfaces.Drawable;
 import com.library.interfaces.WeaponEntity;
-
+import com.library.interfaces.Entity;
 
 @SuppressWarnings("WeakerAccess")
-class Tower implements Drawable {
+class Tower implements Drawable, Entity {
 
     Sprite sprite;
     Texture[] textures;
@@ -32,7 +32,6 @@ class Tower implements Drawable {
     public Sprite getSprite() {
         return sprite;
     }
-
 
     public int getCost() {
         return cost * level;

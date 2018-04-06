@@ -1,6 +1,5 @@
 package com.library;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.library.vectors.Vector2f;
 
 public class Sprite {
@@ -9,9 +8,9 @@ public class Sprite {
     private final float width;
     private Vector2f position;
     private Vector2f velocity;
-    private Texture texture;
+    private String texture;
 
-    public Sprite(Texture texture,
+    public Sprite(String texture,
                   Vector2f position,
                   Vector2f velocity,
                   float height,
@@ -47,11 +46,11 @@ public class Sprite {
         this.position = position;
     }
 
-    public Texture getTexture() {
+    public String getTexture() {
         return texture;
     }
 
-    public void setTexture(Texture texture) {
+    public void setTexture(String texture) {
         this.texture = texture;
     }
 }

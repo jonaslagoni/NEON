@@ -1,9 +1,8 @@
-package com.neon_coin;
+package com.neon-coin;
 
-import com.neon.libary.GameData;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.INeonService;
-import com.neon.libary.interfaces.Plugin;
+import com.library.GameData;
+import com.library.World;
+import com.library.interfaces.Plugin;
 
 /**
  * Created by sam on 15-03-2018.
@@ -20,7 +19,6 @@ public class NeonCoinPlugin implements Plugin {
 
     @Override
     public void start() {
-        gameData.addService(INeonService.class, new NeonWallet());
     }
 
     @Override

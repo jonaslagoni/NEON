@@ -5,8 +5,8 @@
  */
 package com.life;
 
-import com.neon.libary.GameData;
-import com.neon.libary.interfaces.ILifeService;
+import com.library.GameData;
+import com.library.interfaces.ILifeService;
 
 /**
  * @author Ejer
@@ -14,8 +14,7 @@ import com.neon.libary.interfaces.ILifeService;
 public class Life implements ILifeService {
 
     private int life;
-
-    private GameData gameData;
+    private final GameData gameData;
 
     Life(int life, GameData gameData) {
         this.life = life;

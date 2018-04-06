@@ -5,6 +5,7 @@
  */
 package com.enemy;
 
+import com.library.World;
 import com.library.interfaces.Controller;
 import com.library.interfaces.Entity;
 import com.library.interfaces.IEnemyService;
@@ -12,6 +13,10 @@ import com.library.interfaces.ILifeService;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.IPathFindingService;
 import com.library.interfaces.IWaveService;
+import com.library.vectors.Vector2f;
+import com.library.vectors.Vector2i;
+import static com.library.vectors.VectorUtils.distance;
+import static com.library.vectors.VectorUtils.translateVelocity;
 import java.util.Queue;
 
 public class EnemyController implements Controller, IEnemyService {

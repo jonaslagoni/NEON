@@ -24,5 +24,4 @@ public class Player implements Moveable, Drawable {
     public Sprite getSprite() {
         return sprite;
     }
-
 }

@@ -1,7 +1,7 @@
 package com.tower;
 
-import com.libary.World;
-import com.libary.interfaces.Controller;
+import com.library.World;
+import com.library.interfaces.Controller;
 
 class TowerController implements Controller {
 

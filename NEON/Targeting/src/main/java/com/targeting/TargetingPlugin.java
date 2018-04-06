@@ -5,18 +5,18 @@
  */
 package com.targeting;
 
-import com.neon.libary.GameData;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.ITargetingService;
-import com.neon.libary.interfaces.Plugin;
+import com.library.GameData;
+import com.library.World;
+import com.library.interfaces.ITargetingService;
+import com.library.interfaces.Plugin;
 
 /**
  * @author Daniel
  */
 public class TargetingPlugin implements Plugin {
 
-    private World world;
-    private GameData gameData;
+    private final World world;
+    private final GameData gameData;
 
     public TargetingPlugin(World world, GameData gameData) {
         this.gameData = gameData;
@@ -30,7 +30,5 @@ public class TargetingPlugin implements Plugin {
 
     @Override
     public void stop() {
-
     }
-
 }

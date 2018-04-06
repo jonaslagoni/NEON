@@ -12,8 +12,8 @@ import com.weapon.Weapon;
 
 class TowerService implements ITowerService {
 
-    private INeonService neonWallet;
-    private World world;
+    private final INeonService neonWallet;
+    private final World world;
 
     TowerService(World world, INeonService neonWallet) {
         this.neonWallet = neonWallet;
@@ -183,9 +183,7 @@ class TowerService implements ITowerService {
                     tower.setWeapon(splashWeapon);
                     world.addEntity(splashWeapon);
                     break;
-
             }
         }
     }
-
 }

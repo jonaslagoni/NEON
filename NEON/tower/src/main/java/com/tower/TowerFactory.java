@@ -74,7 +74,10 @@ class TowerFactory {
     }
 
     private static Tower build(TowerType key, String... files) {
-        Texture[] textures = Arrays.stream(files).map(Gdx.files::internal).map(Texture::new).toArray(Texture[]::new);
+        Texture[] textures = Arrays.stream(files)
+                .map(Gdx.files::internal)
+                .map(Texture::new)
+                .toArray(Texture[]::new);
         Vector2f position = new Vector2f(0, 0);
         return new Tower(new Sprite(
                 textures[0],

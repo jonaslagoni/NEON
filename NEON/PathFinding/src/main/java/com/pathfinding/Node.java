@@ -1,20 +1,18 @@
 package com.pathfinding;
 
-import com.neon.libary.World;
-import com.neon.libary.vectors.Vector2f;
-import com.neon.libary.vectors.Vector2i;
-import com.neon.libary.vectors.VectorUtils;
-
+import com.library.World;
+import com.library.vectors.Vector2f;
+import com.library.vectors.Vector2i;
+import com.library.vectors.VectorUtils;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 import static java.util.Collections.singleton;
 import static java.util.stream.Collectors.toList;
 
-class Node {
+public class Node {
 
-    private final static List<Vector2i> directions = Arrays.asList(
+    private final static List<Vector2i> DIRECTIONS = Arrays.asList(
             new Vector2i(0, 1),
             new Vector2i(0, -1),
             new Vector2i(1, 0),
@@ -55,7 +53,7 @@ class Node {
     }
 
     public List<Node> neighbors(World world) {
-        return directions.stream()
+        return DIRECTIONS.stream()
                 .filter(d -> !world.blocked(vector.x + d.x, vector.y + d.y))
                 .map(d -> new Node(vector.x + d.x, vector.y + d.y))
                 .collect(toList());
@@ -63,8 +61,12 @@ class Node {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Node node = (Node) o;
         return vector.equals(node.vector);
     }

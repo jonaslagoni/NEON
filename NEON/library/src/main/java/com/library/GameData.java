@@ -4,7 +4,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.library.interfaces.ITargetingService;
 import com.neon.engine.Neon;
+import com.targeting.TargetingService;
 
 import java.util.*;
 
@@ -56,5 +58,9 @@ public class GameData {
 
     public void endGame() {
         game.endGame();
+    }
+
+    public void addService(Class<ITargetingService> aClass, TargetingService targetingService) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

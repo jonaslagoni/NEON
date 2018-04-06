@@ -1,10 +1,14 @@
 package com.weapon;
 
-import com.neon.libary.World;
-import com.neon.libary.interfaces.*;
-import com.neon.libary.vectors.Vector2f;
-
-import static com.neon.libary.vectors.VectorUtils.distanceSquare;
+import com.library.World;
+import com.library.interfaces.Controller;
+import com.library.interfaces.Drawable;
+import com.library.interfaces.ICollisionService;
+import com.library.interfaces.IProjectileService;
+import com.library.interfaces.ITargetingService;
+import com.library.interfaces.Targetable;
+import com.library.vectors.Vector2f;
+import static com.library.vectors.VectorUtils.distanceSquare;
 
 class WeaponController implements Controller {
 
@@ -14,8 +18,8 @@ class WeaponController implements Controller {
     private final ITargetingService targetingService;
 
     WeaponController(World world,
-                     ICollisionService collisionService,
-                     IProjectileService projectileService, ITargetingService targetingService) {
+            ICollisionService collisionService,
+            IProjectileService projectileService, ITargetingService targetingService) {
         this.world = world;
         this.collisionService = collisionService;
         this.projectileService = projectileService;
@@ -26,7 +30,6 @@ class WeaponController implements Controller {
         return distanceSquare(first, source) < distanceSquare(first, second);
     }
 
-
     @Override
     public void update(float dt) {
         world.getEntities(Weapon.class).forEach(weapon -> updateWeapon(weapon, dt));
@@ -36,15 +39,19 @@ class WeaponController implements Controller {
 
         weapon.fireCooldown += dt;
 
-        if (weapon.fireCooldown < weapon.fireRate) return;
+        if (weapon.fireCooldown < weapon.fireRate) {
+            return;
+        }
 
         Drawable closest = null;
 
         for (Drawable target : collisionService.getCollisions(weapon.position, weapon.range)) {
 
-            if (closest == null || isCloser(weapon.position, target.getSprite().getPosition(), closest.getSprite().getPosition()))
-                if (target instanceof Targetable)
+            if (closest == null || isCloser(weapon.position, target.getSprite().getPosition(), closest.getSprite().getPosition())) {
+                if (target instanceof Targetable) {
                     closest = target;
+                }
+            }
         }
 
         if (closest != null) {
@@ -60,4 +67,3 @@ class WeaponController implements Controller {
 
     }
 }
-    

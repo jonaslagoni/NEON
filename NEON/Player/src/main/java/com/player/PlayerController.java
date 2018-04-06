@@ -6,7 +6,6 @@ import com.library.vectors.Vector2f;
 import static com.library.vectors.VectorUtils.distanceSquare;
 import static com.library.vectors.VectorUtils.translateVelocity;
 
-
 public class PlayerController implements Controller {
 
     private World world;
@@ -28,8 +27,7 @@ public class PlayerController implements Controller {
              * It is not necessary to calculate the actual distance, just the square of it. */
             player.getMoveAbility().setMove(distanceSquare(position, target) >= 4);
 
-            /* Calculate angle
-             * https://stackoverflow.com/questions/21483999/using-atan2-to-find-angle-between-two-vectors */
+            /* Calculate angle */
             Vector2f newVelocity = translateVelocity(position, target, velocity);
             player.sprite.setVelocity(newVelocity);
         }
