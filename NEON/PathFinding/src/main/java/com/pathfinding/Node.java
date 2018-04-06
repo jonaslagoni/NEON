@@ -1,9 +1,9 @@
 package com.pathfinding;
 
-import com.neon.libary.World;
-import com.neon.libary.vectors.Vector2f;
-import com.neon.libary.vectors.Vector2i;
-import com.neon.libary.vectors.VectorUtils;
+import com.library.World;
+import com.library.vectors.Vector2f;
+import com.library.vectors.Vector2i;
+import com.library.vectors.VectorUtils;
 
 import java.util.Arrays;
 import java.util.LinkedList;

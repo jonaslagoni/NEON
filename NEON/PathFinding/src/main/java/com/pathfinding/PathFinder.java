@@ -1,9 +1,9 @@
 package com.pathfinding;
 
-import com.neon.libary.World;
-import com.neon.libary.interfaces.IPathFindingService;
-import com.neon.libary.vectors.Vector2f;
-import com.neon.libary.vectors.Vector2i;
+import com.library.World;
+import com.library.interfaces.IPathFindingService;
+import com.library.vectors.Vector2f;
+import com.library.vectors.Vector2i;
 
 import java.util.*;
 

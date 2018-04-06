@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="dk.sdu.mmmi.cbse.osgiasteroids">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.tower.TowerController">
     <implementation class="com.tower.TowerController"/>
     <service>
-        <provide interface="com.interfaces.Controller"/>
+        <provide interface="com.library.interfaces.Controller"/>
     </service>
 
 </scr:component>

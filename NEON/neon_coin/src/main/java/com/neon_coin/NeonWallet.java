@@ -1,6 +1,6 @@
 package com.neon_coin;
 
-import com.neon.libary.interfaces.INeonService;
+import com.library.interfaces.INeonService;
 
 /**
  * Created by sam on 15-03-2018.
