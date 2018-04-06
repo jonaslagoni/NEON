@@ -1,8 +1,10 @@
 package com.weapon;
 
+
 import com.library.ShotType;
 import com.library.interfaces.WeaponEntity;
 import com.library.vectors.Vector2f;
+
 
 public class Weapon implements WeaponEntity {
 

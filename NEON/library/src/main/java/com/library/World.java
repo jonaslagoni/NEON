@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.library.interfaces.Drawable;
 import com.library.interfaces.Entity;
+import com.library.interfaces.WorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 
@@ -12,7 +13,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
-public class World {
+public class World implements WorldService{
 
     public static final int WIDTH = 2048;
     public static final int HEIGHT = 2048;

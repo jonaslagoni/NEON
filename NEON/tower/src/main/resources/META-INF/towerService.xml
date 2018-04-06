@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.tower.towerservice">
+    <implementation class="com.tower.TowerService"/>
+
+    <reference bind="setNeonWallet" cardinality="0..1"
+               interface="com.library.interfaces.INeonService"
+               name="neonWallet" policy="dynamic" unbind="removeNeonWallet"/>
+
+</scr:component>
