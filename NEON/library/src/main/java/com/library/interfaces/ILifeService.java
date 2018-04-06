@@ -8,7 +8,7 @@ package com.library.interfaces;
 /**
  * @author Ejer
  */
-public interface ILifeService extends Service {
+public interface ILifeService  {
 
     int subtractLife(int i);
 

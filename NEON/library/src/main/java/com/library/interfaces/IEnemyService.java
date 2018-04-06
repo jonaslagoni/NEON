@@ -1,6 +1,6 @@
 package com.library.interfaces;
 
-public interface IEnemyService extends Service {
+public interface IEnemyService {
 
     public int getWaveCountdown();
 }

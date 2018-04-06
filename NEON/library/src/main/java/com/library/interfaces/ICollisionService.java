@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Daniel
  */
-public interface ICollisionService extends Service {
+public interface ICollisionService {
 
     List<Drawable> getCollisions(Sprite sprite);
 

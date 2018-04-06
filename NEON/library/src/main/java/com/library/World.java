@@ -2,16 +2,15 @@ package com.library;
 
 import com.library.interfaces.Drawable;
 import com.library.interfaces.Entity;
-import com.library.interfaces.WorldService;
+import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
-
 
 import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
-public class World implements WorldService{
+public class World implements IWorldService {
 
     public static final int WIDTH = 2048;
     public static final int HEIGHT = 2048;
@@ -44,6 +43,7 @@ public class World implements WorldService{
         return new Vector2f(v.x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2, v.y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2);
     }
 
+    @Override
     public void addEntity(Entity entity) {
         cache.clear();
         if (entities.size() > 0) {
@@ -56,21 +56,28 @@ public class World implements WorldService{
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     public final <E extends Entity> List<E> getEntities(final Class<E> type) {
-        if (cache.containsKey(type)) return (List<E>) cache.get(type);
+        if (cache.containsKey(type)) {
+            return (List<E>) cache.get(type);
+        }
         final List<E> result = entities.stream().filter(type::isInstance).map(type::cast).collect(toList());
         cache.put(type, result);
         return result;
     }
 
+    @Override
     public void removeEntity(Entity player) {
         cache.clear();
         entities.remove(player);
     }
 
+    @Override
     public boolean setGridCell(Vector2f position, Drawable entity) {
         Vector2i v = gridProject(position);
-        if (grid[v.x][v.y] != null || entity == null) return false;
+        if (grid[v.x][v.y] != null || entity == null) {
+            return false;
+        }
         grid[v.x][v.y] = entity;
         addEntity(entity);
         Vector2f v1 = gridUnproject(v);
@@ -79,6 +86,7 @@ public class World implements WorldService{
         return true;
     }
 
+    @Override
     public boolean isValidPosition(Vector2f position) {
 //        boolean b = setGridCell(position, () -> new Sprite(
 //                new Texture(Gdx.files.internal("images/laser-tower.png")),
@@ -95,6 +103,7 @@ public class World implements WorldService{
         return true;
     }
 
+    @Override
     public Entity getGridCell(Vector2f position) {
         Vector2i v = gridProject(position);
         return grid[v.x][v.y];
@@ -111,6 +120,7 @@ public class World implements WorldService{
         grid[x][y] = null;
     }
 
+    @Override
     public boolean blocked(int x, int y) {
         return x >= World.GRID_SPACES || y >= World.GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
     }
@@ -118,6 +128,7 @@ public class World implements WorldService{
     /**
      * @return the numberOfTowers
      */
+    @Override
     public int getNumberOfTowers() {
         return numberOfTowers;
     }

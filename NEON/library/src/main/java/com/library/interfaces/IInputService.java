@@ -5,13 +5,15 @@
  */
 package com.library.interfaces;
 
-import com.library.Sprite;
 import com.library.vectors.Vector2f;
 
 /**
- * @author Daniel
+ *
+ * @author emil
  */
-public interface ITargetingService {
+public interface IInputService {
 
-    Vector2f calculateTargetVector(Vector2f weaponPosition, Sprite enemy);
+    public boolean isClicked();
+
+    public Vector2f getCords();
 }
