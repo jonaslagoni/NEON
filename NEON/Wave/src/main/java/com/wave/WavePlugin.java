@@ -1,9 +1,9 @@
 package com.wave;
 
-import com.neon.libary.GameData;
-import com.neon.libary.World;
-import com.neon.libary.interfaces.IWaveService;
-import com.neon.libary.interfaces.Plugin;
+import com.library.GameData;
+import com.library.World;
+import com.library.interfaces.IWaveService;
+import com.library.interfaces.Plugin;
 
 /**
  * Created by sam on 15-03-2018.

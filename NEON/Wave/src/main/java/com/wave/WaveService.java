@@ -1,8 +1,8 @@
 package com.wave;
 
-import com.neon.enemy.EnemyFactory;
-import com.neon.libary.interfaces.Entity;
-import com.neon.libary.interfaces.IWaveService;
+import com.enemy.EnemyFactory;
+import com.library.interfaces.Entity;
+import com.library.interfaces.IWaveService;
 
 import java.util.Collections;
 import java.util.LinkedList;

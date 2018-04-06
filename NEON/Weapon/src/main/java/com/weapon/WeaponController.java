@@ -1,10 +1,14 @@
 package com.weapon;
 
-import com.neon.libary.World;
-import com.neon.libary.interfaces.*;
-import com.neon.libary.vectors.Vector2f;
-
-import static com.neon.libary.vectors.VectorUtils.distanceSquare;
+import com.library.World;
+import com.library.interfaces.Controller;
+import com.library.interfaces.Drawable;
+import com.library.interfaces.ICollisionService;
+import com.library.interfaces.IProjectileService;
+import com.library.interfaces.ITargetingService;
+import com.library.interfaces.Targetable;
+import com.library.vectors.Vector2f;
+import static com.library.vectors.VectorUtils.distanceSquare;
 
 class WeaponController implements Controller {
 
