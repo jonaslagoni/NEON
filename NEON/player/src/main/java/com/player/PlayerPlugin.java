@@ -1,6 +1,5 @@
 package com.player;
 
-import com.library.GameData;
 import com.library.MoveAbility;
 import com.library.Sprite;
 import com.library.World;

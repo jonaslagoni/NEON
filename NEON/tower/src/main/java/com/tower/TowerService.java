@@ -1,12 +1,10 @@
 package com.tower;
 
-import com.library.ShotType;
 import com.library.TowerType;
 import com.library.World;
 import com.library.interfaces.Entity;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.ITowerService;
-import com.library.interfaces.WeaponEntity;
 import com.library.vectors.Vector2f;
 
 class TowerService implements ITowerService {

@@ -13,10 +13,8 @@ class TowerController implements Controller {
 
     @Override
     public void update(float dt) {
-        world.getEntities(Tower.class).forEach(this::updateTower);
-    }
-
-    private void updateTower(Tower tower) {
-        tower.sprite.setTexture(tower.textures[tower.level - 1]);
+        world.getEntities(Tower.class).forEach(tower -> {
+            tower.sprite.setTexture(tower.textures[tower.level - 1]);
+        });
     }
 }

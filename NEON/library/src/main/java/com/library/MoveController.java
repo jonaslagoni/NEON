@@ -7,10 +7,14 @@ import static com.library.vectors.VectorUtils.translate;
 
 public class MoveController implements Controller {
 
-    private final World world;
+    private World world;
 
-    public MoveController(World world) {
+    public void setWorld(World world) {
         this.world = world;
+    }
+
+    public void removeWorld() {
+        this.world = null;
     }
 
     private void moveEntity(Moveable moveable, float dt) {
