@@ -45,14 +45,15 @@ public class HUD implements InputProcessor, Controller {
     private int counter;
     private final Skin skin;
 
-    public HUD(Batch batch, Skin skin) {
+    public HUD(Batch batch, Skin skin, GameData gameData) {
         this.skin = skin;
         this.batch = batch;
+        this.gameData = gameData;
     }
 
     public void start() {
         this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
-
+        
         Table table = new Table(skin);
         table.setFillParent(true);
         hud.addActor(table);

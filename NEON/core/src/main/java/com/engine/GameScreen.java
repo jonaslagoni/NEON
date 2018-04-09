@@ -16,7 +16,6 @@ import com.library.interfaces.Drawable;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 import com.library.interfaces.Controller;
-import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
 import static com.library.vectors.VectorUtils.angle;
 import java.util.List;
@@ -39,10 +38,10 @@ public class GameScreen implements Screen {
 
     GameScreen(final Neon game) {
         this.game = game;
-
+        gameData = new GameData();
         bg = new Texture(Gdx.files.internal("images/background2048.png"));
 
-        hud = new HUD(game.batch, game.skin);
+        hud = new HUD(game.batch, game.skin, gameData);
         hud.start();
 
         Gdx.input.setInputProcessor(new InputProcessor() {
