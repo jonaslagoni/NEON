@@ -1,19 +1,30 @@
 package com.player;
 
 import com.library.interfaces.IInputService;
-import com.library.World;
 import com.library.interfaces.Controller;
+import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import static com.library.vectors.VectorUtils.distanceSquare;
 import static com.library.vectors.VectorUtils.translateVelocity;
 
 public class PlayerController implements Controller {
 
-    private World world;
+    private IWorldService world;
     private IInputService inputService;
 
-    PlayerController(World world) {
+    public void setWorld(IWorldService world){
         this.world = world;
+    }
+    public void removeWorld() {
+        this.world = null;
+    }
+    
+    public void setInputService(IInputService inputService){
+        this.inputService = inputService;
+    }
+    
+    public void removeInputService(){
+        this.inputService = null;
     }
 
     @Override
@@ -21,7 +32,7 @@ public class PlayerController implements Controller {
 
         world.getEntities(Player.class).forEach((player) -> {
 
-            if (inputService.isClicked() && !World.isOutOfBounds(inputService.getCords())) {
+            if (inputService.isClicked() && !IWorldService.isOutOfBounds(inputService.getCords())) {
                 player.moveAbility.setTarget(inputService.getCords());
             }
 

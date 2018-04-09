@@ -1,6 +1,7 @@
 package com.pathfinding;
 
 import com.library.World;
+import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 import com.library.vectors.VectorUtils;
@@ -52,7 +53,7 @@ public class Node {
         return Math.abs(vector.x - b.vector.x) + Math.abs(vector.y - b.vector.y);
     }
 
-    public List<Node> neighbors(World world) {
+    public List<Node> neighbors(IWorldService world) {
         return DIRECTIONS.stream()
                 .filter(d -> !world.blocked(vector.x + d.x, vector.y + d.y))
                 .map(d -> new Node(vector.x + d.x, vector.y + d.y))
