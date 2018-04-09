@@ -5,10 +5,14 @@ import com.library.interfaces.Controller;
 
 class TowerController implements Controller {
 
-    private final World world;
+    private World world;
 
-    TowerController(World world) {
+    public void setWorld(World world){
         this.world = world;
+    }
+    
+    public void removeWorld(){
+        this.world = null;
     }
 
     @Override
