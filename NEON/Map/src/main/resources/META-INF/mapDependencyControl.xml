@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.enemy.plugin">
-    <implementation class="com.enemy.EnemyPlugin"/>
-
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.map.MapPlugin">
+    <implementation class="com.map.MapPlugin"/>
+    
     <reference bind="setWorld" cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
                name="worldService" policy="dynamic" unbind="removeWorld"/>
-    
 
 </scr:component>

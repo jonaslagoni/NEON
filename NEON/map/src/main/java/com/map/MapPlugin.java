@@ -18,6 +18,9 @@ public class MapPlugin implements Plugin {
     public void setWorld(IWorldService world) {
         this.world = world;
     }
+    public void removeWorld() {
+        this.world = null;
+    }
 
     @Override
     public void start() {
