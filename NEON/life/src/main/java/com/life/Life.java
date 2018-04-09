@@ -5,7 +5,6 @@
  */
 package com.life;
 
-import com.library.GameData;
 import com.library.interfaces.ILifeService;
 
 /**
@@ -14,11 +13,9 @@ import com.library.interfaces.ILifeService;
 public class Life implements ILifeService {
 
     private int life;
-    private final GameData gameData;
 
-    Life(int life, GameData gameData) {
+    Life(int life) {
         this.life = life;
-        this.gameData = gameData;
     }
 
     @Override
