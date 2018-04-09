@@ -1,4 +1,3 @@
 Bundle-SymbolicName: Wave OSGi Bundle
 Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/WaveService.xml, META-INF/EntityPlugin.xml
-
+Service-Component: META-INF/WaveService.xml

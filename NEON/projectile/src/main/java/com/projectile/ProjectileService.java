@@ -3,17 +3,21 @@ package com.projectile;
 import com.library.MoveAbility;
 import com.library.ShotType;
 import com.library.Sprite;
-import com.library.World;
 import com.library.interfaces.IProjectileService;
+import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import static com.library.vectors.VectorUtils.translateVelocity;
 
 public class ProjectileService implements IProjectileService {
 
-    private World world;
+    private IWorldService world;
 
-    ProjectileService(World world) {
+    public void setWorld(IWorldService world) {
         this.world = world;
+    }
+    
+    public void removeWorld() {
+        this.world = null;
     }
 
     @Override

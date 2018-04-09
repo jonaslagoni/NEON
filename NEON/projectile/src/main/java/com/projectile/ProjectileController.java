@@ -6,16 +6,20 @@ import com.library.interfaces.Controller;
 import com.library.interfaces.DamageAble;
 import com.library.interfaces.Entity;
 import com.library.interfaces.ICollisionService;
+import com.library.interfaces.IWorldService;
 
 public class ProjectileController implements Controller {
 
-    private final World world;
+    private IWorldService world;
     private ICollisionService collisionService;
 
-    ProjectileController(World world, GameData gameData) {
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
-
+    
+    public void removeWorld() {
+        this.world = null;
+    }
     public void setCollisionService(ICollisionService collisionService) {
         this.collisionService = collisionService;
     }
