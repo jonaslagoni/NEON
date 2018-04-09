@@ -5,13 +5,15 @@
  */
 package com.library.interfaces;
 
+import java.io.File;
+
 /**
  *
  * @author emil
  */
 public interface IAssetManager {
 
-    void loadAsset(String name, String path);
+    void loadAsset(String name, File file);
 
     void unloadAsset(String name);
 

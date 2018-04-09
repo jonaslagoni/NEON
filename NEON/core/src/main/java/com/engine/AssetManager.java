@@ -5,9 +5,11 @@
  */
 package com.engine;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.library.interfaces.IAssetManager;
 import java.util.HashMap;
 import com.badlogic.gdx.graphics.Texture;
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -15,19 +17,19 @@ import java.util.Map;
  * @author emil
  */
 public class AssetManager implements IAssetManager {
-
+    
     private static final Map<String, Texture> ASSETS = new HashMap<>();
-
+    
     @Override
-    public void loadAsset(String name, String path) {
-        ASSETS.put(name, new Texture(path));
+    public void loadAsset(String name, File file) {
+        ASSETS.put(name, new Texture(new FileHandle(file)));
     }
-
+    
     @Override
     public void unloadAsset(String name) {
         ASSETS.remove(name);
     }
-
+    
     public Texture getTexture(String name) {
         return ASSETS.get(name);
     }

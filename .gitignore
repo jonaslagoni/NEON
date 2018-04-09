@@ -25,3 +25,5 @@ target/
 assembly/
 
 *~
+/NEON/HashTest/build/
+/NEON/HashTest/dist/

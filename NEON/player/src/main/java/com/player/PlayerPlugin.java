@@ -7,6 +7,7 @@ import com.library.World;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
 import com.library.vectors.Vector2f;
+import java.io.File;
 
 public class PlayerPlugin implements Plugin {
 
@@ -16,7 +17,6 @@ public class PlayerPlugin implements Plugin {
 
     private Player player;
     private World world;
-    private GameData gameData;
     private IAssetManager assetManager;
 
     public void setAssetManager(IAssetManager assetManager) {
@@ -27,13 +27,13 @@ public class PlayerPlugin implements Plugin {
         this.world = world;
     }
 
-    public void setGameData(GameData gameData) {
-        this.gameData = gameData;
-    }
-
     @Override
     public void start() {
-        assetManager.loadAsset(ASSET_NAME, ASSET_PATH);
+        assetManager.loadAsset(ASSET_NAME, new File(getClass()
+                .getClassLoader()
+                .getResource(ASSET_PATH)
+                .getFile()
+        ));
         player = new Player(new Sprite(
                 ASSET_NAME,
                 new Vector2f(World.WIDTH / 2, World.HEIGHT / 2),
