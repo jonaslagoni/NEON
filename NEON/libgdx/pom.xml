@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>neon-parent</artifactId>
         <groupId>com</groupId>
         <version>0.1</version>
     </parent>
-
     <groupId>com</groupId>
     <artifactId>libgdx</artifactId>
     <version>0.1</version>
     <packaging>bundle</packaging>
-
     <name>LibGDX OSGi Bundles</name>
-
     <properties>
         <libGDX.version>1.9.6</libGDX.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -85,9 +83,7 @@
             <artifactId>com.diffplug.osgi.extension.sun.reflect</artifactId>
             <version>0.0.0</version>
         </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -98,7 +94,7 @@
                     <instructions>
                         <Export-Package>com.badlogic.gdx.*</Export-Package>
                         <Import-Package>!com.apple.eio,!com.sun.*,!org.objectweb.*,*</Import-Package>
-                        <Embed-Dependency>*</Embed-Dependency>
+                        <Embed-Dependency>!org.osgi.*,!com.diffplug.osgi.*,*</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                     </instructions>
                 </configuration>
@@ -106,7 +102,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

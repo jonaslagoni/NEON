@@ -1,10 +1,8 @@
 package com.projectile;
 
-import com.library.GameData;
 import com.library.World;
 import com.library.interfaces.Controller;
 import com.library.interfaces.DamageAble;
-import com.library.interfaces.Entity;
 import com.library.interfaces.ICollisionService;
 import com.library.interfaces.IWorldService;
 
@@ -16,10 +14,11 @@ public class ProjectileController implements Controller {
     public void setWorld(IWorldService world) {
         this.world = world;
     }
-    
+
     public void removeWorld() {
         this.world = null;
     }
+
     public void setCollisionService(ICollisionService collisionService) {
         this.collisionService = collisionService;
     }
@@ -32,14 +31,14 @@ public class ProjectileController implements Controller {
     private void updateProjectile(Projectile projectile) {
         if (World.isOutOfBounds(projectile.sprite.getPosition())) {
             world.removeEntity(projectile);
+            return;
         }
-
-        for (Entity entity : collisionService.getCollisions(projectile.sprite)) {
-            if (entity instanceof DamageAble) {
-                ((DamageAble) entity).setDamage(projectile.damage);
-                world.removeEntity(projectile);
-            }
-        }
+        collisionService.getCollisions(projectile.sprite).stream()
+                .filter(DamageAble.class::isInstance)
+                .map(DamageAble.class::cast)
+                .forEach(entity -> {
+                    entity.setDamage(projectile.damage);
+                    world.removeEntity(projectile);
+                });
     }
-
 }

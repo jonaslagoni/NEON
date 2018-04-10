@@ -11,17 +11,14 @@ public class Activator implements BundleActivator {
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void start(BundleContext context) throws Exception {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        // config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-        config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
-        // config.height = 768;
-        // config.width = 1024;
+//        config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
+        config.height = 768;
+        config.width = 1024;
         config.resizable = false;
         new LwjglApplication(new Neon(), config);
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        // TODO add deactivation code here
     }
-
 }

@@ -1,4 +1,3 @@
 Bundle-SymbolicName: Projectile OSGi Bundle
 Bundle-ActivationPolicy: lazy
 Service-Component: META-INF/EntityController.xml, META-INF/projectileControllerDependencyControl.xml, META-INF/projectileServiceDependencyControl.xml
-

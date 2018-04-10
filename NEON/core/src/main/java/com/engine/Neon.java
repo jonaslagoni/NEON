@@ -13,7 +13,8 @@ public class Neon extends Game {
 
     @Override
     public void create() {
-        skin = new Skin(Gdx.files.internal("skin.json"), new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
+        skin = new Skin(Gdx.files.internal("skin.json"),
+                new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
         batch = new SpriteBatch();
         this.setScreen(new MainMenuScreen(this));
     }
@@ -47,4 +48,3 @@ public class Neon extends Game {
         this.setScreen(new EndScreen(this));
     }
 }
-

@@ -1,4 +1,3 @@
 Bundle-SymbolicName: Map OSGi Bundle
 Bundle-ActivationPolicy: lazy
 Service-Component: META-INF/EntityPlugin.xml, META-INF/mapDependencyControl.xml
-

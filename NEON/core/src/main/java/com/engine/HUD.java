@@ -45,7 +45,7 @@ public class HUD implements InputProcessor, Controller {
     private int counter;
     private final Skin skin;
 
-    public HUD(Batch batch, Skin skin) {
+    HUD(Batch batch, Skin skin) {
         this.skin = skin;
         this.batch = batch;
     }

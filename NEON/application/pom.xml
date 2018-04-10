@@ -8,19 +8,15 @@
         <artifactId>neon-parent</artifactId>
         <version>0.1</version>
     </parent>
-
     <artifactId>application</artifactId>
     <packaging>nbm-application</packaging>
-
     <name>NEON-app</name>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <all.clusters>${project.build.directory}/${brandingToken}</all.clusters>
         <netbeans.run.params.ide/>
         <netbeans.run.params>${netbeans.run.params.ide} --nosplash</netbeans.run.params>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.netbeans.modules</groupId>
@@ -47,11 +43,20 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>OSGiExtender</artifactId>
+            <artifactId>extender</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>library</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>core</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

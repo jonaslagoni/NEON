@@ -16,7 +16,6 @@ import com.library.interfaces.Drawable;
 
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 import com.library.interfaces.Controller;
-import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
 import static com.library.vectors.VectorUtils.angle;
 import java.util.List;
