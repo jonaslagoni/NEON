@@ -24,7 +24,7 @@ public class Updater implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
-        final Path MODULES_DIRECTORY = Paths.get("/Users/corfixen/OSGiModules");
+        final Path MODULES_DIRECTORY = Paths.get("C:/Users/Lagoni/Documents/SmartGit/NEON-2/NEON");
 
         bundleContext = context;
 

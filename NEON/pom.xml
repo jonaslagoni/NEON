@@ -53,16 +53,8 @@
         <module>libgdx</module>
         <module>extender</module>
         <module>core</module>
-        <module>player</module>
-        <module>projectile</module>
-        <module>targeting</module>
-        <module>map</module>
-        <module>life</module>
-        <module>enemy</module>
-        <module>wave</module>
-        <module>neoncoin</module>
-        <module>pathfinding</module>
         <module>tower</module>
+        <module>Player</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>

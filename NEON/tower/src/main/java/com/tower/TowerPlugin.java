@@ -32,6 +32,16 @@ public class TowerPlugin implements Plugin {
     private World world;
     private GameData gameData;
     private IAssetManager assetManager;
+    
+    public void setWorld(World world){
+        this.world = world;
+    }
+    
+    public void removeWorld(){
+        this.world = null;
+    }
+    
+    
 
     @Override
     public void start() {

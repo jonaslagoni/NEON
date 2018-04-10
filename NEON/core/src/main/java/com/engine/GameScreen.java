@@ -38,10 +38,10 @@ public class GameScreen implements Screen {
 
     GameScreen(final Neon game) {
         this.game = game;
-
+        gameData = new GameData();
         bg = new Texture(Gdx.files.internal("images/background2048.png"));
 
-        hud = new HUD(game.batch, game.skin);
+        hud = new HUD(game.batch, game.skin, gameData);
         hud.start();
 
         Gdx.input.setInputProcessor(new InputProcessor() {
