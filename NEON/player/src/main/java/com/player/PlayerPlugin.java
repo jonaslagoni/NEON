@@ -26,6 +26,14 @@ public class PlayerPlugin implements Plugin {
         this.world = world;
     }
 
+    public void removeAssetManager() {
+        this.assetManager = null;
+    }
+    
+    public void removeWorld(){
+        this.world = null;
+    }
+    
     @Override
     public void start() {
         assetManager.loadAsset(ASSET_NAME, new File(getClass()
