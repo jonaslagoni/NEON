@@ -7,6 +7,8 @@ import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
 import com.library.vectors.Vector2f;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class PlayerPlugin implements Plugin {
 
@@ -28,11 +30,13 @@ public class PlayerPlugin implements Plugin {
 
     @Override
     public void start() {
-        assetManager.loadAsset(ASSET_NAME, new File(getClass()
-                .getClassLoader()
-                .getResource(ASSET_PATH)
-                .getFile()
-        ));
+        try (InputStream stream = getClass().getClassLoader().getResourceAsStream(ASSET_PATH)) {
+            byte[] bytes = new byte[stream.available()];
+            stream.read(bytes);
+            assetManager.loadAsset(ASSET_NAME, bytes);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         player = new Player(new Sprite(
                 ASSET_NAME,
                 new Vector2f(World.WIDTH / 2, World.HEIGHT / 2),

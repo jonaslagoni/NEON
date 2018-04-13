@@ -54,7 +54,7 @@
         <module>extender</module>
         <module>core</module>
         <module>tower</module>
-        <module>Player</module>
+        <module>player</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>

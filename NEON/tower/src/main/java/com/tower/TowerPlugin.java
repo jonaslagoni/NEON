@@ -6,7 +6,11 @@ import com.library.World;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TowerPlugin implements Plugin {
 
@@ -32,25 +36,27 @@ public class TowerPlugin implements Plugin {
     private World world;
     private GameData gameData;
     private IAssetManager assetManager;
-    
-    public void setWorld(World world){
+
+    public void setWorld(World world) {
         this.world = world;
     }
-    
-    public void removeWorld(){
+
+    public void removeWorld() {
         this.world = null;
     }
-    
-    
 
     @Override
     public void start() {
         for (String name : ASSETS) {
             String pathName = ASSET_FOLDER + name + FILE_TYPE;
-            String path = getClass().getClassLoader().getResource(pathName).getFile();
-            assetManager.loadAsset(name, new File(path));
+            try (InputStream stream = getClass().getClassLoader().getResourceAsStream(pathName)) {
+                byte[] bytes = new byte[stream.available()];
+                stream.read(bytes);
+                assetManager.loadAsset(name, bytes);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
-
         for (TowerType t : TowerType.values()) {
             gameData.addPlaceable(t);
         }

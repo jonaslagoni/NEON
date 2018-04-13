@@ -9,7 +9,7 @@
         <version>0.1</version>
     </parent>
     <groupId>com</groupId>
-    <artifactId>OSGiCore</artifactId>
+    <artifactId>core</artifactId>
     <version>0.1</version>
     <packaging>bundle</packaging>
     <name>Core OSGi Bundle</name>
