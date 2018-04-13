@@ -28,6 +28,14 @@ public class PlayerPlugin implements Plugin {
         this.world = world;
     }
 
+    public void removeAssetManager() {
+        this.assetManager = null;
+    }
+    
+    public void removeWorld(){
+        this.world = null;
+    }
+    
     @Override
     public void start() {
         try (InputStream stream = getClass().getClassLoader().getResourceAsStream(ASSET_PATH)) {

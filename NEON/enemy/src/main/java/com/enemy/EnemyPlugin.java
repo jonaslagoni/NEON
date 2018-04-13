@@ -44,6 +44,10 @@ public class EnemyPlugin implements Plugin {
     public void setAssetManager(IAssetManager assetManager) {
         this.assetManager = assetManager;
     }
+    
+    public void removeAssetManager() {
+        this.assetManager = null;
+    }
 
     @Override
     public void start() {
