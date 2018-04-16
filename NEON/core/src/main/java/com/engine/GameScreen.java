@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,8 +19,10 @@ import static com.badlogic.gdx.math.MathUtils.radDeg;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.library.Sprite;
 import com.library.interfaces.Controller;
+import com.library.interfaces.Entity;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IWorldService;
+import com.library.interfaces.Moveable;
 import com.library.interfaces.Plugin;
 import static com.library.vectors.VectorUtils.angle;
 import java.io.IOException;
@@ -85,6 +86,8 @@ public class GameScreen extends Game {
         super.render();
         float delta = Gdx.graphics.getDeltaTime();
         entityProcessorList.forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
+        
+        
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -104,6 +107,9 @@ public class GameScreen extends Game {
         /* Draw all entities to screen*/
         if(world != null){
             world.getEntities(Drawable.class).forEach(this::drawEntity);
+            for(Moveable e: world.getEntities(Moveable.class)){
+                batch.draw(((AssetManager)assetManager).getTexture("bg"), e.getSprite().getPosition().getX(), e.getSprite().getPosition().getY(), 100, 100);
+            }
         }
         batch.end();
     }
