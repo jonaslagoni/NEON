@@ -16,14 +16,12 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.library.GameData;
 import com.library.TowerType;
-import com.library.World;
 import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
 
 public class HUD implements InputProcessor, Controller {
 
     private final Batch batch;
-    private World world;
     private GameData gameData;
     private Stage hud;
     private TowerType selectedEntity;
@@ -44,7 +42,14 @@ public class HUD implements InputProcessor, Controller {
     private ILifeService lifeService;
     private int counter;
     private final Skin skin;
-
+    private IWorldService world;
+    
+    public void setWorld(IWorldService world){
+        this.world = world;
+    }
+    public void removeWorld() {
+        this.world = null;
+    }
     public HUD(Batch batch, Skin skin, GameData gameData) {
         this.skin = skin;
         this.batch = batch;
@@ -146,8 +151,8 @@ public class HUD implements InputProcessor, Controller {
                 placementTable.row();
             }
             placementTable.bottom().right().add(button)
-                    .width(World.GRID_CELL_SIZE / 2)
-                    .height(World.GRID_CELL_SIZE / 2);
+                    .width(IWorldService.GRID_CELL_SIZE / 2)
+                    .height(IWorldService.GRID_CELL_SIZE / 2);
 
             counter++;
         }
@@ -183,17 +188,21 @@ public class HUD implements InputProcessor, Controller {
         placementGroup.setVisible(true);
 
         /* Abandon if click is outside of the world */
-        if (World.isOutOfBounds(pos)) {
+        if (IWorldService.isOutOfBounds(pos)) {
             return false;
         }
         /* If a tower is selected, place it */
         if (selectedEntity != null) {
-            if (!world.isValidPosition(pos)) {
+            if(world != null){
+                if (!world.isValidPosition(pos)) {
+                    return false;
+                }
+                towerService.placeTower(pos, selectedEntity);
+                selectedEntity = null;
+                return false;
+            }else{
                 return false;
             }
-            towerService.placeTower(pos, selectedEntity);
-            selectedEntity = null;
-            return false;
         }
 
         /* Select an already placed tower */
@@ -233,7 +242,7 @@ public class HUD implements InputProcessor, Controller {
         waveScoreLabel.setText("" + waveService.getWaveScore());
         lifeLabel.setText("" + lifeService.getLife());
         coinLabel.setText("" + neonService.getCoins());
-        towers.setText("" + world.getNumberOfTowers());
+        towers.setText("" + (world == null ? "World not sat" : world.getNumberOfTowers()));
         waveCountdown.setText("" + enemyService.getWaveCountdown());
     }
 }

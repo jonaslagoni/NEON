@@ -21,7 +21,6 @@ import java.util.Map;
 public class AssetManager implements IAssetManager {
 
     private final Map<String, Texture> assets = new HashMap<>();
-
     @Override
     public void unloadAsset(String name) {
         assets.remove(name);

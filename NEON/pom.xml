@@ -53,7 +53,6 @@
         <module>libgdx</module>
         <module>extender</module>
         <module>core</module>
-        <module>tower</module>
         <module>player</module>
     </modules>
     <properties>
