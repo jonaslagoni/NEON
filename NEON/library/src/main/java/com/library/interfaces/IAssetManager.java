@@ -5,13 +5,15 @@
  */
 package com.library.interfaces;
 
+import java.io.InputStream;
+
 /**
  *
  * @author emil
  */
 public interface IAssetManager {
 
-    void loadAsset(String name, byte[] file);
+    void loadAsset(String name, InputStream stream);
 
     void unloadAsset(String name);
 

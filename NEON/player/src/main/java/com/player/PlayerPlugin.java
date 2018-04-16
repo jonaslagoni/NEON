@@ -39,9 +39,7 @@ public class PlayerPlugin implements Plugin {
     @Override
     public void start() {
         try (InputStream stream = getClass().getClassLoader().getResourceAsStream(ASSET_PATH)) {
-            byte[] bytes = new byte[stream.available()];
-            stream.read(bytes);
-            assetManager.loadAsset(ASSET_NAME, bytes);
+            assetManager.loadAsset(ASSET_NAME, stream);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -22,12 +22,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameScreen implements Screen {
-    
+
     private final static OrthographicCamera CAMERA = new OrthographicCamera();
     public final static Viewport VIEWPORT = new ExtendViewport(World.WIDTH, World.HEIGHT, CAMERA);
-    
+
     private final Neon game;
     private final World world = new World();
     private boolean speedUp;
@@ -36,23 +38,19 @@ public class GameScreen implements Screen {
     private AssetManager assetManager;
     private GameData gameData;
     private HUD hud;
-    
+
     GameScreen(final Neon game) {
         this.game = game;
         gameData = new GameData();
-        
+
         try (InputStream stream = getClass().getClassLoader().getResourceAsStream("background2048.png")) {
-            byte[] bs = new byte[stream.available()];
-            stream.read(bs);
-            assetManager.loadAsset("bg", bs);
+            assetManager.loadAsset("bg", stream);
         } catch (IOException ex) {
-            System.err.println("Error loading texture");
             ex.printStackTrace();
         }
-        
         hud = new HUD(game.batch, game.skin, gameData);
         hud.start();
-        
+
         Gdx.input.setInputProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int keycode) {
@@ -63,45 +61,45 @@ public class GameScreen implements Screen {
                 }
                 return false;
             }
-            
+
             @Override
             public boolean keyUp(int keycode) {
                 return false;
             }
-            
+
             @Override
             public boolean keyTyped(char character) {
                 return false;
             }
-            
+
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 return false;
             }
-            
+
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 return false;
             }
-            
+
             @Override
             public boolean touchDragged(int screenX, int screenY, int pointer) {
                 return false;
             }
-            
+
             @Override
             public boolean mouseMoved(int screenX, int screenY) {
                 return false;
             }
-            
+
             @Override
             public boolean scrolled(int amount) {
                 return false;
             }
         });
-        
+
     }
-    
+
     private void drawEntity(Drawable drawable) {
         Sprite sprite = drawable.getSprite();
         Texture texture = assetManager.getTexture(sprite.getTexture());
@@ -122,25 +120,25 @@ public class GameScreen implements Screen {
                 false, false
         );
     }
-    
+
     @Override
     public void show() {
     }
-    
+
     @Override
     public void render(float delta) {
-        
+
         entityProcessorList.forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
 
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
+
         VIEWPORT.apply();
-        
+
         CAMERA.update();
         game.batch.setProjectionMatrix(CAMERA.combined);
-        
+
         game.batch.begin();
 
         /* Draw background */
@@ -150,43 +148,43 @@ public class GameScreen implements Screen {
         world.getEntities(Drawable.class).forEach(this::drawEntity);
         game.batch.end();
     }
-    
+
     public void addEntityProcessingService(Controller eps) {
         this.entityProcessorList.add(eps);
     }
-    
+
     public void removeEntityProcessingService(Controller eps) {
         this.entityProcessorList.remove(eps);
     }
-    
+
     public void addGamePluginService(Plugin plugin) {
         this.gamePluginList.add(plugin);
         plugin.start();
-        
+
     }
-    
+
     public void removeGamePluginService(Plugin plugin) {
         this.gamePluginList.remove(plugin);
         plugin.stop();
     }
-    
+
     @Override
     public void resize(int width, int height) {
         VIEWPORT.update(width, height, true);
     }
-    
+
     @Override
     public void pause() {
     }
-    
+
     @Override
     public void resume() {
     }
-    
+
     @Override
     public void hide() {
     }
-    
+
     @Override
     public void dispose() {
     }

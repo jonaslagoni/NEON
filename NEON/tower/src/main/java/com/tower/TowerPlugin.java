@@ -50,9 +50,7 @@ public class TowerPlugin implements Plugin {
         for (String name : ASSETS) {
             String pathName = ASSET_FOLDER + name + FILE_TYPE;
             try (InputStream stream = getClass().getClassLoader().getResourceAsStream(pathName)) {
-                byte[] bytes = new byte[stream.available()];
-                stream.read(bytes);
-                assetManager.loadAsset(name, bytes);
+                assetManager.loadAsset(name, stream);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

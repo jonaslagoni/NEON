@@ -11,8 +11,13 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.library.interfaces.IAssetManager;
 import java.util.HashMap;
 import com.badlogic.gdx.graphics.Texture;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,11 +37,17 @@ public class AssetManager implements IAssetManager {
     }
 
     @Override
-    public void loadAsset(String name, byte[] file) {
-        Gdx.app.postRunnable(() -> {
-            Pixmap pixmap = new Pixmap(file, 0, file.length);
-            Texture texture = new Texture(pixmap);
-            assets.put(name, texture);
-        });
+    public void loadAsset(String name, InputStream stream) {
+        try (DataInputStream dataStream = new DataInputStream(stream)) {
+            byte[] bytes = new byte[dataStream.available()];
+            dataStream.readFully(bytes);
+            Gdx.app.postRunnable(() -> {
+                Pixmap pixmap = new Pixmap(bytes, 0, bytes.length);
+                Texture texture = new Texture(pixmap);
+                assets.put(name, texture);
+            });
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
