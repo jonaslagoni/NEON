@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-public class GameScreen extends Game implements Screen {
+public class GameScreen extends Game {
     private final static OrthographicCamera CAMERA = new OrthographicCamera();
     public final static Viewport VIEWPORT = new ExtendViewport(IWorldService.WIDTH, IWorldService.HEIGHT, CAMERA);   
     private final List<Controller> entityProcessorList = new CopyOnWriteArrayList<>();
@@ -81,12 +81,9 @@ public class GameScreen extends Game implements Screen {
     }
     
     @Override
-    public void show() {
-    }
-    
-    @Override
-    public void render(float delta) {
+    public void render() {
         super.render();
+        float delta = Gdx.graphics.getDeltaTime();
         entityProcessorList.forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -125,9 +122,6 @@ public class GameScreen extends Game implements Screen {
     public void resume() {
     }
     
-    @Override
-    public void hide() {
-    }
     
     @Override
     public void dispose() {
