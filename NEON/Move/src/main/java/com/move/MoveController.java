@@ -1,5 +1,7 @@
-package com.library;
+package com.move;
 
+import com.library.MoveAbility;
+import com.library.Sprite;
 import com.library.interfaces.Controller;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Moveable;
