@@ -1,4 +1,3 @@
 Bundle-SymbolicName: Player OSGi Bundle
 Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/EntityController.xml, META-INF/EntityPlugin.xml, META-INF/playerControllerDependency.xml, META-INF/playerPluginDependency.xml
-
+Service-Component: META-INF/EntityController.xml, META-INF/EntityPlugin.xml
