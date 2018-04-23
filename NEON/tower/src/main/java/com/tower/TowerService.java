@@ -1,21 +1,16 @@
 package com.tower;
 
 import com.library.TowerType;
-import com.library.World;
 import com.library.interfaces.Entity;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.ITowerService;
+import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 
 class TowerService implements ITowerService {
 
     private INeonService neonWallet;
-    private World world;
-
-    TowerService(World world, INeonService neonWallet) {
-        this.neonWallet = neonWallet;
-        this.world = world;
-    }
+    private IWorldService world;
 
     public void setNeonWallet(INeonService neonWallet) {
         this.neonWallet = neonWallet;
@@ -25,14 +20,16 @@ class TowerService implements ITowerService {
         this.neonWallet = null;
     }
 
-    public void setWorld(World world) {
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
 
     public void removeWorld() {
         this.world = null;
     }
-
+    public TowerService(){
+        
+    }
     @Override
     public void upgrade(Entity entity) {
         if (!(entity instanceof Tower)) {

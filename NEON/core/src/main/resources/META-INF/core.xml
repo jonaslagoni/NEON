@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.engin.GameScreen">
-    <implementation class="com.engin.GameScreen"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.engine.GameScreen">
+    <implementation class="com.engine.GameScreen"/>
 
     <reference bind="addEntityProcessingService" cardinality="0..n"
                interface="com.library.interfaces.Controller"
@@ -9,4 +9,19 @@
     <reference bind="addGamePluginService" cardinality="0..n"
                interface="com.library.interfaces.Plugin"
                name="Plugin" policy="dynamic" unbind="removeGamePluginService"/>
+    
+    <reference bind="setWorld" cardinality="0..1"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService" policy="dynamic" unbind="removeWorld"/>
+    
+    <reference bind="setAssetManager" cardinality="0..1"
+               interface="com.library.interfaces.IAssetManager"
+               name="assetService" policy="dynamic" unbind="removeAssetManager"/>
+    
+    <reference bind="setGameData" cardinality="0..1"
+               interface="com.library.interfaces.IGameData"
+               name="gamedata" policy="dynamic" unbind="removeGameData"/>
+    
+    
+    
 </scr:component>

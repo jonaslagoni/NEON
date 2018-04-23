@@ -2,9 +2,9 @@ package com.tower;
 
 import com.library.Sprite;
 import com.library.TowerType;
-import com.library.World;
 import com.library.vectors.Vector2f;
 import static com.library.TowerType.*;
+import com.library.interfaces.IWorldService;
 
 class TowerFactory {
 
@@ -75,8 +75,8 @@ class TowerFactory {
                 files[0],
                 position,
                 new Vector2f(0, 0),
-                World.GRID_CELL_SIZE,
-                World.GRID_CELL_SIZE
+                IWorldService.GRID_CELL_SIZE,
+                IWorldService.GRID_CELL_SIZE
         ), files, 10, 4, key);
     }
 }

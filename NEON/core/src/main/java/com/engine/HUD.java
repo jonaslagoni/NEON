@@ -14,18 +14,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.library.GameData;
 import com.library.TowerType;
-import com.library.World;
 import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
 
 public class HUD implements InputProcessor, Controller {
 
     private final Batch batch;
-    private World world;
-    private GameData gameData;
-    private Stage hud;
+    private IGameData gameData;
+    private Stage stage;
     private TowerType selectedEntity;
     private Entity selectedTower;
     private Group placementGroup;
@@ -44,19 +41,34 @@ public class HUD implements InputProcessor, Controller {
     private ILifeService lifeService;
     private int counter;
     private final Skin skin;
-
-    public HUD(Batch batch, Skin skin, GameData gameData) {
+    private IWorldService world;
+    
+    public void setWorld(IWorldService world){
+        this.world = world;
+    }
+    public void removeWorld() {
+        this.world = null;
+    }
+    public void setGameData(IGameData gameData){
+        this.gameData = gameData;
+        this.start();
+    }
+    public void removeGameData() {
+        this.gameData = null;
+    }
+    public HUD(Batch batch, Skin skin) {
         this.skin = skin;
         this.batch = batch;
-        this.gameData = gameData;
     }
 
     public void start() {
-        this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
+        System.out.println("DOES THIS");
+        System.out.println("WIdth" + Gdx.graphics.getWidth());
+        this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
         
         Table table = new Table(skin);
         table.setFillParent(true);
-        hud.addActor(table);
+        stage.addActor(table);
 
         statsGroup = new Group();
         statsGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -128,33 +140,35 @@ public class HUD implements InputProcessor, Controller {
         placementGroup.addActor(placementTable);
         upgradeGroup.addActor(upgradeTable);
 
-        hud.addActor(statsGroup);
-        hud.addActor(placementGroup);
-        hud.addActor(upgradeGroup);
+        stage.addActor(statsGroup);
+        stage.addActor(placementGroup);
+        stage.addActor(upgradeGroup);
 
         /*Create button for each placable item in gamedata*/
-        for (TowerType title : gameData.getPlaceables()) {
-            TextButton button = new TextButton("", skin, title.toString());
-            button.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    selectedEntity = title;
+        if(gameData != null){
+            for (TowerType title : gameData.getPlaceables()) {
+                TextButton button = new TextButton("", skin, title.toString());
+                button.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        selectedEntity = title;
+                    }
+                });
+
+                if (counter % 4 == 0) {
+                    placementTable.row();
                 }
-            });
+                placementTable.bottom().right().add(button)
+                        .width(IWorldService.GRID_CELL_SIZE / 2)
+                        .height(IWorldService.GRID_CELL_SIZE / 2);
 
-            if (counter % 4 == 0) {
-                placementTable.row();
+                counter++;
             }
-            placementTable.bottom().right().add(button)
-                    .width(World.GRID_CELL_SIZE / 2)
-                    .height(World.GRID_CELL_SIZE / 2);
-
-            counter++;
         }
     }
 
     public Stage getStage() {
-        return hud;
+        return stage;
     }
 
     @Override
@@ -183,17 +197,21 @@ public class HUD implements InputProcessor, Controller {
         placementGroup.setVisible(true);
 
         /* Abandon if click is outside of the world */
-        if (World.isOutOfBounds(pos)) {
+        if (IWorldService.isOutOfBounds(pos)) {
             return false;
         }
         /* If a tower is selected, place it */
         if (selectedEntity != null) {
-            if (!world.isValidPosition(pos)) {
+            if(world != null){
+                if (!world.isValidPosition(pos)) {
+                    return false;
+                }
+                towerService.placeTower(pos, selectedEntity);
+                selectedEntity = null;
+                return false;
+            }else{
                 return false;
             }
-            towerService.placeTower(pos, selectedEntity);
-            selectedEntity = null;
-            return false;
         }
 
         /* Select an already placed tower */
@@ -233,7 +251,7 @@ public class HUD implements InputProcessor, Controller {
         waveScoreLabel.setText("" + waveService.getWaveScore());
         lifeLabel.setText("" + lifeService.getLife());
         coinLabel.setText("" + neonService.getCoins());
-        towers.setText("" + world.getNumberOfTowers());
+        towers.setText("" + (world == null ? "World not sat" : world.getNumberOfTowers()));
         waveCountdown.setText("" + enemyService.getWaveCountdown());
     }
 }
