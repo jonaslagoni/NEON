@@ -1,21 +1,18 @@
 package com.engine;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Neon extends Game {
 
     SpriteBatch batch;
-    Skin skin;
+    BitmapFont font;
 
     @Override
     public void create() {
-        skin = new Skin(Gdx.files.internal("skin.json"),
-                new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
         batch = new SpriteBatch();
+        font = new BitmapFont();
         this.setScreen(new MainMenuScreen(this));
     }
 

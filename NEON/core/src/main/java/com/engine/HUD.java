@@ -22,7 +22,6 @@ import com.library.vectors.Vector2f;
 
 public class HUD implements InputProcessor, Controller {
 
-    private final Batch batch;
     private World world;
     private GameData gameData;
     private Stage hud;
@@ -43,18 +42,17 @@ public class HUD implements InputProcessor, Controller {
     private IEnemyService enemyService;
     private ILifeService lifeService;
     private int counter;
-    private final Skin skin;
+    private Neon game;
 
-    public HUD(Batch batch, Skin skin, GameData gameData) {
-        this.skin = skin;
-        this.batch = batch;
+    public HUD(GameData gameData, Neon game) {
         this.gameData = gameData;
+        this.game = game;
     }
 
     public void start() {
-        this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
-        
-        Table table = new Table(skin);
+        this.hud = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), game.batch);
+
+        Table table = new Table();
         table.setFillParent(true);
         hud.addActor(table);
 
@@ -68,25 +66,30 @@ public class HUD implements InputProcessor, Controller {
         upgradeGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         upgradeGroup.setVisible(false);
 
-        Table statsTable = new Table(skin);
+        Table statsTable = new Table();
         statsTable.setFillParent(true);
 
-        Table placementTable = new Table(skin);
+        Table placementTable = new Table();
         placementTable.padRight(Gdx.graphics.getWidth() / 100)
                 .padBottom(Gdx.graphics.getHeight() / 100)
                 .setFillParent(true);
 
-        Table upgradeTable = new Table(skin);
+        Table upgradeTable = new Table();
         upgradeTable.setFillParent(true);
 
-        waveCounterLabel = new Label("", skin);
-        waveScoreLabel = new Label("", skin);
-        coinLabel = new Label("", skin);
-        towers = new Label("", skin);
-        waveCountdown = new Label("", skin);
-        lifeLabel = new Label("", skin);
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = game.font;
+        waveCounterLabel = new Label("", labelStyle);
+        waveScoreLabel = new Label("", labelStyle);
+        coinLabel = new Label("", labelStyle);
+        towers = new Label("", labelStyle);
+        waveCountdown = new Label("", labelStyle);
+        lifeLabel = new Label("", labelStyle);
 
-        TextButton upgradeButton = new TextButton("Upgrade", skin, "upgradeTower");
+        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = game.font;
+
+        TextButton upgradeButton = new TextButton("Upgrade", buttonStyle);
         upgradeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -98,26 +101,24 @@ public class HUD implements InputProcessor, Controller {
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
         statsTable.top().right();
 
-        statsTable.add("Wave: ").expandX().align(Align.left);
+//        statsTable.add("Wave: ").expandX().align(Align.left);
         statsTable.add(waveCounterLabel).expandX().align(Align.right).row();
 
-        statsTable.add("Enemy Difficulty Value: ").expandX().align(Align.left);
+//        statsTable.add("Enemy Difficulty Value: ").expandX().align(Align.left);
         statsTable.add(waveScoreLabel).expandX().align(Align.right).row();
 
-        statsTable.add("").row();
-
-        statsTable.add("Next wave in: ").expandX().align(Align.left);
+//        statsTable.add("").row();
+//        statsTable.add("Next wave in: ").expandX().align(Align.left);
         statsTable.add(waveCountdown).expandX().align(Align.right).row();
 
-        statsTable.add("").row();
-
-        statsTable.add("Life: ").expandX().align(Align.left);
+//        statsTable.add("").row();
+//        statsTable.add("Life: ").expandX().align(Align.left);
         statsTable.add(lifeLabel).expandX().align(Align.right).row();
 
-        statsTable.add("Neon Coins: ").expandX().align(Align.left);
+//        statsTable.add("Neon Coins: ").expandX().align(Align.left);
         statsTable.add(coinLabel).expandX().align(Align.right).row();
 
-        statsTable.add("Towers: ").expandX().align(Align.left);
+//        statsTable.add("Towers: ").expandX().align(Align.left);
         statsTable.add(towers).expandX().align(Align.right).row();
 
         statsTable.align(Align.right).align(Align.top)
@@ -132,9 +133,10 @@ public class HUD implements InputProcessor, Controller {
         hud.addActor(placementGroup);
         hud.addActor(upgradeGroup);
 
+
         /*Create button for each placable item in gamedata*/
         for (TowerType title : gameData.getPlaceables()) {
-            TextButton button = new TextButton("", skin, title.toString());
+            TextButton button = new TextButton(title.toString(), buttonStyle);
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {

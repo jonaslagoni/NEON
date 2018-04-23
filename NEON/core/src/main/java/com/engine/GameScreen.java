@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GameScreen implements Screen {
 
@@ -48,7 +46,7 @@ public class GameScreen implements Screen {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        hud = new HUD(game.batch, game.skin, gameData);
+        hud = new HUD(gameData, game);
         hud.start();
 
         Gdx.input.setInputProcessor(new InputProcessor() {

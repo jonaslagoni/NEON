@@ -28,7 +28,9 @@ public class EndScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
-        TextButton playAgainButton = new TextButton("Play Again", game.skin);
+        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = game.font;
+        TextButton playAgainButton = new TextButton("Play Again", buttonStyle);
         playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

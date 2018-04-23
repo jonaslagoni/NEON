@@ -5,12 +5,9 @@ import com.library.TowerType;
 import com.library.World;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TowerPlugin implements Plugin {
 

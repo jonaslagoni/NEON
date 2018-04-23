@@ -21,13 +21,19 @@ public class MainMenuScreen implements Screen {
         this.game = game;
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         stage = new Stage(viewport, game.batch);
+
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    @Override
+    public void show() {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
-        Gdx.input.setInputProcessor(stage);
-
-        TextButton startGameButton = new TextButton("Start Game", game.skin);
+        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
+        buttonStyle.font = game.font;
+        TextButton startGameButton = new TextButton("Start Game", buttonStyle);
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -36,10 +42,6 @@ public class MainMenuScreen implements Screen {
             }
         });
         table.add(startGameButton);
-    }
-
-    @Override
-    public void show() {
     }
 
     @Override
