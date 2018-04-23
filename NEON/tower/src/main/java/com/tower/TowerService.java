@@ -7,7 +7,7 @@ import com.library.interfaces.ITowerService;
 import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 
-class TowerService implements ITowerService {
+public class TowerService implements ITowerService {
 
     private INeonService neonWallet;
     private IWorldService world;

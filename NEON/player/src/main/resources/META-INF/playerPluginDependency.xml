@@ -12,7 +12,7 @@
     
     <reference bind="setAssetManager" cardinality="0..1"
                interface="com.library.interfaces.IAssetManager"
-               name="inputService" policy="dynamic" unbind="removeAssetManager"/>
+               name="assetmanager" policy="dynamic" unbind="removeAssetManager"/>
     
     
 </scr:component>
