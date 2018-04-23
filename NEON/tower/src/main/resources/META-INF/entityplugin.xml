@@ -5,4 +5,16 @@
     <service>
         <provide interface="com.library.interfaces.Plugin"/>
     </service>
+    <reference bind="setWorld" cardinality="0..1"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService" policy="dynamic" unbind="removeWorld"/>
+    
+    <reference bind="setAssetManager" cardinality="0..1"
+               interface="com.library.interfaces.IAssetManager"
+               name="assetManager" policy="dynamic" unbind="removeAssetManager"/>
+    
+    <reference bind="setGameData" cardinality="0..1"
+               interface="com.library.interfaces.IGameData"
+               name="gamedata" policy="dynamic" unbind="removeGameData"/>
+    
 </scr:component>

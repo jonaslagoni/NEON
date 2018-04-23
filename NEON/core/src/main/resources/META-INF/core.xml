@@ -18,5 +18,10 @@
                interface="com.library.interfaces.IAssetManager"
                name="assetService" policy="dynamic" unbind="removeAssetManager"/>
     
+    <reference bind="setGameData" cardinality="0..1"
+               interface="com.library.interfaces.IGameData"
+               name="gamedata" policy="dynamic" unbind="removeGameData"/>
+    
+    
     
 </scr:component>

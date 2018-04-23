@@ -1,13 +1,16 @@
 package com.tower;
 
-import com.library.World;
 import com.library.interfaces.Controller;
+import com.library.interfaces.IWorldService;
 
-class TowerController implements Controller {
+public class TowerController implements Controller {
 
-    private World world;
+    private IWorldService world;
 
-    public void setWorld(World world){
+    public TowerController(){
+        
+    }
+    public void setWorld(IWorldService world){
         this.world = world;
     }
     

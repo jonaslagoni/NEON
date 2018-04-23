@@ -55,6 +55,7 @@
         <module>core</module>
     <module>Move</module>
         <module>Player</module>
+        <module>tower</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>

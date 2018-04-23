@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.library.GameData;
 import com.library.interfaces.Drawable;
 import static com.badlogic.gdx.math.MathUtils.radDeg;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -21,6 +20,7 @@ import com.library.Sprite;
 import com.library.interfaces.Controller;
 import com.library.interfaces.Entity;
 import com.library.interfaces.IAssetManager;
+import com.library.interfaces.IGameData;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Moveable;
 import com.library.interfaces.Plugin;
@@ -38,10 +38,9 @@ public class GameScreen extends Game {
     private IWorldService world;
     private boolean speedUp;
     private Texture bg;
-    private GameData gameData;
-    private HUD hud;
     SpriteBatch batch;
     Skin skin;
+    private HUD hud;
     
     public GameScreen() {
         
@@ -112,6 +111,11 @@ public class GameScreen extends Game {
             }
         }
         batch.end();
+        
+        if(hud.getStage() != null){
+            hud.getStage().getViewport().apply();
+            hud.getStage().draw();
+        }
     }
     
     
@@ -140,10 +144,7 @@ public class GameScreen extends Game {
         skin = new Skin(Gdx.files.internal("skin.json"),
                 new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
         batch = new SpriteBatch();
-        gameData = new GameData();
-        
-        hud = new HUD(batch, skin, gameData);
-        hud.start();
+        hud = new HUD(batch, skin);
         
         Gdx.input.setInputProcessor(new InputProcessor() {
             @Override
@@ -195,9 +196,18 @@ public class GameScreen extends Game {
     }
     public void setWorld(IWorldService world){
         this.world = world;
+        hud.setWorld(world);
     }
     public void removeWorld() {
         this.world = null;
+        hud.removeWorld();
+    }
+    public void setGameData(IGameData gameData){
+        hud.setGameData(gameData);
+        hud.start();
+    }
+    public void removeGameData() {
+        hud.removeGameData();
     }
     public void setAssetManager(IAssetManager assetManager) {
         this.assetManager = assetManager;

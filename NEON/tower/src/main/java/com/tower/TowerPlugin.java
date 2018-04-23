@@ -1,16 +1,13 @@
 package com.tower;
 
-import com.library.GameData;
 import com.library.TowerType;
-import com.library.World;
 import com.library.interfaces.IAssetManager;
+import com.library.interfaces.IGameData;
+import com.library.interfaces.IWorldService;
 import com.library.interfaces.Plugin;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TowerPlugin implements Plugin {
 
@@ -33,11 +30,20 @@ public class TowerPlugin implements Plugin {
         "strength-tower1", "strength-tower2"
     };
 
-    private World world;
-    private GameData gameData;
+    private IWorldService world;
+    private IGameData gameData;
     private IAssetManager assetManager;
 
-    public void setWorld(World world) {
+    public TowerPlugin(){
+        
+    }
+    public void setGameData(IGameData gameData){
+        this.gameData = gameData;
+    }
+    public void removeGameData() {
+        this.gameData = null;
+    }
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
 
