@@ -18,9 +18,9 @@ import static com.badlogic.gdx.math.MathUtils.radDeg;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.library.Sprite;
 import com.library.interfaces.Controller;
-import com.library.interfaces.Entity;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IGameData;
+import com.library.interfaces.ITowerService;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Moveable;
 import com.library.interfaces.Plugin;
@@ -36,6 +36,8 @@ public class GameScreen extends Game {
     private final List<Plugin> gamePluginList = new CopyOnWriteArrayList<>();
     private IAssetManager assetManager;
     private IWorldService world;
+    private IGameData gameData;
+    private ITowerService towerService;
     private boolean speedUp;
     private Texture bg;
     SpriteBatch batch;
@@ -58,7 +60,7 @@ public class GameScreen extends Game {
     }
     
     private void drawEntity(Drawable drawable) {
-        if(assetManager == null){
+        if(assetManager != null){
             Sprite sprite = drawable.getSprite();
             Texture texture = ((AssetManager)assetManager).getTexture(sprite.getTexture());
             batch.draw(
@@ -104,7 +106,7 @@ public class GameScreen extends Game {
         }
 
         /* Draw all entities to screen*/
-        if(world != null){
+        if(world != null && assetManager != null){
             world.getEntities(Drawable.class).forEach(this::drawEntity);
             for(Moveable e: world.getEntities(Moveable.class)){
                 batch.draw(((AssetManager)assetManager).getTexture("bg"), e.getSprite().getPosition().getX(), e.getSprite().getPosition().getY(), 100, 100);
@@ -145,7 +147,9 @@ public class GameScreen extends Game {
                 new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
         batch = new SpriteBatch();
         hud = new HUD(batch, skin);
-        
+        hud.setWorld(world);
+        hud.setTowerService(towerService);
+        hud.setGameData(gameData);
         Gdx.input.setInputProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int keycode) {
@@ -193,21 +197,43 @@ public class GameScreen extends Game {
             }
         });
         
+         Gdx.input.setInputProcessor(hud);
     }
     public void setWorld(IWorldService world){
         this.world = world;
-        hud.setWorld(world);
+        if(hud != null){
+            hud.setWorld(world);
+        }
     }
     public void removeWorld() {
         this.world = null;
-        hud.removeWorld();
+        if(hud != null){
+            hud.removeWorld();
+        }
     }
     public void setGameData(IGameData gameData){
-        hud.setGameData(gameData);
-        hud.start();
+        this.gameData = gameData;
+        if(hud != null){
+            hud.setGameData(gameData);
+        }
     }
     public void removeGameData() {
-        hud.removeGameData();
+        this.gameData = null;
+        if(hud != null){
+            hud.removeGameData();
+        }
+    }
+    public void setTowerService(ITowerService towerService){
+        this.towerService = towerService;
+        if(hud != null){
+            hud.setTowerService(towerService);
+        }
+    }
+    public void removeTowerService() {
+        this.towerService = null;
+        if(hud != null){
+            hud.removeTowerService();
+        }
     }
     public void setAssetManager(IAssetManager assetManager) {
         this.assetManager = assetManager;

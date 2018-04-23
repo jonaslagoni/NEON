@@ -6,7 +6,7 @@ import com.library.vectors.Vector2f;
 import static com.library.TowerType.*;
 import com.library.interfaces.IWorldService;
 
-class TowerFactory {
+public class TowerFactory {
 
     private TowerFactory() {
     }

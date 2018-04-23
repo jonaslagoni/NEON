@@ -43,6 +43,7 @@ public class HUD implements InputProcessor, Controller {
     private final Skin skin;
     private IWorldService world;
     
+    
     public void setWorld(IWorldService world){
         this.world = world;
     }
@@ -51,10 +52,18 @@ public class HUD implements InputProcessor, Controller {
     }
     public void setGameData(IGameData gameData){
         this.gameData = gameData;
-        this.start();
+        if(gameData != null){
+            this.start();
+        }
     }
     public void removeGameData() {
         this.gameData = null;
+    }
+    public void setTowerService(ITowerService towerService){
+        this.towerService = towerService;
+    }
+    public void removeTowerService() {
+        this.towerService = null;
     }
     public HUD(Batch batch, Skin skin) {
         this.skin = skin;
