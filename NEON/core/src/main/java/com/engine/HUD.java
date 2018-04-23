@@ -17,12 +17,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.library.TowerType;
 import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
 
 public class HUD implements InputProcessor, Controller {
 
     private final Batch batch;
+    private IGameData gameData;
     private Stage stage;
     private TowerType selectedEntity;
     private Entity selectedTower;
@@ -40,25 +39,9 @@ public class HUD implements InputProcessor, Controller {
     private ITowerService towerService;
     private IEnemyService enemyService;
     private ILifeService lifeService;
-    private IGameData gameData;
     private int counter;
     private final Skin skin;
     private IWorldService world;
-    
-    public HUD(Batch batch, Skin skin, IGameData gamedata, IWorldService world, ITowerService towerService) {
-        this.skin = skin;
-        this.batch = batch;
-        this.setGameData(gamedata);
-        this.setWorld(world);
-        this.setTowerService(towerService);
-    }
-    
-    public void setTowerService(ITowerService towerService){
-        this.towerService = towerService;
-    }
-    public void removeTowerService() {
-        this.towerService = null;
-    }
     
     public void setWorld(IWorldService world){
         this.world = world;
@@ -66,13 +49,16 @@ public class HUD implements InputProcessor, Controller {
     public void removeWorld() {
         this.world = null;
     }
-    
     public void setGameData(IGameData gameData){
         this.gameData = gameData;
         this.start();
     }
     public void removeGameData() {
         this.gameData = null;
+    }
+    public HUD(Batch batch, Skin skin) {
+        this.skin = skin;
+        this.batch = batch;
     }
 
     public void start() {
@@ -157,9 +143,8 @@ public class HUD implements InputProcessor, Controller {
         stage.addActor(statsGroup);
         stage.addActor(placementGroup);
         stage.addActor(upgradeGroup);
-        
-        
-        /* Create button for each placable item in gamedata */
+
+        /*Create button for each placable item in gamedata*/
         if(gameData != null){
             for (TowerType title : gameData.getPlaceables()) {
                 TextButton button = new TextButton("", skin, title.toString());

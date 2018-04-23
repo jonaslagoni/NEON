@@ -21,7 +21,6 @@ import com.library.interfaces.Controller;
 import com.library.interfaces.Entity;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IGameData;
-import com.library.interfaces.ITowerService;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Moveable;
 import com.library.interfaces.Plugin;
@@ -36,11 +35,9 @@ public class GameScreen extends Game {
     private final List<Controller> entityProcessorList = new CopyOnWriteArrayList<>();
     private final List<Plugin> gamePluginList = new CopyOnWriteArrayList<>();
     private IAssetManager assetManager;
+    private IWorldService world;
     private boolean speedUp;
     private Texture bg;
-    private ITowerService towerService;
-    private IWorldService world;
-    private IGameData gameData;
     SpriteBatch batch;
     Skin skin;
     private HUD hud;
@@ -147,7 +144,7 @@ public class GameScreen extends Game {
         skin = new Skin(Gdx.files.internal("skin.json"),
                 new TextureAtlas(Gdx.files.internal("assets/assets.atlas")));
         batch = new SpriteBatch();
-        hud = new HUD(batch, skin, gameData, world, towerService);
+        hud = new HUD(batch, skin);
         
         Gdx.input.setInputProcessor(new InputProcessor() {
             @Override
@@ -199,28 +196,18 @@ public class GameScreen extends Game {
     }
     public void setWorld(IWorldService world){
         this.world = world;
-        if(hud != null){
-            hud.setWorld(world);
-        }
+        hud.setWorld(world);
     }
     public void removeWorld() {
         this.world = null;
-        if(hud != null){
-            hud.removeWorld();
-        }
+        hud.removeWorld();
     }
     public void setGameData(IGameData gameData){
-        this.gameData = gameData;
-        if(hud != null){
-            hud.setGameData(gameData);
-        }
+        hud.setGameData(gameData);
+        hud.start();
     }
     public void removeGameData() {
-        this.gameData = null;
         hud.removeGameData();
-        if(hud != null){
-            hud.removeGameData();
-        }
     }
     public void setAssetManager(IAssetManager assetManager) {
         this.assetManager = assetManager;
@@ -235,18 +222,6 @@ public class GameScreen extends Game {
     }
     public void removeAssetManager() {
         this.assetManager = null;
-    }
-    public void setTowerService(ITowerService towerService){
-        this.towerService = towerService;
-        if(hud != null){
-            hud.setTowerService(towerService);
-        }
-    }
-    public void removeTowerService() {
-        this.towerService = null;
-        if(hud != null){
-            hud.removeTowerService();
-        }
     }
     
     public void addEntityProcessingService(Controller eps) {
