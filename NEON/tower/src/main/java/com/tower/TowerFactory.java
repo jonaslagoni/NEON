@@ -5,7 +5,7 @@ import com.library.vectors.Vector2f;
 import static com.tower.TowerType.*;
 import com.library.interfaces.IWorldService;
 
-class TowerFactory {
+public class TowerFactory {
 
     private TowerFactory() {
     }

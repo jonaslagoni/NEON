@@ -22,4 +22,8 @@
                policy="dynamic"
                unbind="removeWorld"/>
 
+    <reference bind="setWorld" cardinality="0..1"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService" policy="dynamic" unbind="removeWorld"/>
+    
 </scr:component>

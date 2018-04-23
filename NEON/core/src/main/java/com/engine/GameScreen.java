@@ -21,6 +21,7 @@ import com.library.Sprite;
 import com.library.interfaces.Controller;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IGameData;
+import com.library.interfaces.ITowerService;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Plugin;
 import static com.library.vectors.VectorUtils.angle;
@@ -37,6 +38,8 @@ public class GameScreen implements ApplicationListener {
     private final List<Plugin> gamePluginList = new CopyOnWriteArrayList<>();
     private IAssetManager assetManager;
     private IWorldService world;
+    private IGameData gameData;
+    private ITowerService towerService;
     private boolean speedUp;
     private Texture bg;
     SpriteBatch batch;

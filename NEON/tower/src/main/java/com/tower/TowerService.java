@@ -144,55 +144,5 @@ public class TowerService implements ITowerService, ILocalTowerService {
             return;
         }
         world.setGridCell(pos, tower);
-//            switch (key) {
-//                case LASER_TOWER:
-//                    WeaponEntity weapon = new Weapon(512, tower.sprite.getPosition(), ShotType.GREEN_BEAM, 10);
-//                    tower.setWeapon(weapon);
-//                    world.addEntity(weapon);
-//                    break;
-//
-//                case MELEE_GLAIVE_TOWER:
-//                    WeaponEntity meleeWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, 10);
-//                    tower.setWeapon(meleeWeapon);
-//                    world.addEntity(meleeWeapon);
-//                    break;
-//
-//                case PEA_SHOOTER:
-//                    WeaponEntity peaWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.BLUE_BEAM, 10);
-//                    tower.setWeapon(peaWeapon);
-//                    world.addEntity(peaWeapon);
-//                    break;
-//
-//                case RANGE_POWERUP:
-//                    WeaponEntity rangePowerup = new Weapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, 10);
-//                    tower.setWeapon(rangePowerup);
-//                    world.addEntity(rangePowerup);
-//                    break;
-//
-//                case STRENGTH_POWERUP:
-//                    WeaponEntity strengthPowerup = new Weapon(512, tower.sprite.getPosition(), ShotType.RED_BEAM, 10);
-//                    tower.setWeapon(strengthPowerup);
-//                    world.addEntity(strengthPowerup);
-//                    break;
-//
-//                case RAILGUN_TOWER:
-//                    WeaponEntity railWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.PINK_LASER, 10);
-//                    tower.setWeapon(railWeapon);
-//                    world.addEntity(railWeapon);
-//                    break;
-//
-//                case ROCKET_TOWER:
-//                    WeaponEntity rocketWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.ROCKET_SHOT, 10);
-//                    tower.setWeapon(rocketWeapon);
-//                    world.addEntity(rocketWeapon);
-//                    break;
-//
-//                case SPLASH_TOWER:
-//                    WeaponEntity splashWeapon = new Weapon(512, tower.sprite.getPosition(), ShotType.GREEN_BOMB_SMALLER, 10);
-//                    tower.setWeapon(splashWeapon);
-//                    world.addEntity(splashWeapon);
-//                    break;
-//            }
-
     }
 }
