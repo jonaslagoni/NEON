@@ -1,21 +1,27 @@
 package com.engine;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.library.GameData;
-import com.library.Sprite;
-import com.library.World;
 import com.library.interfaces.Drawable;
-
 import static com.badlogic.gdx.math.MathUtils.radDeg;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.library.Sprite;
 import com.library.interfaces.Controller;
+import com.library.interfaces.IAssetManager;
+import com.library.interfaces.IGameData;
+import com.library.interfaces.IWorldService;
 import com.library.interfaces.Plugin;
 import static com.library.vectors.VectorUtils.angle;
 import java.io.IOException;
@@ -23,33 +29,121 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class GameScreen implements Screen {
+public class GameScreen implements ApplicationListener {
 
     private final static OrthographicCamera CAMERA = new OrthographicCamera();
-    public final static Viewport VIEWPORT = new ExtendViewport(World.WIDTH, World.HEIGHT, CAMERA);
-
-    private final Neon game;
-    private final World world = new World();
-    private boolean speedUp;
+    public final static Viewport VIEWPORT = new ExtendViewport(IWorldService.WIDTH, IWorldService.HEIGHT, CAMERA);
     private final List<Controller> entityProcessorList = new CopyOnWriteArrayList<>();
     private final List<Plugin> gamePluginList = new CopyOnWriteArrayList<>();
-    private AssetManager assetManager;
-    private GameData gameData;
+    private IAssetManager assetManager;
+    private IWorldService world;
+    private boolean speedUp;
+    private Texture bg;
+    SpriteBatch batch;
+    Skin skin;
     private HUD hud;
+    private IGameData gameData;
 
-    GameScreen(final Neon game) {
-        this.game = game;
-        gameData = new GameData();
+    @SuppressWarnings("ResultOfObjectAllocationIgnored")
+    public void init() {
+
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+//        config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
+        config.height = 768;
+        config.width = 1024;
+        config.resizable = false;
+        new LwjglApplication(this, config);
+    }
+
+    private void drawEntity(Drawable drawable) {
+        Sprite sprite = drawable.getSprite();
+        Texture texture = ((AssetManager) assetManager).getTexture(sprite.getTexture());
+        if (texture == null) {
+            return;
+        }
+        batch.draw(
+                texture, // The texture to use
+                sprite.getPosition().getX() - texture.getWidth() / 2, // Position x to draw
+                sprite.getPosition().getY() - texture.getHeight() / 2, // Position y to draw
+                texture.getWidth() / 2,
+                texture.getHeight() / 2,
+                texture.getWidth(),
+                texture.getHeight(),
+                sprite.getWidth() / texture.getWidth(),
+                sprite.getHeight() / texture.getHeight(),
+                angle(sprite.getVelocity()) * radDeg,
+                0, 0,
+                texture.getWidth(),
+                texture.getHeight(),
+                false, false
+        );
+
+    }
+
+    @Override
+    public void render() {
+        float delta = Gdx.graphics.getDeltaTime();
+        entityProcessorList.forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
+
+        /* Clear screen*/
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        VIEWPORT.apply();
+
+        CAMERA.update();
+        batch.setProjectionMatrix(CAMERA.combined);
+
+        batch.begin();
+
+        /* Draw background */
+        batch.draw(((AssetManager) assetManager).getTexture("bg"), 0, 0, IWorldService.WIDTH, IWorldService.HEIGHT);
+
+        /* Draw all entities to screen*/
+        world.getEntities(Drawable.class).forEach(this::drawEntity);
+
+        batch.end();
+
+        hud.getStage().getViewport().apply();
+        hud.getStage().draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        VIEWPORT.update(width, height, true);
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+    }
+
+    @Override
+    public void create() {
 
         try (InputStream stream = getClass().getClassLoader().getResourceAsStream("background2048.png")) {
             assetManager.loadAsset("bg", stream);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        hud = new HUD(gameData, game);
+
+        batch = new SpriteBatch();
+        hud = new HUD(batch, new BitmapFont(), world, gameData);
         hud.start();
 
-        Gdx.input.setInputProcessor(new InputProcessor() {
+        InputMultiplexer multiplexer = new InputMultiplexer();
+        Gdx.input.setInputProcessor(multiplexer);
+        multiplexer.addProcessor(hud);
+        multiplexer.addProcessor(hud.getStage());
+        multiplexer.addProcessor(new InputProcessor() {
             @Override
             public boolean keyDown(int keycode) {
                 switch (keycode) {
@@ -98,53 +192,28 @@ public class GameScreen implements Screen {
 
     }
 
-    private void drawEntity(Drawable drawable) {
-        Sprite sprite = drawable.getSprite();
-        Texture texture = assetManager.getTexture(sprite.getTexture());
-        game.batch.draw(
-                texture, // The texture to use
-                sprite.getPosition().getX() - texture.getWidth() / 2, // Position x to draw
-                sprite.getPosition().getY() - texture.getHeight() / 2, // Position y to draw
-                texture.getWidth() / 2,
-                texture.getHeight() / 2,
-                texture.getWidth(),
-                texture.getHeight(),
-                sprite.getWidth() / texture.getWidth(),
-                sprite.getHeight() / texture.getHeight(),
-                angle(sprite.getVelocity()) * radDeg,
-                0, 0,
-                texture.getWidth(),
-                texture.getHeight(),
-                false, false
-        );
+    public void setWorld(IWorldService world) {
+        this.world = world;
     }
 
-    @Override
-    public void show() {
+    public void removeWorld(IWorldService world) {
+        this.world = null;
     }
 
-    @Override
-    public void render(float delta) {
+    public void setGameData(IGameData gameData) {
+        this.gameData = gameData;
+    }
 
-        entityProcessorList.forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
+    public void removeGameData(IGameData gameData) {
+        this.gameData = null;
+    }
 
-        /* Clear screen*/
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    public void setAssetManager(IAssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
 
-        VIEWPORT.apply();
-
-        CAMERA.update();
-        game.batch.setProjectionMatrix(CAMERA.combined);
-
-        game.batch.begin();
-
-        /* Draw background */
-        game.batch.draw(assetManager.getTexture("bg"), 0, 0, World.WIDTH, World.HEIGHT);
-
-        /* Draw all entities to screen*/
-        world.getEntities(Drawable.class).forEach(this::drawEntity);
-        game.batch.end();
+    public void removeAssetManager(IAssetManager assetManager) {
+        this.assetManager = null;
     }
 
     public void addEntityProcessingService(Controller eps) {
@@ -164,26 +233,5 @@ public class GameScreen implements Screen {
     public void removeGamePluginService(Plugin plugin) {
         this.gamePluginList.remove(plugin);
         plugin.stop();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        VIEWPORT.update(width, height, true);
-    }
-
-    @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
     }
 }

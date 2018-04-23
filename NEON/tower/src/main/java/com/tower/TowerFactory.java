@@ -1,10 +1,9 @@
 package com.tower;
 
 import com.library.Sprite;
-import com.library.TowerType;
-import com.library.World;
 import com.library.vectors.Vector2f;
-import static com.library.TowerType.*;
+import static com.tower.TowerType.*;
+import com.library.interfaces.IWorldService;
 
 class TowerFactory {
 
@@ -15,55 +14,38 @@ class TowerFactory {
         switch (key) {
             case LASER_TOWER:
                 return build(key,
-                        "images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 1.png",
-                        "images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 2.png",
-                        "images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 3.png",
-                        "images/towers/Laser Tower (Constant focused single target)/Laser Tower lvl 4.png"
+                        "laser-tower1", "laser-tower2",
+                        "laser-tower3", "laser-tower4"
                 );
             case MELEE_GLAIVE_TOWER:
-                return build(key,
-                        "images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 1.1.png",
-                        "images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 2.1.png",
-                        "images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 3.1.png",
-                        "images/towers/Melee Glaive Tower/Melee Glaive Tower lvl 4.1.png"
-                );
+                return build(key, "melee-tower1", "melee-tower2", "melee-tower3", "melee-tower4");
             case PEA_SHOOTER:
                 return build(key,
-                        "images/towers/Pea shooter (Single target)/Blue Pea Shooter lvl 1.png",
-                        "images/towers/Pea shooter (Single target)/Blue Pea Shooter lvl 2.png",
-                        "images/towers/Pea shooter (Single target)/Blue Pea Shooter lvl 3.png",
-                        "images/towers/Pea shooter (Single target)/Blue Pea Shooter lvl 4.png"
+                        "pea-towe1", "pea-towe2",
+                        "pea-towe3", "pea-towe4"
                 );
             case RANGE_POWERUP:
                 return build(key,
-                        "images/towers/Powerup/Range Powerup v1.png",
-                        "images/towers/Powerup/Range Powerup v2.png"
+                        "range-tower1", "range-tower2"
                 );
             case STRENGTH_POWERUP:
                 return build(key,
-                        "images/towers/Powerup/Strength Powerup non-glowing.png",
-                        "images/towers/Powerup/Strength Powerup.png"
+                        "strength-tower1", "strength-tower2"
                 );
             case RAILGUN_TOWER:
                 return build(key,
-                        "images/towers/Railgun Tower (Long distance sniper)/Railgun Tower lvl 1.png",
-                        "images/towers/Railgun Tower (Long distance sniper)/Railgun Tower lvl 2.png",
-                        "images/towers/Railgun Tower (Long distance sniper)/Railgun Tower lvl 3.png",
-                        "images/towers/Railgun Tower (Long distance sniper)/Railgun Tower lvl 4.png"
+                        "rail-tower1", "rail-tower2",
+                        "rail-tower3", "rail-tower4"
                 );
             case ROCKET_TOWER:
                 return build(key,
-                        "images/towers/Rocket Tower (Curve & AOE)/Orange Rocket Tower lvl 1.png",
-                        "images/towers/Rocket Tower (Curve & AOE)/Orange Rocket Tower lvl 2.png",
-                        "images/towers/Rocket Tower (Curve & AOE)/Orange Rocket Tower lvl 3.png",
-                        "images/towers/Rocket Tower (Curve & AOE)/Orange Rocket Tower lvl 4.png"
+                        "rocket-tower1", "rocket-tower2",
+                        "rocket-tower3", "rocket-tower4"
                 );
             case SPLASH_TOWER:
                 return build(key,
-                        "images/towers/Splash Tower (AOE)/Red Splash Tower lvl 1.png",
-                        "images/towers/Splash Tower (AOE)/Red Splash Tower lvl 2.png",
-                        "images/towers/Splash Tower (AOE)/Red Splash Tower lvl 3.png",
-                        "images/towers/Splash Tower (AOE)/Red Splash Tower lvl 4.png"
+                        "splash-tower1", "splash-tower2",
+                        "splash-tower3", "splash-tower4"
                 );
         }
         return null;
@@ -75,8 +57,8 @@ class TowerFactory {
                 files[0],
                 position,
                 new Vector2f(0, 0),
-                World.GRID_CELL_SIZE,
-                World.GRID_CELL_SIZE
+                IWorldService.GRID_CELL_SIZE,
+                IWorldService.GRID_CELL_SIZE
         ), files, 10, 4, key);
     }
 }

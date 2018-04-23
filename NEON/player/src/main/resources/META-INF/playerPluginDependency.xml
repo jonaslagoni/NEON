@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.tower.towerplugin">
-    <implementation class="com.tower.TowerPlugin"/>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.player.PlayerPlugin">
+    <implementation class="com.player.PlayerPlugin"/>
 
+    <service>
+        <provide interface="com.library.interfaces.Plugin"/>
+    </service>
+  
     <reference bind="setWorld" cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
                name="worldService" policy="dynamic" unbind="removeWorld"/>
     
     <reference bind="setAssetManager" cardinality="0..1"
                interface="com.library.interfaces.IAssetManager"
-               name="assetManager" policy="dynamic" unbind="removeAssetManager"/>
+               name="inputService" policy="dynamic" unbind="removeAssetManager"/>
     
     
-
 </scr:component>

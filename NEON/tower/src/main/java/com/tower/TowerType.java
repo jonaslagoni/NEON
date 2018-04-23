@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.library;
+package com.tower;
 
 /**
  * @author Mathias
@@ -18,12 +18,13 @@ public enum TowerType {
     ROCKET_TOWER("rocket-tower"),
     SPLASH_TOWER("splash-tower");
 
-    private String title;
+    private final String title;
 
     TowerType(String title) {
         this.title = title;
     }
 
+    @Override
     public String toString() {
         return title;
     }

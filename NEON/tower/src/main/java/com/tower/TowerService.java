@@ -1,21 +1,15 @@
 package com.tower;
 
-import com.library.TowerType;
-import com.library.World;
 import com.library.interfaces.Entity;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.ITowerService;
+import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 
-class TowerService implements ITowerService {
+public class TowerService implements ITowerService, ILocalTowerService {
 
     private INeonService neonWallet;
-    private World world;
-
-    TowerService(World world, INeonService neonWallet) {
-        this.neonWallet = neonWallet;
-        this.world = world;
-    }
+    private IWorldService world;
 
     public void setNeonWallet(INeonService neonWallet) {
         this.neonWallet = neonWallet;
@@ -25,11 +19,11 @@ class TowerService implements ITowerService {
         this.neonWallet = null;
     }
 
-    public void setWorld(World world) {
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
 
-    public void removeWorld() {
+    public void removeWorld(IWorldService world) {
         this.world = null;
     }
 
@@ -141,13 +135,15 @@ class TowerService implements ITowerService {
     }
 
     @Override
-    public void placeTower(Vector2f pos, TowerType key) {
+    public void place(Vector2f pos, TowerType key) {
         Tower tower = TowerFactory.build(key);
         if (tower == null) {
             return;
         }
-        if (neonWallet.subtractCoins(tower.getCost())) {
-            world.setGridCell(pos, tower);
+        if (neonWallet != null && !neonWallet.subtractCoins(tower.getCost())) {
+            return;
+        }
+        world.setGridCell(pos, tower);
 //            switch (key) {
 //                case LASER_TOWER:
 //                    WeaponEntity weapon = new Weapon(512, tower.sprite.getPosition(), ShotType.GREEN_BEAM, 10);
@@ -197,6 +193,6 @@ class TowerService implements ITowerService {
 //                    world.addEntity(splashWeapon);
 //                    break;
 //            }
-        }
+
     }
 }

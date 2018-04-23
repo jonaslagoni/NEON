@@ -1,7 +1,6 @@
 package com.tower;
 
 import com.library.Sprite;
-import com.library.TowerType;
 import com.library.interfaces.Drawable;
 import com.library.interfaces.WeaponEntity;
 import com.library.interfaces.Entity;

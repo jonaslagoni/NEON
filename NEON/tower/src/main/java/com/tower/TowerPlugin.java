@@ -1,13 +1,15 @@
 package com.tower;
 
-import com.library.GameData;
-import com.library.TowerType;
-import com.library.World;
 import com.library.interfaces.IAssetManager;
+import com.library.interfaces.IGameData;
+import com.library.interfaces.IPlaceable;
+import com.library.interfaces.IWorldService;
 import com.library.interfaces.Plugin;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class TowerPlugin implements Plugin {
 
@@ -30,16 +32,34 @@ public class TowerPlugin implements Plugin {
         "strength-tower1", "strength-tower2"
     };
 
-    private World world;
-    private GameData gameData;
+    private IWorldService world;
+    private IGameData gameData;
     private IAssetManager assetManager;
+    private ILocalTowerService towerService;
+    private Collection<IPlaceable> placeables;
 
-    public void setWorld(World world) {
+    public void setGameData(IGameData gameData) {
+        this.gameData = gameData;
+    }
+
+    public void removeGameData(IGameData gameData) {
+        this.gameData = null;
+    }
+
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
 
-    public void removeWorld() {
+    public void removeWorld(IWorldService world) {
         this.world = null;
+    }
+
+    public void setTowerService(ILocalTowerService towerService) {
+        this.towerService = towerService;
+    }
+
+    public void removeTowerService(ILocalTowerService towerService) {
+        this.towerService = null;
     }
 
     @Override
@@ -52,22 +72,26 @@ public class TowerPlugin implements Plugin {
                 ex.printStackTrace();
             }
         }
-        for (TowerType t : TowerType.values()) {
-            gameData.addPlaceable(t);
-        }
+        
+        placeables = Arrays.stream(TowerType.values())
+                .map(t -> new TowerPlaceable(t, towerService, t.toString()))
+                .collect(Collectors.toList());
+
+        gameData.addPlaceables(placeables);
     }
 
     @Override
     public void stop() {
         Arrays.stream(ASSETS).forEach(assetManager::unloadAsset);
         world.getEntities(Tower.class).forEach(world::removeEntity);
+        gameData.removePlaceables(placeables);
     }
 
     public void setAssetManager(IAssetManager assetManager) {
         this.assetManager = assetManager;
     }
 
-    public void removeAssetManager() {
+    public void removeAssetManager(IAssetManager assetManager) {
         this.assetManager = null;
     }
 }

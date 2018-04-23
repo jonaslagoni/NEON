@@ -53,8 +53,9 @@
         <module>libgdx</module>
         <module>extender</module>
         <module>core</module>
-        <module>tower</module>
+        <module>move</module>
         <module>player</module>
+        <module>tower</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>

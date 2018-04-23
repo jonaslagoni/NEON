@@ -15,7 +15,7 @@ public class PlayerController implements Controller {
     public void setWorld(IWorldService world){
         this.world = world;
     }
-    public void removeWorld() {
+    public void removeWorld(IWorldService world) {
         this.world = null;
     }
     
@@ -23,7 +23,7 @@ public class PlayerController implements Controller {
         this.inputService = inputService;
     }
     
-    public void removeInputService(){
+    public void removeInputService(IInputService iInputService){
         this.inputService = null;
     }
 

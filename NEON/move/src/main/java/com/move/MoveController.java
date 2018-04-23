@@ -1,19 +1,22 @@
-package com.library;
+package com.move;
 
+import com.library.MoveAbility;
+import com.library.Sprite;
 import com.library.interfaces.Controller;
+import com.library.interfaces.IWorldService;
 import com.library.interfaces.Moveable;
 import com.library.vectors.Vector2f;
 import static com.library.vectors.VectorUtils.translate;
 
 public class MoveController implements Controller {
 
-    private World world;
+    private IWorldService world;
 
-    public void setWorld(World world) {
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
 
-    public void removeWorld() {
+    public void removeWorld(IWorldService world) {
         this.world = null;
     }
 

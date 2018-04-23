@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.tower.towerservice">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+               name="com.tower.towerservice"
+               immediate="true">
     <implementation class="com.tower.TowerService"/>
+    <service>
+        <provide interface="com.library.interfaces.ITowerService"/>
+        <provide interface="com.tower.ILocalTowerService"/>
+    </service>
 
-    <reference bind="setNeonWallet" cardinality="0..1"
+    <reference bind="setNeonWallet" 
+               cardinality="0..1"
                interface="com.library.interfaces.INeonService"
-               name="neonWallet" policy="dynamic" unbind="removeNeonWallet"/>
+               name="neonWallet" 
+               policy="dynamic"
+               unbind="removeNeonWallet"/>
+    
+        <reference bind="setWorld" 
+               cardinality="0..1"
+               interface="com.library.interfaces.IWorldService"
+               name="world" 
+               policy="dynamic"
+               unbind="removeWorld"/>
 
 </scr:component>

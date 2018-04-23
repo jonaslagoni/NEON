@@ -12,36 +12,11 @@ import static java.util.stream.Collectors.toList;
 
 public class World implements IWorldService {
 
-    public static final int WIDTH = 2048;
-    public static final int HEIGHT = 2048;
-    @SuppressWarnings("WeakerAccess")
-    public static final int MAX_WIDTH = WIDTH - 1;
-    @SuppressWarnings("WeakerAccess")
-    public static final int MAX_HEIGHT = HEIGHT - 1;
-    @SuppressWarnings("WeakerAccess")
-    public static final int GRID_SPACES = 16;
-    public static final int GRID_CELL_SIZE = HEIGHT / GRID_SPACES;
-    @SuppressWarnings("WeakerAccess")
-    public static final Vector2f START = new Vector2f(WIDTH / 2, HEIGHT);
-    @SuppressWarnings("WeakerAccess")
-    public static final Vector2f END = new Vector2f(WIDTH / 2, 0);
-
     private final List<Entity> entities = new ArrayList<>();
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
     private int numberOfTowers = 0;
-
-    public static boolean isOutOfBounds(Vector2f v) {
-        return v.getX() < 0 || v.getX() > WIDTH || v.getY() < 0 || v.getY() > HEIGHT;
-    }
-
-    public static Vector2i gridProject(Vector2f v) {
-        return new Vector2i((int) v.getX() / GRID_CELL_SIZE, (int) v.getY() / GRID_CELL_SIZE);
-    }
-
-    public static Vector2f gridUnproject(Vector2i v) {
-        return new Vector2f(v.x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2, v.y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2);
-    }
+    
 
     @Override
     public void addEntity(Entity entity) {
@@ -74,13 +49,13 @@ public class World implements IWorldService {
 
     @Override
     public boolean setGridCell(Vector2f position, Drawable entity) {
-        Vector2i v = gridProject(position);
+        Vector2i v = IWorldService.gridProject(position);
         if (grid[v.x][v.y] != null || entity == null) {
             return false;
         }
         grid[v.x][v.y] = entity;
         addEntity(entity);
-        Vector2f v1 = gridUnproject(v);
+        Vector2f v1 = IWorldService.gridUnproject(v);
         entity.getSprite().setPosition(v1);
         numberOfTowers++;
         return true;
@@ -105,12 +80,12 @@ public class World implements IWorldService {
 
     @Override
     public Entity getGridCell(Vector2f position) {
-        Vector2i v = gridProject(position);
+        Vector2i v = IWorldService.gridProject(position);
         return grid[v.x][v.y];
     }
 
     private Vector2i getPositionGridCell(Vector2f position) {
-        Vector2i v = gridProject(position);
+        Vector2i v = IWorldService.gridProject(position);
         return new Vector2i(v.x < 0 ? 0 : v.x, v.y < 0 ? 0 : v.y);
     }
 
@@ -122,7 +97,7 @@ public class World implements IWorldService {
 
     @Override
     public boolean blocked(int x, int y) {
-        return x >= World.GRID_SPACES || y >= World.GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
+        return x >= GRID_SPACES || y >= GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
     }
 
     /**
@@ -131,5 +106,61 @@ public class World implements IWorldService {
     @Override
     public int getNumberOfTowers() {
         return numberOfTowers;
+    }
+
+    /**
+     * @return the WIDTH
+     */
+    public int getWIDTH() {
+        return WIDTH;
+    }
+
+    /**
+     * @return the HEIGHT
+     */
+    public int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    /**
+     * @return the MAX_WIDTH
+     */
+    public int getMAX_WIDTH() {
+        return MAX_WIDTH;
+    }
+
+    /**
+     * @return the MAX_HEIGHT
+     */
+    public int getMAX_HEIGHT() {
+        return MAX_HEIGHT;
+    }
+
+    /**
+     * @return the GRID_SPACES
+     */
+    public int getGRID_SPACES() {
+        return GRID_SPACES;
+    }
+
+    /**
+     * @return the GRID_CELL_SIZE
+     */
+    public int getGRID_CELL_SIZE() {
+        return GRID_CELL_SIZE;
+    }
+
+    /**
+     * @return the START
+     */
+    public Vector2f getSTART() {
+        return START;
+    }
+
+    /**
+     * @return the END
+     */
+    public Vector2f getEND() {
+        return END;
     }
 }

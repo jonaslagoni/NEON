@@ -23,7 +23,6 @@
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
             <version>4.3.0</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
@@ -37,6 +36,7 @@
                     <target>1.8</target>
                     <instructions>    
                         <Export-Package>com.library, com.library.interfaces, com.library.vectors</Export-Package>
+                        <Service-Component>META-INF/world.xml</Service-Component>
                     </instructions>
                 </configuration>
             </plugin>
