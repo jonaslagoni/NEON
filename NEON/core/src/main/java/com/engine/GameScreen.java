@@ -39,13 +39,9 @@ public class GameScreen implements ApplicationListener {
     private IAssetManager assetManager;
     private IWorldService world;
     private IGameData gameData;
-    private ITowerService towerService;
     private boolean speedUp;
-    private Texture bg;
     SpriteBatch batch;
-    Skin skin;
     private HUD hud;
-    private IGameData gameData;
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void init() {

@@ -56,6 +56,8 @@
         <module>move</module>
         <module>player</module>
         <module>tower</module>
+        <module>neoncoin</module>
+        <module>map</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>
