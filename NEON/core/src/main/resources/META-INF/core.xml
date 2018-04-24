@@ -6,24 +6,39 @@
     
     <implementation class="com.engine.GameScreen"/>
 
-    <reference bind="addEntityProcessingService" cardinality="0..n"
+    <reference bind="addEntityProcessingService" 
+               cardinality="0..n"
                interface="com.library.interfaces.Controller"
-               name="Controller" policy="dynamic" unbind="removeEntityProcessingService"/>
+               name="Controller" 
+               policy="dynamic" 
+               unbind="removeEntityProcessingService"/>
 
-    <reference bind="addGamePluginService" cardinality="0..n"
+    <reference bind="addGamePluginService" 
+               cardinality="0..n"
                interface="com.library.interfaces.Plugin"
-               name="Plugin" policy="dynamic" unbind="removeGamePluginService"/>
+               name="Plugin" 
+               policy="dynamic" 
+               unbind="removeGamePluginService"/>
     
-    <reference bind="setWorld" cardinality="0..1"
+    <reference bind="setWorld" 
+               cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
-               name="IWorldService" policy="static" unbind="removeWorld"/>
+               name="IWorldService" 
+               policy="static" 
+               unbind="removeWorld"/>
     
-    <reference bind="setAssetManager" cardinality="0..1"
+    <reference bind="setAssetManager" 
+               cardinality="0..1"
                interface="com.library.interfaces.IAssetManager"
-               name="assetService" policy="dynamic" unbind="removeAssetManager"/>
+               name="assetService" 
+               policy="dynamic" 
+               unbind="removeAssetManager"/>
     
-    <reference bind="setGameData" cardinality="0..1"
+    <reference bind="setGameData" 
+               cardinality="0..1"
                interface="com.library.interfaces.IGameData"
-               name="gamedata" policy="dynamic" unbind="removeGameData"/>
+               name="gamedata" 
+               policy="dynamic" 
+               unbind="removeGameData"/>
 
 </scr:component>

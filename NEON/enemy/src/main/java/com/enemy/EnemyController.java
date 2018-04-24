@@ -22,8 +22,6 @@ import com.library.interfaces.IWorldService;
 
 public class EnemyController implements Controller, IEnemyService {
 
-    
-
     private IWaveService waveService;
     private INeonService wallet;
     private ILifeService lifeService;
@@ -98,7 +96,7 @@ public class EnemyController implements Controller, IEnemyService {
         Vector2f velocity = enemy.sprite.getVelocity();
         Vector2f target = enemy.moveAbility.getTarget();
 
-        Vector2i start = World.gridProject(enemy.getSprite().getPosition()); // Find current grid position
+        Vector2i start = IWorldService.gridProject(enemy.getSprite().getPosition()); // Find current grid position
         Vector2i end = new Vector2i(8, 0); // Find goal grid position
         /* Remove enemy if it is at goal */
         if (start.equals(end)) {

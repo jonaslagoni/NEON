@@ -35,7 +35,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package />
+                        <Service-Component>META-INF/PathfindingService.xml</Service-Component>
                     </instructions>
                 </configuration>
             </plugin>

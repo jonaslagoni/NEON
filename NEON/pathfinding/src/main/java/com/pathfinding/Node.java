@@ -35,17 +35,18 @@ public class Node {
 
     public LinkedList<Vector2f> reconstructPath(Node node) {
         Node current = node;
-        LinkedList<Vector2f> path = new LinkedList<>(singleton(World.gridUnproject(current.vector)));
+        LinkedList<Vector2f> path
+                = new LinkedList<>(singleton(IWorldService.gridUnproject(current.vector)));
         while (current.parent != null) {
             current = current.parent;
-            path.addFirst(World.gridUnproject(current.vector));
+            path.addFirst(IWorldService.gridUnproject(current.vector));
         }
         return path;
     }
 
     public float heuristicCostEstimate(Node goalState) {
-        Vector2f v0 = World.gridUnproject(this.vector);
-        Vector2f v1 = World.gridUnproject(goalState.vector);
+        Vector2f v0 = IWorldService.gridUnproject(this.vector);
+        Vector2f v1 = IWorldService.gridUnproject(goalState.vector);
         return VectorUtils.distance(v0, v1) / World.GRID_CELL_SIZE;
     }
 

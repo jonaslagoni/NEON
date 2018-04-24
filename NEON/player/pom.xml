@@ -37,8 +37,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <!--<Bundle-Activator>com.player.Activator</Bundle-Activator>-->
-                        <Export-Package />
+                        <Service-Component>
+                            META-INF/player_controller.xml,
+                            META-INF/player_plugin.xml
+                        </Service-Component>
                     </instructions>
                 </configuration>
             </plugin>

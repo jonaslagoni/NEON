@@ -40,7 +40,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package />
+                        <Service-Component>META-INF/map_plugin.xml</Service-Component>
                     </instructions>
                 </configuration>
             </plugin>

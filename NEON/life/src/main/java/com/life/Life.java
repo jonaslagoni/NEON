@@ -12,11 +12,7 @@ import com.library.interfaces.ILifeService;
  */
 public class Life implements ILifeService {
 
-    private int life;
-
-    Life(int life) {
-        this.life = life;
-    }
+    private int life = 100;
 
     @Override
     public int subtractLife(int i) {

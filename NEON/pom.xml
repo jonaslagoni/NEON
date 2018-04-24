@@ -58,6 +58,9 @@
         <module>tower</module>
         <module>neoncoin</module>
         <module>map</module>
+        <module>pathfinding</module>
+        <module>life</module>
+        <module>enemy</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>

@@ -1,5 +1,0 @@
-Bundle-SymbolicName: Enemy OSGi Bundle
-Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/EntityController.xml, META-INF/EntityPlugin.xml, 
-    META-INF/enemyDependencyControl.xml, META-INF/enemyDependencyPlugin.xml
-

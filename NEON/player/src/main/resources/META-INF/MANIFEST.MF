@@ -1,3 +1,0 @@
-Bundle-SymbolicName: Player OSGi Bundle
-Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/playerControllerDependency.xml, META-INF/playerPluginDependency.xml

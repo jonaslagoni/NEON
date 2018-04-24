@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.pathfinding">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+               name="com.pathfinding.PathfindingService">
     <implementation class="com.pathfinding.PathFinder"/>
     <service>
-        <provide interface="com.libary.interfaces.IPathFindingService"/>
+        <provide interface="com.library.interfaces.IPathFindingService"/>
     </service>
+    
+    <reference bind="setWorld" 
+               cardinality="0..1"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService" 
+               policy="dynamic" 
+               unbind="removeWorld"/>
+    
 </scr:component>

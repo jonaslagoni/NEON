@@ -40,7 +40,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package />
+                        <Service-Component>
+                            META-INF/entitycontroller.xml, 
+                            META-INF/entityplugin.xml, 
+                            META-INF/towerService.xml
+                        </Service-Component>
                     </instructions>
                 </configuration>
             </plugin>

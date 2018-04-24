@@ -1,4 +1,0 @@
-Bundle-SymbolicName: neon_coin OSGi Bundle
-Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/NeonCoinService.xml
-

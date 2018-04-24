@@ -11,18 +11,6 @@ public class PathFinder implements IPathFindingService {
 
     private IWorldService world;
 
-    public PathFinder() {
-        
-    }
-    
-    public void setWorld(World world) {
-        this.world = world;
-    }
-
-    public void removeWorld() {
-        this.world = null;
-    }
-
     @Override
     public Queue<Vector2f> findPath(Vector2i start, Vector2i goal) {
 
@@ -69,5 +57,13 @@ public class PathFinder implements IPathFindingService {
             }
         }
         return new LinkedList<>();
+    }
+
+    public void setWorld(IWorldService world) {
+        this.world = world;
+    }
+
+    public void removeWorld(IWorldService world) {
+        this.world = null;
     }
 }

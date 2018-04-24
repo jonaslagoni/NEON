@@ -40,7 +40,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package />
+                        <Service-Component>
+                            META-INF/NeonCoinService.xml
+                        </Service-Component>
                     </instructions>
                 </configuration>
             </plugin>

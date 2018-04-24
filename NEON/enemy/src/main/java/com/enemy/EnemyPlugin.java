@@ -5,7 +5,8 @@ import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
 
 import com.library.interfaces.IWorldService;
-import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 public class EnemyPlugin implements Plugin {
@@ -33,31 +34,17 @@ public class EnemyPlugin implements Plugin {
         "triangle4", "triangle5", "triangle6"
     };
 
-    public void setWorld(World world) {
-        this.world = world;
-    }
-
-    public void removeWorld() {
-        this.world = null;
-    }
-
-    public void setAssetManager(IAssetManager assetManager) {
-        this.assetManager = assetManager;
-    }
-    
-    public void removeAssetManager() {
-        this.assetManager = null;
-    }
-
     @Override
     public void start() {
-
         /* Load assets */
         for (String name : ASSETS) {
-            String pathName = "assets/" + name + ".png";
-            String path = getClass().getClassLoader()
-                    .getResource(pathName).getFile();
-            assetManager.loadAsset(name, new File(path));
+            try (InputStream stream = getClass()
+                    .getClassLoader()
+                    .getResourceAsStream("assets/" + name + ".png")) {
+                assetManager.loadAsset(name, stream);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -65,5 +52,21 @@ public class EnemyPlugin implements Plugin {
     public void stop() {
         Arrays.stream(ASSETS).forEach(assetManager::unloadAsset);
         world.getEntities(Enemy.class).forEach(world::removeEntity);
+    }
+
+    public void setWorld(IWorldService world) {
+        this.world = world;
+    }
+
+    public void removeWorld(IWorldService world) {
+        this.world = null;
+    }
+
+    public void setAssetManager(IAssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
+
+    public void removeAssetManager(IAssetManager assetManager) {
+        this.assetManager = null;
     }
 }
