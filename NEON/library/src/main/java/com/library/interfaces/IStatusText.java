@@ -9,7 +9,9 @@ package com.library.interfaces;
  *
  * @author emil
  */
-public interface ViewObserver {
+public interface IStatusText {
 
-    void updateView();
+    String getLabel();
+
+    String update();
 }

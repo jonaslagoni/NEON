@@ -3,6 +3,6 @@
 	name="com.neoncoin.NeonWallet">
     <implementation class="com.neoncoin.NeonWallet"/>
     <service>
-        <provide interface="com.libary.interfaces.INeonService"/>
+        <provide interface="com.library.interfaces.INeonService"/>
     </service>
 </scr:component>

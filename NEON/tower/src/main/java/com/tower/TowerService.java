@@ -15,7 +15,7 @@ public class TowerService implements ITowerService, ILocalTowerService {
         this.neonWallet = neonWallet;
     }
 
-    public void removeNeonWallet() {
+    public void removeNeonWallet(INeonService neonWallet) {
         this.neonWallet = null;
     }
 

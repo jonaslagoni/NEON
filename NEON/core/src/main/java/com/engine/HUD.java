@@ -11,13 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
+import java.util.HashMap;
+import java.util.Map;
 
-public class HUD implements InputProcessor, Controller, ViewObserver {
+public class HUD implements InputProcessor, Controller, IViewObserver {
 
     private final BitmapFont font;
     private final Batch batch;
@@ -29,25 +32,16 @@ public class HUD implements InputProcessor, Controller, ViewObserver {
 
     private Group placementGroup;
     private Group upgradeGroup;
-    private Group statsGroup;
-
-    private Label waveCounterLabel;
-    private Label waveScoreLabel;
-    private Label coinLabel;
-    private Label towers;
-    private Label waveCountdown;
-    private Label lifeLabel;
+    private VerticalGroup statsGroup;
 
     private IWorldService world;
     private IGameData gameData;
-    private IWaveService waveService;
-    private INeonService neonService;
-    private ITowerService towerService;
-    private IEnemyService enemyService;
-    private ILifeService lifeService;
 
     private Table placementTable;
     private TextButton.TextButtonStyle buttonStyle;
+    private Label.LabelStyle labelStyle;
+
+    private final Map<IStatusText, Label> statusTexts = new HashMap<>();
 
     public HUD(Batch batch, BitmapFont font, IWorldService world, IGameData gameData) {
         this.gameData = gameData;
@@ -63,8 +57,10 @@ public class HUD implements InputProcessor, Controller, ViewObserver {
         table.setFillParent(true);
         stage.addActor(table);
 
-        statsGroup = new Group();
-        statsGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        statsGroup = new VerticalGroup();
+        statsGroup.setFillParent(true);
+        statsGroup.align(Align.topRight);
+        stage.addActor(statsGroup);
 
         placementGroup = new Group();
         placementGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -73,25 +69,18 @@ public class HUD implements InputProcessor, Controller, ViewObserver {
         upgradeGroup.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         upgradeGroup.setVisible(false);
 
-        Table statsTable = new Table();
-        statsTable.setFillParent(true);
-
         placementTable = new Table();
         placementTable.padRight(Gdx.graphics.getWidth() / 100)
                 .padBottom(Gdx.graphics.getHeight() / 100)
                 .setFillParent(true);
+        placementGroup.addActor(placementTable);
+        stage.addActor(placementGroup);
 
         Table upgradeTable = new Table();
         upgradeTable.setFillParent(true);
 
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle = new Label.LabelStyle();
         labelStyle.font = font;
-        waveCounterLabel = new Label("", labelStyle);
-        waveScoreLabel = new Label("", labelStyle);
-        coinLabel = new Label("", labelStyle);
-        towers = new Label("", labelStyle);
-        waveCountdown = new Label("", labelStyle);
-        lifeLabel = new Label("", labelStyle);
 
         buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = font;
@@ -101,45 +90,13 @@ public class HUD implements InputProcessor, Controller, ViewObserver {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (selectedTower != null) {
-                    towerService.upgrade(selectedTower);
+//                    towerService.upgrade(selectedTower);
                 }
             }
         });
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
-        statsTable.top().right();
-
-        statsTable.add(new Label("Wave: ", labelStyle)).expandX().align(Align.left);
-        statsTable.add(waveCounterLabel).expandX().align(Align.right).row();
-
-        statsTable.add(new Label("Enemy Difficulty Value: ", labelStyle)).expandX().align(Align.left);
-        statsTable.add(waveScoreLabel).expandX().align(Align.right).row();
-
-        statsTable.add(new Label("", labelStyle)).row();
-        statsTable.add(new Label("Next wave in: ", labelStyle)).expandX().align(Align.left);
-        statsTable.add(waveCountdown).expandX().align(Align.right).row();
-
-        statsTable.add(new Label("", labelStyle)).row();
-        statsTable.add(new Label("Life: ", labelStyle)).expandX().align(Align.left);
-        statsTable.add(lifeLabel).expandX().align(Align.right).row();
-
-        statsTable.add(new Label("Neon Coins: ", labelStyle)).expandX().align(Align.left);
-        statsTable.add(coinLabel).expandX().align(Align.right).row();
-
-        statsTable.add(new Label("Towers: ", labelStyle)).expandX().align(Align.left);
-        statsTable.add(towers).expandX().align(Align.right).row();
-
-        statsTable.align(Align.right).align(Align.top)
-                .padLeft(Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 9 * 2)
-                .padRight(Gdx.graphics.getWidth() / 100);
-
-        statsGroup.addActor(statsTable);
-        placementGroup.addActor(placementTable);
         upgradeGroup.addActor(upgradeTable);
-
-        stage.addActor(statsGroup);
-        stage.addActor(placementGroup);
         stage.addActor(upgradeGroup);
-        /*Create button for each placable item in gamedata*/
 
         gameData.addObserver(this);
 
@@ -219,16 +176,30 @@ public class HUD implements InputProcessor, Controller, ViewObserver {
 
     @Override
     public void update(float dt) {
-        waveCounterLabel.setText("" + waveService.getWaveCount());
-        waveScoreLabel.setText("" + waveService.getWaveScore());
-        lifeLabel.setText("" + lifeService.getLife());
-        coinLabel.setText("" + neonService.getCoins());
-        towers.setText("" + (world == null ? "World not sat" : world.getNumberOfTowers()));
-        waveCountdown.setText("" + enemyService.getWaveCountdown());
+
+        /* Update text on status labels */
+        statusTexts.forEach((text, label) -> label.setText(text.getLabel() + " " + text.update()));
+
+//        waveCounterLabel.setText("" + waveService.getWaveCount());
+//        waveScoreLabel.setText("" + waveService.getWaveScore());
+//        lifeLabel.setText("" + lifeService.getLife());
+//        coinLabel.setText("" + neonService.getCoins());
+//        towers.setText("" + (world == null ? "World not sat" : world.getNumberOfTowers()));
+//        waveCountdown.setText("" + enemyService.getWaveCountdown());
     }
 
     @Override
     public void updateView() {
+
+        /* Create a label for each status text object */
+        statusTexts.clear();
+        for (IStatusText statusText : gameData.getStatusText()) {
+            Label label = new Label(statusText.getLabel(), labelStyle);
+            statusTexts.put(statusText, label);
+            statsGroup.addActor(label);
+        }
+
+        /* Create a place button for each placable object */
         placementTable.clear();
         for (IPlaceable placeable : gameData.getPlaceables()) {
             TextButton button = new TextButton(placeable.getTitle(), buttonStyle);

@@ -41,7 +41,8 @@
                 <configuration>
                     <instructions>
                         <Service-Component>
-                            META-INF/NeonCoinService.xml
+                            META-INF/NeonCoinService.xml,
+                            META-INF/neon_plugin.xml
                         </Service-Component>
                     </instructions>
                 </configuration>

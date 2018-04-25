@@ -14,11 +14,18 @@ import java.util.List;
  */
 public interface IGameData {
 
-    public void addObserver(ViewObserver observer);
+    public void addObserver(IViewObserver observer);
 
     public void addPlaceables(Collection<IPlaceable> placables);
 
     public void removePlaceables(Collection<IPlaceable> placables);
 
     public List<IPlaceable> getPlaceables();
+
+    public void addStatusText(IStatusText text);
+
+    public void removeStatusText(IStatusText text);
+
+    public List<IStatusText> getStatusText();
+
 }

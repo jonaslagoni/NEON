@@ -1,23 +1,42 @@
 package com.engine;
 
+import com.library.interfaces.IStatusText;
 import com.library.interfaces.IGameData;
 import com.library.interfaces.IPlaceable;
-import com.library.interfaces.ViewObserver;
 import java.util.*;
+import com.library.interfaces.IViewObserver;
 
 public class GameData implements IGameData {
 
     private final List<IPlaceable> placeables = new ArrayList<>();
-    private final List<ViewObserver> observers = new ArrayList<>();
+    private final List<IViewObserver> observers = new ArrayList<>();
+    private final List<IStatusText> statusTexts = new ArrayList<>();
 
     @Override
-    public void addObserver(ViewObserver observer) {
+    public void addObserver(IViewObserver observer) {
         observers.add(observer);
     }
 
     @Override
     public List<IPlaceable> getPlaceables() {
         return placeables;
+    }
+
+    @Override
+    public void addStatusText(IStatusText text) {
+        statusTexts.add(text);
+        observers.forEach(t -> t.updateView());
+    }
+
+    @Override
+    public void removeStatusText(IStatusText text) {
+        statusTexts.remove(text);
+        observers.forEach(t -> t.updateView());
+    }
+
+    @Override
+    public List<IStatusText> getStatusText() {
+        return statusTexts;
     }
 
     @Override

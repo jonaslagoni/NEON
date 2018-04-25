@@ -16,12 +16,10 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.library.interfaces.Drawable;
 import static com.badlogic.gdx.math.MathUtils.radDeg;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.library.Sprite;
 import com.library.interfaces.Controller;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IGameData;
-import com.library.interfaces.ITowerService;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Plugin;
 import static com.library.vectors.VectorUtils.angle;
@@ -83,6 +81,7 @@ public class GameScreen implements ApplicationListener {
     public void render() {
         float delta = Gdx.graphics.getDeltaTime();
         entityProcessorList.forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
+        hud.update(delta);
 
         /* Clear screen*/
         Gdx.gl.glClearColor(0, 0, 0, 1);
