@@ -61,6 +61,7 @@
         <module>pathfinding</module>
         <module>life</module>
         <module>enemy</module>
+        <module>wave</module>
     </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>

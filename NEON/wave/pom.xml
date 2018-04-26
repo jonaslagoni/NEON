@@ -39,7 +39,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package />
+                        <Service-Component>
+                            META-INF/WaveService.xml
+                        </Service-Component>                    
                     </instructions>
                 </configuration>
             </plugin>
