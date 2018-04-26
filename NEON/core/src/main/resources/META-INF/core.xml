@@ -21,10 +21,9 @@
                unbind="removeGamePluginService"/>
     
     <reference bind="setWorld" 
-               cardinality="0..1"
+               cardinality="1..1"
                interface="com.library.interfaces.IWorldService"
                name="IWorldService" 
-               policy="static" 
                unbind="removeWorld"/>
     
     <reference bind="setAssetManager" 

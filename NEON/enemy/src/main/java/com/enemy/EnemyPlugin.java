@@ -1,6 +1,5 @@
 package com.enemy;
 
-import com.library.World;
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.Plugin;
 

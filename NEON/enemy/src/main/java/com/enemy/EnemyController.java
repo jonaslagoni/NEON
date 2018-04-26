@@ -34,18 +34,6 @@ public class EnemyController implements Controller, IEnemyService {
     private float waveCounter;
     private int deathCount;
 
-    EnemyController(World world,
-            INeonService wallet,
-            IWaveService waveService,
-            ILifeService lifeService,
-            IPathFindingService pathFindingService) {
-        this.world = world;
-        this.waveService = waveService;
-        this.lifeService = lifeService;
-        this.pathFindingService = pathFindingService;
-        this.wallet = wallet;
-    }
-    
     public void setWaveService(IWaveService waveService) {
         this.waveService = waveService;
     }
@@ -62,31 +50,29 @@ public class EnemyController implements Controller, IEnemyService {
         this.pathFindingService = pathFindingService;
     }
 
-    public void setWorld(World world) {
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
-    
-    public void removeWaveService(){
+
+    public void removeWaveService(IWaveService waveService) {
         this.waveService = null;
     }
-    
-    public void removeWallet(){
+
+    public void removeWallet(INeonService wallet) {
         this.wallet = null;
     }
-    
-    public void removeLifeService(){
+
+    public void removeLifeService(ILifeService lifeService) {
         this.lifeService = null;
     }
-     
-        public void removePathFindingService(){
+
+    public void removePathFindingService(IPathFindingService pathFindingService) {
         this.pathFindingService = null;
     }
-    
-    public void removeWorld(){
+
+    public void removeWorld(IWorldService world) {
         this.world = null;
     }
-    
-    
 
     private void updateEnemy(final Enemy enemy, float dt) {
 

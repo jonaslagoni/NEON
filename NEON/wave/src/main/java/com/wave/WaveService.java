@@ -18,7 +18,7 @@ public class WaveService implements IWaveService {
     private int waveCount = 0;
     private int enemyScore;
 
-    WaveService() {
+    public WaveService() {
         this.tierScore = new int[4];
         tierScore[0] = 1;
         tierScore[1] = 20;
@@ -48,7 +48,6 @@ public class WaveService implements IWaveService {
 
         enemyScore = waveScore;
 
-
         while (waveScore > 0) {
             // Randomizes what enemy to spawn within tier
             int randomType = (int) (Math.random() * 3 + 1);
@@ -76,7 +75,7 @@ public class WaveService implements IWaveService {
                 // Spawns tier 1 enemies if there is any waveScore left
             } else if (waveScore >= tierScore[0]) {
                 waveScore -= tierScore[0];
-               // enemyList.add(EnemyFactory.build("tier1", randomType));
+                // enemyList.add(EnemyFactory.build("tier1", randomType));
             }
         }
         /* Randomizes the arrayList of enemies */
