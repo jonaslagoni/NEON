@@ -40,7 +40,8 @@
                 <configuration>
                     <instructions>
                         <Service-Component>
-                            META-INF/WaveService.xml
+                            META-INF/WaveService.xml,
+                            META-INF/WaveController.xml
                         </Service-Component>                    
                     </instructions>
                 </configuration>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+               name="com.wave.WaveController">
+    
+    <implementation class="com.wave.WaveController"/>
+    
+    <service>
+        <provide interface="com.library.interfaces.Controller"/>
+    </service>
+    
+    <reference bind="addWaveService" 
+               cardinality="1..1"
+               interface="com.library.interfaces.IWaveService"
+               name="WaveService" 
+               unbind="removeWaveService"/>
+    
+    <reference bind="addWorld" 
+               cardinality="1..1"
+               interface="com.library.interfaces.IWorldService"
+               name="world" 
+               unbind="removeWorld"/>
+    
+</scr:component>

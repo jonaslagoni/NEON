@@ -3,12 +3,16 @@ package com.enemy;
 import com.library.MoveAbility;
 import com.library.Sprite;
 import static com.library.World.HEIGHT;
+import com.library.interfaces.Entity;
+import com.library.interfaces.IEntityFactory;
+import com.library.interfaces.Targetable;
 import com.library.vectors.Vector2f;
+import java.util.Random;
 
 /**
  * Created by sam on 12-03-2018.
  */
-public class EnemyFactory {
+public class EnemyFactory implements IEntityFactory {
 
     private static final int START_POS_X = 960;
     private static final int START_POS_Y = 2047;
@@ -20,6 +24,13 @@ public class EnemyFactory {
     private static final int TIER3_VALUE = 50;
     private static final int BOSS_VALUE = 200;
     private static final int DAMAGE = 1;
+    private static final String[] TIERS = {"tier1", "tier2", "tier3"};
+    private final Random rand = new Random();
+
+    @Override
+    public Targetable createEntity() {
+        return build(TIERS[rand.nextInt(TIERS.length)], rand.nextInt(4));
+    }
 
     public static Enemy build(String tier, int type) {
         switch (tier) {
@@ -96,9 +107,18 @@ public class EnemyFactory {
     }
 
     private static Enemy build(int size, int hp, int value, int damage, String... textures) {
-//        Texture[] textures = Arrays.stream(paths).map(Gdx.files::internal).map(Texture::new).toArray(Texture[]::new);
-        return new Enemy(new Sprite(textures[textures.length - 1], new Vector2f(START_POS_X, START_POS_Y),
-                new Vector2f(0, MOVE_SPEED), size, size), new MoveAbility(new Vector2f(0, 0), true),
-                textures, hp, value, damage); // wat
+        return new Enemy(
+                new Sprite(
+                        textures[textures.length - 1],
+                        new Vector2f(START_POS_X, START_POS_Y),
+                        new Vector2f(0, MOVE_SPEED),
+                        size, size
+                ),
+                new MoveAbility(
+                        new Vector2f(0, 0),
+                        true
+                ),
+                textures, hp, value, damage
+        ); // wat
     }
 }

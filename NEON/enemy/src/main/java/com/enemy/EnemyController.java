@@ -5,69 +5,49 @@
  */
 package com.enemy;
 
-import com.library.World;
 import com.library.interfaces.Controller;
-import com.library.interfaces.Entity;
-import com.library.interfaces.IEnemyService;
 import com.library.interfaces.ILifeService;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.IPathFindingService;
-import com.library.interfaces.IWaveService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 import static com.library.vectors.VectorUtils.distance;
 import static com.library.vectors.VectorUtils.translateVelocity;
-import java.util.Queue;
 import com.library.interfaces.IWorldService;
 
-public class EnemyController implements Controller, IEnemyService {
+public class EnemyController implements Controller {
 
-    private IWaveService waveService;
     private INeonService wallet;
     private ILifeService lifeService;
     private IPathFindingService pathFindingService;
     private IWorldService world;
-    private final float WAVE_COOLDOWN = 20;
-
-    private Queue<Entity> wave;
-    private float enemyCooldown;
-    private float waveCounter;
-    private int deathCount;
-
-    public void setWaveService(IWaveService waveService) {
-        this.waveService = waveService;
-    }
 
     public void setWallet(INeonService wallet) {
         this.wallet = wallet;
-    }
-
-    public void setLifeService(ILifeService lifeService) {
-        this.lifeService = lifeService;
-    }
-
-    public void setPathFindingService(IPathFindingService pathFindingService) {
-        this.pathFindingService = pathFindingService;
-    }
-
-    public void setWorld(IWorldService world) {
-        this.world = world;
-    }
-
-    public void removeWaveService(IWaveService waveService) {
-        this.waveService = null;
     }
 
     public void removeWallet(INeonService wallet) {
         this.wallet = null;
     }
 
+    public void setLifeService(ILifeService lifeService) {
+        this.lifeService = lifeService;
+    }
+
     public void removeLifeService(ILifeService lifeService) {
         this.lifeService = null;
     }
 
+    public void setPathFindingService(IPathFindingService pathFindingService) {
+        this.pathFindingService = pathFindingService;
+    }
+
     public void removePathFindingService(IPathFindingService pathFindingService) {
         this.pathFindingService = null;
+    }
+
+    public void setWorld(IWorldService world) {
+        this.world = world;
     }
 
     public void removeWorld(IWorldService world) {
@@ -86,7 +66,6 @@ public class EnemyController implements Controller, IEnemyService {
         Vector2i end = new Vector2i(8, 0); // Find goal grid position
         /* Remove enemy if it is at goal */
         if (start.equals(end)) {
-            deathCount--;
             world.removeEntity(enemy);
             lifeService.subtractLife(enemy.damage);
             return;
@@ -108,7 +87,6 @@ public class EnemyController implements Controller, IEnemyService {
 
         /* If enemy is killed */
         if (enemy.hp <= 0) {
-            deathCount--;
             world.removeEntity(enemy);
             wallet.addCoins(enemy.coinValue);
             return;
@@ -119,28 +97,6 @@ public class EnemyController implements Controller, IEnemyService {
 
     @Override
     public void update(float dt) {
-
-        enemyCooldown += dt;
-        waveCounter += dt;
-        /* Generate new Wave */
-        if (deathCount <= 0 && waveCounter > WAVE_COOLDOWN) {
-            wave = waveService.createWave();
-            deathCount = wave.size();
-            waveCounter = 0;
-        }
-        /* Spawn new enemy */
-        if (enemyCooldown > 1 && wave != null && !wave.isEmpty()) {
-            world.addEntity(wave.remove());
-            enemyCooldown = 0;
-            waveCounter = 0;
-        }
-        /* Update enemies */
         world.getEntities(Enemy.class).forEach(enemy -> updateEnemy(enemy, dt));
-
-    }
-
-    @Override
-    public int getWaveCountdown() {
-        return (int) (WAVE_COOLDOWN - waveCounter);
     }
 }

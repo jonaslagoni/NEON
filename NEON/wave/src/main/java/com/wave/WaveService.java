@@ -1,9 +1,9 @@
 package com.wave;
 
-import com.library.interfaces.Entity;
+import com.library.interfaces.IEntityFactory;
 import com.library.interfaces.IWaveService;
+import com.library.interfaces.Targetable;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,74 +12,39 @@ import java.util.Queue;
  */
 public class WaveService implements IWaveService {
 
-    private final int[] tierScore;
-    private int waveDifficulty = 1;
-    private int waveScore = 0;
-    private int waveCount = 0;
-    private int enemyScore;
+    private int waveDifficulty = 512;
 
-    public WaveService() {
-        this.tierScore = new int[4];
-        tierScore[0] = 1;
-        tierScore[1] = 20;
-        tierScore[2] = 100;
-        tierScore[3] = 1000;
+    private IEntityFactory factory;
+
+    public void addFactory(IEntityFactory factory) {
+        this.factory = factory;
+    }
+
+    public void removeFactory(IEntityFactory factory) {
+        this.factory = null;
     }
 
     @Override
     public int getWaveScore() {
-        return enemyScore;
+        return 4;
     }
 
     @Override
     public int getWaveCount() {
-        return waveCount;
+        return 4;
     }
 
     @Override
-    public Queue<Entity> createWave() {
+    public Queue<Targetable> createWave() {
 
-        LinkedList<Entity> enemyList = new LinkedList<>();
+        LinkedList<Targetable> enemyList = new LinkedList<>();
 
-        waveDifficulty += 2;
-        waveCount++;
-
-        waveScore += (int) (Math.ceil(waveDifficulty * waveCount));
-
-        enemyScore = waveScore;
-
-        while (waveScore > 0) {
-            // Randomizes what enemy to spawn within tier
-            int randomType = (int) (Math.random() * 3 + 1);
-            int randomTypeTier2 = (int) (Math.random() * 2 + 1);
-
-            // Add boss to enemyList if wave % 10 == 0 AND if wave >= 20
-            // Spawns bosses if waveScore is high enough
-            if (waveScore >= tierScore[3] && waveCount % 10 == 0 && waveCount >= 20) {
-                waveScore -= tierScore[3];
-                // TODO remove dependency to enemy factory
-                // enemyList.add(EnemyFactory.build(1, 1));
-
-                // Add tier 3 to enemyList if wave >= 10
-                // Spawns tier 3 enemies if there is enough waveScore
-            } else if (waveScore >= tierScore[2] && waveCount >= 10) {
-                waveScore -= tierScore[2];
-                // enemyList.add(EnemyFactory.build("tier3", randomType));
-
-                // Add tier 2 to enemyList if wave >= 5
-                // Spawns tier 2 enemies if there is enough waveScore
-            } else if (waveScore >= tierScore[1] && waveCount >= 5) {
-                waveScore -= tierScore[1];
-                // enemyList.add(EnemyFactory.build("tier2", randomTypeTier2));
-
-                // Spawns tier 1 enemies if there is any waveScore left
-            } else if (waveScore >= tierScore[0]) {
-                waveScore -= tierScore[0];
-                // enemyList.add(EnemyFactory.build("tier1", randomType));
-            }
+        while (enemyList.stream().mapToInt(Targetable::getHp).sum() < waveDifficulty) {
+            Targetable targetable = factory.createEntity();
+            enemyList.add(targetable);
         }
-        /* Randomizes the arrayList of enemies */
-        Collections.shuffle(enemyList);
+
+        waveDifficulty *= 2;
         return enemyList;
     }
 }

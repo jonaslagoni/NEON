@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
                name="com.wave.WaveService">
+    
     <implementation class="com.wave.WaveService"/>
+    
     <service>
         <provide interface="com.library.interfaces.IWaveService"/>
     </service>
+    
+    <reference bind="addFactory" 
+               cardinality="1..1"
+               interface="com.library.interfaces.IEntityFactory"
+               name="factories" 
+               unbind="removeFactory"/>
+    
 </scr:component>

@@ -41,7 +41,8 @@
                     <instructions>
                         <Service-Component>
                             META-INF/EntityController.xml, 
-                            META-INF/EntityPlugin.xml
+                            META-INF/EntityPlugin.xml,
+                            META-INF/EnemyFactory.xml
                         </Service-Component>
                     </instructions>
                 </configuration>

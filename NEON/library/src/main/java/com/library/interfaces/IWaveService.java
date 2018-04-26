@@ -7,7 +7,7 @@ import java.util.Queue;
  */
 public interface IWaveService {
 
-    Queue<Entity> createWave();
+    Queue<Targetable> createWave();
 
     int getWaveScore();
 

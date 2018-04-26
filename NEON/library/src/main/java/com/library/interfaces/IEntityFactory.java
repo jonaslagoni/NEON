@@ -5,9 +5,14 @@
  */
 package com.library.interfaces;
 
+import com.library.interfaces.Entity;
+
 /**
- * @author Mathias
+ *
+ * @author emil
  */
-public interface DamageAble {
+public interface IEntityFactory {
+
+    Targetable createEntity();
 
 }

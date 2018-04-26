@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.life">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+               name="com.life">
+    
     <implementation class="com.life.Life"/>
+    
     <service>
-        <provide interface="com.libary.interfaces.ILifeService"/>
+        <provide interface="com.library.interfaces.ILifeService"/>
     </service>
+    
 </scr:component>

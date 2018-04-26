@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
-               name="com.enemy">
+               name="com.enemy.EnemyPlugin">
     
     <implementation class="com.enemy.EnemyPlugin"/>
     
     <service>
-        <provide interface="com.libary.interfaces.Plugin"/>
+        <provide interface="com.library.interfaces.Plugin"/>
     </service>
     
     <reference bind="setWorld" 

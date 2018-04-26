@@ -51,9 +51,7 @@ public class Enemy implements Moveable, Drawable, Targetable, DamageAble {
     }
 
     @Override
-    public void setDamage(float damage) {
-        if (hp - damage <= maxHp) {
-            hp -= damage;
-        }
+    public int getHp() {
+        return hp;
     }
 }

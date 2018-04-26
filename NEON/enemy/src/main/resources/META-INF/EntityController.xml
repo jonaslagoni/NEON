@@ -8,13 +8,6 @@
         <provide interface="com.library.interfaces.Controller"/>
     </service>
     
-    <reference bind="setWaveService" 
-               cardinality="0..1"
-               interface="com.library.interfaces.IWaveService"
-               name="waveService" 
-               policy="dynamic" 
-               unbind="removeWaveService"/>
-    
     <reference bind="setWallet" 
                cardinality="0..1"
                interface="com.library.interfaces.INeonService"
