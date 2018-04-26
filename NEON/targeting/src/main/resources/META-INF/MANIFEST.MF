@@ -1,4 +1,0 @@
-Bundle-SymbolicName: Weapon OSGi Bundle
-Bundle-ActivationPolicy: lazy
-Service-Component: META-INF/TargetingService.xml, META-INF/EntityPlugin.xml
-

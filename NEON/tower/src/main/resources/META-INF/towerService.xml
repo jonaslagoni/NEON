@@ -15,15 +15,18 @@
                policy="dynamic"
                unbind="removeNeonWallet"/>
     
-        <reference bind="setWorld" 
-               cardinality="0..1"
-               interface="com.library.interfaces.IWorldService"
-               name="world" 
-               policy="dynamic"
-               unbind="removeWorld"/>
+    <reference bind="setWorld" 
+           cardinality="0..1"
+           interface="com.library.interfaces.IWorldService"
+           name="world" 
+           policy="dynamic"
+           unbind="removeWorld"/>
 
-    <reference bind="setWorld" cardinality="0..1"
-               interface="com.library.interfaces.IWorldService"
-               name="worldService" policy="dynamic" unbind="removeWorld"/>
+    <reference bind="setWeaponFactory" 
+               cardinality="0..1"
+               interface="com.library.interfaces.IWeaponFactory"
+               name="weaponFactory" 
+               policy="dynamic" 
+               unbind="removeWeaponFactory"/>
     
 </scr:component>

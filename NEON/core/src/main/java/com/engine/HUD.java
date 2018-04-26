@@ -137,19 +137,20 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
             return false;
         }
         /* If a tower is selected, place it */
-        if (selectedPlacable != null && world.isValidPosition(pos)) {
-            selectedPlacable.place(pos);
-            selectedPlacable = null;
-            return false;
-        }
-
-        /* Select an already placed tower */
-        Entity entity = world.getGridCell(pos);
-        if (entity != null) {
-            selectedTower = entity;
-            upgradeGroup.setVisible(true);
-            placementGroup.setVisible(false);
-            return true;
+        if(world != null){
+            if (selectedPlacable != null && world.isValidPosition(pos)) {
+                selectedPlacable.place(pos);
+                selectedPlacable = null;
+                return false;
+            }
+            /* Select an already placed tower */
+            Entity entity = world.getGridCell(pos);
+            if (entity != null) {
+                selectedTower = entity;
+                upgradeGroup.setVisible(true);
+                placementGroup.setVisible(false);
+                return true;
+            }
         }
         return false;
     }

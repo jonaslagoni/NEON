@@ -4,8 +4,9 @@ import com.library.MoveAbility;
 import com.library.Sprite;
 import com.library.interfaces.Drawable;
 import com.library.interfaces.Moveable;
+import com.library.interfaces.Targetable;
 
-public class Player implements Moveable, Drawable {
+public class Player implements Moveable, Drawable, Targetable {
 
     MoveAbility moveAbility;
     Sprite sprite;

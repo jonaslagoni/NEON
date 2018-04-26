@@ -1,6 +1,5 @@
 package com.projectile;
 
-import com.library.World;
 import com.library.interfaces.Controller;
 import com.library.interfaces.DamageAble;
 import com.library.interfaces.ICollisionService;
@@ -15,12 +14,15 @@ public class ProjectileController implements Controller {
         this.world = world;
     }
 
-    public void removeWorld() {
+    public void removeWorld(IWorldService world) {
         this.world = null;
     }
 
     public void setCollisionService(ICollisionService collisionService) {
         this.collisionService = collisionService;
+    }
+    public void removeCollisionService(ICollisionService collisionService) {
+        this.collisionService = null;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class ProjectileController implements Controller {
     }
 
     private void updateProjectile(Projectile projectile) {
-        if (World.isOutOfBounds(projectile.sprite.getPosition())) {
+        if (IWorldService.isOutOfBounds(projectile.sprite.getPosition())) {
             world.removeEntity(projectile);
             return;
         }

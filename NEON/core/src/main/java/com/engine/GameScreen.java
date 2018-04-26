@@ -98,7 +98,8 @@ public class GameScreen implements ApplicationListener {
         batch.draw(((AssetManager) assetManager).getTexture("bg"), 0, 0, IWorldService.WIDTH, IWorldService.HEIGHT);
 
         /* Draw all entities to screen*/
-        world.getEntities(Drawable.class).forEach(this::drawEntity);
+        if(world != null)
+            world.getEntities(Drawable.class).forEach(this::drawEntity);
 
         batch.end();
 
