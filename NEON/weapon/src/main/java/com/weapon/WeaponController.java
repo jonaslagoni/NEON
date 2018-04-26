@@ -1,23 +1,21 @@
 package com.weapon;
 
-import com.library.World;
 import com.library.interfaces.Controller;
 import com.library.interfaces.Drawable;
 import com.library.interfaces.ICollisionService;
 import com.library.interfaces.IProjectileService;
-import com.library.interfaces.ITargetingService;
+import com.library.interfaces.IWorldService;
 import com.library.interfaces.Targetable;
 import com.library.vectors.Vector2f;
 import static com.library.vectors.VectorUtils.distanceSquare;
 
-class WeaponController implements Controller {
+public class WeaponController implements Controller {
 
-    private World world;
+    private IWorldService world;
     private ICollisionService collisionService;
     private IProjectileService projectileService;
-    private ITargetingService targetingService;
 
-    private static boolean isCloser(Vector2f source, Vector2f first, Vector2f second) {
+    private boolean isCloser(Vector2f source, Vector2f first, Vector2f second) {
         return distanceSquare(first, source) < distanceSquare(first, second);
     }
 
@@ -27,7 +25,7 @@ class WeaponController implements Controller {
     }
 
     private void updateWeapon(Weapon weapon, float dt) {
-
+        
         weapon.fireCooldown += dt;
 
         if (weapon.fireCooldown < weapon.fireRate) {
@@ -53,16 +51,11 @@ class WeaponController implements Controller {
         }
     }
 
-    private Vector2f findTarget(Drawable targetSprite, Weapon weapon) {
-        return targetingService.calculateTargetVector(weapon.position, targetSprite.getSprite());
-
-    }
-
     public void setCollisionService(ICollisionService ics) {
         this.collisionService = ics;
     }
 
-    public void removeCollisionService() {
+    public void removeCollisionService(ICollisionService collisionService) {
         this.collisionService = null;
     }
 
@@ -70,15 +63,16 @@ class WeaponController implements Controller {
         this.projectileService = ips;
     }
 
-    public void removeProjectileService() {
+    public void removeProjectileService(ICollisionService collisionService) {
         this.projectileService = null;
     }
 
-    public void setTargetingService(ITargetingService its) {
-        this.targetingService = its;
+    public void setWorld(IWorldService world){
+        this.world = world;
+    }
+    
+    public void removeWorld(IWorldService world){
+        this.world = null;
     }
 
-    public void removeTargetingService() {
-        this.targetingService = null;
-    }
 }

@@ -62,7 +62,10 @@
         <module>life</module>
         <module>enemy</module>
         <module>wave</module>
-    </modules>
+        <module>weapon</module>
+        <module>Projectile</module>
+    <module>Collision</module>
+  </modules>
     <properties>
         <netbeans.version>RELEASE82</netbeans.version>
         <brandingToken>neon</brandingToken>

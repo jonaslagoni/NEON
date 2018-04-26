@@ -1,15 +1,19 @@
 package com.tower;
 
+import com.library.ShotType;
 import com.library.interfaces.Entity;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.ITowerService;
+import com.library.interfaces.IWeaponFactory;
 import com.library.interfaces.IWorldService;
+import com.library.interfaces.WeaponEntity;
 import com.library.vectors.Vector2f;
 
 public class TowerService implements ITowerService, ILocalTowerService {
 
     private INeonService neonWallet;
     private IWorldService world;
+    private IWeaponFactory weaponFactory;
 
     public void setNeonWallet(INeonService neonWallet) {
         this.neonWallet = neonWallet;
@@ -25,6 +29,14 @@ public class TowerService implements ITowerService, ILocalTowerService {
 
     public void removeWorld(IWorldService world) {
         this.world = null;
+    }
+
+    public void setWeaponFactory(IWeaponFactory weaponFactory) {
+        this.weaponFactory = weaponFactory;
+    }
+
+    public void removeWeaponFactory(IWeaponFactory weaponFactory) {
+        this.weaponFactory = null;
     }
 
     @Override
@@ -144,5 +156,57 @@ public class TowerService implements ITowerService, ILocalTowerService {
             return;
         }
         world.setGridCell(pos, tower);
+        if(weaponFactory != null){
+            switch (key) {
+                case LASER_TOWER:
+                    WeaponEntity weapon = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.GREEN_BEAM, 10);
+                    tower.setWeapon(weapon);
+                    world.addEntity(weapon);
+                    break;
+
+                case MELEE_GLAIVE_TOWER:
+                    WeaponEntity meleeWeapon = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, 10);
+                    tower.setWeapon(meleeWeapon);
+                    world.addEntity(meleeWeapon);
+                    break;
+
+                case PEA_SHOOTER:
+                    WeaponEntity peaWeapon = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.BLUE_BEAM, 10);
+                    tower.setWeapon(peaWeapon);
+                    world.addEntity(peaWeapon);
+                    break;
+
+                case RANGE_POWERUP:
+                    WeaponEntity rangePowerup = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.YELLOW_BEAM, 10);
+                    tower.setWeapon(rangePowerup);
+                    world.addEntity(rangePowerup);
+                    break;
+
+                case STRENGTH_POWERUP:
+                    WeaponEntity strengthPowerup = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.RED_BEAM, 10);
+                    tower.setWeapon(strengthPowerup);
+                    world.addEntity(strengthPowerup);
+                    break;
+
+                case RAILGUN_TOWER:
+                    WeaponEntity railWeapon = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.PINK_LASER, 10);
+                    tower.setWeapon(railWeapon);
+                    world.addEntity(railWeapon);
+                    break;
+
+                case ROCKET_TOWER:
+                    WeaponEntity rocketWeapon = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.ROCKET_SHOT, 10);
+                    tower.setWeapon(rocketWeapon);
+                    world.addEntity(rocketWeapon);
+                    break;
+
+                case SPLASH_TOWER:
+                    WeaponEntity splashWeapon = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.GREEN_BOMB_SMALLER, 10);
+                    tower.setWeapon(splashWeapon);
+                    world.addEntity(splashWeapon);
+                    break;
+
+            }
+        }
     }
 }

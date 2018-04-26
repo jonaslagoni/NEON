@@ -40,8 +40,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <!--<Bundle-Activator>com.projectile.Activator</Bundle-Activator>-->
-                        <Export-Package />
+                        <Service-Component>
+                            META-INF/ProjectileController.xml, 
+                            META-INF/ProjectilePlugin.xml, 
+                            META-INF/ProjectileService.xml
+                        </Service-Component>
                     </instructions>
                 </configuration>
             </plugin>

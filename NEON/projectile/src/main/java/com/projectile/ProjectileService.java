@@ -11,23 +11,22 @@ import static com.library.vectors.VectorUtils.translateVelocity;
 public class ProjectileService implements IProjectileService {
 
     private IWorldService world;
-
+    
     public void setWorld(IWorldService world) {
         this.world = world;
     }
     
-    public void removeWorld() {
+    public void removeWorld(IWorldService world) {
         this.world = null;
     }
 
     @Override
     public void newProjectile(Vector2f spawn, Vector2f target, ShotType shotType, float damage) {
-
         switch (shotType) {
             case GREEN_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                "images/beams/green_beam.png",
+                                "GREEN_BEAM",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 32, 32
@@ -39,7 +38,7 @@ public class ProjectileService implements IProjectileService {
             case YELLOW_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                "images/beams/yellow_beam.png",
+                                "YELLOW_BEAM",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 42, 41
@@ -51,7 +50,7 @@ public class ProjectileService implements IProjectileService {
             case BLUE_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                "images/beams/blue_bomb.png",
+                                "BLUE_BEAM",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 80, 145
@@ -63,7 +62,7 @@ public class ProjectileService implements IProjectileService {
             case RED_BEAM:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                "images/beams/red_beam.png",
+                                "RED_BEAM",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 37, 41
@@ -75,7 +74,7 @@ public class ProjectileService implements IProjectileService {
             case PINK_LASER:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                "images/beams/pink_laser.png",
+                                "PINK_LASER",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 26, 50
@@ -87,7 +86,7 @@ public class ProjectileService implements IProjectileService {
             case ROCKET_SHOT:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                "images/beams/rocket_shot.png",
+                                "ROCKET_SHOT",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 28, 98
@@ -99,7 +98,7 @@ public class ProjectileService implements IProjectileService {
             case GREEN_BOMB_SMALLER:
                 world.addEntity(new Projectile(
                         new Sprite(
-                                "images/beams/green_bomb.png",
+                                "GREEN_BOMB_SMALLER",
                                 new Vector2f(spawn.getX(), spawn.getY()),
                                 translateVelocity(spawn, target, new Vector2f(0, 500)),
                                 67, 127
