@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.weapon.WeaponController">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+               name="com.weapon.WeaponController">
+
     <implementation class="com.weapon.WeaponController"/>
 
     <service>
         <provide interface="com.library.interfaces.Controller"/>
     </service>
-    
-    <reference bind="setWorld" 
-           cardinality="1..1"
-           interface="com.library.interfaces.IWorldService"
-           name="world" 
-           policy="dynamic"
-           unbind="removeWorld"/>
 
-    <reference bind="setCollisionService" cardinality="1..1"
+    <reference bind="setWorld"
+               interface="com.library.interfaces.IWorldService"
+               name="world"
+               unbind="removeWorld"/>
+
+    <reference bind="setCollisionService"
                interface="com.library.interfaces.ICollisionService"
-               name="ICollisionService" policy="dynamic" unbind="removeCollisionService"/>
+               name="ICollisionService"
+               unbind="removeCollisionService"/>
 
-    <reference bind="setProjectileService" cardinality="1..1"
+    <reference bind="setProjectileService"
                interface="com.library.interfaces.IProjectileService"
-               name="IProjectileService" policy="dynamic" unbind="removeProjectileService"/>
-    
+               name="IProjectileService"
+               unbind="removeProjectileService"/>
+
 </scr:component>

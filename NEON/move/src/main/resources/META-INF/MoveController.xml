@@ -5,7 +5,9 @@
         <provide interface="com.library.interfaces.Controller"/>
     </service>
   
-    <reference bind="setWorld" cardinality="0..1"
+    <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" policy="dynamic" unbind="removeWorld"/>
+               name="worldService"
+               unbind="removeWorld"/>
+
 </scr:component>

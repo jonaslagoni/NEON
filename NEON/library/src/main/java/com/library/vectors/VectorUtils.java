@@ -42,10 +42,8 @@ public final class VectorUtils {
     }
 
     public static Vector2f translate(Vector2f p, Vector2f v, float dt) {
-
         float dx = p.x + v.x * dt;
         float dy = p.y + v.y * dt;
-
         return new Vector2f(dx, dy);
     }
 

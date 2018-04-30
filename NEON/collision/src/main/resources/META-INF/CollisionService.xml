@@ -10,10 +10,8 @@
     </service>
 
     <reference bind="setWorld"
-               cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
                name="world"
-               policy="dynamic"
                unbind="removeWorld"/>
 
 </scr:component>
