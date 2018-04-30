@@ -1,7 +1,6 @@
 package com.wave;
 
 import com.library.interfaces.IEntityFactory;
-import com.library.interfaces.IWaveService;
 import com.library.interfaces.Targetable;
 
 import java.util.LinkedList;
@@ -16,7 +15,7 @@ public class WaveService implements IWaveService {
 
     private IEntityFactory factory;
 
-    public void addFactory(IEntityFactory factory) {
+    public void setFactory(IEntityFactory factory) {
         this.factory = factory;
     }
 
@@ -25,18 +24,9 @@ public class WaveService implements IWaveService {
     }
 
     @Override
-    public int getWaveScore() {
-        return 4;
-    }
-
-    @Override
-    public int getWaveCount() {
-        return 4;
-    }
-
-    @Override
     public Queue<Targetable> createWave() {
 
+        System.out.println(factory);
         LinkedList<Targetable> enemyList = new LinkedList<>();
 
         while (enemyList.stream().mapToInt(Targetable::getHp).sum() < waveDifficulty) {

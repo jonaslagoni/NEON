@@ -10,7 +10,7 @@
     
     <reference bind="addWaveService" 
                cardinality="1..1"
-               interface="com.library.interfaces.IWaveService"
+               interface="com.wave.IWaveService"
                name="WaveService" 
                unbind="removeWaveService"/>
     

@@ -1,4 +1,6 @@
-package com.library.interfaces;
+package com.wave;
+
+import com.library.interfaces.Targetable;
 
 import java.util.Queue;
 
@@ -9,7 +11,4 @@ public interface IWaveService {
 
     Queue<Targetable> createWave();
 
-    int getWaveScore();
-
-    int getWaveCount();
 }

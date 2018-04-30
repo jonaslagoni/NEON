@@ -26,11 +26,11 @@ public class Enemy implements Moveable, Drawable, Targetable, DamageAble {
     Queue<Vector2f> path;
 
     Enemy(Sprite sprite,
-            MoveAbility moveAbility,
-            String[] textures,
-            int hp,
-            int coinValue,
-            int damage) {
+          MoveAbility moveAbility,
+          String[] textures,
+          int hp,
+          int coinValue,
+          int damage) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;
         this.textures = textures;
@@ -53,5 +53,10 @@ public class Enemy implements Moveable, Drawable, Targetable, DamageAble {
     @Override
     public int getHp() {
         return hp;
+    }
+
+    @Override
+    public void damage(float damage) {
+        this.hp -= damage;
     }
 }

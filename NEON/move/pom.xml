@@ -7,7 +7,6 @@
         <version>0.1</version>
     </parent>
 
-    <groupId>com</groupId>
     <artifactId>move</artifactId>
     <version>0.1</version>
     <packaging>bundle</packaging>

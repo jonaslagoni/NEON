@@ -10,4 +10,5 @@ package com.library.interfaces;
  */
 public interface DamageAble {
 
+    void damage(float damage);
 }

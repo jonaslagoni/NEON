@@ -7,7 +7,6 @@ package com.wave;
 
 import com.library.interfaces.Controller;
 import com.library.interfaces.Entity;
-import com.library.interfaces.IWaveService;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Targetable;
 import java.util.Queue;

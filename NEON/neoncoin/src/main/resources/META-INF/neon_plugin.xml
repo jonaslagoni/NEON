@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
                name="com.neoncoin.NeoncoinPlugin">
+
     <implementation class="com.neoncoin.NeoncoinPlugin"/>
+
     <service>
         <provide interface="com.library.interfaces.Plugin"/>
     </service>
@@ -14,8 +16,8 @@
                unbind="removeGameData"/>
     
     <reference bind="setNeonWallet" 
-               cardinality="1..1"
                interface="com.library.interfaces.INeonService"
                name="neonWallet" 
                unbind="removeNeonWallet"/>
+
 </scr:component>

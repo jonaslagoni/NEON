@@ -39,7 +39,7 @@ public class ProjectileController implements Controller {
                 .filter(DamageAble.class::isInstance)
                 .map(DamageAble.class::cast)
                 .forEach(entity -> {
-                    entity.setDamage(projectile.damage);
+                    entity.damage(projectile.damage);
                     world.removeEntity(projectile);
                 });
     }

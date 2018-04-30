@@ -5,11 +5,11 @@
     <implementation class="com.wave.WaveService"/>
     
     <service>
-        <provide interface="com.library.interfaces.IWaveService"/>
+        <provide interface="com.wave.IWaveService"/>
     </service>
     
-    <reference bind="addFactory" 
-               cardinality="1..1"
+    <reference bind="setFactory"
+               cardinality="0..1"
                interface="com.library.interfaces.IEntityFactory"
                name="factories" 
                unbind="removeFactory"/>

@@ -13,7 +13,7 @@ import com.library.vectors.Vector2f;
  */
 public interface IInputService {
 
-    public boolean isClicked();
+    boolean isClicked();
 
-    public Vector2f getCords();
+    Vector2f getCords();
 }

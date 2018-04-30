@@ -10,9 +10,11 @@ import com.library.interfaces.Drawable;
 import com.library.interfaces.ICollisionService;
 import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
-import static com.library.vectors.VectorUtils.distanceSquare;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.library.vectors.VectorUtils.distanceSquare;
 
 /**
  * @author Daniel
@@ -21,9 +23,10 @@ public class CollisionService implements ICollisionService {
 
     private IWorldService world;
 
-    public void setWorld(IWorldService world){
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
+
     public void removeWorld(IWorldService world) {
         this.world = null;
     }
@@ -42,10 +45,12 @@ public class CollisionService implements ICollisionService {
             float radius1 = drawable.getSprite().getWidth() / 2;
 
             if (position0 != position1
-                    && (radius0 + radius1) * (radius0 + radius1) > distanceSquare(position0, position1)) {
+                    && (radius0 + radius1) * (radius0 + radius1)
+                    > distanceSquare(position0, position1)) {
                 collisions.add(drawable);
             }
         }
         return collisions;
     }
+
 }

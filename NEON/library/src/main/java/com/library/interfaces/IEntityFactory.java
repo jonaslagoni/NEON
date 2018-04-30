@@ -5,10 +5,7 @@
  */
 package com.library.interfaces;
 
-import com.library.interfaces.Entity;
-
 /**
- *
  * @author emil
  */
 public interface IEntityFactory {

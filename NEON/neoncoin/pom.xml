@@ -7,8 +7,7 @@
         <groupId>com</groupId>
         <version>0.1</version>
     </parent>
-    
-    <groupId>com</groupId>
+
     <artifactId>neoncoin</artifactId>
     <version>0.1</version>
     <packaging>bundle</packaging>
