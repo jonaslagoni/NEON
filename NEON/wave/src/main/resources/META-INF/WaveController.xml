@@ -9,13 +9,11 @@
     </service>
     
     <reference bind="addWaveService" 
-               cardinality="1..1"
                interface="com.wave.IWaveService"
                name="WaveService" 
                unbind="removeWaveService"/>
     
     <reference bind="addWorld" 
-               cardinality="1..1"
                interface="com.library.interfaces.IWorldService"
                name="world" 
                unbind="removeWorld"/>

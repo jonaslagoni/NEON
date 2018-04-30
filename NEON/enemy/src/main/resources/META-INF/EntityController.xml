@@ -16,10 +16,8 @@
                unbind="removeWallet"/>
     
     <reference bind="setLifeService" 
-               cardinality="0..1"
                interface="com.library.interfaces.ILifeService"
                name="lifeService" 
-               policy="dynamic" 
                unbind="removeLifeService"/>
     
     <reference bind="setPathFindingService" 

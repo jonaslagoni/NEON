@@ -4,6 +4,7 @@ import com.library.interfaces.IEntityFactory;
 import com.library.interfaces.Targetable;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -29,12 +30,20 @@ public class WaveService implements IWaveService {
         System.out.println(factory);
         LinkedList<Targetable> enemyList = new LinkedList<>();
 
-        while (enemyList.stream().mapToInt(Targetable::getHp).sum() < waveDifficulty) {
+        while (hpSum(enemyList) < waveDifficulty) {
             Targetable targetable = factory.createEntity();
-            enemyList.add(targetable);
+             enemyList.add(targetable);
         }
 
         waveDifficulty *= 2;
         return enemyList;
+    }
+
+    private int hpSum(List<Targetable> list) {
+        int sum = 0;
+        for (Targetable targetable : list) {
+            sum += targetable.getHp();
+        }
+        return sum;
     }
 }

@@ -180,13 +180,6 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
 
         /* Update text on status labels */
         statusTexts.forEach((text, label) -> label.setText(text.getLabel() + " " + text.update()));
-
-//        waveCounterLabel.setText("" + waveService.getWaveCount());
-//        waveScoreLabel.setText("" + waveService.getWaveScore());
-//        lifeLabel.setText("" + lifeService.getLife());
-//        coinLabel.setText("" + neonService.getCoins());
-//        towers.setText("" + (world == null ? "World not sat" : world.getNumberOfTowers()));
-//        waveCountdown.setText("" + enemyService.getWaveCountdown());
     }
 
     @Override

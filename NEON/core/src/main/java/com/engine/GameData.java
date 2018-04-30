@@ -25,13 +25,13 @@ public class GameData implements IGameData {
     @Override
     public void addStatusText(IStatusText text) {
         statusTexts.add(text);
-        observers.forEach(t -> t.updateView());
+        observers.forEach(IViewObserver::updateView);
     }
 
     @Override
     public void removeStatusText(IStatusText text) {
         statusTexts.remove(text);
-        observers.forEach(t -> t.updateView());
+        observers.forEach(IViewObserver::updateView);
     }
 
     @Override
@@ -42,12 +42,12 @@ public class GameData implements IGameData {
     @Override
     public void addPlaceables(Collection<IPlaceable> placables) {
         placeables.addAll(placables);
-        observers.forEach(t -> t.updateView());
+        observers.forEach(IViewObserver::updateView);
     }
 
     @Override
     public void removePlaceables(Collection<IPlaceable> placables) {
         placeables.removeAll(placables);
-        observers.forEach(t -> t.updateView());
+        observers.forEach(IViewObserver::updateView);
     }
 }

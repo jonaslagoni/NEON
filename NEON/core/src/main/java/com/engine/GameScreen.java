@@ -38,7 +38,7 @@ public class GameScreen implements ApplicationListener {
     private IWorldService world;
     private IGameData gameData;
     private boolean speedUp;
-    SpriteBatch batch;
+    private SpriteBatch batch;
     private HUD hud;
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
