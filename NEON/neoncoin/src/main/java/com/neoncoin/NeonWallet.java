@@ -1,13 +1,19 @@
 package com.neoncoin;
 
+import com.library.interfaces.IGameData;
 import com.library.interfaces.INeonService;
+import com.library.interfaces.IStatusText;
+import com.library.interfaces.Plugin;
 
 /**
  * Created by sam on 15-03-2018.
  */
-public class NeonWallet implements INeonService {
+public class NeonWallet implements INeonService, Plugin {
 
     private int neoncoins = 100;
+    private IStatusText status = () -> "Coins: " + getCoins();
+    private IGameData gameData;
+
 
     @Override
     public boolean subtractCoins(int i) {
@@ -16,6 +22,16 @@ public class NeonWallet implements INeonService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void start() {
+        gameData.addStatusText(status);
+    }
+
+    @Override
+    public void stop() {
+        gameData.removeStatusText(status);
     }
 
     @Override
@@ -31,5 +47,13 @@ public class NeonWallet implements INeonService {
     @Override
     public void setCoins(int i) {
         neoncoins = i;
+    }
+
+    public void setGameData(IGameData gameData) {
+        this.gameData = gameData;
+    }
+
+    public void removeGameData(IGameData gameData) {
+        this.gameData = null;
     }
 }

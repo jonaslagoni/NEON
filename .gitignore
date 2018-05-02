@@ -23,6 +23,7 @@ hs_err_pid*
 nbactions.xml
 target/
 assembly/
+out/
 .idea/
 *~
 *.iml
