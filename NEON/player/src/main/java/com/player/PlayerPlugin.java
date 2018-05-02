@@ -6,14 +6,18 @@ import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Plugin;
 import com.library.vectors.Vector2f;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlayerPlugin implements Plugin {
 
     private static final int PLAYER_SIZE = 64;
     private static final String ASSET_NAME = "player";
     private static final String ASSET_PATH = "player.png";
+    private static final Logger LOGGER = Logger.getLogger(PlayerPlugin.class.getName());
 
     private Player player;
     private IWorldService world;
@@ -36,7 +40,7 @@ public class PlayerPlugin implements Plugin {
         try (InputStream stream = getClass().getClassLoader().getResourceAsStream(ASSET_PATH)) {
             assetManager.loadAsset(ASSET_NAME, stream);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, ex.toString(), ex);
         }
         player = new Player(new Sprite(
                 ASSET_NAME,

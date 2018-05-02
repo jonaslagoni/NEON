@@ -15,14 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author emil
  */
 public class AssetManager implements IAssetManager {
 
+    private final static Logger LOGGER = Logger.getLogger(AssetManager.class.getName());
     private final Map<String, byte[]> assets = new ConcurrentHashMap<>();
-    private List<IObserver> observers = new ArrayList<>();
+    private final List<IObserver> observers = new ArrayList<>();
 
     public void addObserver(IObserver observer) {
         observers.add(observer);
@@ -50,7 +53,7 @@ public class AssetManager implements IAssetManager {
             assets.put(name, bytes);
             observers.forEach(IObserver::update);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, ex.toString(), ex);
         }
     }
 }

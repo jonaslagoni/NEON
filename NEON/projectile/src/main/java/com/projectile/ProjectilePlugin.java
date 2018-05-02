@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProjectilePlugin implements Plugin {
 
-    private IAssetManager assetManager;
+    private static final Logger LOGGER = Logger.getLogger(ProjectilePlugin.class.getName());
     private static final Map<String, String> projectiles;
 
     static {
@@ -23,6 +25,8 @@ public class ProjectilePlugin implements Plugin {
         projectiles.put("ROCKET_SHOT", "rocket_shot.png");
         projectiles.put("GREEN_BOMB_SMALLER", "green_bomb.png");
     }
+
+    private IAssetManager assetManager;
 
     public void setAssetManager(IAssetManager assetManager) {
         this.assetManager = assetManager;
@@ -38,7 +42,7 @@ public class ProjectilePlugin implements Plugin {
             try (InputStream stream = getClass().getClassLoader().getResourceAsStream(entry.getValue())) {
                 assetManager.loadAsset(entry.getKey(), stream);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                LOGGER.log(Level.SEVERE, ex.toString(), ex);
             }
         }
     }
