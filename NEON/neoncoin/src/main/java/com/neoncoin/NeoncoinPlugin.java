@@ -10,14 +10,12 @@ import com.library.interfaces.INeonService;
 import com.library.interfaces.Plugin;
 
 /**
- *
  * @author emil
  */
 public class NeoncoinPlugin implements Plugin {
 
     private IGameData gameData;
     private INeonService neonWallet;
-    private NeonStatusText statusText;
 
     public void setGameData(IGameData gameData) {
         this.gameData = gameData;
@@ -37,12 +35,11 @@ public class NeoncoinPlugin implements Plugin {
 
     @Override
     public void start() {
-        statusText = new NeonStatusText("Coins", neonWallet);
-        gameData.addStatusText(statusText);
+        gameData.addStatusText(() -> "Coins:" + neonWallet.getCoins());
     }
 
     @Override
     public void stop() {
-        gameData.removeStatusText(statusText);
+
     }
 }
