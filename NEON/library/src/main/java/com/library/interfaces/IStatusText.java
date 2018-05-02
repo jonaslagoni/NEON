@@ -11,7 +11,5 @@ package com.library.interfaces;
  */
 public interface IStatusText {
 
-    String getLabel();
-
     String update();
 }

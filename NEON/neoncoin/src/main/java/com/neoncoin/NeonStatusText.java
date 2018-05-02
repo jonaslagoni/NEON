@@ -9,7 +9,6 @@ import com.library.interfaces.INeonService;
 import com.library.interfaces.IStatusText;
 
 /**
- *
  * @author emil
  */
 public class NeonStatusText implements IStatusText {
@@ -17,18 +16,14 @@ public class NeonStatusText implements IStatusText {
     private final String label;
     private final INeonService neonWallet;
 
-    public NeonStatusText(String label, INeonService neonWallet) {
+    NeonStatusText(String label, INeonService neonWallet) {
         this.label = label;
         this.neonWallet = neonWallet;
     }
 
     @Override
-    public String getLabel() {
-        return label;
+    public String update() {
+        return label + neonWallet.getCoins();
     }
 
-    @Override
-    public String update() {
-        return Integer.toString(neonWallet.getCoins());
-    }
 }

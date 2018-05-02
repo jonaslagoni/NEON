@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,14 +44,14 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
 
     private final Map<IStatusText, Label> statusTexts = new HashMap<>();
 
-    public HUD(Batch batch, BitmapFont font, IWorldService world, IGameData gameData) {
+    HUD(Batch batch, BitmapFont font, IWorldService world, IGameData gameData) {
         this.gameData = gameData;
         this.world = world;
         this.font = font;
         this.batch = batch;
     }
 
-    public void start() {
+    void start() {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table();
@@ -86,14 +87,14 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
         buttonStyle.font = font;
 
         TextButton upgradeButton = new TextButton("Upgrade", buttonStyle);
-        upgradeButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (selectedTower != null) {
-//                    towerService.upgrade(selectedTower);
-                }
-            }
-        });
+//        upgradeButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                if (selectedTower != null) {
+//                   towerService.upgrade(selectedTower);
+//                }
+//            }
+//        });
         upgradeTable.bottom().right().add(upgradeButton).width(150).height(30);
         upgradeGroup.addActor(upgradeTable);
         stage.addActor(upgradeGroup);
@@ -103,7 +104,7 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
         updateView();
     }
 
-    public Stage getStage() {
+    Stage getStage() {
         return stage;
     }
 
@@ -137,7 +138,7 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
             return false;
         }
         /* If a tower is selected, place it */
-        if(world != null){
+        if (world != null) {
             if (selectedPlacable != null && world.isValidPosition(pos)) {
                 selectedPlacable.place(pos);
                 selectedPlacable = null;
@@ -179,7 +180,7 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
     public void update(float dt) {
 
         /* Update text on status labels */
-        statusTexts.forEach((text, label) -> label.setText(text.getLabel() + " " + text.update()));
+        statusTexts.forEach((status, label) -> label.setText(status.update()));
     }
 
     @Override
@@ -187,9 +188,9 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
 
         /* Create a label for each status text object */
         statusTexts.clear();
-        for (IStatusText statusText : gameData.getStatusText()) {
-            Label label = new Label(statusText.getLabel(), labelStyle);
-            statusTexts.put(statusText, label);
+        for (IStatusText status : gameData.getStatusText()) {
+            Label label = new Label(status.update(), labelStyle);
+            statusTexts.put(status, label);
             statsGroup.addActor(label);
         }
 

@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
-            <version>4.3.0</version>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -76,16 +76,16 @@
             <artifactId>gdx-jnigen</artifactId>
             <version>1.9.6</version>
         </dependency>
-        <dependency>
-            <groupId>com.diffplug.osgi</groupId>
-            <artifactId>com.diffplug.osgi.extension.sun.misc</artifactId>
-            <version>0.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.diffplug.osgi</groupId>
-            <artifactId>com.diffplug.osgi.extension.sun.reflect</artifactId>
-            <version>0.0.0</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.diffplug.osgi</groupId>-->
+        <!--<artifactId>com.diffplug.osgi.extension.sun.misc</artifactId>-->
+        <!--<version>0.0.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.diffplug.osgi</groupId>-->
+        <!--<artifactId>com.diffplug.osgi.extension.sun.reflect</artifactId>-->
+        <!--<version>0.0.0</version>-->
+        <!--</dependency>-->
     </dependencies>
     <build>
         <plugins>
@@ -96,7 +96,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>com.badlogic.gdx.*</Export-Package>
-                        <Import-Package>!com.apple.eio,!com.sun.*,!org.objectweb.*,*</Import-Package>
+                        <Import-Package>!com.apple.eio,!com.sun.*,!org.objectweb.*,!com.badlogic.*,*</Import-Package>
                         <Embed-Dependency>!org.osgi.*,!com.diffplug.osgi.*,*</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Bundle-NativeCode> 
