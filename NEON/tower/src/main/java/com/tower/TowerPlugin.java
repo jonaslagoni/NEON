@@ -1,10 +1,7 @@
 package com.tower;
 
-import com.library.interfaces.IAssetManager;
-import com.library.interfaces.IGameData;
-import com.library.interfaces.IPlaceable;
-import com.library.interfaces.IWorldService;
-import com.library.interfaces.Plugin;
+import com.library.interfaces.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -38,30 +35,6 @@ public class TowerPlugin implements Plugin {
     private ILocalTowerService towerService;
     private Collection<IPlaceable> placeables;
 
-    public void setGameData(IGameData gameData) {
-        this.gameData = gameData;
-    }
-
-    public void removeGameData(IGameData gameData) {
-        this.gameData = null;
-    }
-
-    public void setWorld(IWorldService world) {
-        this.world = world;
-    }
-
-    public void removeWorld(IWorldService world) {
-        this.world = null;
-    }
-
-    public void setTowerService(ILocalTowerService towerService) {
-        this.towerService = towerService;
-    }
-
-    public void removeTowerService(ILocalTowerService towerService) {
-        this.towerService = null;
-    }
-
     @Override
     public void start() {
         for (String name : ASSETS) {
@@ -94,4 +67,29 @@ public class TowerPlugin implements Plugin {
     public void removeAssetManager(IAssetManager assetManager) {
         this.assetManager = null;
     }
+
+    public void setGameData(IGameData gameData) {
+        this.gameData = gameData;
+    }
+
+    public void removeGameData(IGameData gameData) {
+        this.gameData = null;
+    }
+
+    public void setWorld(IWorldService world) {
+        this.world = world;
+    }
+
+    public void removeWorld(IWorldService world) {
+        this.world = null;
+    }
+
+    public void setTowerService(ILocalTowerService towerService) {
+        this.towerService = towerService;
+    }
+
+    public void removeTowerService(ILocalTowerService towerService) {
+        this.towerService = null;
+    }
+
 }

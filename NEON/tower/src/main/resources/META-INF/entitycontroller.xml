@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.tower.TowerController">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.tower.TowerController">
     <implementation class="com.tower.TowerController"/>
     <service>
         <provide interface="com.library.interfaces.Controller"/>
     </service>
 
-    <reference bind="setWorld" cardinality="0..1"
+    <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" policy="dynamic" unbind="removeWorld"/>
-       
-    
+               name="worldService"
+               unbind="removeWorld"/>
+
 </scr:component>

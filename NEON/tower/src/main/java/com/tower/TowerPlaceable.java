@@ -18,9 +18,9 @@ public class TowerPlaceable implements IPlaceable {
     private final ILocalTowerService towerService;
     private final String title;
 
-    public TowerPlaceable(TowerType towerType,
-            ILocalTowerService towerService,
-            String title) {
+    TowerPlaceable(TowerType towerType,
+                   ILocalTowerService towerService,
+                   String title) {
         this.towerType = towerType;
         this.towerService = towerService;
         this.title = title;

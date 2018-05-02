@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
                name="com.tower.towerservice"
                immediate="true">
+
     <implementation class="com.tower.TowerService"/>
+
     <service>
         <provide interface="com.library.interfaces.ITowerService"/>
         <provide interface="com.tower.ILocalTowerService"/>
@@ -16,10 +18,8 @@
                unbind="removeNeonWallet"/>
 
     <reference bind="setWorld"
-               cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
                name="world"
-               policy="dynamic"
                unbind="removeWorld"/>
 
     <reference bind="setWeaponFactory"

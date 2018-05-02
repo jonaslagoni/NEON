@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.projectile.ProjectileController">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.projectile.ProjectileController">
     <implementation class="com.projectile.ProjectileController"/>
     <service>
         <provide interface="com.library.interfaces.Controller"/>

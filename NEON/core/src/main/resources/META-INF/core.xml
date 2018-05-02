@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
                name="com.engine.GameScreen"
                activate="init"
                immediate="true">
@@ -21,13 +21,11 @@
                unbind="removeGamePluginService"/>
 
     <reference bind="setWorld"
-               cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
                name="IWorldService"
                unbind="removeWorld"/>
 
     <reference bind="setAssetManager"
-               cardinality="0..1"
                interface="com.library.interfaces.IAssetManager"
                name="assetManager"
                unbind="removeAssetManager"/>

@@ -27,16 +27,17 @@ import static com.library.vectors.VectorUtils.angle;
 public class GameScreen implements ApplicationListener, IObserver {
 
     private final static OrthographicCamera CAMERA = new OrthographicCamera();
-    public final static Viewport VIEWPORT = new ExtendViewport(IWorldService.WIDTH, IWorldService.HEIGHT, CAMERA);
+    final static Viewport VIEWPORT = new ExtendViewport(IWorldService.WIDTH, IWorldService.HEIGHT, CAMERA);
     private final List<Controller> entityProcessorList = new CopyOnWriteArrayList<>();
     private final List<Plugin> gamePluginList = new CopyOnWriteArrayList<>();
     private Map<String, Texture> textureMap = new HashMap<>();
     private IAssetManager assetManager;
     private IWorldService world;
     private IGameData gameData;
-    private boolean speedUp;
     private SpriteBatch batch;
     private HUD hud;
+    private boolean speedUp;
+
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void init() {
@@ -71,11 +72,11 @@ public class GameScreen implements ApplicationListener, IObserver {
                 texture.getHeight(),
                 false, false
         );
-
     }
 
     @Override
     public void render() {
+
         float delta = Gdx.graphics.getDeltaTime();
         entityProcessorList.forEach(controller -> controller.update(speedUp ? delta * 2 : delta));
         hud.update(delta);

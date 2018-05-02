@@ -8,51 +8,73 @@ package com.wave;
 import com.library.interfaces.*;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author emil
  */
 public class WaveController implements Controller {
 
-    private final float WAVE_COOLDOWN = 20;
-    private Queue<Targetable> wave;
-    private float waveCounter = 0;
-    private float entityCooldown = 0;
-    private IWorldService world;
-
+    private static final float WAVE_COOLDOWN = 20;
+    private float waveTimer = 0;
+    private int waveNumber = 0;
+    private float entityTimer = 0;
     private int waveDifficulty = 512;
-
-    private IEntityFactory factory;
-
-    public void setFactory(IEntityFactory factory) {
-        this.factory = factory;
-    }
-
-    public void removeFactory(IEntityFactory factory) {
-        this.factory = null;
-    }
+    private IWorldService world;
+    private Queue<Targetable> wave;
+    private List<IEntityFactory> factories = new CopyOnWriteArrayList<>();
+    private IGameData gameData;
+    private IStatusText countStatus = () -> "Wave Nr.: " + waveNumber;
+    private IStatusText cooldownStatus = () -> "Wave Countdown: " + Math.ceil(WAVE_COOLDOWN - waveTimer);
 
     @Override
     public void update(float dt) {
-        entityCooldown += dt;
-        waveCounter += dt;
+        entityTimer += dt;
+        waveTimer += dt;
         /* Generate new Wave */
-        if (waveCounter > WAVE_COOLDOWN) {
+        if (waveTimer > WAVE_COOLDOWN) {
             wave = createWave();
-            waveCounter = 0;
+            waveTimer = 0;
         }
 
         /* Spawn new enemy */
-        if (entityCooldown > 1 && wave != null && !wave.isEmpty()) {
+        if (entityTimer > 1 && wave != null && !wave.isEmpty()) {
             world.addEntity((Entity) wave.remove());
-            entityCooldown = 0;
-            waveCounter = 0;
+            entityTimer = 0;
+            waveTimer = 0;
         }
     }
 
+    private Queue<Targetable> createWave() {
 
-    public void addWorld(IWorldService world) {
+        if (factories.isEmpty()) {
+            return new LinkedList<>();
+        }
+
+        LinkedList<Targetable> enemyList = new LinkedList<>();
+
+        while (enemyList.stream().mapToInt(Targetable::getHp).sum() < waveDifficulty) {
+            Targetable targetable = factories.get(0).createEntity();
+            enemyList.add(targetable);
+        }
+
+        waveDifficulty *= 2;
+        return enemyList;
+    }
+
+    public void start() {
+        gameData.addStatusText(countStatus);
+        gameData.addStatusText(cooldownStatus);
+    }
+
+    public void stop() {
+        gameData.removeStatusText(countStatus);
+        gameData.removeStatusText(cooldownStatus);
+    }
+
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
 
@@ -60,20 +82,20 @@ public class WaveController implements Controller {
         this.world = null;
     }
 
-    private Queue<Targetable> createWave() {
-
-        if (factory == null) {
-            return new LinkedList<>();
-        }
-
-        LinkedList<Targetable> enemyList = new LinkedList<>();
-
-        while (enemyList.stream().mapToInt(Targetable::getHp).sum() < waveDifficulty) {
-            Targetable targetable = factory.createEntity();
-            enemyList.add(targetable);
-        }
-
-        waveDifficulty *= 2;
-        return enemyList;
+    public void addFactory(IEntityFactory factory) {
+        factories.add(factory);
     }
+
+    public void removeFactory(IEntityFactory factory) {
+        factories.remove(factory);
+    }
+
+    public void setGameData(IGameData gameData) {
+        this.gameData = gameData;
+    }
+
+    public void removeGameData(IGameData gameData) {
+        this.gameData = null;
+    }
+
 }

@@ -1,16 +1,15 @@
 package com.tower;
 
 import com.library.Sprite;
-import com.library.vectors.Vector2f;
-import static com.tower.TowerType.*;
 import com.library.interfaces.IWorldService;
+import com.library.vectors.Vector2f;
 
-public class TowerFactory {
+class TowerFactory {
 
     private TowerFactory() {
     }
 
-    public static Tower build(TowerType key) {
+    static Tower build(TowerType key) {
         switch (key) {
             case LASER_TOWER:
                 return build(key,
