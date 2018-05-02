@@ -7,12 +7,14 @@
     <service>
         <provide interface="com.library.interfaces.Controller"/>
     </service>
-    
-    <reference bind="addWaveService" 
-               interface="com.wave.IWaveService"
-               name="WaveService" 
-               unbind="removeWaveService"/>
-    
+
+    <reference bind="setFactory"
+               cardinality="0..1"
+               interface="com.library.interfaces.IEntityFactory"
+               name="factories"
+               unbind="removeFactory"/>
+
+
     <reference bind="addWorld" 
                interface="com.library.interfaces.IWorldService"
                name="world" 

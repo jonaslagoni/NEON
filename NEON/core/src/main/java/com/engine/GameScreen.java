@@ -1,39 +1,36 @@
 package com.engine;
 
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.library.interfaces.Drawable;
-import static com.badlogic.gdx.math.MathUtils.radDeg;
 import com.library.Sprite;
-import com.library.interfaces.Controller;
-import com.library.interfaces.IAssetManager;
-import com.library.interfaces.IGameData;
-import com.library.interfaces.IWorldService;
-import com.library.interfaces.Plugin;
-import static com.library.vectors.VectorUtils.angle;
+import com.library.interfaces.*;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class GameScreen implements ApplicationListener {
+import static com.badlogic.gdx.math.MathUtils.radDeg;
+import static com.library.vectors.VectorUtils.angle;
+
+public class GameScreen implements ApplicationListener, IObserver {
 
     private final static OrthographicCamera CAMERA = new OrthographicCamera();
     public final static Viewport VIEWPORT = new ExtendViewport(IWorldService.WIDTH, IWorldService.HEIGHT, CAMERA);
     private final List<Controller> entityProcessorList = new CopyOnWriteArrayList<>();
     private final List<Plugin> gamePluginList = new CopyOnWriteArrayList<>();
+    private Map<String, Texture> textureMap = new HashMap<>();
     private IAssetManager assetManager;
     private IWorldService world;
     private IGameData gameData;
@@ -54,7 +51,7 @@ public class GameScreen implements ApplicationListener {
 
     private void drawEntity(Drawable drawable) {
         Sprite sprite = drawable.getSprite();
-        Texture texture = ((AssetManager) assetManager).getTexture(sprite.getTexture());
+        Texture texture = textureMap.get(sprite.getTexture());
         if (texture == null) {
             return;
         }
@@ -95,10 +92,10 @@ public class GameScreen implements ApplicationListener {
         batch.begin();
 
         /* Draw background */
-        batch.draw(((AssetManager) assetManager).getTexture("bg"), 0, 0, IWorldService.WIDTH, IWorldService.HEIGHT);
+        batch.draw(textureMap.get("bg"), 0, 0, IWorldService.WIDTH, IWorldService.HEIGHT);
 
         /* Draw all entities to screen*/
-        if(world != null)
+        if (world != null)
             world.getEntities(Drawable.class).forEach(this::drawEntity);
 
         batch.end();
@@ -188,7 +185,8 @@ public class GameScreen implements ApplicationListener {
                 return false;
             }
         });
-
+        assetManager.addObserver(this);
+        update();
     }
 
     public void setWorld(IWorldService world) {
@@ -232,5 +230,21 @@ public class GameScreen implements ApplicationListener {
     public void removeGamePluginService(Plugin plugin) {
         this.gamePluginList.remove(plugin);
         plugin.stop();
+    }
+
+    @Override
+    public void update() {
+        Map<String, Texture> newTextureMap = new HashMap<>();
+        assetManager.getTextures().forEach((name, bytes) -> {
+            if (textureMap.containsKey(name)) {
+                Texture texture = this.textureMap.get(name);
+                newTextureMap.put(name, texture);
+            } else {
+                Pixmap pixmap = new Pixmap(bytes, 0, bytes.length);
+                Texture texture = new Texture(pixmap);
+                newTextureMap.put(name, texture);
+            }
+        });
+        textureMap = newTextureMap;
     }
 }

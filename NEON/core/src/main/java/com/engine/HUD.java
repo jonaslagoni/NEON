@@ -21,28 +21,22 @@ import com.library.vectors.Vector2f;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HUD implements InputProcessor, Controller, IViewObserver {
+public class HUD implements InputProcessor, Controller, IObserver {
 
     private final BitmapFont font;
     private final Batch batch;
-
+    private final Map<IStatusText, Label> statusTexts = new HashMap<>();
     private Stage stage;
-
     private IPlaceable selectedPlacable;
     private Entity selectedTower;
-
     private Group placementGroup;
     private Group upgradeGroup;
     private VerticalGroup statsGroup;
-
     private IWorldService world;
     private IGameData gameData;
-
     private Table placementTable;
     private TextButton.TextButtonStyle buttonStyle;
     private Label.LabelStyle labelStyle;
-
-    private final Map<IStatusText, Label> statusTexts = new HashMap<>();
 
     HUD(Batch batch, BitmapFont font, IWorldService world, IGameData gameData) {
         this.gameData = gameData;
@@ -101,7 +95,7 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
 
         gameData.addObserver(this);
 
-        updateView();
+        update();
     }
 
     Stage getStage() {
@@ -184,9 +178,10 @@ public class HUD implements InputProcessor, Controller, IViewObserver {
     }
 
     @Override
-    public void updateView() {
+    public void update() {
 
         /* Create a label for each status text object */
+        statsGroup.clear();
         statusTexts.clear();
         for (IStatusText status : gameData.getStatusText()) {
             Label label = new Label(status.update(), labelStyle);

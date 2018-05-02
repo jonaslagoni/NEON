@@ -1,12 +1,8 @@
 package com.weapon;
 
-import com.library.interfaces.Controller;
-import com.library.interfaces.Drawable;
-import com.library.interfaces.ICollisionService;
-import com.library.interfaces.IProjectileService;
-import com.library.interfaces.IWorldService;
-import com.library.interfaces.Targetable;
+import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
+
 import static com.library.vectors.VectorUtils.distanceSquare;
 
 public class WeaponController implements Controller {
@@ -25,7 +21,7 @@ public class WeaponController implements Controller {
     }
 
     private void updateWeapon(Weapon weapon, float dt) {
-        
+
         weapon.fireCooldown += dt;
 
         if (weapon.fireCooldown < weapon.fireRate) {
@@ -51,27 +47,27 @@ public class WeaponController implements Controller {
         }
     }
 
-    public void setCollisionService(ICollisionService ics) {
-        this.collisionService = ics;
+    public void setCollisionService(ICollisionService collisionService) {
+        this.collisionService = collisionService;
     }
 
     public void removeCollisionService(ICollisionService collisionService) {
         this.collisionService = null;
     }
 
-    public void setProjectileService(IProjectileService ips) {
-        this.projectileService = ips;
+    public void setProjectileService(IProjectileService projectileService) {
+        this.projectileService = projectileService;
     }
 
-    public void removeProjectileService(ICollisionService collisionService) {
+    public void removeProjectileService(IProjectileService projectileService) {
         this.projectileService = null;
     }
 
-    public void setWorld(IWorldService world){
+    public void setWorld(IWorldService world) {
         this.world = world;
     }
-    
-    public void removeWorld(IWorldService world){
+
+    public void removeWorld(IWorldService world) {
         this.world = null;
     }
 

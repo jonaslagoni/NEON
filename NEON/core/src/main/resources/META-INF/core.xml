@@ -21,13 +21,15 @@
                unbind="removeGamePluginService"/>
 
     <reference bind="setWorld"
+               cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
                name="IWorldService"
                unbind="removeWorld"/>
 
     <reference bind="setAssetManager"
+               cardinality="0..1"
                interface="com.library.interfaces.IAssetManager"
-               name="assetService"
+               name="assetManager"
                unbind="removeAssetManager"/>
 
     <reference bind="setGameData"

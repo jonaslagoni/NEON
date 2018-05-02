@@ -5,25 +5,33 @@
  */
 package com.wave;
 
-import com.library.interfaces.Controller;
-import com.library.interfaces.Entity;
-import com.library.interfaces.IWorldService;
-import com.library.interfaces.Targetable;
+import com.library.interfaces.*;
+
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- *
  * @author emil
  */
 public class WaveController implements Controller {
 
-    private Queue<Targetable> wave;
     private final float WAVE_COOLDOWN = 20;
-
+    private Queue<Targetable> wave;
     private float waveCounter = 0;
     private float entityCooldown = 0;
-    private IWaveService waveService;
     private IWorldService world;
+
+    private int waveDifficulty = 512;
+
+    private IEntityFactory factory;
+
+    public void setFactory(IEntityFactory factory) {
+        this.factory = factory;
+    }
+
+    public void removeFactory(IEntityFactory factory) {
+        this.factory = null;
+    }
 
     @Override
     public void update(float dt) {
@@ -31,7 +39,7 @@ public class WaveController implements Controller {
         waveCounter += dt;
         /* Generate new Wave */
         if (waveCounter > WAVE_COOLDOWN) {
-            wave = waveService.createWave();
+            wave = createWave();
             waveCounter = 0;
         }
 
@@ -43,13 +51,6 @@ public class WaveController implements Controller {
         }
     }
 
-    public void addWaveService(IWaveService waveService) {
-        this.waveService = waveService;
-    }
-
-    public void removeWaveService(IWaveService waveService) {
-        this.waveService = null;
-    }
 
     public void addWorld(IWorldService world) {
         this.world = world;
@@ -57,5 +58,22 @@ public class WaveController implements Controller {
 
     public void removeWorld(IWorldService world) {
         this.world = null;
+    }
+
+    private Queue<Targetable> createWave() {
+
+        if (factory == null) {
+            return new LinkedList<>();
+        }
+
+        LinkedList<Targetable> enemyList = new LinkedList<>();
+
+        while (enemyList.stream().mapToInt(Targetable::getHp).sum() < waveDifficulty) {
+            Targetable targetable = factory.createEntity();
+            enemyList.add(targetable);
+        }
+
+        waveDifficulty *= 2;
+        return enemyList;
     }
 }

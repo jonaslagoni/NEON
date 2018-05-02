@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface IGameData {
 
-    void addObserver(IViewObserver observer);
+    void addObserver(IObserver observer);
 
     void addPlaceables(Collection<IPlaceable> placables);
 

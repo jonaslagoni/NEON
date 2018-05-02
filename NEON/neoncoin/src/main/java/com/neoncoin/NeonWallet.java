@@ -3,12 +3,11 @@ package com.neoncoin;
 import com.library.interfaces.IGameData;
 import com.library.interfaces.INeonService;
 import com.library.interfaces.IStatusText;
-import com.library.interfaces.Plugin;
 
 /**
  * Created by sam on 15-03-2018.
  */
-public class NeonWallet implements INeonService, Plugin {
+public class NeonWallet implements INeonService {
 
     private int neoncoins = 100;
     private IStatusText status = () -> "Coins: " + getCoins();
@@ -24,12 +23,10 @@ public class NeonWallet implements INeonService, Plugin {
         return false;
     }
 
-    @Override
     public void start() {
         gameData.addStatusText(status);
     }
 
-    @Override
     public void stop() {
         gameData.removeStatusText(status);
     }

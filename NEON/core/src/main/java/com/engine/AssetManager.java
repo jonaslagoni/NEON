@@ -5,31 +5,41 @@
  */
 package com.engine;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.library.interfaces.IAssetManager;
-import java.util.HashMap;
-import com.badlogic.gdx.graphics.Texture;
+import com.library.interfaces.IObserver;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- *
  * @author emil
  */
 public class AssetManager implements IAssetManager {
 
-    private final Map<String, Texture> assets = new HashMap<>();
-    
+    private final Map<String, byte[]> assets = new ConcurrentHashMap<>();
+    private List<IObserver> observers = new ArrayList<>();
+
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
     @Override
     public void unloadAsset(String name) {
         assets.remove(name);
+        observers.forEach(IObserver::update);
     }
 
-    public Texture getTexture(String name) {
+    public byte[] getTexture(String name) {
         return assets.get(name);
+    }
+
+    public Map<String, byte[]> getTextures() {
+        return assets;
     }
 
     @Override
@@ -37,11 +47,8 @@ public class AssetManager implements IAssetManager {
         try (DataInputStream dataStream = new DataInputStream(stream)) {
             byte[] bytes = new byte[dataStream.available()];
             dataStream.readFully(bytes);
-            Gdx.app.postRunnable(() -> {
-                Pixmap pixmap = new Pixmap(bytes, 0, bytes.length);
-                Texture texture = new Texture(pixmap);
-                assets.put(name, texture);
-            });
+            assets.put(name, bytes);
+            observers.forEach(IObserver::update);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

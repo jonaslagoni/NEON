@@ -9,7 +9,7 @@ package com.library.interfaces;
  *
  * @author emil
  */
-public interface IViewObserver {
+public interface IObserver {
 
-    void updateView();
+    void update();
 }

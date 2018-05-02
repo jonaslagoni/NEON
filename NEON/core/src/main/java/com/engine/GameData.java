@@ -1,19 +1,22 @@
 package com.engine;
 
-import com.library.interfaces.IStatusText;
 import com.library.interfaces.IGameData;
+import com.library.interfaces.IObserver;
 import com.library.interfaces.IPlaceable;
-import java.util.*;
-import com.library.interfaces.IViewObserver;
+import com.library.interfaces.IStatusText;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class GameData implements IGameData {
 
     private final List<IPlaceable> placeables = new ArrayList<>();
-    private final List<IViewObserver> observers = new ArrayList<>();
+    private final List<IObserver> observers = new ArrayList<>();
     private final List<IStatusText> statusTexts = new ArrayList<>();
 
     @Override
-    public void addObserver(IViewObserver observer) {
+    public void addObserver(IObserver observer) {
         observers.add(observer);
     }
 
@@ -25,13 +28,13 @@ public class GameData implements IGameData {
     @Override
     public void addStatusText(IStatusText text) {
         statusTexts.add(text);
-        observers.forEach(IViewObserver::updateView);
+        observers.forEach(IObserver::update);
     }
 
     @Override
     public void removeStatusText(IStatusText text) {
         statusTexts.remove(text);
-        observers.forEach(IViewObserver::updateView);
+        observers.forEach(IObserver::update);
     }
 
     @Override
@@ -42,12 +45,12 @@ public class GameData implements IGameData {
     @Override
     public void addPlaceables(Collection<IPlaceable> placables) {
         placeables.addAll(placables);
-        observers.forEach(IViewObserver::updateView);
+        observers.forEach(IObserver::update);
     }
 
     @Override
     public void removePlaceables(Collection<IPlaceable> placables) {
         placeables.removeAll(placables);
-        observers.forEach(IViewObserver::updateView);
+        observers.forEach(IObserver::update);
     }
 }

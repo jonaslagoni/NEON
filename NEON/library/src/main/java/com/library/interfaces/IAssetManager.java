@@ -6,9 +6,9 @@
 package com.library.interfaces;
 
 import java.io.InputStream;
+import java.util.Map;
 
 /**
- *
  * @author emil
  */
 public interface IAssetManager {
@@ -16,5 +16,11 @@ public interface IAssetManager {
     void loadAsset(String name, InputStream stream);
 
     void unloadAsset(String name);
+
+    byte[] getTexture(String name);
+
+    Map<String, byte[]> getTextures();
+
+    void addObserver(IObserver observer);
 
 }

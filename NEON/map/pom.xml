@@ -7,7 +7,6 @@
         <version>0.1</version>
     </parent>
 
-    <groupId>com</groupId>
     <artifactId>map</artifactId>
     <version>0.1</version>
     <packaging>bundle</packaging>
@@ -22,7 +21,7 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
-            <version>4.3.0</version>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

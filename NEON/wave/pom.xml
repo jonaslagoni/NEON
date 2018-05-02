@@ -25,6 +25,7 @@
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
             <version>6.0.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -40,10 +41,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Service-Component>
-                            META-INF/WaveService.xml,
-                            META-INF/WaveController.xml
-                        </Service-Component>                    
+                        <Service-Component>META-INF/WaveController.xml</Service-Component>
                     </instructions>
                 </configuration>
             </plugin>
