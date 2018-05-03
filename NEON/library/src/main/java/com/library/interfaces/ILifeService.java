@@ -14,6 +14,4 @@ public interface ILifeService  {
 
     int getLife();
 
-    void setLife();
-
 }
