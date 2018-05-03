@@ -5,6 +5,9 @@ import com.library.ShotType;
 import com.library.interfaces.WeaponEntity;
 import com.library.vectors.Vector2f;
 
+/**
+ * An entity class that can shoot projectiles
+ */
 public class Weapon implements WeaponEntity {
 
     float fireCooldown;
@@ -15,6 +18,12 @@ public class Weapon implements WeaponEntity {
     Vector2f position;
     float damage;
 
+    /**
+     * @param range    the weapon will shoot at all target within this range
+     * @param position the weapons current position in the game
+     * @param shotType the type of shot to shoot with
+     * @param damage   how much damage the shots should apply
+     */
     public Weapon(float range, Vector2f position, ShotType shotType, float damage) {
         this.range = range;
         this.position = position;
@@ -22,7 +31,12 @@ public class Weapon implements WeaponEntity {
         this.damage = damage;
     }
 
-    public ShotType getShotType() {
+    /**
+     * Get the type of shot
+     *
+     * @return type of shot
+     */
+    ShotType getShotType() {
         return shotType;
     }
 

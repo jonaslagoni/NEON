@@ -5,6 +5,9 @@ import com.library.vectors.Vector2f;
 
 import static com.library.vectors.VectorUtils.distanceSquare;
 
+/**
+ * Handles updates of weapon entities, this is mainly selecting targets and firing projectiles.
+ */
 public class WeaponController implements Controller {
 
     private IWorldService world;

@@ -13,6 +13,8 @@ import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+ * Spawns enemies at an interval
+ *
  * @author emil
  */
 public class WaveController implements Controller {
@@ -64,11 +66,17 @@ public class WaveController implements Controller {
         return enemyList;
     }
 
+    /**
+     * Apply needed resources to other components
+     */
     public void start() {
         gameData.addStatusText(countStatus);
         gameData.addStatusText(cooldownStatus);
     }
 
+    /**
+     * Clean up before stopping component
+     */
     public void stop() {
         gameData.removeStatusText(countStatus);
         gameData.removeStatusText(cooldownStatus);
