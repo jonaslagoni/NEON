@@ -32,9 +32,6 @@ public class Life implements ILifeService {
         return life;
     }
 
-    @Override
-    public void setLife() {
-    }
 
     public void start() {
         gameData.addStatusText(status);
