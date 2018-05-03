@@ -33,6 +33,11 @@ public class Node {
         this.vector = new Vector2i(x, y);
     }
 
+    /**
+     * 
+     * @param node
+     * @return 
+     */
     public LinkedList<Vector2f> reconstructPath(Node node) {
         Node current = node;
         LinkedList<Vector2f> path

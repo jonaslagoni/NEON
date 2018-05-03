@@ -50,6 +50,12 @@ public class GameScreen implements ApplicationListener, IObserver {
         new LwjglApplication(this, config);
     }
 
+    /**
+     * Draws an entity, if that entity has a texture attached to it.
+     * <p>
+     * if the entity does not have a texture, nothing will be drawn.
+     * @param drawable Drawable entity
+     */
     private void drawEntity(Drawable drawable) {
         Sprite sprite = drawable.getSprite();
         Texture texture = textureMap.get(sprite.getTexture());
