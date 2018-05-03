@@ -225,7 +225,6 @@ public class GameScreen implements ApplicationListener, IObserver {
     public void addGamePluginService(Plugin plugin) {
         this.gamePluginList.add(plugin);
         plugin.start();
-
     }
 
     public void removeGamePluginService(Plugin plugin) {
@@ -241,9 +240,11 @@ public class GameScreen implements ApplicationListener, IObserver {
                 Texture texture = this.textureMap.get(name);
                 newTextureMap.put(name, texture);
             } else {
-                Pixmap pixmap = new Pixmap(bytes, 0, bytes.length);
-                Texture texture = new Texture(pixmap);
-                newTextureMap.put(name, texture);
+                Gdx.app.postRunnable(() -> {
+                    Pixmap pixmap = new Pixmap(bytes, 0, bytes.length);
+                    Texture texture = new Texture(pixmap);
+                    newTextureMap.put(name, texture);
+                });
             }
         });
         textureMap = newTextureMap;

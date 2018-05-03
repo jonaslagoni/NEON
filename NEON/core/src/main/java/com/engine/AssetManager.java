@@ -27,6 +27,7 @@ public class AssetManager implements IAssetManager {
     private final Map<String, byte[]> assets = new ConcurrentHashMap<>();
     private final List<IObserver> observers = new ArrayList<>();
 
+    @Override
     public void addObserver(IObserver observer) {
         observers.add(observer);
     }
@@ -37,10 +38,12 @@ public class AssetManager implements IAssetManager {
         observers.forEach(IObserver::update);
     }
 
+    @Override
     public byte[] getTexture(String name) {
         return assets.get(name);
     }
 
+    @Override
     public Map<String, byte[]> getTextures() {
         return assets;
     }

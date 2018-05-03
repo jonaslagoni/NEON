@@ -5,15 +5,15 @@
  */
 package com.enemy;
 
-import com.library.interfaces.Controller;
-import com.library.interfaces.ILifeService;
-import com.library.interfaces.INeonService;
-import com.library.interfaces.IPathFindingService;
+import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
+
+import java.util.Collections;
+import java.util.LinkedList;
+
 import static com.library.vectors.VectorUtils.distance;
 import static com.library.vectors.VectorUtils.translateVelocity;
-import com.library.interfaces.IWorldService;
 
 public class EnemyController implements Controller {
 
@@ -72,8 +72,13 @@ public class EnemyController implements Controller {
         }
         /* Generate path if it doesn't have one */
         if (enemy.path == null) {
-            enemy.path = pathFindingService.findPath(start, end);
+            if (pathFindingService != null) {
+                enemy.path = pathFindingService.findPath(start, end);
+            } else {
+                enemy.path = new LinkedList<>(Collections.singletonList(new Vector2f(IWorldService.WIDTH / 2, 0)));
+            }
         }
+
         /* Move to next step in the path if it has reached the step */
         if (!enemy.path.isEmpty() && distance(position, enemy.path.element()) < 6) {
             enemy.path.remove();

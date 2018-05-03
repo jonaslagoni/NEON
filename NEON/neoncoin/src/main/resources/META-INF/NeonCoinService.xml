@@ -8,7 +8,6 @@
 
     <service>
         <provide interface="com.library.interfaces.INeonService"/>
-        <provide interface="com.library.interfaces.Plugin"/>
     </service>
 
     <reference bind="setGameData"

@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
-               name="com.enemy.EnemyController">
-    
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.enemy.EnemyController"
+               immediate="true">
+
     <implementation class="com.enemy.EnemyController"/>
-    
+
     <service>
         <provide interface="com.library.interfaces.Controller"/>
     </service>
-    
-    <reference bind="setWallet" 
+
+    <reference bind="setWallet"
+               cardinality="0..1"
+               policy="dynamic"
                interface="com.library.interfaces.INeonService"
-               name="wallet" 
+               name="wallet"
                unbind="removeWallet"/>
-    
-    <reference bind="setLifeService" 
+
+    <reference bind="setLifeService"
+               cardinality="0..1"
+               policy="dynamic"
                interface="com.library.interfaces.ILifeService"
-               name="lifeService" 
+               name="lifeService"
                unbind="removeLifeService"/>
-    
-    <reference bind="setPathFindingService" 
+
+    <reference bind="setPathFindingService"
+               cardinality="0..1"
                interface="com.library.interfaces.IPathFindingService"
-               name="pathfindingService" 
+               name="pathfindingService"
+               policy="dynamic"
                unbind="removePathFindingService"/>
-    
-    <reference bind="setWorld" 
+
+    <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" 
+               name="worldService"
                unbind="removeWorld"/>
-    
+
 </scr:component>
