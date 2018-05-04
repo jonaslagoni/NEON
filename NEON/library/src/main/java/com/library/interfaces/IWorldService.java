@@ -7,6 +7,7 @@ package com.library.interfaces;
 
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
+
 import java.util.List;
 
 /**
@@ -43,14 +44,12 @@ public interface IWorldService {
 
     void removeEntity(Entity player);
 
-    boolean setGridCell(Vector2f position, Drawable entity);
+    void setGridCell(Vector2f position, Drawable entity);
 
     boolean isValidPosition(Vector2f position);
 
     Entity getGridCell(Vector2f position);
 
     boolean blocked(int x, int y);
-
-    int getNumberOfTowers();
 
 }

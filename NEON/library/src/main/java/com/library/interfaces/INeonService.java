@@ -11,5 +11,4 @@ public interface INeonService  {
 
     int getCoins();
 
-    void setCoins(int i);
 }

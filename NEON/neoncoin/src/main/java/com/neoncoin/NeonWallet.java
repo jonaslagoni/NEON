@@ -41,11 +41,6 @@ public class NeonWallet implements INeonService {
         return neoncoins;
     }
 
-    @Override
-    public void setCoins(int i) {
-        neoncoins = i;
-    }
-
     public void setGameData(IGameData gameData) {
         this.gameData = gameData;
     }

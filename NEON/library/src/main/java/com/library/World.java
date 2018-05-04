@@ -6,7 +6,10 @@ import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -15,8 +18,6 @@ public class World implements IWorldService {
     private final List<Entity> entities = new ArrayList<>();
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
-    private int numberOfTowers = 0;
-    
 
     @Override
     public void addEntity(Entity entity) {
@@ -48,17 +49,15 @@ public class World implements IWorldService {
     }
 
     @Override
-    public boolean setGridCell(Vector2f position, Drawable entity) {
+    public void setGridCell(Vector2f position, Drawable entity) {
         Vector2i v = IWorldService.gridProject(position);
         if (grid[v.x][v.y] != null || entity == null) {
-            return false;
+            return;
         }
         grid[v.x][v.y] = entity;
         addEntity(entity);
         Vector2f v1 = IWorldService.gridUnproject(v);
         entity.getSprite().setPosition(v1);
-        numberOfTowers++;
-        return true;
     }
 
     @Override
@@ -90,7 +89,6 @@ public class World implements IWorldService {
     }
 
     private void removeGridCell(int x, int y) {
-        numberOfTowers--;
         removeEntity(grid[x][y]);
         grid[x][y] = null;
     }
@@ -98,69 +96,5 @@ public class World implements IWorldService {
     @Override
     public boolean blocked(int x, int y) {
         return x >= GRID_SPACES || y >= GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
-    }
-
-    /**
-     * @return the numberOfTowers
-     */
-    @Override
-    public int getNumberOfTowers() {
-        return numberOfTowers;
-    }
-
-    /**
-     * @return the WIDTH
-     */
-    public int getWIDTH() {
-        return WIDTH;
-    }
-
-    /**
-     * @return the HEIGHT
-     */
-    public int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    /**
-     * @return the MAX_WIDTH
-     */
-    public int getMAX_WIDTH() {
-        return MAX_WIDTH;
-    }
-
-    /**
-     * @return the MAX_HEIGHT
-     */
-    public int getMAX_HEIGHT() {
-        return MAX_HEIGHT;
-    }
-
-    /**
-     * @return the GRID_SPACES
-     */
-    public int getGRID_SPACES() {
-        return GRID_SPACES;
-    }
-
-    /**
-     * @return the GRID_CELL_SIZE
-     */
-    public int getGRID_CELL_SIZE() {
-        return GRID_CELL_SIZE;
-    }
-
-    /**
-     * @return the START
-     */
-    public Vector2f getSTART() {
-        return START;
-    }
-
-    /**
-     * @return the END
-     */
-    public Vector2f getEND() {
-        return END;
     }
 }

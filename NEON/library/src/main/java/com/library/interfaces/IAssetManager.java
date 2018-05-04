@@ -17,8 +17,6 @@ public interface IAssetManager {
 
     void unloadAsset(String name);
 
-    byte[] getTexture(String name);
-
     Map<String, byte[]> getTextures();
 
     void addObserver(IObserver observer);

@@ -39,11 +39,6 @@ public class AssetManager implements IAssetManager {
     }
 
     @Override
-    public byte[] getTexture(String name) {
-        return assets.get(name);
-    }
-
-    @Override
     public Map<String, byte[]> getTextures() {
         return assets;
     }
