@@ -13,9 +13,20 @@ import java.util.List;
  * @author Daniel
  */
 public interface ICollisionService {
-
+    
+    /**
+     * NO USAGE?
+     * @param sprite
+     * @return 
+     */
     List<Drawable> getCollisions(Sprite sprite);
 
+    /**
+     * NO USAGE?
+     * @param position
+     * @param range
+     * @return 
+     */
     List<Drawable> getCollisions(Vector2f position, float range);
 
 }

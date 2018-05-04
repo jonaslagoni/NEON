@@ -18,7 +18,14 @@ public class World implements IWorldService {
     private final List<Entity> entities = new ArrayList<>();
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
-
+    private int numberOfTowers = 0;
+    
+    /**
+     * Adds entities to a list
+     * If there is already a list of entities, and entity to the existing list
+     * Else add entity to a new list
+     * @param entity is an object like a tower or player
+     */
     @Override
     public void addEntity(Entity entity) {
         cache.clear();
@@ -30,7 +37,13 @@ public class World implements IWorldService {
             entities.add(entity);
         }
     }
-
+    
+    /**
+     * ?????????
+     * @param <E>
+     * @param type
+     * @return 
+     */
     @SuppressWarnings("unchecked")
     @Override
     public final <E extends Entity> List<E> getEntities(final Class<E> type) {
@@ -41,13 +54,26 @@ public class World implements IWorldService {
         cache.put(type, result);
         return result;
     }
-
+    
+    /**
+     * Removes player from entity list
+     * @param player object
+     */
     @Override
     public void removeEntity(Entity player) {
         cache.clear();
         entities.remove(player);
     }
 
+    /**
+     * Sets an entity (tower) into the map
+     * If it is a empty gridcell and there is choosen an entity (tower),
+     * add the entity with sprite into the map in the empty gridcell
+     * incement number of towers and return true
+     * @param position is a gridcell
+     * @param entity is a tower object
+     * @return boolean
+     */
     @Override
     public void setGridCell(Vector2f position, Drawable entity) {
         Vector2i v = IWorldService.gridProject(position);
@@ -88,11 +114,22 @@ public class World implements IWorldService {
         return new Vector2i(v.x < 0 ? 0 : v.x, v.y < 0 ? 0 : v.y);
     }
 
+    /**
+     * Removes an entity (tower) and sets the gridcell empty
+     * @param x coordinate
+     * @param y coordinate
+     */
     private void removeGridCell(int x, int y) {
         removeEntity(grid[x][y]);
         grid[x][y] = null;
     }
 
+    /**
+     * NO USAGE
+     * @param x
+     * @param y
+     * @return 
+     */
     @Override
     public boolean blocked(int x, int y) {
         return x >= GRID_SPACES || y >= GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;

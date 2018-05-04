@@ -13,8 +13,18 @@ import java.util.Map;
  */
 public interface IAssetManager {
 
+    /**
+     * Load asset by name from the asset folder containing pictures
+     * of each asset
+     * @param name of the asset
+     * @param stream datainputstream
+     */
     void loadAsset(String name, InputStream stream);
 
+    /**
+     * Unload asset when the games stops
+     * @param name of the asset
+     */
     void unloadAsset(String name);
 
     Map<String, byte[]> getTextures();

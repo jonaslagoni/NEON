@@ -10,8 +10,22 @@ package com.library.interfaces;
  */
 public interface ILifeService  {
 
+    /**
+     * NO USAGE?
+     * @param i
+     * @return 
+     */
     int subtractLife(int i);
 
+    /**
+     * NO USAGE?
+     * @return 
+     */
     int getLife();
+    
+    /**
+     * NO USAGE?
+     */
+    void setLife();
 
 }

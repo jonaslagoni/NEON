@@ -7,6 +7,7 @@ package com.library.interfaces;
 
 /**
  * @author Mathias
+ * Bliver denne brugt?
  */
 public interface DamageAble {
 

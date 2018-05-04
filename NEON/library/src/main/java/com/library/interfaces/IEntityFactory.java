@@ -9,7 +9,10 @@ package com.library.interfaces;
  * @author emil
  */
 public interface IEntityFactory {
-
+    /**
+     * NO USAGE?
+     * @return 
+     */
     Targetable createEntity();
 
 }
