@@ -54,6 +54,16 @@ public class EnemyController implements Controller {
         this.world = null;
     }
 
+    /**
+     * Updates the enemy since last frame.
+     * <p>
+     * Sets the path, if the enemy does not have one.
+     * <p>
+     * Checks whether end point, or hp has reached 0, and removes the entity if
+     * it has.
+     * @param enemy Enemy entity to be updated
+     * @param dt time in ms since last frame
+     */
     private void updateEnemy(final Enemy enemy, float dt) {
 
         enemy.damageTimer += dt;

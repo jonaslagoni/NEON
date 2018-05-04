@@ -20,8 +20,13 @@ public class MoveController implements Controller {
         this.world = null;
     }
 
+    /**
+     * Updates the vector2f of an entity, changing the speed and direction, and
+     * sets the new position.
+     * @param moveable Moveable entity to be moved
+     * @param dt time since last frame
+     */
     private void moveEntity(Moveable moveable, float dt) {
-        /* Move */
         MoveAbility moveAbility = moveable.getMoveAbility();
         Sprite sprite = moveable.getSprite();
 

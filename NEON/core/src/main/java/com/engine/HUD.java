@@ -38,14 +38,17 @@ public class HUD implements InputProcessor, Controller, IObserver {
     private TextButton.TextButtonStyle buttonStyle;
     private Label.LabelStyle labelStyle;
 
-    HUD(Batch batch, BitmapFont font, IWorldService world, IGameData gameData) {
+    public HUD(Batch batch, BitmapFont font, IWorldService world, IGameData gameData) {
         this.gameData = gameData;
         this.world = world;
         this.font = font;
         this.batch = batch;
     }
 
-    void start() {
+    /**
+     * Adds visual elements to the game screen HUD
+     */
+    public void start() {
         this.stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), batch);
 
         Table table = new Table();
