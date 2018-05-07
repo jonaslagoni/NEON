@@ -6,12 +6,12 @@ import com.library.interfaces.IPathFindingService;
 import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
-import com.sun.prism.Texture;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 import static java.util.stream.Collectors.toList;
 
@@ -135,14 +135,6 @@ public class World implements IWorldService {
     @Override
     public boolean blocked(int x, int y) {
         return x >= GRID_SPACES || y >= GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
-    }
-
-    /**
-     * @return the numberOfTowers
-     */
-    @Override
-    public int getNumberOfTowers() {
-        return numberOfTowers;
     }
 
     /**

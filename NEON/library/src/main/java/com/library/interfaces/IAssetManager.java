@@ -27,13 +27,6 @@ public interface IAssetManager {
     public void unloadAsset(String name);
 
     /**
-     * Returns a byte array containing bit representation of texture
-     * @param name
-     * @return byte array 
-     */
-    byte[] getTexture(String name);
-
-    /**
      * Returns the hashmap containing all textures
      * @return map
      */
