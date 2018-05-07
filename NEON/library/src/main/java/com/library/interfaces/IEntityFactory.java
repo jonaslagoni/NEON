@@ -10,8 +10,8 @@ package com.library.interfaces;
  */
 public interface IEntityFactory {
     /**
-     * NO USAGE?
-     * @return 
+     * Creates a targeable entity
+     * @returns a targeable entity
      */
     Targetable createEntity();
 

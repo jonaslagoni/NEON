@@ -38,18 +38,54 @@ public interface IWorldService {
         return new Vector2f(v.x * GRID_CELL_SIZE + GRID_CELL_SIZE / 2, v.y * GRID_CELL_SIZE + GRID_CELL_SIZE / 2);
     }
 
+    /**
+     * Add entities to a list
+     * @param entity
+     */
     void addEntity(Entity entity);
 
+    /**
+     * Returns a list of type E extending entities
+     * @param <E> generic type of entity
+     * @param type class of wanted entities
+     * @return entities 
+     */
     <E extends Entity> List<E> getEntities(final Class<E> type);
 
+    /**
+     * Remove entity from entity list
+     * @param player the entity to be removed
+     */
     void removeEntity(Entity player);
 
-    void setGridCell(Vector2f position, Drawable entity);
-
+    /**
+     * Sets a drawable entity into the map at the vectors x and y
+     * @param position is a gridcell
+     * @param entity is a drawable entity
+     * @return if successful
+     */
+    boolean setGridCell(Vector2f position, Drawable entity);
+    
+    /**
+     * Returns true if position is valid
+     * @param position x and y
+     * @return true if valid and false if invalid
+     */
     boolean isValidPosition(Vector2f position);
 
+    /**
+     * Returns entity on the given position
+     * @param position at the entity
+     * @return entity or null
+     */
     Entity getGridCell(Vector2f position);
 
+    /**
+     * Checks if a coordinate is blocked by an entity or out of bounds
+     * @param x coodinate
+     * @param y coordinate
+     * @return true if invalid
+     */
     boolean blocked(int x, int y);
 
 }

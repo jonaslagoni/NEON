@@ -12,8 +12,16 @@ import com.library.vectors.Vector2f;
  * @author emil
  */
 public interface IPlaceable {
-
+    
+    /**
+     * Returns the title
+     * @return string
+     */
     String getTitle();
 
+    /**
+     * Places a tower at the position
+     * @param pos vector
+     */
     void place(Vector2f pos);
 }

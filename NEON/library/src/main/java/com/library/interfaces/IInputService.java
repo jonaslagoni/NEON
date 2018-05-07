@@ -14,14 +14,14 @@ import com.library.vectors.Vector2f;
 public interface IInputService {
 
     /**
-     * Checks if "something?" is clicked in the gamescreen
-     * @return true if clicked
+     * Checks if the mouse is clicked
+     * @returns true if clicked
      */
     boolean isClicked();
 
     /**
      * Gets the coordinates on a vector
-     * @return a new vector object with coordinates
+     * @returns a new vector with coordinates
      */
     Vector2f getCords();
 }

@@ -5,12 +5,12 @@
  */
 package com.library.interfaces;
 
-/**
- * @author Mathias
- * Bliver denne brugt?
- */
 public interface DamageAble {
-
+    
+    /**
+     * Gives the entity damage
+     * @param damage amount of damage
+     */
     void damage(float damage);
 
 }

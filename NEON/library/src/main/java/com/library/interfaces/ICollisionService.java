@@ -15,17 +15,17 @@ import java.util.List;
 public interface ICollisionService {
     
     /**
-     * NO USAGE?
-     * @param sprite
-     * @return 
+     * Returns a list of drawables which collide with a given sprite 
+     * @param sprite 
+     * @return list of collisions
      */
     List<Drawable> getCollisions(Sprite sprite);
 
     /**
-     * NO USAGE?
-     * @param position
-     * @param range
-     * @return 
+     * Returns a list of drawables which collides with a given position and range
+     * @param position at the sprite
+     * @param range of the sprite
+     * @return a list of collisions
      */
     List<Drawable> getCollisions(Vector2f position, float range);
 

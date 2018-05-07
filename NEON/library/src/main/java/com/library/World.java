@@ -2,9 +2,11 @@ package com.library;
 
 import com.library.interfaces.Drawable;
 import com.library.interfaces.Entity;
+import com.library.interfaces.IPathFindingService;
 import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
+import com.sun.prism.Texture;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +21,7 @@ public class World implements IWorldService {
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
     private int numberOfTowers = 0;
+    private IPathFindingService pathFinder;
     
     /**
      * Adds entities to a list
@@ -46,7 +49,7 @@ public class World implements IWorldService {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public final <E extends Entity> List<E> getEntities(final Class<E> type) {
+    public  <E extends Entity> List<E> getEntities(final Class<E> type) {
         if (cache.containsKey(type)) {
             return (List<E>) cache.get(type);
         }
@@ -75,31 +78,35 @@ public class World implements IWorldService {
      * @return boolean
      */
     @Override
-    public void setGridCell(Vector2f position, Drawable entity) {
+    public boolean setGridCell(Vector2f position, Drawable entity) {
         Vector2i v = IWorldService.gridProject(position);
         if (grid[v.x][v.y] != null || entity == null) {
-            return;
+            return false;
         }
         grid[v.x][v.y] = entity;
         addEntity(entity);
         Vector2f v1 = IWorldService.gridUnproject(v);
         entity.getSprite().setPosition(v1);
+        numberOfTowers++;
+        return true;
     }
 
     @Override
     public boolean isValidPosition(Vector2f position) {
-//        boolean b = setGridCell(position, () -> new Sprite(
-//                new Texture(Gdx.files.internal("images/laser-tower.png")),
-//                new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
-//                new Vector2f(0, 200),
-//                GRID_CELL_SIZE,
-//                GRID_CELL_SIZE
-//        ));
-//        if (!b) return false;
-//        Queue<Vector2f> path = new PathFinder(this).findPath(getPositionGridCell(START), getPositionGridCell(END));
-//        Vector2i v = gridProject(position);
-//        removeGridCell(v.x, v.y);
-//        return path.size() > 0;
+        if(pathFinder != null){
+            boolean b = setGridCell(position, () -> new Sprite(
+                "",
+                new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
+                new Vector2f(0, 200),
+                GRID_CELL_SIZE,
+                GRID_CELL_SIZE
+        ));
+        if (!b) return false;
+        Queue<Vector2f> path = pathFinder.findPath(getPositionGridCell(START), getPositionGridCell(END));
+        Vector2i v = IWorldService.gridProject(position);
+        removeGridCell(v.x, v.y);
+        return path.size() > 0;
+        }
         return true;
     }
 
@@ -120,18 +127,85 @@ public class World implements IWorldService {
      * @param y coordinate
      */
     private void removeGridCell(int x, int y) {
+        numberOfTowers--;
         removeEntity(grid[x][y]);
         grid[x][y] = null;
     }
 
-    /**
-     * NO USAGE
-     * @param x
-     * @param y
-     * @return 
-     */
     @Override
     public boolean blocked(int x, int y) {
         return x >= GRID_SPACES || y >= GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
+    }
+
+    /**
+     * @return the numberOfTowers
+     */
+    @Override
+    public int getNumberOfTowers() {
+        return numberOfTowers;
+    }
+
+    /**
+     * @return the WIDTH
+     */
+    public int getWIDTH() {
+        return WIDTH;
+    }
+
+    /**
+     * @return the HEIGHT
+     */
+    public int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    /**
+     * @return the MAX_WIDTH
+     */
+    public int getMAX_WIDTH() {
+        return MAX_WIDTH;
+    }
+
+    /**
+     * @return the MAX_HEIGHT
+     */
+    public int getMAX_HEIGHT() {
+        return MAX_HEIGHT;
+    }
+
+    /**
+     * @return the GRID_SPACES
+     */
+    public int getGRID_SPACES() {
+        return GRID_SPACES;
+    }
+
+    /**
+     * @return the GRID_CELL_SIZE
+     */
+    public int getGRID_CELL_SIZE() {
+        return GRID_CELL_SIZE;
+    }
+
+    /**
+     * @return the START
+     */
+    public Vector2f getSTART() {
+        return START;
+    }
+
+    /**
+     * @return the END
+     */
+    public Vector2f getEND() {
+        return END;
+    }
+    
+    public void removePathFinder() {
+        pathFinder = null;
+    }
+
+    public void setPathFinder(IPathFindingService pathFinder) {
+        this.pathFinder = pathFinder;
     }
 }

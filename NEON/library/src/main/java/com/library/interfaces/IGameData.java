@@ -15,44 +15,44 @@ import java.util.List;
 public interface IGameData {
 
     /**
-     * ???
+     * Add observers
      * @param observer 
      */
-    void addObserver(IViewObserver observer);
+    void addObserver(IObserver observer);
 
     /**
-     * ???
-     * @param placables 
+     * Add a collection of placeables
+     * @param placables collection
      */
     void addPlaceables(Collection<IPlaceable> placables);
     
     /**
-     * 
-     * @param placables 
+     * Removes a collection of placeables
+     * @param placables collection
      */
     void removePlaceables(Collection<IPlaceable> placables);
 
     /**
-     * ???
-     * @return 
+     * Returns a list of placeables
+     * @return list
      */
     List<IPlaceable> getPlaceables();
 
     /**
-     * ???
+     * Add IStatusText
      * @param text 
      */
     void addStatusText(IStatusText text);
 
     /**
-     * 
+     * Remove IStatusText
      * @param text 
      */
     void removeStatusText(IStatusText text);
 
     /**
-     * 
-     * @return 
+     * Returns a list of IStatusText
+     * @return list
      */
     List<IStatusText> getStatusText();
 

@@ -13,7 +13,7 @@ import java.util.Queue;
 /**
  * Created by sam on 02-03-2018.
  */
-public class Enemy implements Moveable, Drawable, Targetable, DamageAble {
+public class Enemy implements Moveable, Targetable, DamageAble {
 
     MoveAbility moveAbility;
     Sprite sprite;
