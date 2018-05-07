@@ -41,7 +41,6 @@ public class GameScreen implements ApplicationListener, IObserver {
 
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void init() {
-
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 //        config.setFromDisplayMode(LwjglApplicationConfiguration.getDesktopDisplayMode());
         config.height = 768;

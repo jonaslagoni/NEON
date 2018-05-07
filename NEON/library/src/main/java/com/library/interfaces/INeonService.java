@@ -3,7 +3,7 @@ package com.library.interfaces;
 /**
  * Created by sam on 15-03-2018.
  */
-public interface INeonService  {
+public interface INeonService {
 
     boolean subtractCoins(int i);
 

@@ -7,13 +7,13 @@
     <version>0.1</version>
     <packaging>pom</packaging>
     <name>NEON-parent</name>
-    <repositories>
-        <repository>
-            <id>netbeans</id>
-            <name>NetBeans</name>
-            <url>http://bits.netbeans.org/nexus/content/groups/netbeans/</url>
-        </repository>
-    </repositories>
+    <!--    <repositories>
+            <repository>
+                <id>netbeans</id>
+                <name>NetBeans</name>
+                <url>http://bits.netbeans.org/nexus/content/groups/netbeans/</url>
+            </repository>
+        </repositories>-->
     <build>
         <pluginManagement>
             <plugins>
@@ -48,11 +48,8 @@
         </pluginManagement>
     </build>
     <modules>
-        <module>application</module>
         <module>library</module>
-        <module>updater</module>
         <module>libgdx</module>
-        <module>extender</module>
         <module>core</module>
         <module>move</module>
         <module>player</module>

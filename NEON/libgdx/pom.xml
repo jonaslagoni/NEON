@@ -4,23 +4,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>neon-parent</artifactId>
         <groupId>com</groupId>
         <version>0.1</version>
     </parent>
-
     <artifactId>libgdx</artifactId>
     <version>0.1</version>
     <packaging>bundle</packaging>
     <name>LibGDX OSGi Bundles</name>
-
     <properties>
         <libGDX.version>1.9.6</libGDX.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -64,7 +60,6 @@
             <artifactId>gdx-box2d-platform</artifactId>
             <classifier>natives-desktop</classifier>
             <version>${libGDX.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
@@ -75,18 +70,8 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-jnigen</artifactId>
-            <version>1.9.6</version>
+            <version>${libGDX.version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.diffplug.osgi</groupId>-->
-        <!--<artifactId>com.diffplug.osgi.extension.sun.misc</artifactId>-->
-        <!--<version>0.0.0</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.diffplug.osgi</groupId>-->
-        <!--<artifactId>com.diffplug.osgi.extension.sun.reflect</artifactId>-->
-        <!--<version>0.0.0</version>-->
-        <!--</dependency>-->
     </dependencies>
     <build>
         <plugins>
@@ -98,7 +83,7 @@
                     <instructions>
                         <Export-Package>com.badlogic.gdx.*</Export-Package>
                         <Import-Package>!com.apple.eio,!com.sun.*,!org.objectweb.*,!com.badlogic.*,*</Import-Package>
-                        <Embed-Dependency>!org.osgi.*,!com.diffplug.osgi.*,*</Embed-Dependency>
+                        <Embed-Dependency>!org.osgi.*,*</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Bundle-NativeCode> 
                             libgdx-box2d.dylib;libgdx-box2d64.dylib;

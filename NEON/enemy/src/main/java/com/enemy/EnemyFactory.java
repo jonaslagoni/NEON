@@ -68,20 +68,12 @@ public class EnemyFactory implements IEntityFactory {
                                 "star4", "star5", "star6");
                     case 1:
                         return build(REGULAR_SIZE, 11250, TIER3_VALUE,
-                                "images/Enemies/Tier3/Cross/1.png",
-                                "images/Enemies/Tier3/Cross/2.png",
-                                "images/Enemies/Tier3/Cross/3.png",
-                                "images/Enemies/Tier3/Cross/4.png",
-                                "images/Enemies/Tier3/Cross/5.png",
-                                "images/Enemies/Tier3/Cross/6.png");
+                                "cross1", "cross2", "cross3",
+                                "cross4", "cross5", "cross6");
                     case 2:
                         return build(REGULAR_SIZE, 12500, TIER3_VALUE,
-                                "images/Enemies/Tier3/Fidget/1.png",
-                                "images/Enemies/Tier3/Fidget/2.png",
-                                "images/Enemies/Tier3/Fidget/3.png",
-                                "images/Enemies/Tier3/Fidget/4.png",
-                                "images/Enemies/Tier3/Fidget/5.png",
-                                "images/Enemies/Tier3/Fidget/6.png");
+                                "fidget1", "fidget2", "fidget3",
+                                "fidget4", "fidget5", "fidget6");
                 }
             case "boss":
                 switch (type) {
