@@ -21,17 +21,8 @@ public class Life implements ILifeService {
     @Override
     public int subtractLife(int i) {
         life -= i;
-//        if (life <= 0) {
-//            gameData.endGame();
-//        }
         return life;
     }
-
-    @Override
-    public int getLife() {
-        return life;
-    }
-
 
     public void start() {
         gameData.addStatusText(status);

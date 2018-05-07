@@ -7,27 +7,60 @@ public final class VectorUtils {
 
     private VectorUtils() {
     }
-
+    
+    /**
+     * NO USAGE
+     * Calculates the angle for vector a on vector b in radians between 0 and PI
+     * @param a first vector
+     * @param b second vector
+     * @return angle in decimal
+     */
+    
     public static float angle(Vector2f a, Vector2f b) {
         return (float) atan2(a.y - b.y, a.x - b.x);
     }
 
+    /**
+     * Calculates the angle for a vector in radians between 0 and PI
+     * @param v vector
+     * @return angle in decimal
+     */
     public static float angle(Vector2f v) {
         return (float) atan2(v.y, v.x);
     }
 
+    /**
+     * Calculates distance between two vectors
+     * @param a first vector
+     * @param b second vetor
+     * @return distance in decimal
+     */
     public static float distanceSquare(Vector2f a, Vector2f b) {
         return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
     }
-
+    
+    /**
+     * NO USAGE
+     * Hvad er forskellen på denne og ovenstående????????????????????????????????
+     * @param a
+     * @param b
+     * @return 
+     */
     public static float distance(Vector2f a, Vector2f b) {
         return (float) sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
     }
 
+    /**
+     * Calculates the difference between two vectors x and y condtinates
+     * @param a first vector
+     * @param b second vector
+     * @return a new vector object with x and y coordinates as the difference the two vectors
+     */
     public static Vector2f difference(Vector2f a, Vector2f b) {
         return new Vector2f(a.x - b.x, a.y - b.y);
     }
 
+    
     public static float magnitude(Vector2f v) {
         return (float) sqrt(v.x * v.x + v.y * v.y);
     }

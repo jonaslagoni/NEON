@@ -10,8 +10,11 @@ package com.library.interfaces;
  */
 public interface ILifeService  {
 
+    /**
+     * Subtracts life
+     * @param i amount of life
+     * @return amount of life
+     */
     int subtractLife(int i);
-
-    int getLife();
-
+    
 }

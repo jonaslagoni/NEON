@@ -9,7 +9,10 @@ package com.library.interfaces;
  * @author emil
  */
 public interface IEntityFactory {
-
+    /**
+     * Creates a targeable entity
+     * @returns a targeable entity
+     */
     Targetable createEntity();
 
 }

@@ -11,7 +11,7 @@ public class Player implements Moveable, Drawable {
     MoveAbility moveAbility;
     Sprite sprite;
 
-    Player(Sprite sprite, MoveAbility moveAbility) {
+    public Player(Sprite sprite, MoveAbility moveAbility) {
         this.moveAbility = moveAbility;
         this.sprite = sprite;
     }
