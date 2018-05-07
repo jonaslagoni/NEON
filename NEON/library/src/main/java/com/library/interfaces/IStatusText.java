@@ -10,6 +10,10 @@ package com.library.interfaces;
  * @author emil
  */
 public interface IStatusText {
-
+    
+    /**
+     * Updates IStatusText
+     * @return string
+     */
     String update();
 }

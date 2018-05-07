@@ -10,5 +10,9 @@ package com.library.interfaces;
  */
 public interface ProjectileEntity extends Entity {
 
+    /**
+     * Gets damage from projectile
+     * @return amount of damage
+     */
     float getDamage();
 }

@@ -10,6 +10,12 @@ package com.library.interfaces;
  */
 public interface WeaponEntity extends Entity {
 
+    /**
+     * CHanges the value for weaponentity
+     * @param additiveDamage value to be added to damage
+     * @param additiveRange value to be added to range
+     * @param additiveFireCooldown value to firecooldown
+     */
     void affectWeapon(float additiveDamage, float additiveRange, float additiveFireCooldown);
 
 }
