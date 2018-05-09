@@ -6,22 +6,18 @@
         <groupId>com</groupId>
         <version>0.1</version>
     </parent>
-
     <artifactId>projectile</artifactId>
     <version>0.1</version>
     <packaging>bundle</packaging>
-
     <name>Projectile OSGi Bundle</name>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
-            <version>4.3.0</version>
+            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -30,7 +26,6 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

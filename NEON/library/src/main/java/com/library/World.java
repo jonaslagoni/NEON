@@ -7,11 +7,7 @@ import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,11 +18,12 @@ public class World implements IWorldService {
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
     private int numberOfTowers = 0;
     private IPathFindingService pathFinder;
-    
+
     /**
      * Adds entities to a list
      * If there is already a list of entities, and entity to the existing list
      * Else add entity to a new list
+     *
      * @param entity is an object like a tower or player
      */
     @Override
@@ -40,16 +37,17 @@ public class World implements IWorldService {
             entities.add(entity);
         }
     }
-    
+
     /**
      * ?????????
+     *
      * @param <E>
      * @param type
-     * @return 
+     * @return
      */
     @SuppressWarnings("unchecked")
     @Override
-    public  <E extends Entity> List<E> getEntities(final Class<E> type) {
+    public <E extends Entity> List<E> getEntities(final Class<E> type) {
         if (cache.containsKey(type)) {
             return (List<E>) cache.get(type);
         }
@@ -57,9 +55,10 @@ public class World implements IWorldService {
         cache.put(type, result);
         return result;
     }
-    
+
     /**
      * Removes player from entity list
+     *
      * @param player object
      */
     @Override
@@ -73,8 +72,9 @@ public class World implements IWorldService {
      * If it is a empty gridcell and there is choosen an entity (tower),
      * add the entity with sprite into the map in the empty gridcell
      * incement number of towers and return true
+     *
      * @param position is a gridcell
-     * @param entity is a tower object
+     * @param entity   is a tower object
      * @return boolean
      */
     @Override
@@ -93,19 +93,19 @@ public class World implements IWorldService {
 
     @Override
     public boolean isValidPosition(Vector2f position) {
-        if(pathFinder != null){
+        if (pathFinder != null) {
             boolean b = setGridCell(position, () -> new Sprite(
-                "",
-                new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
-                new Vector2f(0, 200),
-                GRID_CELL_SIZE,
-                GRID_CELL_SIZE
-        ));
-        if (!b) return false;
-        Queue<Vector2f> path = pathFinder.findPath(getPositionGridCell(START), getPositionGridCell(END));
-        Vector2i v = IWorldService.gridProject(position);
-        removeGridCell(v.x, v.y);
-        return path.size() > 0;
+                    "",
+                    new Vector2f(MAX_WIDTH / 2, MAX_HEIGHT),
+                    new Vector2f(0, 200),
+                    GRID_CELL_SIZE,
+                    GRID_CELL_SIZE
+            ));
+            if (!b) return false;
+            Queue<Vector2f> path = pathFinder.findPath(getPositionGridCell(START), getPositionGridCell(END));
+            Vector2i v = IWorldService.gridProject(position);
+            removeGridCell(v.x, v.y);
+            return path.size() > 0;
         }
         return true;
     }
@@ -123,6 +123,7 @@ public class World implements IWorldService {
 
     /**
      * Removes an entity (tower) and sets the gridcell empty
+     *
      * @param x coordinate
      * @param y coordinate
      */
@@ -137,62 +138,6 @@ public class World implements IWorldService {
         return x >= GRID_SPACES || y >= GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
     }
 
-    /**
-     * @return the WIDTH
-     */
-    public int getWIDTH() {
-        return WIDTH;
-    }
-
-    /**
-     * @return the HEIGHT
-     */
-    public int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    /**
-     * @return the MAX_WIDTH
-     */
-    public int getMAX_WIDTH() {
-        return MAX_WIDTH;
-    }
-
-    /**
-     * @return the MAX_HEIGHT
-     */
-    public int getMAX_HEIGHT() {
-        return MAX_HEIGHT;
-    }
-
-    /**
-     * @return the GRID_SPACES
-     */
-    public int getGRID_SPACES() {
-        return GRID_SPACES;
-    }
-
-    /**
-     * @return the GRID_CELL_SIZE
-     */
-    public int getGRID_CELL_SIZE() {
-        return GRID_CELL_SIZE;
-    }
-
-    /**
-     * @return the START
-     */
-    public Vector2f getSTART() {
-        return START;
-    }
-
-    /**
-     * @return the END
-     */
-    public Vector2f getEND() {
-        return END;
-    }
-    
     public void removePathFinder() {
         pathFinder = null;
     }

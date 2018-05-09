@@ -1,10 +1,10 @@
 package com.pathfinding;
 
-import com.library.World;
 import com.library.interfaces.IPathFindingService;
 import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
+
 import java.util.*;
 
 public class PathFinder implements IPathFindingService {

@@ -15,26 +15,30 @@ public interface IAssetManager {
 
     /**
      * Load asset from the inputstream and save it with the name
-     * @param name of the asset
+     *
+     * @param name   of the asset
      * @param stream inputstream
      */
-    public void loadAsset(String name, InputStream stream);
+    void loadAsset(String name, InputStream stream);
 
     /**
      * Unload asset when the game stops
+     *
      * @param name of the asset
      */
-    public void unloadAsset(String name);
+    void unloadAsset(String name);
 
     /**
      * Returns the hashmap containing all textures
+     *
      * @return map
      */
     Map<String, byte[]> getTextures();
 
     /**
      * Add observer
-     * @param observer 
+     *
+     * @param observer
      */
     void addObserver(IObserver observer);
 
