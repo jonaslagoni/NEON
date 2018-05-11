@@ -47,7 +47,8 @@ public class CollisionServiceTest {
 
     
     @Test
-    public void TestWithACollision() {        
+    public void TestWithACollision() {
+        //Mock the drawable interface, and ensure we can mock nested methods.
         Drawable drawMoc1 = mock(Drawable.class, Mockito.RETURNS_DEEP_STUBS);
         Vector2f position1 = new Vector2f(40, 40);
         when(drawMoc1.getSprite().getPosition()).thenReturn(position1);
@@ -56,7 +57,7 @@ public class CollisionServiceTest {
         List<Drawable> drawables = new ArrayList();
         drawables.add(drawMoc1);
         
-        IWorldService worldMoc = mock(IWorldService.class, Mockito.RETURNS_DEEP_STUBS);
+        IWorldService worldMoc = mock(IWorldService.class);
         when(worldMoc.getEntities(Drawable.class)).thenReturn(drawables);
         service.setWorld(worldMoc);
         Vector2f position2 = new Vector2f(40, 40);
@@ -65,7 +66,8 @@ public class CollisionServiceTest {
         assertTrue("Should find collision", collisions.size() == 1);
     }
     @Test
-    public void TestWithNoCollision() {        
+    public void TestWithNoCollision() {
+        //Mock the drawable interface, and ensure we can mock nested methods.
         Drawable drawMoc1 = mock(Drawable.class, Mockito.RETURNS_DEEP_STUBS);
         Vector2f position1 = new Vector2f(40, 40);
         when(drawMoc1.getSprite().getPosition()).thenReturn(position1);
@@ -74,7 +76,7 @@ public class CollisionServiceTest {
         List<Drawable> drawables = new ArrayList();
         drawables.add(drawMoc1);
         
-        IWorldService worldMoc = mock(IWorldService.class, Mockito.RETURNS_DEEP_STUBS);
+        IWorldService worldMoc = mock(IWorldService.class);
         when(worldMoc.getEntities(Drawable.class)).thenReturn(drawables);
         service.setWorld(worldMoc);
         Vector2f position2 = new Vector2f(140, 140);
