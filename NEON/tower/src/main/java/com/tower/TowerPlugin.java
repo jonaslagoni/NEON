@@ -59,7 +59,10 @@ public class TowerPlugin implements Plugin {
     @Override
     public void stop() {
         Arrays.stream(ASSETS).forEach(assetManager::unloadAsset);
-        world.getEntities(Tower.class).forEach(world::removeEntity);
+        world.getEntities(Tower.class).forEach(tower -> {
+            world.removeEntity(tower.weapon);
+            world.removeEntity(tower);
+        });
         gameData.removePlaceables(placeables);
     }
 
