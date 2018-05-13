@@ -39,15 +39,19 @@ public class CollisionService implements ICollisionService {
     @Override
     public List<Drawable> getCollisions(Vector2f position0, float radius0) {
         List<Drawable> collisions = new ArrayList<>();
-        for (Drawable drawable : world.getEntities(Drawable.class)) {
+        if(world != null){
+            for (Drawable drawable : world.getEntities(Drawable.class)) {
 
-            Vector2f position1 = drawable.getSprite().getPosition();
-            float radius1 = drawable.getSprite().getWidth() / 2;
+                Vector2f position1 = drawable.getSprite().getPosition();
+                float radius1 = drawable.getSprite().getWidth() / 2;
 
-            if (position0 != position1
-                    && (radius0 + radius1) * (radius0 + radius1)
-                    > distanceSquare(position0, position1)) {
-                collisions.add(drawable);
+                if (position0 != position1) {
+                    float dist = distanceSquare(position0, position1);
+                    float distRad = (radius0 + radius1) * (radius0 + radius1);
+                    if(distRad >= dist){
+                        collisions.add(drawable);
+                    }
+                }
             }
         }
         return collisions;

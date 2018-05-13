@@ -9,7 +9,7 @@ public class ProjectileController implements Controller {
 
     private IWorldService world;
     private ICollisionService collisionService;
-
+    
     public void setWorld(IWorldService world) {
         this.world = world;
     }
@@ -30,6 +30,12 @@ public class ProjectileController implements Controller {
         world.getEntities(Projectile.class).forEach(this::updateProjectile);
     }
 
+    /**
+     * If projectile is out of bounds, remove projectile and return
+     * <p>
+     * If projectile collides with a damageable entity, remove projectile and apply damage
+     * @param projectile entity
+     */
     private void updateProjectile(Projectile projectile) {
         if (IWorldService.isOutOfBounds(projectile.sprite.getPosition())) {
             world.removeEntity(projectile);
