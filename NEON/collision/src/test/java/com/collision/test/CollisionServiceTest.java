@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -26,6 +28,7 @@ import static org.mockito.Mockito.when;
  * @author Lagoni
  */
 public class CollisionServiceTest {
+
     private CollisionService service;
     
     @BeforeClass
@@ -54,7 +57,7 @@ public class CollisionServiceTest {
         when(drawMoc1.getSprite().getPosition()).thenReturn(position1);
         when(drawMoc1.getSprite().getWidth()).thenReturn(30f);
         
-        List<Drawable> drawables = new ArrayList();
+        List<Drawable> drawables = new ArrayList<>();
         drawables.add(drawMoc1);
         
         IWorldService worldMoc = mock(IWorldService.class);
@@ -62,8 +65,8 @@ public class CollisionServiceTest {
         service.setWorld(worldMoc);
         Vector2f position2 = new Vector2f(40, 40);
         List<Drawable> collisions = service.getCollisions(position2, 30f);
-        
-        assertTrue("Should find collision", collisions.size() == 1);
+
+        assertEquals("Should find collision", 1, collisions.size());
     }
     @Test
     public void TestWithNoCollision() {
@@ -73,7 +76,7 @@ public class CollisionServiceTest {
         when(drawMoc1.getSprite().getPosition()).thenReturn(position1);
         when(drawMoc1.getSprite().getWidth()).thenReturn(30f);
         
-        List<Drawable> drawables = new ArrayList();
+        List<Drawable> drawables = new ArrayList<>();
         drawables.add(drawMoc1);
         
         IWorldService worldMoc = mock(IWorldService.class);
