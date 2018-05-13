@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
-               name="com.engine.AssetManager">
-    <implementation class="com.engine.AssetManager"/>
+               name="com.library.AssetManager">
+    <implementation class="com.library.AssetManager"/>
     <service>
         <provide interface="com.library.interfaces.IAssetManager"/>
     </service>

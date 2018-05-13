@@ -51,10 +51,8 @@
                 <configuration>
                     <instructions>
                         <Service-Component>
-                            META-INF/asset_manager.xml,
                             META-INF/input_service.xml,
                             META-INF/core.xml,
-                            META-INF/gamedata.xml
                         </Service-Component>
                     </instructions>
                 </configuration>

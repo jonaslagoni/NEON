@@ -2,8 +2,8 @@ package com.tower;
 
 import com.library.Sprite;
 import com.library.interfaces.Drawable;
-import com.library.interfaces.WeaponEntity;
 import com.library.interfaces.Entity;
+import com.library.interfaces.WeaponEntity;
 
 class Tower implements Drawable, Entity {
 
@@ -25,7 +25,6 @@ class Tower implements Drawable, Entity {
         this.cost = cost;
         this.maxLevel = maxLevel;
         this.towerType = towerType;
-
     }
 
     @Override

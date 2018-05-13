@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.engine;
+package com.library;
 
 import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IObserver;
