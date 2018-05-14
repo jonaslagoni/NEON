@@ -60,6 +60,7 @@ public class TowerPlugin implements Plugin {
     public void stop() {
         Arrays.stream(ASSETS).forEach(assetManager::unloadAsset);
         world.getEntities(Tower.class).forEach(tower -> {
+            world.removeFromGrid(tower);
             world.removeEntity(tower.weapon);
             world.removeEntity(tower);
         });

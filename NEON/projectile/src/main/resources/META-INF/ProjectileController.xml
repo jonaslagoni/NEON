@@ -7,17 +7,17 @@
     <service>
         <provide interface="com.library.interfaces.Controller"/>
     </service>
-    
-    <reference bind="setWorld" 
+
+    <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" 
+               name="worldService"
                unbind="removeWorld"/>
-    
-    <reference bind="setCollisionService" 
+
+    <reference bind="setCollisionService"
                cardinality="0..1"
                interface="com.library.interfaces.ICollisionService"
-               name="collisionService" 
-               policy="dynamic" 
+               name="collisionService"
+               policy="dynamic"
                unbind="removeCollisionService"/>
 
 </scr:component>

@@ -1,12 +1,7 @@
 package com.tower;
 
 import com.library.ShotType;
-import com.library.interfaces.Entity;
-import com.library.interfaces.INeonService;
-import com.library.interfaces.ITowerService;
-import com.library.interfaces.IWeaponFactory;
-import com.library.interfaces.IWorldService;
-import com.library.interfaces.WeaponEntity;
+import com.library.interfaces.*;
 import com.library.vectors.Vector2f;
 
 public class TowerService implements ITowerService, ILocalTowerService {
@@ -156,7 +151,7 @@ public class TowerService implements ITowerService, ILocalTowerService {
             return;
         }
         world.setGridCell(pos, tower);
-        if(weaponFactory != null){
+        if (weaponFactory != null) {
             switch (key) {
                 case LASER_TOWER:
                     WeaponEntity weapon = weaponFactory.newWeapon(512, tower.sprite.getPosition(), ShotType.GREEN_BEAM, 10);

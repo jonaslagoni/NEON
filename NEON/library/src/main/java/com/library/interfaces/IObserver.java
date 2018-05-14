@@ -6,11 +6,10 @@
 package com.library.interfaces;
 
 /**
- *
  * @author emil
  */
 public interface IObserver {
-    
+
     /**
      * Updates the observer
      */

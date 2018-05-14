@@ -11,7 +11,6 @@ import com.library.interfaces.IInputService;
 import com.library.vectors.Vector2f;
 
 /**
- *
  * @author emil
  */
 public class InputService implements IInputService {

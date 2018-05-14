@@ -6,15 +6,15 @@
     <service>
         <provide interface="com.library.interfaces.Plugin"/>
     </service>
-  
-    <reference bind="setWorld" 
+
+    <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" 
+               name="worldService"
                unbind="removeWorld"/>
-    
-    <reference bind="setAssetManager" 
+
+    <reference bind="setAssetManager"
                interface="com.library.interfaces.IAssetManager"
-               name="inputService" 
+               name="inputService"
                unbind="removeAssetManager"/>
 
 </scr:component>

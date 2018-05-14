@@ -2,11 +2,11 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
                name="com.enemy.EnemyFactory"
                immediate="true">
-    
+
     <implementation class="com.enemy.EnemyFactory"/>
-    
+
     <service>
         <provide interface="com.library.interfaces.IEntityFactory"/>
     </service>
-        
+
 </scr:component>

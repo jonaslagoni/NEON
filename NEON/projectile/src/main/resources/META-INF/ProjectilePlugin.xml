@@ -5,12 +5,12 @@
     <service>
         <provide interface="com.library.interfaces.Plugin"/>
     </service>
-    
-    <reference bind="setAssetManager" 
+
+    <reference bind="setAssetManager"
                cardinality="0..1"
                interface="com.library.interfaces.IAssetManager"
-               name="inputService" 
-               policy="dynamic" 
+               name="inputService"
+               policy="dynamic"
                unbind="removeAssetManager"/>
-    
+
 </scr:component>

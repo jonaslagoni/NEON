@@ -16,7 +16,6 @@ public class World implements IWorldService {
     private final List<Entity> entities = new ArrayList<>();
     private final Entity[][] grid = new Entity[GRID_SPACES][GRID_SPACES];
     private final Map<Class<?>, List<?>> cache = new HashMap<>();
-    private int numberOfTowers = 0;
     private IPathFindingService pathFinder;
 
     /**
@@ -41,9 +40,9 @@ public class World implements IWorldService {
     /**
      * ?????????
      *
-     * @param <E>
-     * @param type
-     * @return
+     * @param <E>  type of entity to find
+     * @param type class of entity to find
+     * @return list of all entities with specified types
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -51,7 +50,11 @@ public class World implements IWorldService {
         if (cache.containsKey(type)) {
             return (List<E>) cache.get(type);
         }
-        final List<E> result = entities.stream().filter(type::isInstance).map(type::cast).collect(toList());
+        final List<E> result = entities.stream()
+                .filter(type::isInstance)
+                .map(type::cast)
+                .collect(toList());
+
         cache.put(type, result);
         return result;
     }
@@ -87,7 +90,6 @@ public class World implements IWorldService {
         addEntity(entity);
         Vector2f v1 = IWorldService.gridUnproject(v);
         entity.getSprite().setPosition(v1);
-        numberOfTowers++;
         return true;
     }
 
@@ -128,7 +130,6 @@ public class World implements IWorldService {
      * @param y coordinate
      */
     private void removeGridCell(int x, int y) {
-        numberOfTowers--;
         removeEntity(grid[x][y]);
         grid[x][y] = null;
     }
@@ -136,6 +137,17 @@ public class World implements IWorldService {
     @Override
     public boolean blocked(int x, int y) {
         return x >= GRID_SPACES || y >= GRID_SPACES || x < 0 || y < 0 || grid[x][y] != null;
+    }
+
+    @Override
+    public void removeFromGrid(Entity entity) {
+        for (int i = 0; i < GRID_SPACES; i++) {
+            for (int j = 0; j < GRID_SPACES; j++) {
+                if (grid[i][j] == entity) {
+                    grid[i][j] = null;
+                }
+            }
+        }
     }
 
     public void removePathFinder() {

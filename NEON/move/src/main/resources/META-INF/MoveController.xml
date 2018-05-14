@@ -5,7 +5,7 @@
     <service>
         <provide interface="com.library.interfaces.Controller"/>
     </service>
-  
+
     <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
                name="worldService"

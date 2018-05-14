@@ -14,16 +14,16 @@ public class PathFinder implements IPathFindingService {
     @Override
     public Queue<Vector2f> findPath(Vector2i start, Vector2i goal) {
 
-        
+
         Node goalState = new Node(goal);
         Node initialState = new Node(start);
-        initialState.setgCost(0);
-        initialState.setfCost(initialState.heuristicCostEstimate(goalState));
+        initialState.setGCost(0);
+        initialState.setFCost(initialState.heuristicCostEstimate(goalState));
 
         HashSet<Node> closedSet = new HashSet<>();
 
-        // TreeSet<Node> openSet = new TreeSet<>(Comparator.comparing(Node::hashCode).thenComparing(Node::getfCost));
-        PriorityQueue<Node> openSet = new PriorityQueue<>(Comparator.comparing(Node::getfCost));
+        // TreeSet<Node> openSet = new TreeSet<>(Comparator.comparing(Node::hashCode).thenComparing(Node::getFCost));
+        PriorityQueue<Node> openSet = new PriorityQueue<>(Comparator.comparing(Node::getFCost));
 
         openSet.add(initialState);
 
@@ -45,14 +45,14 @@ public class PathFinder implements IPathFindingService {
                     openSet.add(neighbor);
                 }
 
-                int tentativeGcost = current.getgCost() + current.manhattanDistance(neighbor);
-                if (tentativeGcost >= neighbor.getgCost()) {
+                int tentativeGcost = current.getGCost() + current.manhattanDistance(neighbor);
+                if (tentativeGcost >= neighbor.getGCost()) {
                     continue;
                 }
 
                 neighbor.setParent(current);
-                neighbor.setgCost(tentativeGcost);
-                neighbor.setfCost(neighbor.getgCost() + neighbor.heuristicCostEstimate(goalState));
+                neighbor.setGCost(tentativeGcost);
+                neighbor.setFCost(neighbor.getGCost() + neighbor.heuristicCostEstimate(goalState));
             }
         }
         return new LinkedList<>();

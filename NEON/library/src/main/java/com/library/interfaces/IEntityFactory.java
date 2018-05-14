@@ -11,6 +11,7 @@ package com.library.interfaces;
 public interface IEntityFactory {
     /**
      * Creates a targeable entity
+     *
      * @returns a targeable entity
      */
     Targetable createEntity();

@@ -6,5 +6,5 @@
     <service>
         <provide interface="com.library.interfaces.IWeaponFactory"/>
     </service>
-    
+
 </scr:component>

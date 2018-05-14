@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--suppress NonOsgiMavenDependency -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -85,12 +85,12 @@
                         <Import-Package>!com.apple.eio,!com.sun.*,!org.objectweb.*,!com.badlogic.*,*</Import-Package>
                         <Embed-Dependency>!org.osgi.*,*</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
-                        <Bundle-NativeCode> 
+                        <Bundle-NativeCode>
                             libgdx-box2d.dylib;libgdx-box2d64.dylib;
                             libgdx-freetype.dylib;libgdx-freetype64.dylib;
                             openal.dylib;
                             libgdx.dylib;libgdx64.dylib;
-                            osname=MacOSX;processor=x86-64, 
+                            osname=MacOSX;processor=x86-64,
                             OpenAL32.dll;OpenAL64.dll;
                             gdx-box2d.dll;gdx-box2d64.dll;
                             gdx-freetype.dll;gdx-freetype64.dll;

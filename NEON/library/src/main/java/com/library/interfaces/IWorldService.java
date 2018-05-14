@@ -11,7 +11,6 @@ import com.library.vectors.Vector2i;
 import java.util.List;
 
 /**
- *
  * @author Daniel
  */
 public interface IWorldService {
@@ -40,34 +39,39 @@ public interface IWorldService {
 
     /**
      * Add entities to a list
-     * @param entity
+     *
+     * @param entity entity to add
      */
     void addEntity(Entity entity);
 
     /**
      * Returns a list of type E extending entities
-     * @param <E> generic type of entity
+     *
+     * @param <E>  generic type of entity
      * @param type class of wanted entities
-     * @return entities 
+     * @return entities
      */
     <E extends Entity> List<E> getEntities(final Class<E> type);
 
     /**
      * Remove entity from entity list
+     *
      * @param player the entity to be removed
      */
     void removeEntity(Entity player);
 
     /**
      * Sets a drawable entity into the map at the vectors x and y
+     *
      * @param position is a gridcell
-     * @param entity is a drawable entity
+     * @param entity   is a drawable entity
      * @return if successful
      */
     boolean setGridCell(Vector2f position, Drawable entity);
-    
+
     /**
      * Returns true if position is valid
+     *
      * @param position x and y
      * @return true if valid and false if invalid
      */
@@ -75,6 +79,7 @@ public interface IWorldService {
 
     /**
      * Returns entity on the given position
+     *
      * @param position at the entity
      * @return entity or null
      */
@@ -82,10 +87,12 @@ public interface IWorldService {
 
     /**
      * Checks if a coordinate is blocked by an entity or out of bounds
-     * @param x coodinate
-     * @param y coordinate
+     *
+     * @param x x coordinate
+     * @param y y coordinate
      * @return true if invalid
      */
     boolean blocked(int x, int y);
 
+    void removeFromGrid(Entity tower);
 }

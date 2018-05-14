@@ -7,10 +7,10 @@
     <service>
         <provide interface="com.library.interfaces.IPathFindingService"/>
     </service>
-    
-    <reference bind="setWorld" 
+
+    <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" 
+               name="worldService"
                unbind="removeWorld"/>
-    
+
 </scr:component>

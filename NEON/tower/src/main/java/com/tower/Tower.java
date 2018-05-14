@@ -10,16 +10,16 @@ class Tower implements Drawable, Entity {
     Sprite sprite;
     String[] textures;
     int level = 1;
-    int cost;
+    private int cost;
     int maxLevel;
     WeaponEntity weapon;
-    TowerType towerType;
+    private TowerType towerType;
 
     Tower(Sprite sprite,
-            String[] textures,
-            int cost,
-            int maxLevel,
-            TowerType towerType) {
+          String[] textures,
+          int cost,
+          int maxLevel,
+          TowerType towerType) {
         this.sprite = sprite;
         this.textures = textures;
         this.cost = cost;
@@ -32,27 +32,27 @@ class Tower implements Drawable, Entity {
         return sprite;
     }
 
-    public int getCost() {
+    int getCost() {
         return cost * level;
     }
 
-    public int getLevel() {
+    int getLevel() {
         return level;
     }
 
-    public void increaseLevel() {
+    void increaseLevel() {
         level++;
     }
 
-    public TowerType getTowerType() {
+    TowerType getTowerType() {
         return towerType;
     }
 
-    public WeaponEntity getWeapon() {
+    WeaponEntity getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(WeaponEntity weapon) {
+    void setWeapon(WeaponEntity weapon) {
         this.weapon = weapon;
     }
 }

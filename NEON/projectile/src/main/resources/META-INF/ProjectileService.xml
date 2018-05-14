@@ -5,12 +5,12 @@
     <service>
         <provide interface="com.library.interfaces.IProjectileService"/>
     </service>
-    
-    <reference bind="setWorld" 
+
+    <reference bind="setWorld"
                cardinality="0..1"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" 
-               policy="dynamic" 
+               name="worldService"
+               policy="dynamic"
                unbind="removeWorld"/>
-    
+
 </scr:component>

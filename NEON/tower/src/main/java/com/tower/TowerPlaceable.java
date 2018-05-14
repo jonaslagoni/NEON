@@ -9,7 +9,6 @@ import com.library.interfaces.IPlaceable;
 import com.library.vectors.Vector2f;
 
 /**
- *
  * @author emil
  */
 public class TowerPlaceable implements IPlaceable {

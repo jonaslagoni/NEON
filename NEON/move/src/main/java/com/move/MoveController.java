@@ -6,6 +6,7 @@ import com.library.interfaces.Controller;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Moveable;
 import com.library.vectors.Vector2f;
+
 import static com.library.vectors.VectorUtils.translate;
 
 public class MoveController implements Controller {
@@ -23,8 +24,9 @@ public class MoveController implements Controller {
     /**
      * Updates the vector2f of an entity, changing the speed and direction, and
      * sets the new position.
+     *
      * @param moveable Moveable entity to be moved
-     * @param dt time since last frame
+     * @param dt       time since last frame
      */
     private void moveEntity(Moveable moveable, float dt) {
         MoveAbility moveAbility = moveable.getMoveAbility();

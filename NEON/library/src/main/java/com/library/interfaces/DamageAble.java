@@ -6,9 +6,10 @@
 package com.library.interfaces;
 
 public interface DamageAble {
-    
+
     /**
      * Gives the entity damage
+     *
      * @param damage amount of damage
      */
     void damage(float damage);

@@ -6,16 +6,17 @@ import com.library.Sprite;
 import com.library.interfaces.IProjectileService;
 import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
+
 import static com.library.vectors.VectorUtils.translateVelocity;
 
 public class ProjectileService implements IProjectileService {
 
     private IWorldService world;
-    
+
     public void setWorld(IWorldService world) {
         this.world = world;
     }
-    
+
     public void removeWorld(IWorldService world) {
         this.world = null;
     }

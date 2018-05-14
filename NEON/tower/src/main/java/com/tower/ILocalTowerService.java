@@ -9,14 +9,14 @@ import com.library.interfaces.ITowerService;
 import com.library.vectors.Vector2f;
 
 /**
- *
  * @author emil
  */
 public interface ILocalTowerService extends ITowerService {
 
     /**
      * Places a tower at the given position
-     * @param pos Position for tower to be placed
+     *
+     * @param pos  Position for tower to be placed
      * @param type Type of the tower
      */
     void place(Vector2f pos, TowerType type);

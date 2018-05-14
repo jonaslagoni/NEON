@@ -5,13 +5,15 @@ import com.library.interfaces.IWorldService;
 import com.library.vectors.Vector2f;
 import com.library.vectors.Vector2i;
 import com.library.vectors.VectorUtils;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 import static java.util.Collections.singleton;
 import static java.util.stream.Collectors.toList;
 
-public class Node {
+class Node {
 
     private final static List<Vector2i> DIRECTIONS = Arrays.asList(
             new Vector2i(0, 1),
@@ -36,10 +38,11 @@ public class Node {
     /**
      * Returns a LinkedList containing the route from start to finish.
      * The route is determined by the Node's parent(s).
+     *
      * @param node the goal node
      * @return LinkedList containing path to from finish to start
      */
-    public LinkedList<Vector2f> reconstructPath(Node node) {
+    LinkedList<Vector2f> reconstructPath(Node node) {
         Node current = node;
         LinkedList<Vector2f> path
                 = new LinkedList<>(singleton(IWorldService.gridUnproject(current.vector)));
@@ -52,10 +55,11 @@ public class Node {
 
     /**
      * Calculates the estimate heuristic cost from current node to goal
+     *
      * @param goalState the goal node
      * @return distance as float
      */
-    public float heuristicCostEstimate(Node goalState) {
+    float heuristicCostEstimate(Node goalState) {
         Vector2f v0 = IWorldService.gridUnproject(this.vector);
         Vector2f v1 = IWorldService.gridUnproject(goalState.vector);
         return VectorUtils.distance(v0, v1) / World.GRID_CELL_SIZE;
@@ -63,19 +67,21 @@ public class Node {
 
     /**
      * Returns the sum of the two absolute values of the nodes
+     *
      * @param b Node to compare with
      * @return the absolute distance as int
      */
-    public int manhattanDistance(Node b) {
+    int manhattanDistance(Node b) {
         return Math.abs(vector.x - b.vector.x) + Math.abs(vector.y - b.vector.y);
     }
 
     /**
      * Returns the available neighbors of the current node
+     *
      * @param world world object
      * @return List containing the available neighbors
      */
-    public List<Node> neighbors(IWorldService world) {
+    List<Node> neighbors(IWorldService world) {
         return DIRECTIONS.stream()
                 .filter(d -> !world.blocked(vector.x + d.x, vector.y + d.y))
                 .map(d -> new Node(vector.x + d.x, vector.y + d.y))
@@ -99,27 +105,23 @@ public class Node {
         return vector.hashCode();
     }
 
-    private Vector2i getVector() {
-        return vector;
-    }
-
-    public int getgCost() {
+    int getGCost() {
         return gCost;
     }
 
-    public void setgCost(int gCost) {
+    void setGCost(int gCost) {
         this.gCost = gCost;
     }
 
-    public float getfCost() {
+    float getFCost() {
         return fCost;
     }
 
-    public void setfCost(float fCost) {
+    void setFCost(float fCost) {
         this.fCost = fCost;
     }
 
-    public void setParent(Node parent) {
+    void setParent(Node parent) {
         this.parent = parent;
     }
 }

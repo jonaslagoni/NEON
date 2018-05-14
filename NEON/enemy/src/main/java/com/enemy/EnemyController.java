@@ -61,8 +61,9 @@ public class EnemyController implements Controller {
      * <p>
      * Checks whether end point, or hp has reached 0, and removes the entity if
      * it has.
+     *
      * @param enemy Enemy entity to be updated
-     * @param dt time in ms since last frame
+     * @param dt    time in ms since last frame
      */
     private void updateEnemy(final Enemy enemy, float dt) {
 

@@ -6,24 +6,22 @@ import com.library.interfaces.IAssetManager;
 import com.library.interfaces.IWorldService;
 import com.library.interfaces.Plugin;
 import com.library.vectors.Vector2f;
+
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.Random;
 
 public class MapPlugin implements Plugin {
 
     private static final int NUM_OBSTACLES = 10;
     private static final int PADDING = 128;
-
+    private static final String[] TEXTURES = {
+            "rock1", "rock2", "rock3",
+            "rock4", "rock5", "rock6"
+    };
+    private final Random random = new Random();
     private IWorldService world;
     private IAssetManager assetManager;
-    private final Random random = new Random();
-
-    private static final String[] TEXTURES = {
-        "rock1", "rock2", "rock3",
-        "rock4", "rock5", "rock6"
-    };
 
     public void setAssetManager(IAssetManager assetManager) {
         this.assetManager = assetManager;

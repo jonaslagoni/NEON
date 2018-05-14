@@ -12,12 +12,6 @@ public class Vector2i {
         this.y = y;
     }
 
-    /**
-     * NO USAGE
-     * @param other
-     * @return 
-     */
-    
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -30,10 +24,7 @@ public class Vector2i {
         return this.x == vector.x && this.y == vector.y;
     }
 
-    /**
-     * NO USAGE
-     * @return 
-     */
+
     @Override
     public int hashCode() {
         return Objects.hash(x, y);

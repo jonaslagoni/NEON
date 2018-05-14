@@ -9,7 +9,7 @@ public class ProjectileController implements Controller {
 
     private IWorldService world;
     private ICollisionService collisionService;
-    
+
     public void setWorld(IWorldService world) {
         this.world = world;
     }
@@ -21,6 +21,7 @@ public class ProjectileController implements Controller {
     public void setCollisionService(ICollisionService collisionService) {
         this.collisionService = collisionService;
     }
+
     public void removeCollisionService(ICollisionService collisionService) {
         this.collisionService = null;
     }
@@ -34,6 +35,7 @@ public class ProjectileController implements Controller {
      * If projectile is out of bounds, remove projectile and return
      * <p>
      * If projectile collides with a damageable entity, remove projectile and apply damage
+     *
      * @param projectile entity
      */
     private void updateProjectile(Projectile projectile) {

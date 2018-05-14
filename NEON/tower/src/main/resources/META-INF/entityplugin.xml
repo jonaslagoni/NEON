@@ -7,25 +7,25 @@
     <service>
         <provide interface="com.library.interfaces.Plugin"/>
     </service>
-    
-    <reference bind="setWorld" 
+
+    <reference bind="setWorld"
                interface="com.library.interfaces.IWorldService"
-               name="worldService" 
+               name="worldService"
                unbind="removeWorld"/>
-    
+
     <reference bind="setAssetManager"
                interface="com.library.interfaces.IAssetManager"
                name="assetManager"
                unbind="removeAssetManager"/>
-    
-    <reference bind="setGameData" 
+
+    <reference bind="setGameData"
                interface="com.library.interfaces.IGameData"
                name="gamedata"
                unbind="removeGameData"/>
-    
-    <reference bind="setTowerService" 
+
+    <reference bind="setTowerService"
                interface="com.tower.ILocalTowerService"
-               name="ILocalTowerService" 
+               name="ILocalTowerService"
                unbind="removeTowerService"/>
-    
+
 </scr:component>

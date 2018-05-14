@@ -3,7 +3,6 @@ package com.enemy;
 import com.library.MoveAbility;
 import com.library.Sprite;
 import com.library.interfaces.DamageAble;
-import com.library.interfaces.Drawable;
 import com.library.interfaces.Moveable;
 import com.library.interfaces.Targetable;
 import com.library.vectors.Vector2f;
