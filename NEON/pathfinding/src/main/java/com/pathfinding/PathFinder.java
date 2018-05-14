@@ -14,8 +14,7 @@ public class PathFinder implements IPathFindingService {
     @Override
     public Queue<Vector2f> findPath(Vector2i start, Vector2i goal) {
 
-        /* Implementation of the a* algorithm from:
-         * https://en.wikipedia.org/wiki/A*_search_algorithm */
+        
         Node goalState = new Node(goal);
         Node initialState = new Node(start);
         initialState.setgCost(0);

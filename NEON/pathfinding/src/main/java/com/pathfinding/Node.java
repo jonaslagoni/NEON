@@ -34,9 +34,10 @@ public class Node {
     }
 
     /**
-     * 
-     * @param node
-     * @return 
+     * Returns a LinkedList containing the route from start to finish.
+     * The route is determined by the Node's parent(s).
+     * @param node the goal node
+     * @return LinkedList containing path to from finish to start
      */
     public LinkedList<Vector2f> reconstructPath(Node node) {
         Node current = node;
@@ -49,16 +50,31 @@ public class Node {
         return path;
     }
 
+    /**
+     * Calculates the estimate heuristic cost from current node to goal
+     * @param goalState the goal node
+     * @return distance as float
+     */
     public float heuristicCostEstimate(Node goalState) {
         Vector2f v0 = IWorldService.gridUnproject(this.vector);
         Vector2f v1 = IWorldService.gridUnproject(goalState.vector);
         return VectorUtils.distance(v0, v1) / World.GRID_CELL_SIZE;
     }
 
+    /**
+     * Returns the sum of the two absolute values of the nodes
+     * @param b Node to compare with
+     * @return the absolute distance as int
+     */
     public int manhattanDistance(Node b) {
         return Math.abs(vector.x - b.vector.x) + Math.abs(vector.y - b.vector.y);
     }
 
+    /**
+     * Returns the available neighbors of the current node
+     * @param world world object
+     * @return List containing the available neighbors
+     */
     public List<Node> neighbors(IWorldService world) {
         return DIRECTIONS.stream()
                 .filter(d -> !world.blocked(vector.x + d.x, vector.y + d.y))
