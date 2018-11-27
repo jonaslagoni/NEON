@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.enemy.EnemyPlugin">
+
+    <implementation class="com.enemy.EnemyPlugin"/>
+
+    <service>
+        <provide interface="com.library.interfaces.Plugin"/>
+    </service>
+
+    <reference bind="setWorld"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService"
+               unbind="removeWorld"/>
+
+    <reference bind="setAssetManager"
+               interface="com.library.interfaces.IAssetManager"
+               name="IAssetManager"
+               unbind="removeAssetManager"/>
+
+</scr:component>

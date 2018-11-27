@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+               name="com.collision.CollisionService"
+               immediate="true">
+
+    <implementation class="com.collision.CollisionService"/>
+
+    <service>
+        <provide interface="com.library.interfaces.ICollisionService"/>
+    </service>
+
+    <reference bind="setWorld"
+               interface="com.library.interfaces.IWorldService"
+               name="world"
+               unbind="removeWorld"/>
+
+</scr:component>

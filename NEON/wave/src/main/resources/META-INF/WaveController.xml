@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.wave.WaveController"
+               activate="start"
+               deactivate="stop">
+
+    <implementation class="com.wave.WaveController"/>
+
+    <service>
+        <provide interface="com.library.interfaces.Controller"/>
+    </service>
+
+    <reference bind="addFactory"
+               cardinality="0..n"
+               interface="com.library.interfaces.IEntityFactory"
+               name="factories"
+               policy="dynamic"
+               unbind="removeFactory"/>
+
+    <reference bind="setWorld"
+               interface="com.library.interfaces.IWorldService"
+               name="world"
+               unbind="removeWorld"/>
+
+    <reference bind="setGameData"
+               interface="com.library.interfaces.IGameData"
+               name="gameData"
+               unbind="removeGameData"/>
+
+</scr:component>

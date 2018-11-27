@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.tower.TowerPlugin">
+
+    <implementation class="com.tower.TowerPlugin"/>
+
+    <service>
+        <provide interface="com.library.interfaces.Plugin"/>
+    </service>
+
+    <reference bind="setWorld"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService"
+               unbind="removeWorld"/>
+
+    <reference bind="setAssetManager"
+               interface="com.library.interfaces.IAssetManager"
+               name="assetManager"
+               unbind="removeAssetManager"/>
+
+    <reference bind="setGameData"
+               interface="com.library.interfaces.IGameData"
+               name="gamedata"
+               unbind="removeGameData"/>
+
+    <reference bind="setTowerService"
+               interface="com.tower.ILocalTowerService"
+               name="ILocalTowerService"
+               unbind="removeTowerService"/>
+
+</scr:component>

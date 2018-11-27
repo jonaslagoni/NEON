@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.library.World"
+               immediate="true">
+    <implementation class="com.library.World"/>
+    <service>
+        <provide interface="com.library.interfaces.IWorldService"/>
+    </service>
+    <reference bind="setPathFinder"
+               cardinality="0..1"
+               policy="dynamic"
+               interface="com.library.interfaces.IPathFindingService"
+               name="pathfinder"
+               unbind="removePathFinder"/>
+</scr:component>

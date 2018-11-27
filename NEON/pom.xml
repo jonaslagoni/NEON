@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com</groupId>
+    <artifactId>neon-parent</artifactId>
+    <version>0.1</version>
+    <packaging>pom</packaging>
+    <name>NEON-parent</name>
+    <!--    <repositories>
+            <repository>
+                <id>netbeans</id>
+                <name>NetBeans</name>
+                <url>http://bits.netbeans.org/nexus/content/groups/netbeans/</url>
+            </repository>
+        </repositories>-->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>nbm-maven-plugin</artifactId>
+                    <version>4.1</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <brandingToken>${brandingToken}</brandingToken>
+                        <cluster>${brandingToken}</cluster>
+                        <useOSGiDependencies>true</useOSGiDependencies>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <!-- NetBeans 6.9+ requires JDK 6, starting NetBeans 7.4 source 1.7 is required -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>3.5.0</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <modules>
+        <module>library</module>
+        <module>libgdx</module>
+        <module>core</module>
+        <module>move</module>
+        <module>player</module>
+        <module>tower</module>
+        <module>neoncoin</module>
+        <module>map</module>
+        <module>pathfinding</module>
+        <module>life</module>
+        <module>enemy</module>
+        <module>wave</module>
+        <module>weapon</module>
+        <module>projectile</module>
+        <module>collision</module>
+    </modules>
+    <properties>
+        <netbeans.version>RELEASE82</netbeans.version>
+        <brandingToken>neon</brandingToken>
+    </properties>
+</project>

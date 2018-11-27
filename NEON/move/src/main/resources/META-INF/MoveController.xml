@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.move.MoveController">
+    <implementation class="com.move.MoveController"/>
+    <service>
+        <provide interface="com.library.interfaces.Controller"/>
+    </service>
+
+    <reference bind="setWorld"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService"
+               unbind="removeWorld"/>
+
+</scr:component>

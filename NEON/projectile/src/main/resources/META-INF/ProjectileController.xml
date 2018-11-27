@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0"
+               name="com.projectile.ProjectileController">
+
+    <implementation class="com.projectile.ProjectileController"/>
+
+    <service>
+        <provide interface="com.library.interfaces.Controller"/>
+    </service>
+
+    <reference bind="setWorld"
+               interface="com.library.interfaces.IWorldService"
+               name="worldService"
+               unbind="removeWorld"/>
+
+    <reference bind="setCollisionService"
+               cardinality="0..1"
+               interface="com.library.interfaces.ICollisionService"
+               name="collisionService"
+               policy="dynamic"
+               unbind="removeCollisionService"/>
+
+</scr:component>
